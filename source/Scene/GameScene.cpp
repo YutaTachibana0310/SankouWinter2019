@@ -6,13 +6,19 @@
 //
 //=====================================
 #include "GameScene.h"
+#include "../../Framework/Camera/Camera.h"
+
+#include "../BackGround/GameSkybox.h"
 
 /**************************************
 ‰Šú‰»ˆ—
 ***************************************/
 void GameScene::Init()
 {
+	sceneCamera = new Camera();
+	skybox = new GameSkybox();
 
+	Camera::SetMainCamera(sceneCamera);
 }
 
 /**************************************
@@ -20,7 +26,8 @@ void GameScene::Init()
 ***************************************/
 void GameScene::Uninit()
 {
-
+	SAFE_DELETE(sceneCamera);
+	SAFE_DELETE(skybox);
 }
 
 /**************************************
@@ -28,7 +35,8 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
-
+	sceneCamera->Update();
+	skybox->Update();
 }
 
 /**************************************
@@ -36,5 +44,7 @@ void GameScene::Update()
 ***************************************/
 void GameScene::Draw()
 {
+	Camera::MainCamera()->Set();
 
+	skybox->Draw();
 }
