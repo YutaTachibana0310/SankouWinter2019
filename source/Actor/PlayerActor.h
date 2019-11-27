@@ -29,9 +29,13 @@ public:
 	virtual void Update();
 	virtual void Draw();
 
+	static const float SpeedMove;
+	static const D3DXVECTOR3 BorderMove;
+
 private:
 	MeshContainer * mesh;
 
+	void Move(const D3DXVECTOR3& dir);
 };
 
 #endif
