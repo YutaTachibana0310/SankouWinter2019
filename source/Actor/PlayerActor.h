@@ -1,37 +1,37 @@
 //=====================================
 //
-//GameScene.h
-//機能:ゲームシーン処理
+//PlayerActor.h
+//機能:プレイヤーアクター
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMESCENE_H_
-#define _GAMESCENE_H_
+#ifndef _PLAYERACTOR_H_
+#define _PLAYERACTOR_H_
 
 #include "../../main.h"
-#include "../../Framework/Core/BaseScene.h"
 
 /**************************************
 前方宣言
 ***************************************/
-class GameSkybox;
-class PlayerActor;
+class MeshContainer;
 
 /**************************************
 クラス定義
 ***************************************/
-class GameScene : public BaseScene
+class PlayerActor : public GameObject
 {
-	using BaseScene::BaseScene;
 public:
-	void Init();
-	void Uninit();
-	void Update();
-	void Draw();
+	PlayerActor();
+	virtual ~PlayerActor();
+
+	virtual void Init();
+	virtual void Uninit();
+	virtual void Update();
+	virtual void Draw();
 
 private:
-	GameSkybox * skybox;
-	PlayerActor *player;
+	MeshContainer * mesh;
+
 };
 
 #endif
