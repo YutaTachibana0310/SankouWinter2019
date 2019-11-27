@@ -6,13 +6,24 @@
 //
 //=====================================
 #include "GameScene.h"
+#include "../../Framework/Camera/Camera.h"
+#include "../../Framework/Resource/ResourceManager.h"
+
+#include "../BackGround/GameSkybox.h"
+#include "../Actor/PlayerActor.h"
 
 /**************************************
 ‰Šú‰»ˆ—
 ***************************************/
 void GameScene::Init()
 {
+	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 
+	sceneCamera = new Camera();
+	skybox = new GameSkybox();
+	player = new PlayerActor();
+
+	Camera::SetMainCamera(sceneCamera);
 }
 
 /**************************************
@@ -20,7 +31,9 @@ void GameScene::Init()
 ***************************************/
 void GameScene::Uninit()
 {
-
+	SAFE_DELETE(sceneCamera);
+	SAFE_DELETE(skybox);
+	SAFE_DELETE(player);
 }
 
 /**************************************
@@ -28,7 +41,9 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
-
+	sceneCamera->Update();
+	skybox->Update();
+	player->Update();
 }
 
 /**************************************
@@ -36,5 +51,9 @@ void GameScene::Update()
 ***************************************/
 void GameScene::Draw()
 {
+	Camera::MainCamera()->Set();
 
+	skybox->Draw();
+
+	player->Draw();
 }
