@@ -8,6 +8,8 @@
 #include "PlayerActor.h"
 #include "../../Framework/Renderer3D/MeshContainer.h"
 #include "../../Framework/Resource/ResourceManager.h"
+#include "../../Framework/Input/input.h"
+#include "../../Framework/Tool/DebugWindow.h"
 
 /**************************************
 コンストラクタ
@@ -47,6 +49,17 @@ void PlayerActor::Uninit()
 ***************************************/
 void PlayerActor::Update()
 {
+	D3DXVECTOR3 direction = Vector3::Zero;
+	direction.x = Input::GetPressHorizontail();
+	direction.y = Input::GetPressVertical();
+
+	transform->Move(direction);
+
+	Debug::Begin("Player");
+
+	Debug::Text(transform->GetPosition(), "PlayerPos");
+
+	Debug::End();
 }
 
 /**************************************
