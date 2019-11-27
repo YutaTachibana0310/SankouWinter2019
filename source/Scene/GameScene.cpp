@@ -10,7 +10,7 @@
 #include "../../Framework/Resource/ResourceManager.h"
 
 #include "../BackGround/GameSkybox.h"
-#include "../Actor/PlayerActor.h"
+#include "../Actor/Player/PlayerActor.h"
 
 /**************************************
 ‰Šú‰»ˆ—
@@ -18,6 +18,7 @@
 void GameScene::Init()
 {
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
+	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 
 	sceneCamera = new Camera();
 	skybox = new GameSkybox();

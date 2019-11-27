@@ -220,7 +220,8 @@
     <ClCompile Include="Library\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Library\json11\json11.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source\Actor\PlayerActor.cpp" />
+    <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
+    <ClCompile Include="source\Actor\Player\PlayerTurretActor.cpp" />
     <ClCompile Include="source\BackGround\GameSkybox.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
@@ -336,7 +337,8 @@
     <ClInclude Include="Library\nameof\nameof.hpp" />
     <ClInclude Include="Library\picojson\picojson.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="source\Actor\PlayerActor.h" />
+    <ClInclude Include="source\Actor\Player\PlayerActor.h" />
+    <ClInclude Include="source\Actor\Player\PlayerTurretActor.h" />
     <ClInclude Include="source\BackGround\GameSkybox.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
