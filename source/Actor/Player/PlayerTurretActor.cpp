@@ -31,7 +31,7 @@ PlayerTurretActor::~PlayerTurretActor()
 ***************************************/
 void PlayerTurretActor::Update()
 {
-	transform->Rotate(2.0f, Vector3::Right);
+	transform->Rotate(-2.0f, Vector3::Right);
 }
 
 /**************************************
