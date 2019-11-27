@@ -31,11 +31,13 @@ public:
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
+	static const float MaxAngle;
 
 private:
 	MeshContainer * mesh;
 
-	void Move(const D3DXVECTOR3& dir);
+	void _Move(const D3DXVECTOR3& dir);
+	void _Rotate(float dir);
 };
 
 #endif
