@@ -236,6 +236,7 @@
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerTurretActor.cpp" />
     <ClCompile Include="source\BackGround\GameSkybox.cpp" />
+    <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
   </ItemGroup>
@@ -354,6 +355,7 @@
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerTurretActor.h" />
     <ClInclude Include="source\BackGround\GameSkybox.h" />
+    <ClInclude Include="source\Controller\PlayerBulletController.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
     <ClInclude Include="source\Scene\GameScene.h" />

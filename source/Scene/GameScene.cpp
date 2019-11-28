@@ -11,6 +11,7 @@
 
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Player/PlayerActor.h"
+#include "../Controller/PlayerBulletController.h"
 
 /**************************************
 ‰Šú‰»ˆ—
@@ -19,12 +20,19 @@ void GameScene::Init()
 {
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
+	ResourceManager::Instance()->MakePolygon("BlazeBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 
 	sceneCamera = new Camera();
 	skybox = new GameSkybox();
 	player = new PlayerActor();
+	bulletController = new PlayerBulletController();
 
 	Camera::SetMainCamera(sceneCamera);
+
+	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1);
+	player->onFireBullet = onFireBullet;
+
+	player->Init();
 }
 
 /**************************************
@@ -35,6 +43,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(sceneCamera);
 	SAFE_DELETE(skybox);
 	SAFE_DELETE(player);
+	SAFE_DELETE(bulletController);
 }
 
 /**************************************
@@ -45,6 +54,7 @@ void GameScene::Update()
 	sceneCamera->Update();
 	skybox->Update();
 	player->Update();
+	bulletController->Update();
 }
 
 /**************************************
@@ -57,4 +67,6 @@ void GameScene::Draw()
 	skybox->Draw();
 
 	player->Draw();
+
+	bulletController->Draw();
 }

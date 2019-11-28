@@ -1,39 +1,36 @@
 //=====================================
 //
-//GameScene.h
-//機能:ゲームシーン処理
+//PlayerBulletController.h
+//機能:プレイヤーバレットコントローラ
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMESCENE_H_
-#define _GAMESCENE_H_
+#ifndef _PLAYERBULLETCONTROLLER_H_
+#define _PLAYERBULLETCONTROLLER_H_
 
 #include "../../main.h"
-#include "../../Framework/Core/BaseScene.h"
+#include <vector>
 
 /**************************************
 前方宣言
 ***************************************/
-class GameSkybox;
-class PlayerActor;
-class PlayerBulletController;
+class PlayerBulletActor;
 
 /**************************************
 クラス定義
 ***************************************/
-class GameScene : public BaseScene
+class PlayerBulletController
 {
-	using BaseScene::BaseScene;
 public:
-	void Init();
-	void Uninit();
+	PlayerBulletController();
+	~PlayerBulletController();
+
 	void Update();
 	void Draw();
 
-private:
-	GameSkybox * skybox;
-	PlayerActor *player;
-	PlayerBulletController *bulletController;
-};
+	void FireBullet(const D3DXVECTOR3& pos);
 
+private:
+	std::vector<PlayerBulletActor*> bulletContainer;
+};
 #endif

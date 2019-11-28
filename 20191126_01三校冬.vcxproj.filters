@@ -102,6 +102,7 @@
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerTurretActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
+    <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -221,6 +222,7 @@
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerTurretActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
+    <ClInclude Include="source\Controller\PlayerBulletController.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

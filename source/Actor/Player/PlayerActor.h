@@ -10,6 +10,7 @@
 
 #include "../../../main.h"
 #include <vector>
+#include <functional>
 
 /**************************************
 ‘O•ûéŒ¾
@@ -30,6 +31,8 @@ public:
 	virtual void Uninit();
 	virtual void Update();
 	virtual void Draw();
+
+	std::function<void(const D3DXVECTOR3)> onFireBullet;
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;

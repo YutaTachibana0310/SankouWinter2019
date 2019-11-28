@@ -24,11 +24,18 @@ public:
 	PlayerTurretActor();
 	~PlayerTurretActor();
 
+	void Init(Transform* parent);
+	void Uninit();
 	void Update();
-	void Draw(const Transform& parent);
+	void Draw();
+
+	D3DXVECTOR3 GetShotPosition() const;
 
 private:
 	MeshContainer * mesh;
+	Transform *parent;
+
+	static const D3DXVECTOR3 OffsetShot;
 };
 
 #endif

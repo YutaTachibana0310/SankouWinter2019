@@ -13,6 +13,7 @@
 staticメンバ
 ***************************************/
 const float PlayerBulletActor::SpeedMove = 2.0f;
+const D3DXVECTOR3 PlayerBulletActor::MoveBorder = { 50.0f, 30.0f, 0.0f };
 
 /**************************************
 コンストラクタ
@@ -53,6 +54,11 @@ void PlayerBulletActor::Uninit()
 void PlayerBulletActor::Update()
 {
 	transform->Move(Vector3::Right * SpeedMove);
+
+	if (_IsOutBorder())
+	{
+		active = false;
+	}
 }
 
 /**************************************
@@ -61,4 +67,20 @@ void PlayerBulletActor::Update()
 void PlayerBulletActor::Draw()
 {
 	polygon->Draw(transform->GetMatrix());
+}
+
+/**************************************
+移動範囲チェック処理
+***************************************/
+bool PlayerBulletActor::_IsOutBorder()
+{
+	D3DXVECTOR3 position = transform->GetPosition();
+
+	if (fabsf(position.x) > MoveBorder.x)
+		return true;
+
+	if (fabsf(position.y) > MoveBorder.y)
+		return true;
+
+	return false;
 }

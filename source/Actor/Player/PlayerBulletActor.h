@@ -30,9 +30,11 @@ public:
 	void Draw();
 
 	static const float SpeedMove;
+	static const D3DXVECTOR3 MoveBorder;
 
 private:
 	BoardPolygon * polygon;
 
+	bool _IsOutBorder();
 };
 #endif

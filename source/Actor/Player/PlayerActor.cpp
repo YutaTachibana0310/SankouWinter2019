@@ -10,8 +10,10 @@
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Input/input.h"
 #include "../../../Framework/Tool/DebugWindow.h"
+#include "../../../Framework/Core/ObjectPool.h"
 
 #include "PlayerTurretActor.h"
+#include "PlayerBulletActor.h"
 
 /**************************************
 staticÉÅÉìÉo
@@ -33,6 +35,7 @@ PlayerActor::PlayerActor()
 	for (int i = 0; i < MaxTurret; i++)
 	{
 		turretContainer.push_back(new PlayerTurretActor());
+		turretContainer[i]->Init(turretTransform);
 	}
 
 	const float PositionTurret = -2.0f;
@@ -85,6 +88,11 @@ void PlayerActor::Update()
 
 	turretTransform->Rotate(5.0f, Vector3::Right);
 
+	for (auto&& turret : turretContainer)
+	{
+		onFireBullet(turret->GetShotPosition());
+	}
+
 	Debug::Begin("Player");
 
 	Debug::Text(transform->GetPosition(), "PlayerPos");
@@ -101,7 +109,7 @@ void PlayerActor::Draw()
 
 	for (auto&& turret : turretContainer)
 	{
-		turret->Draw(*turretTransform);
+		turret->Draw();
 	}
 }
 

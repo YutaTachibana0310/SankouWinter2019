@@ -10,6 +10,11 @@
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 
 /**************************************
+staticメンバ
+***************************************/
+const D3DXVECTOR3 PlayerTurretActor::OffsetShot = { 3.0f, 0.0f, 0.0f };
+
+/**************************************
 コンストラクタ
 ***************************************/
 PlayerTurretActor::PlayerTurretActor()
@@ -27,6 +32,22 @@ PlayerTurretActor::~PlayerTurretActor()
 }
 
 /**************************************
+初期化処理
+***************************************/
+void PlayerTurretActor::Init(Transform * parent)
+{
+	this->parent = parent;
+}
+
+/**************************************
+終了処理
+***************************************/
+void PlayerTurretActor::Uninit()
+{
+	parent = nullptr;
+}
+
+/**************************************
 更新処理
 ***************************************/
 void PlayerTurretActor::Update()
@@ -37,8 +58,20 @@ void PlayerTurretActor::Update()
 /**************************************
 描画処理
 ***************************************/
-void PlayerTurretActor::Draw(const Transform & parent)
+void PlayerTurretActor::Draw()
 {
-	transform->SetWorld(&parent.GetMatrix());
+	transform->SetWorld(&parent->GetMatrix());
 	mesh->Draw();
+}
+
+/**************************************
+発射位置取得処理
+***************************************/
+D3DXVECTOR3 PlayerTurretActor::GetShotPosition() const
+{
+	D3DXMATRIX mtxWorld = transform->GetMatrix();
+	mtxWorld *= parent->GetMatrix();
+
+	D3DXVECTOR3 shotPos = { mtxWorld._41, mtxWorld._42, mtxWorld._43 };
+	return shotPos + OffsetShot;
 }
