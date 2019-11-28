@@ -12,6 +12,7 @@
 #include "../Actor/Player/PlayerBulletActor.h"
 
 #include <algorithm>
+#include <functional>
 
 /**************************************
 コンストラクタ
@@ -57,10 +58,17 @@ void PlayerBulletController::Update()
 ***************************************/
 void PlayerBulletController::Draw()
 {
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+
+	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
+	std::sort(bulletContainer.begin(), bulletContainer.end(), std::greater<>());
 	for (auto&& bullet : bulletContainer)
 	{
 		bullet->Draw();
 	}
+
+	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);
 }
 
 /**************************************

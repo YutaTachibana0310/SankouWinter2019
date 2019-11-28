@@ -70,6 +70,22 @@ void PlayerBulletActor::Draw()
 }
 
 /**************************************
+<演算子
+***************************************/
+bool PlayerBulletActor::operator<(const PlayerBulletActor & rhs) const
+{
+	return transform->GetPosition().z < rhs.GetPosition().z;
+}
+
+/**************************************
+>演算子
+***************************************/
+bool PlayerBulletActor::operator>(const PlayerBulletActor & rhs) const
+{
+	return transform->GetPosition().z > rhs.GetPosition().z;
+}
+
+/**************************************
 移動範囲チェック処理
 ***************************************/
 bool PlayerBulletActor::_IsOutBorder()

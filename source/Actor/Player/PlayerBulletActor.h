@@ -32,6 +32,9 @@ public:
 	static const float SpeedMove;
 	static const D3DXVECTOR3 MoveBorder;
 
+	bool operator<(const PlayerBulletActor& rhs) const;
+	bool operator>(const PlayerBulletActor& rhs) const;
+
 private:
 	BoardPolygon * polygon;
 
