@@ -35,6 +35,8 @@ public:
 	bool operator<(const PlayerBulletActor& rhs) const;
 	bool operator>(const PlayerBulletActor& rhs) const;
 
+	static const D3DXVECTOR2 Size;
+
 private:
 	BoardPolygon * polygon;
 

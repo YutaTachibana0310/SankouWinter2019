@@ -8,12 +8,13 @@
 #include "PlayerBulletActor.h"
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Resource/ResourceManager.h"
+#include "../../../Framework/Camera/Camera.h"
 
 /**************************************
 staticメンバ
 ***************************************/
 const float PlayerBulletActor::SpeedMove = 2.0f;
-const D3DXVECTOR3 PlayerBulletActor::MoveBorder = { 50.0f, 30.0f, 0.0f };
+const D3DXVECTOR2 PlayerBulletActor::Size = { 2.0f, 1.0f };
 
 /**************************************
 コンストラクタ
@@ -21,7 +22,7 @@ const D3DXVECTOR3 PlayerBulletActor::MoveBorder = { 50.0f, 30.0f, 0.0f };
 PlayerBulletActor::PlayerBulletActor()
 {
 	polygon = new BoardPolygon();
-	ResourceManager::Instance()->GetPolygon("BlazeBullet", polygon);
+	ResourceManager::Instance()->GetPolygon("PlayerBullet", polygon);
 }
 
 /**************************************
@@ -92,10 +93,12 @@ bool PlayerBulletActor::_IsOutBorder()
 {
 	D3DXVECTOR3 position = transform->GetPosition();
 
-	if (fabsf(position.x) > MoveBorder.x)
+	D3DXVECTOR3 leftTop = Camera::MainCamera()->Projection(position + D3DXVECTOR3(-Size.x, Size.y, 0.0f));
+	if (leftTop.x < 0.0f || leftTop.y < 0.0f)
 		return true;
 
-	if (fabsf(position.y) > MoveBorder.y)
+	D3DXVECTOR3 rightBottom = Camera::MainCamera()->Projection(position + D3DXVECTOR3(Size.x, -Size.y, 0.0f));
+	if(rightBottom.x > SCREEN_WIDTH * 1.05f || rightBottom.y > SCREEN_HEIGHT * 1.05f)
 		return true;
 
 	return false;
