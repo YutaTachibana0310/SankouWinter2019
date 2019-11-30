@@ -25,7 +25,8 @@ const float PlayerActor::MaxAngle = 40.0f;
 /**************************************
 コンストラクタ
 ***************************************/
-PlayerActor::PlayerActor()
+PlayerActor::PlayerActor() :
+	cntShotFrame(0)
 {
 	mesh = new MeshContainer();
 	turretTransform = new Transform();
@@ -86,12 +87,10 @@ void PlayerActor::Update()
 
 	_Rotate(direction.y);
 
-	turretTransform->Rotate(5.0f, Vector3::Right);
+	const float AngleRotateTurret = 3.0f;
+	turretTransform->Rotate(AngleRotateTurret, Vector3::Right);
 
-	for (auto&& turret : turretContainer)
-	{
-		onFireBullet(turret->GetShotPosition());
-	}
+	_Shot();
 
 	Debug::Begin("Player");
 
@@ -140,4 +139,22 @@ void PlayerActor::_Rotate(float dir)
 	float rotAngle = (targetAngle - currentAngle) * 0.075f;
 
 	transform->Rotate(rotAngle, Vector3::Right);
+}
+
+/**************************************
+ショット発射処理
+***************************************/
+void PlayerActor::_Shot()
+{
+	const int ShotInterval = 3;
+
+	cntShotFrame = Math::WrapAround(0, ShotInterval, ++cntShotFrame);
+	
+	if (cntShotFrame != 0)
+		return;
+
+	for (auto&& turret : turretContainer)
+	{
+		onFireBullet(turret->GetShotPosition());
+	}
 }

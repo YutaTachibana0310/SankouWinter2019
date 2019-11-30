@@ -20,8 +20,8 @@
 /**************************************
 staticメンバ
 ***************************************/
-const float GameScene::BloomPower[] = { 0.9f, 0.75f, 0.6f };		//ブルームの強さ
-const float GameScene::BloomThrethold[] = { 0.6f, 0.5f, 0.24f };		//ブルームをかける輝度の閾値
+const float GameScene::BloomPower[] = { 0.9f, 0.85f, 0.76f };		//ブルームの強さ
+const float GameScene::BloomThrethold[] = { 0.4f, 0.3f, 0.24f };		//ブルームをかける輝度の閾値
 
 /**************************************
 初期化処理

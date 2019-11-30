@@ -37,14 +37,18 @@ public:
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
 	static const float MaxAngle;
+
 private:
 	MeshContainer * mesh;
 
 	Transform *turretTransform;
 	std::vector<PlayerTurretActor*> turretContainer;
 
+	int cntShotFrame;
+
 	void _Move(const D3DXVECTOR3& dir);
 	void _Rotate(float dir);
+	void _Shot();
 };
 
 #endif

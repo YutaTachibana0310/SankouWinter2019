@@ -94,11 +94,11 @@ bool PlayerBulletActor::_IsOutBorder()
 	D3DXVECTOR3 position = transform->GetPosition();
 
 	D3DXVECTOR3 leftTop = Camera::MainCamera()->Projection(position + D3DXVECTOR3(-Size.x, Size.y, 0.0f));
-	if (leftTop.x < 0.0f || leftTop.y < 0.0f)
+	if (leftTop.x < 0.0f || leftTop.y < -SCREEN_HEIGHT * 0.1f)
 		return true;
 
 	D3DXVECTOR3 rightBottom = Camera::MainCamera()->Projection(position + D3DXVECTOR3(Size.x, -Size.y, 0.0f));
-	if(rightBottom.x > SCREEN_WIDTH * 1.05f || rightBottom.y > SCREEN_HEIGHT * 1.05f)
+	if(rightBottom.x > SCREEN_WIDTH * 1.05f || rightBottom.y > SCREEN_HEIGHT * 1.1f)
 		return true;
 
 	return false;
