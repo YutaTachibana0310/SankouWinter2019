@@ -6,10 +6,14 @@
 //
 //=====================================
 #include "PlayerActor.h"
-#include "../../Framework/Renderer3D/MeshContainer.h"
-#include "../../Framework/Resource/ResourceManager.h"
-#include "../../Framework/Input/input.h"
-#include "../../Framework/Tool/DebugWindow.h"
+#include "../../../Framework/Renderer3D/MeshContainer.h"
+#include "../../../Framework/Resource/ResourceManager.h"
+#include "../../../Framework/Input/input.h"
+#include "../../../Framework/Tool/DebugWindow.h"
+#include "../../../Framework/Core/ObjectPool.h"
+
+#include "PlayerTurretActor.h"
+#include "PlayerBulletActor.h"
 
 /**************************************
 staticメンバ
@@ -21,9 +25,26 @@ const float PlayerActor::MaxAngle = 40.0f;
 /**************************************
 コンストラクタ
 ***************************************/
-PlayerActor::PlayerActor()
+PlayerActor::PlayerActor() :
+	cntShotFrame(0)
 {
 	mesh = new MeshContainer();
+	turretTransform = new Transform();
+
+	const unsigned MaxTurret = 4;
+	turretContainer.reserve(MaxTurret);
+	for (int i = 0; i < MaxTurret; i++)
+	{
+		turretContainer.push_back(new PlayerTurretActor());
+		turretContainer[i]->Init(turretTransform);
+	}
+
+	const float PositionTurret = -2.0f;
+	const float OffsetTurret = 5.0f;
+	turretContainer[0]->SetPosition({ PositionTurret, 0.0f, OffsetTurret });
+	turretContainer[1]->SetPosition({ PositionTurret, 0.0f, -OffsetTurret });
+	turretContainer[2]->SetPosition({ PositionTurret, OffsetTurret, 0.0f });
+	turretContainer[3]->SetPosition({ PositionTurret, -OffsetTurret, 0.0f });
 
 	ResourceManager::Instance()->GetMesh("Player", mesh);
 }
@@ -34,6 +55,8 @@ PlayerActor::PlayerActor()
 PlayerActor::~PlayerActor()
 {
 	SAFE_DELETE(mesh);
+
+	Utility::DeleteContainer(turretContainer);
 }
 
 /**************************************
@@ -64,6 +87,11 @@ void PlayerActor::Update()
 
 	_Rotate(direction.y);
 
+	const float AngleRotateTurret = 3.0f;
+	turretTransform->Rotate(AngleRotateTurret, Vector3::Right);
+
+	_Shot();
+
 	Debug::Begin("Player");
 
 	Debug::Text(transform->GetPosition(), "PlayerPos");
@@ -77,6 +105,11 @@ void PlayerActor::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
+
+	for (auto&& turret : turretContainer)
+	{
+		turret->Draw();
+	}
 }
 
 /**************************************
@@ -89,6 +122,7 @@ void PlayerActor::_Move(const D3DXVECTOR3 & dir)
 	position = Vector3::Clamp(-BorderMove, BorderMove, position);
 
 	transform->SetPosition(position);
+	turretTransform->SetPosition(position);
 }
 
 /**************************************
@@ -105,4 +139,22 @@ void PlayerActor::_Rotate(float dir)
 	float rotAngle = (targetAngle - currentAngle) * 0.075f;
 
 	transform->Rotate(rotAngle, Vector3::Right);
+}
+
+/**************************************
+ショット発射処理
+***************************************/
+void PlayerActor::_Shot()
+{
+	const int ShotInterval = 3;
+
+	cntShotFrame = Math::WrapAround(0, ShotInterval, ++cntShotFrame);
+	
+	if (cntShotFrame != 0)
+		return;
+
+	for (auto&& turret : turretContainer)
+	{
+		onFireBullet(turret->GetShotPosition());
+	}
 }

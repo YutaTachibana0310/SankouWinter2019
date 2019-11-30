@@ -16,6 +16,9 @@
 ***************************************/
 class GameSkybox;
 class PlayerActor;
+class PlayerBulletController;
+class BloomController;
+class RenderingTarget;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -29,9 +32,19 @@ public:
 	void Update();
 	void Draw();
 
+	static const float BloomPower[];
+	static const float BloomThrethold[];
+
 private:
+	RenderingTarget * bloomTarget;
 	GameSkybox * skybox;
 	PlayerActor *player;
+	PlayerBulletController *bulletController;
+
+	BloomController *bloom;
+
+	void _DrawDebug();
+
 };
 
 #endif

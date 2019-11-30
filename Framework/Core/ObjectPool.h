@@ -65,8 +65,6 @@ public:
 			container->pop_back();
 		}
 
-		ptr->Init(args...);
-
 		return ptr;
 	}
 

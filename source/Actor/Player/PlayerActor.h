@@ -8,12 +8,15 @@
 #ifndef _PLAYERACTOR_H_
 #define _PLAYERACTOR_H_
 
-#include "../../main.h"
+#include "../../../main.h"
+#include <vector>
+#include <functional>
 
 /**************************************
 前方宣言
 ***************************************/
 class MeshContainer;
+class PlayerTurretActor;
 
 /**************************************
 クラス定義
@@ -29,6 +32,8 @@ public:
 	virtual void Update();
 	virtual void Draw();
 
+	std::function<void(const D3DXVECTOR3)> onFireBullet;
+
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
 	static const float MaxAngle;
@@ -36,8 +41,14 @@ public:
 private:
 	MeshContainer * mesh;
 
+	Transform *turretTransform;
+	std::vector<PlayerTurretActor*> turretContainer;
+
+	int cntShotFrame;
+
 	void _Move(const D3DXVECTOR3& dir);
 	void _Rotate(float dir);
+	void _Shot();
 };
 
 #endif
