@@ -9,6 +9,7 @@
 #include "../../Framework/Camera/Camera.h"
 #include "../../Framework/Resource/ResourceManager.h"
 #include "../../Framework/Tool/DebugWindow.h"
+#include "../../Framework/Renderer2D/RenderingTarget.h"
 
 #include "../../Framework/PostEffect/BloomController.h"
 
@@ -19,8 +20,8 @@
 /**************************************
 staticメンバ
 ***************************************/
-const float GameScene::BloomPower[] = { 0.6f, 0.55f, 0.50f };		//ブルームの強さ
-const float GameScene::BloomThrethold[] = { 0.6f, 0.5f, 0.4f };		//ブルームをかける輝度の閾値
+const float GameScene::BloomPower[] = { 0.9f, 0.75f, 0.6f };		//ブルームの強さ
+const float GameScene::BloomThrethold[] = { 0.6f, 0.5f, 0.24f };		//ブルームをかける輝度の閾値
 
 /**************************************
 初期化処理
@@ -32,6 +33,7 @@ void GameScene::Init()
 	ResourceManager::Instance()->MakePolygon("BlazeBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 
 	sceneCamera = new Camera();
+	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	skybox = new GameSkybox();
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
@@ -54,6 +56,7 @@ void GameScene::Init()
 void GameScene::Uninit()
 {
 	SAFE_DELETE(sceneCamera);
+	SAFE_DELETE(bloomTarget);
 	SAFE_DELETE(skybox);
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
@@ -80,12 +83,18 @@ void GameScene::Draw()
 
 	skybox->Draw();
 
+	bloomTarget->Set();
+
 	player->Draw();
 
 	bulletController->Draw();
 
+	bloomTarget->Restore();
+
+	bloomTarget->Draw();
+
 	//ブルームをかける
-	bloom->Draw(renderTexture);
+	bloom->Draw(bloomTarget->GetTexture());
 
 	_DrawDebug();
 }

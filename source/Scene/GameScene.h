@@ -18,6 +18,7 @@ class GameSkybox;
 class PlayerActor;
 class PlayerBulletController;
 class BloomController;
+class RenderingTarget;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -35,6 +36,7 @@ public:
 	static const float BloomThrethold[];
 
 private:
+	RenderingTarget * bloomTarget;
 	GameSkybox * skybox;
 	PlayerActor *player;
 	PlayerBulletController *bulletController;
