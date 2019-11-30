@@ -18,18 +18,24 @@ sampler s0 : register(s0) = sampler_state{
 	MipFilter = LINEAR;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
 };	
 
 sampler s1 : register(s1) = sampler_state {
 	MipFilter = LINEAR;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
 };
 
 sampler s2 : register(s2) = sampler_state {
 	MipFilter = LINEAR;
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
+	AddressU = CLAMP;
+	AddressV = CLAMP;
 };
 
 /***************************************
