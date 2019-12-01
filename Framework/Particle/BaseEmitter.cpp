@@ -47,7 +47,7 @@ BaseEmitter::BaseEmitter(int emitNum) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEmitter::BaseEmitter(int emitNum, int duration) :
+BaseEmitter::BaseEmitter(int emitNum, float duration) :
 	GameObject(false),
 	emitNum(emitNum),
 	duration(duration),
@@ -59,7 +59,7 @@ BaseEmitter::BaseEmitter(int emitNum, int duration) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEmitter::BaseEmitter(int emitNum, int durationMin, int durationMax) :
+BaseEmitter::BaseEmitter(int emitNum, float durationMin, float durationMax) :
 	GameObject(false),
 	emitNum(emitNum),
 	duration(Math::RandomRange(durationMin, durationMax)),
@@ -71,7 +71,7 @@ BaseEmitter::BaseEmitter(int emitNum, int durationMin, int durationMax) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEmitter::BaseEmitter(int emitNumMin, int emitNumMax, int durationMin, int durationMax) :
+BaseEmitter::BaseEmitter(int emitNumMin, int emitNumMax, float durationMin, float durationMax) :
 	GameObject(false),
 	emitNum(Math::RandomRange(emitNumMin, emitNumMax)),
 	duration(Math::RandomRange(durationMin, durationMax)),

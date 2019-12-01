@@ -45,9 +45,9 @@ class BaseParticle
 {
 public:
 	BaseParticle();
-	BaseParticle(int life);
-	BaseParticle(int lifeMin, int lifeMax);
-	BaseParticle(float u, float v, int lifeMin, int lifeMax);
+	BaseParticle(float life);
+	BaseParticle(float lifeMin, float lifeMax);
+	BaseParticle(float u, float v, float lifeMin, float lifeMax);
 	virtual ~BaseParticle();
 
 	virtual void Init() = 0;
@@ -64,8 +64,8 @@ public:
 	ParticleUV uv;
 
 protected:
-	int cntFrame;
-	int lifeFrame;
+	float cntFrame;
+	float lifeFrame;
 
 	bool _IsActive() const;
 };

@@ -40,8 +40,8 @@ namespace Effect::Game
 
 		//エミッタコンテナ作成
 		const unsigned MaxEmitter = 64;
-		const int NumEmit = 5;
-		const int DurationEmit = 5;
+		const float NumEmit = 5;
+		const int DurationEmit = 5.0f;
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{

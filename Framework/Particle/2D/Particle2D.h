@@ -23,9 +23,9 @@ class Particle2D : public BaseParticle, public GameObject
 {
 public:
 	Particle2D();
-	Particle2D(int life);
-	Particle2D(int minLife, int maxLife);
-	Particle2D(float u, float v, int minLife, int maxLife);
+	Particle2D(float life);
+	Particle2D(float minLife, float maxLife);
+	Particle2D(float u, float v, float minLife, float maxLife);
 	virtual ~Particle2D();
 
 	virtual bool IsActive() const;

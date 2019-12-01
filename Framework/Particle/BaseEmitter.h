@@ -23,9 +23,9 @@ class BaseEmitter : public GameObject
 public:
 	BaseEmitter();
 	BaseEmitter(int emitNum);
-	BaseEmitter(int emitNum, int duration);
-	BaseEmitter(int emitNum, int durationMin, int durationMax);
-	BaseEmitter(int emitNumMin, int emitNumMax, int durationMin, int durationMax);
+	BaseEmitter(int emitNum, float duration);
+	BaseEmitter(int emitNum, float durationMin, float durationMax);
+	BaseEmitter(int emitNumMin, int emitNumMax, float durationMin, float durationMax);
 
 	virtual ~BaseEmitter();
 
@@ -38,8 +38,8 @@ public:
 	virtual void UseCulling(bool value);
 
 protected:
-	int cntFrame;
-	int duration;
+	float cntFrame;
+	float duration;
 	int emitNum;
 	bool useCull;
 
