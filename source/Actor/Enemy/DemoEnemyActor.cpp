@@ -8,10 +8,10 @@
 #include "DemoEnemyActor.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Renderer3D/MeshContainer.h"
-#include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 
 #include "../../Effect/GameParticleManager.h"
+#include "../../System/EnemyTween.h"
 
 /**************************************
 コンストラクタ
@@ -43,7 +43,7 @@ void DemoEnemyActor::Init()
 	D3DXVECTOR3 InitPos = { 0.0f, 0.0f, 50.0f };
 	D3DXVECTOR3 GoalPos = { 0.0f, 0.0f, 25.0f };
 
-	Tween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
+	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
 
 	SetCollider(true);
 

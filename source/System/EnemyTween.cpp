@@ -7,6 +7,7 @@
 #include "EnemyTween.h"
 #include "../../Framework/Math/Quaternion.h"
 #include "../Actor/Enemy/BaseEnemy.h"
+#include "../Controller/EnemyTimeController.h"
 
 #include <algorithm>
 
@@ -91,7 +92,7 @@ void EnemyTween::ClearAll()
 /**************************************
 移動処理
 ***************************************/
-void EnemyTween::Move(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void EnemyTween::Move(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	MoveEnemyTweener *tweener = new MoveEnemyTweener(ref.transform, start, end, duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -100,7 +101,7 @@ void EnemyTween::Move(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTOR
 /**************************************
 移動処理
 ***************************************/
-void EnemyTween::Move(BaseEnemy& ref, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void EnemyTween::Move(BaseEnemy& ref, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	D3DXVECTOR3 start = ref.transform->GetPosition();
 	Move(ref, start, end, duration, type, callback);
@@ -109,7 +110,7 @@ void EnemyTween::Move(BaseEnemy& ref, const D3DXVECTOR3& end, int duration, Ease
 /**************************************
 スケール処理
 ***************************************/
-void EnemyTween::Scale(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void EnemyTween::Scale(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	ScaleEnemyTweener *tweener = new ScaleEnemyTweener(ref.transform, start, end, duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -118,7 +119,7 @@ void EnemyTween::Scale(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTO
 /**************************************
 スケール処理
 ***************************************/
-void EnemyTween::Scale(BaseEnemy& ref, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void EnemyTween::Scale(BaseEnemy& ref, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	D3DXVECTOR3 start = ref.transform->GetScale();
 	Scale(ref, start, end, duration, type, callback);
@@ -127,7 +128,7 @@ void EnemyTween::Scale(BaseEnemy& ref, const D3DXVECTOR3& end, int duration, Eas
 /**************************************
 回転処理
 ***************************************/
-void EnemyTween::Rotate(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void EnemyTween::Rotate(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	RotateEnemyTweener *tweener = new RotateEnemyTweener(ref.transform, start, end, duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -136,7 +137,7 @@ void EnemyTween::Rotate(BaseEnemy& ref, const D3DXVECTOR3& start, const D3DXVECT
 /**************************************
 回転処理
 ***************************************/
-void EnemyTween::Rotate(BaseEnemy& ref, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void EnemyTween::Rotate(BaseEnemy& ref, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	D3DXVECTOR3 start = ref.transform->GetEulerAngle();
 	Rotate(ref, start, end, duration, type, callback);
@@ -145,7 +146,7 @@ void EnemyTween::Rotate(BaseEnemy& ref, const D3DXVECTOR3& end, int duration, Ea
 /**************************************
 方向処理
 ***************************************/
-void EnemyTween::Turn(BaseEnemy & ref, const D3DXVECTOR3 & end, int duration, EaseType type, const D3DXVECTOR3& dummyAxis, std::function<void()> callback)
+void EnemyTween::Turn(BaseEnemy & ref, const D3DXVECTOR3 & end, float duration, EaseType type, const D3DXVECTOR3& dummyAxis, std::function<void()> callback)
 {
 	//始点となるクォータニオンを求める
 	D3DXQUATERNION start = ref.transform->GetRotation();
@@ -173,7 +174,7 @@ void EnemyTween::Turn(BaseEnemy & ref, const D3DXVECTOR3 & end, int duration, Ea
 /**************************************
 EnemyTweenerコンストラクタ
 ***************************************/
-EnemyTween::EnemyTweener::EnemyTweener(std::shared_ptr<Transform>& ref, int duration, EaseType type, Callback callback) :
+EnemyTween::EnemyTweener::EnemyTweener(std::shared_ptr<Transform>& ref, float duration, EaseType type, Callback callback) :
 	reference(ref),
 	cntFrame(0),
 	duration(duration),
@@ -219,7 +220,7 @@ inline void EnemyTween::EnemyTweener::CheckCallback()
 /**************************************
 MoveEnemyTweenerコンストラクタ
 ***************************************/
-EnemyTween::MoveEnemyTweener::MoveEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
+EnemyTween::MoveEnemyTweener::MoveEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, Callback callback) :
 	EnemyTweener(ref, duration, type, callback),
 	start(start),
 	end(end)
@@ -232,7 +233,7 @@ MoveEnemyTweener更新処理
 ***************************************/
 void EnemyTween::MoveEnemyTweener::Update()
 {
-	cntFrame++;
+	cntFrame += EnemyTimeController::GetTimeScale();
 
 	shared_ptr<Transform> transform = reference.lock();
 	if (transform)
@@ -246,7 +247,7 @@ void EnemyTween::MoveEnemyTweener::Update()
 /**************************************
 ScaleEnemyTweenerコンストラクタ
 ***************************************/
-EnemyTween::ScaleEnemyTweener::ScaleEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
+EnemyTween::ScaleEnemyTweener::ScaleEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, Callback callback) :
 	EnemyTweener(ref, duration, type, callback),
 	start(start),
 	end(end)
@@ -259,7 +260,7 @@ ScaleEnemyTweener更新処理
 ***************************************/
 void EnemyTween::ScaleEnemyTweener::Update()
 {
-	cntFrame++;
+	cntFrame += EnemyTimeController::GetTimeScale();
 
 	shared_ptr<Transform> transform = reference.lock();
 	if (transform)
@@ -273,7 +274,7 @@ void EnemyTween::ScaleEnemyTweener::Update()
 /**************************************
 RotateEnemyTweenerコンストラクタ
 ***************************************/
-EnemyTween::RotateEnemyTweener::RotateEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
+EnemyTween::RotateEnemyTweener::RotateEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, Callback callback) :
 	EnemyTweener(ref, duration, type, callback),
 	start(Quaternion::ToQuaternion(start)),
 	end(Quaternion::ToQuaternion(end))
@@ -284,7 +285,7 @@ EnemyTween::RotateEnemyTweener::RotateEnemyTweener(std::shared_ptr<Transform>& r
 /**************************************
 RotateEnemyTweenerコンストラクタ
 ***************************************/
-EnemyTween::RotateEnemyTweener::RotateEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXQUATERNION & start, const D3DXQUATERNION & end, int duration, EaseType type, Callback callback) :
+EnemyTween::RotateEnemyTweener::RotateEnemyTweener(std::shared_ptr<Transform>& ref, const D3DXQUATERNION & start, const D3DXQUATERNION & end, float duration, EaseType type, Callback callback) :
 	EnemyTweener(ref, duration, type, callback),
 	start(start),
 	end(end)
@@ -297,7 +298,7 @@ RotateEnemyTweener更新処理
 ***************************************/
 void EnemyTween::RotateEnemyTweener::Update()
 {
-	cntFrame++;
+	cntFrame += EnemyTimeController::GetTimeScale();
 
 	shared_ptr<Transform> transform = reference.lock();
 	if (transform)

@@ -6,8 +6,10 @@
 //
 //=====================================
 #include "EnemyController.h"
-#include "../System/EnemyTween.h"
+#include "../../Framework/Tool/DebugWindow.h"
 
+#include "EnemyTimeController.h"
+#include "../System/EnemyTween.h"
 #include "../Actor/Enemy/DemoEnemyActor.h"
 
 /**************************************
@@ -43,6 +45,13 @@ EnemyController::~EnemyController()
 ***************************************/
 void EnemyController::Update()
 {
+	Debug::Begin("Enemy");
+	static float timeScale = 1.0f;
+	EnemyTimeController::SetTimeScale(timeScale);
+	Debug::Slider("timeScale", timeScale, 0.001f, 1.0f);
+
+	Debug::End();
+
 	enemy->Update();
 	EnemyTween::mInstance->Update();
 }
