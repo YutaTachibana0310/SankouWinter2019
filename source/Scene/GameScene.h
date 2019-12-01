@@ -19,7 +19,7 @@ class PlayerActor;
 class PlayerBulletController;
 class BloomController;
 class RenderingTarget;
-class DemoEnemyActor;
+class EnemyController;
 class GameCamera;
 class GameParticleManager;
 
@@ -47,7 +47,7 @@ private:
 
 	PlayerActor *player;
 	PlayerBulletController *bulletController;
-	DemoEnemyActor *enemy;
+	EnemyController *enemyController;
 
 	BloomController *bloom;
 

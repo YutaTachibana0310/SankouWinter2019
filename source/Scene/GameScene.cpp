@@ -19,7 +19,7 @@
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Player/PlayerActor.h"
 #include "../Controller/PlayerBulletController.h"
-#include "../Actor/Enemy/DemoEnemyActor.h"
+#include "../Controller/EnemyController.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -46,7 +46,7 @@ void GameScene::Init()
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
 	bloom = new BloomController();
-	enemy = new DemoEnemyActor();
+	enemyController = new EnemyController();
 
 	Camera::SetMainCamera(gameCamera);
 
@@ -54,7 +54,6 @@ void GameScene::Init()
 	player->onFireBullet = onFireBullet;
 
 	player->Init();
-	enemy->Init();
 
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
@@ -71,7 +70,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
 	SAFE_DELETE(bloom);
-	SAFE_DELETE(enemy);
+	SAFE_DELETE(enemyController);
 
 	particleManager->Uninit();
 
@@ -87,7 +86,7 @@ void GameScene::Update()
 	skybox->Update();
 	player->Update();
 	bulletController->Update();
-	enemy->Update();
+	enemyController->Update();
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 
@@ -106,7 +105,7 @@ void GameScene::Draw()
 	bloomTarget->Set();
 
 	player->Draw();
-	enemy->Draw();
+	enemyController->Draw();
 
 	bulletController->Draw();
 
