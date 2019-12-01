@@ -23,9 +23,9 @@ class Particle3D : public BaseParticle, public BillboardObject
 {
 public:
 	Particle3D();
-	Particle3D(int life);
-	Particle3D(int minLife, int maxLife);
-	Particle3D(float u, float v, int minLife, int maxLife);
+	Particle3D(float life);
+	Particle3D(float minLife, float maxLife);
+	Particle3D(float u, float v, float minLife, float maxLife);
 	virtual ~Particle3D();
 
 	virtual bool IsActive() const;

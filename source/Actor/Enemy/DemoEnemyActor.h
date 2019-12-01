@@ -10,6 +10,7 @@
 
 #include "../../../main.h"
 #include "../../../Framework/Collider/ColliderObserver.h"
+#include "BaseEnemy.h"
 
 /**************************************
 前方宣言
@@ -20,7 +21,7 @@ class BoxCollider3D;
 /**************************************
 クラス定義
 ***************************************/
-class DemoEnemyActor : public GameObject, public ColliderObserver
+class DemoEnemyActor : public BaseEnemy, public ColliderObserver
 {
 public:
 	DemoEnemyActor();
@@ -34,10 +35,7 @@ public:
 	virtual void OnColliderHit(ColliderObserver * other) override;
 
 private:
-	MeshContainer * mesh;
-	std::shared_ptr<BoxCollider3D> collider;
 
-	int hp;
 };
 
 #endif

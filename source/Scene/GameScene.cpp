@@ -13,13 +13,15 @@
 
 #include "../../Framework/PostEffect/BloomController.h"
 #include "../../Framework/Collider/ColliderManager.h"
+#include "../../Framework/Input/input.h"
 
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Player/PlayerActor.h"
 #include "../Controller/PlayerBulletController.h"
-#include "../Actor/Enemy/DemoEnemyActor.h"
+#include "../Controller/EnemyController.h"
+#include "../Controller/EnemyTimeController.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -46,7 +48,7 @@ void GameScene::Init()
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
 	bloom = new BloomController();
-	enemy = new DemoEnemyActor();
+	enemyController = new EnemyController();
 
 	Camera::SetMainCamera(gameCamera);
 
@@ -54,7 +56,6 @@ void GameScene::Init()
 	player->onFireBullet = onFireBullet;
 
 	player->Init();
-	enemy->Init();
 
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
@@ -71,7 +72,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
 	SAFE_DELETE(bloom);
-	SAFE_DELETE(enemy);
+	SAFE_DELETE(enemyController);
 
 	particleManager->Uninit();
 
@@ -83,11 +84,16 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
+	if (Keyboard::GetTrigger(DIK_C))
+		EnemyTimeController::SetTimeScale(0.2f);
+	if (Keyboard::GetRelease(DIK_C))
+		EnemyTimeController::SetTimeScale(1.0f);
+
 	gameCamera->Update();
 	skybox->Update();
 	player->Update();
 	bulletController->Update();
-	enemy->Update();
+	enemyController->Update();
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 
@@ -106,7 +112,7 @@ void GameScene::Draw()
 	bloomTarget->Set();
 
 	player->Draw();
-	enemy->Draw();
+	enemyController->Draw();
 
 	bulletController->Draw();
 

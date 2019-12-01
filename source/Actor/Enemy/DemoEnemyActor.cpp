@@ -8,10 +8,10 @@
 #include "DemoEnemyActor.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Renderer3D/MeshContainer.h"
-#include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 
 #include "../../Effect/GameParticleManager.h"
+#include "../../System/EnemyTween.h"
 
 /**************************************
 コンストラクタ
@@ -21,9 +21,10 @@ DemoEnemyActor::DemoEnemyActor()
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("DemoEnemy", mesh);
 
-	collider = BoxCollider3D::Create("Enemy", transform);
-	collider->AddObserver(this);
-	collider->SetSize({ 5.0f, 8.0f, 7.0f });
+	colliders.resize(1, nullptr);
+	colliders[0] = BoxCollider3D::Create("Enemy", transform);
+	colliders[0]->AddObserver(this);
+	colliders[0]->SetSize({ 5.0f, 8.0f, 7.0f });
 }
 
 /**************************************
@@ -32,7 +33,6 @@ DemoEnemyActor::DemoEnemyActor()
 DemoEnemyActor::~DemoEnemyActor()
 {
 	SAFE_DELETE(mesh);
-	collider.reset();
 }
 
 /**************************************
@@ -43,11 +43,11 @@ void DemoEnemyActor::Init()
 	D3DXVECTOR3 InitPos = { 0.0f, 0.0f, 50.0f };
 	D3DXVECTOR3 GoalPos = { 0.0f, 0.0f, 25.0f };
 
-	Tween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
+	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
 
-	collider->SetActive(true);
+	SetCollider(true);
 
-	hp = 50;
+	hp = 50.0f;
 }
 
 /**************************************
@@ -55,7 +55,7 @@ void DemoEnemyActor::Init()
 ***************************************/
 void DemoEnemyActor::Uninit()
 {
-	collider->SetActive(false);
+	SetCollider(false);
 
 	//α用に最初期化する
 	Init();
@@ -87,7 +87,7 @@ void DemoEnemyActor::Draw()
 ***************************************/
 void DemoEnemyActor::OnColliderHit(ColliderObserver * other)
 {
-	hp--;
+	hp -= 1.0f;
 
 	if (hp <= 0)
 	{

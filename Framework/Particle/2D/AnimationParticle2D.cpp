@@ -19,7 +19,7 @@ AnimationParticle2D::AnimationParticle2D(float divX, float divY) :
 /**************************************
 コンストラクタ
 ***************************************/
-AnimationParticle2D::AnimationParticle2D(float divX, float divY, int life) :
+AnimationParticle2D::AnimationParticle2D(float divX, float divY, float life) :
 	Particle2D(life)
 {
 	SetAnimParameter(divX, divY);
@@ -28,7 +28,7 @@ AnimationParticle2D::AnimationParticle2D(float divX, float divY, int life) :
 /**************************************
 コンストラクタ
 ***************************************/
-AnimationParticle2D::AnimationParticle2D(float divX, float divY, int lifeMin, int lifeMax) :
+AnimationParticle2D::AnimationParticle2D(float divX, float divY, float lifeMin, float lifeMax) :
 	Particle2D(lifeMin, lifeMax)
 {
 	SetAnimParameter(divX, divY);

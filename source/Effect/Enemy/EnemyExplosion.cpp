@@ -7,6 +7,8 @@
 //=====================================
 #include "EnemyExplosion.h"
 #include "../../../Framework/Math/Easing.h"
+#include "../../Controller/EnemyTimeController.h"
+#include "../Enemy/EnemyParticleEmitter.h"
 
 namespace Effect::Game
 {
@@ -41,11 +43,11 @@ namespace Effect::Game
 		//エミッタコンテナ作成
 		const unsigned MaxEmitter = 64;
 		const int NumEmit = 5;
-		const int DurationEmit = 5;
+		const float DurationEmit = 5.0f;
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new BaseEmitter(NumEmit, DurationEmit);
+			emitter = new Enemy::EnemyParticleEmitter(NumEmit, DurationEmit);
 		}
 	}
 
@@ -82,11 +84,11 @@ namespace Effect::Game
 		if (!IsActive())
 			return;
 
-		cntFrame++;
+		cntFrame += EnemyTimeController::GetTimeScale();
 
 		float t = (float)cntFrame / lifeFrame;
 		float speed = Easing::EaseValue(t, initSpeed, 0.0f, EaseType::OutSine);
-		transform->Move(speed * moveDir);
+		transform->Move(speed * moveDir * EnemyTimeController::GetTimeScale());
 
 		Animation(t);
 	}
