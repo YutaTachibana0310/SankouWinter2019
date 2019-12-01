@@ -9,6 +9,7 @@
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Camera/Camera.h"
+#include "../../../Framework/Collider/BoxCollider3D.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -24,6 +25,10 @@ PlayerBulletActor::PlayerBulletActor()
 	polygon = new BoardPolygon();
 	ResourceManager::Instance()->GetPolygon("PlayerBullet", polygon);
 	transform->Rotate(-90.0f, Vector3::Up);
+
+	collider = BoxCollider3D::Create("PlayerBullet", transform);
+	collider->AddObserver(this);
+	collider->SetSize({ 2.0f, 1.0f, 2.0f });
 }
 
 /**************************************
@@ -32,6 +37,7 @@ PlayerBulletActor::PlayerBulletActor()
 PlayerBulletActor::~PlayerBulletActor()
 {
 	SAFE_DELETE(polygon);
+	collider.reset();
 }
 
 /**************************************
@@ -41,6 +47,8 @@ void PlayerBulletActor::Init(const D3DXVECTOR3& position)
 {
 	active = true;
 	transform->SetPosition(position);
+
+	collider->SetActive(true);
 }
 
 /**************************************
@@ -48,6 +56,7 @@ void PlayerBulletActor::Init(const D3DXVECTOR3& position)
 ***************************************/
 void PlayerBulletActor::Uninit()
 {
+	collider->SetActive(false);
 }
 
 /**************************************
@@ -69,6 +78,10 @@ void PlayerBulletActor::Update()
 void PlayerBulletActor::Draw()
 {
 	polygon->Draw(transform->GetMatrix());
+
+#ifdef _DEBUG
+	collider->Draw();
+#endif
 }
 
 /**************************************
@@ -103,4 +116,12 @@ bool PlayerBulletActor::_IsOutBorder()
 		return true;
 
 	return false;
+}
+
+/**************************************
+“–‚½‚è”»’èˆ—
+***************************************/
+void PlayerBulletActor::OnColliderHit(ColliderObserver * other)
+{
+	active = false;
 }

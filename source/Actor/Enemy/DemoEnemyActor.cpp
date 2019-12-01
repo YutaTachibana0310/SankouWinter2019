@@ -9,6 +9,7 @@
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Tween/Tween.h"
+#include "../../../Framework/Collider/BoxCollider3D.h"
 
 /**************************************
 コンストラクタ
@@ -17,6 +18,10 @@ DemoEnemyActor::DemoEnemyActor()
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("DemoEnemy", mesh);
+
+	collider = BoxCollider3D::Create("Enemy", transform);
+	collider->AddObserver(this);
+	collider->SetSize({ 5.0f, 8.0f, 7.0f });
 }
 
 /**************************************
@@ -25,6 +30,7 @@ DemoEnemyActor::DemoEnemyActor()
 DemoEnemyActor::~DemoEnemyActor()
 {
 	SAFE_DELETE(mesh);
+	collider.reset();
 }
 
 /**************************************
@@ -36,6 +42,8 @@ void DemoEnemyActor::Init()
 	D3DXVECTOR3 GoalPos = { 0.0f, 0.0f, 25.0f };
 
 	Tween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
+
+	collider->SetActive(true);
 }
 
 /**************************************
@@ -43,6 +51,8 @@ void DemoEnemyActor::Init()
 ***************************************/
 void DemoEnemyActor::Uninit()
 {
+	collider->SetActive(false);
+
 	//α用に最初期化する
 	Init();
 }
@@ -61,4 +71,15 @@ void DemoEnemyActor::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
+
+#ifdef _DEBUG
+	collider->Draw();
+#endif
+}
+
+/**************************************
+当たり判定処理
+***************************************/
+void DemoEnemyActor::OnColliderHit(ColliderObserver * other)
+{
 }

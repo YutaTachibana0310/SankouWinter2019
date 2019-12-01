@@ -12,6 +12,7 @@
 #include "../../Framework/Renderer2D/RenderingTarget.h"
 
 #include "../../Framework/PostEffect/BloomController.h"
+#include "../../Framework/Collider/ColliderManager.h"
 
 #include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
@@ -81,6 +82,8 @@ void GameScene::Update()
 	player->Update();
 	bulletController->Update();
 	enemy->Update();
+
+	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 }
 
 /**************************************

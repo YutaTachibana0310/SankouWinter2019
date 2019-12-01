@@ -9,16 +9,18 @@
 #define _PLAYERULLETACTOR_H_
 
 #include "../../../main.h"
+#include "../../../Framework/Collider/ColliderObserver.h"
 
 /**************************************
 前方宣言
 ***************************************/
 class BoardPolygon;
+class BoxCollider3D;
 
 /**************************************
 クラス定義
 ***************************************/
-class PlayerBulletActor : public GameObject
+class PlayerBulletActor : public GameObject, public ColliderObserver
 {
 public:
 	PlayerBulletActor();
@@ -28,6 +30,8 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
+
+	virtual void OnColliderHit(ColliderObserver * other) override;
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 MoveBorder;
@@ -39,7 +43,9 @@ public:
 
 private:
 	BoardPolygon * polygon;
+	std::shared_ptr<BoxCollider3D> collider;
 
 	bool _IsOutBorder();
+
 };
 #endif
