@@ -12,10 +12,14 @@
 #include "../../Framework/Renderer2D/RenderingTarget.h"
 
 #include "../../Framework/PostEffect/BloomController.h"
+#include "../../Framework/Collider/ColliderManager.h"
 
+#include "../Effect/GameParticleManager.h"
+#include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Player/PlayerActor.h"
 #include "../Controller/PlayerBulletController.h"
+#include "../Actor/Enemy/DemoEnemyActor.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -30,21 +34,27 @@ void GameScene::Init()
 {
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
+	ResourceManager::Instance()->LoadMesh("DemoEnemy", "data/MODEL/Enemy/Enemy00.x");
 	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 
-	sceneCamera = new Camera();
+	particleManager = GameParticleManager::Instance();
+	particleManager->Init();
+
+	sceneCamera = gameCamera = new GameCamera();
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	skybox = new GameSkybox();
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
 	bloom = new BloomController();
+	enemy = new DemoEnemyActor();
 
-	Camera::SetMainCamera(sceneCamera);
+	Camera::SetMainCamera(gameCamera);
 
 	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1);
 	player->onFireBullet = onFireBullet;
 
 	player->Init();
+	enemy->Init();
 
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
@@ -55,12 +65,17 @@ void GameScene::Init()
 ***************************************/
 void GameScene::Uninit()
 {
-	SAFE_DELETE(sceneCamera);
+	SAFE_DELETE(gameCamera);
 	SAFE_DELETE(bloomTarget);
 	SAFE_DELETE(skybox);
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
 	SAFE_DELETE(bloom);
+	SAFE_DELETE(enemy);
+
+	particleManager->Uninit();
+
+	sceneCamera = nullptr;
 }
 
 /**************************************
@@ -68,10 +83,15 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
-	sceneCamera->Update();
+	gameCamera->Update();
 	skybox->Update();
 	player->Update();
 	bulletController->Update();
+	enemy->Update();
+
+	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
+
+	particleManager->Update();
 }
 
 /**************************************
@@ -86,6 +106,7 @@ void GameScene::Draw()
 	bloomTarget->Set();
 
 	player->Draw();
+	enemy->Draw();
 
 	bulletController->Draw();
 
@@ -95,6 +116,8 @@ void GameScene::Draw()
 
 	//ƒuƒ‹[ƒ€‚ð‚©‚¯‚é
 	bloom->Draw(bloomTarget->GetTexture());
+
+	particleManager->Draw();
 
 	_DrawDebug();
 }

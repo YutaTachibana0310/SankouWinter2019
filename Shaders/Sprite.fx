@@ -88,6 +88,7 @@ technique tech
 	pass P1 {
 		ALPHABLENDENABLE = true;
 		ALPHATESTENABLE = true;
+		ZWRITEENABLE = false;
 		VertexShader = compile vs_2_0 VS_2D();
 		PixelShader = compile ps_2_0 PS();
 	}

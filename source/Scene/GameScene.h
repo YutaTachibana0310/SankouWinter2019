@@ -19,6 +19,9 @@ class PlayerActor;
 class PlayerBulletController;
 class BloomController;
 class RenderingTarget;
+class DemoEnemyActor;
+class GameCamera;
+class GameParticleManager;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -38,8 +41,13 @@ public:
 private:
 	RenderingTarget * bloomTarget;
 	GameSkybox * skybox;
+	GameCamera *gameCamera;
+
+	GameParticleManager *particleManager;
+
 	PlayerActor *player;
 	PlayerBulletController *bulletController;
+	DemoEnemyActor *enemy;
 
 	BloomController *bloom;
 

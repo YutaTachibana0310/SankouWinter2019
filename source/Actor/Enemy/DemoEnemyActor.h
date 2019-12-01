@@ -1,12 +1,12 @@
 //=====================================
 //
-//PlayerBulletActor.h
-//機能:プレイヤーバレットアクター
+//DemoEnemyActor.h
+//機能:でもエネミーアクター
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _PLAYERULLETACTOR_H_
-#define _PLAYERULLETACTOR_H_
+#ifndef _DEMOENEMYACTOR_H_
+#define _DEMOENEMYACTOR_H_
 
 #include "../../../main.h"
 #include "../../../Framework/Collider/ColliderObserver.h"
@@ -14,38 +14,30 @@
 /**************************************
 前方宣言
 ***************************************/
-class BoardPolygon;
+class MeshContainer;
 class BoxCollider3D;
 
 /**************************************
 クラス定義
 ***************************************/
-class PlayerBulletActor : public GameObject, public ColliderObserver
+class DemoEnemyActor : public GameObject, public ColliderObserver
 {
 public:
-	PlayerBulletActor();
-	~PlayerBulletActor();
+	DemoEnemyActor();
+	~DemoEnemyActor();
 
-	void Init(const D3DXVECTOR3& position);
+	void Init();
 	void Uninit();
 	void Update();
 	void Draw();
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
 
-	static const float SpeedMove;
-	static const D3DXVECTOR3 MoveBorder;
-
-	bool operator<(const PlayerBulletActor& rhs) const;
-	bool operator>(const PlayerBulletActor& rhs) const;
-
-	static const D3DXVECTOR2 Size;
-
 private:
-	BoardPolygon * polygon;
+	MeshContainer * mesh;
 	std::shared_ptr<BoxCollider3D> collider;
 
-	bool _IsOutBorder();
-
+	int hp;
 };
+
 #endif
