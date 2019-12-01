@@ -32,8 +32,8 @@ DemoEnemyActor::~DemoEnemyActor()
 ***************************************/
 void DemoEnemyActor::Init()
 {
-	D3DXVECTOR3 InitPos = { 50.0f, 0.0f, 0.0f };
-	D3DXVECTOR3 GoalPos = { 25.0f, 0.0f, 0.0f };
+	D3DXVECTOR3 InitPos = { 0.0f, 0.0f, 50.0f };
+	D3DXVECTOR3 GoalPos = { 0.0f, 0.0f, 25.0f };
 
 	Tween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
 }

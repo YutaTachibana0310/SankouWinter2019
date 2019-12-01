@@ -12,7 +12,7 @@
 /**************************************
 staticメンバ
 ***************************************/
-const D3DXVECTOR3 PlayerTurretActor::OffsetShot = { 3.0f, 0.0f, 0.0f };
+const D3DXVECTOR3 PlayerTurretActor::OffsetShot = { 0.0f, 0.0f, 3.0f };
 
 /**************************************
 コンストラクタ
@@ -52,7 +52,7 @@ void PlayerTurretActor::Uninit()
 ***************************************/
 void PlayerTurretActor::Update()
 {
-	transform->Rotate(-2.0f, Vector3::Right);
+	transform->Rotate(-2.0f, Vector3::Forward);
 }
 
 /**************************************

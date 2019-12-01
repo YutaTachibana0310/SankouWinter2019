@@ -23,6 +23,7 @@ PlayerBulletActor::PlayerBulletActor()
 {
 	polygon = new BoardPolygon();
 	ResourceManager::Instance()->GetPolygon("PlayerBullet", polygon);
+	transform->Rotate(-90.0f, Vector3::Up);
 }
 
 /**************************************
@@ -54,7 +55,7 @@ void PlayerBulletActor::Uninit()
 ***************************************/
 void PlayerBulletActor::Update()
 {
-	transform->Move(Vector3::Right * SpeedMove);
+	transform->Move(Vector3::Forward * SpeedMove);
 
 	if (_IsOutBorder())
 	{
