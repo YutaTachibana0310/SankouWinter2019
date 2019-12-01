@@ -20,6 +20,7 @@ namespace GameEffect
 	enum ParticleID
 	{
 		PlayerBulletHit,
+		EnemyExplosion,
 		Max
 	};
 }
@@ -31,6 +32,7 @@ class GameParticleManager : public SceneParticleManager, public BaseSingleton<Ga
 {
 public:
 	void Init() override;
+	void Update() override;
 
 private:
 	static const float BloomPower[3];

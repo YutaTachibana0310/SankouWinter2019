@@ -7,8 +7,10 @@
 //=====================================
 #include "GameParticleManager.h"
 #include "../../Framework/PostEffect/CrossFilterController.h"
+#include "../../Framework/Tool/DebugWindow.h"
 
 #include "Game\PlayerBulletHit.h"
+#include "Game\EnemyExplosion.h"
 
 /**************************************
 staticÉÅÉìÉo
@@ -25,7 +27,30 @@ void GameParticleManager::Init()
 
 	controllers.resize(GameEffect::Max);
 	controllers[GameEffect::PlayerBulletHit] = new Effect::Game::PlayerBulletHitController();
+	controllers[GameEffect::EnemyExplosion] = new Effect::Game::EnemyExplosionController();
 
 	crossFilter->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	crossFilter->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
+}
+
+/**************************************
+çXêVèàóù
+***************************************/
+void GameParticleManager::Update()
+{
+	static float power[3] = { BloomPower[0],BloomPower[1], BloomPower[2] };
+	static float threth[3] = { BloomThrethold[0],BloomThrethold[1], BloomThrethold[2] };
+	
+	Debug::Begin("GameParticle");
+
+	Debug::Slider("power0", power[0], 0.0f, 1.0f);
+	Debug::Slider("power1", power[1], 0.0f, 1.0f);
+	Debug::Slider("power2", power[2], 0.0f, 1.0f);
+	Debug::Slider("threth0", threth[0], 0.0f, 1.0f);
+	Debug::Slider("threth1", threth[1], 0.0f, 1.0f);
+	Debug::Slider("threth2", threth[2], 0.0f, 1.0f);
+
+	Debug::End();
+
+	SceneParticleManager::Update();
 }

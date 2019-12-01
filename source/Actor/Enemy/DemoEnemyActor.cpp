@@ -11,6 +11,8 @@
 #include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 
+#include "../../Effect/GameParticleManager.h"
+
 /**************************************
 コンストラクタ
 ***************************************/
@@ -44,6 +46,8 @@ void DemoEnemyActor::Init()
 	Tween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
 
 	collider->SetActive(true);
+
+	hp = 50;
 }
 
 /**************************************
@@ -62,6 +66,7 @@ void DemoEnemyActor::Uninit()
 ***************************************/
 void DemoEnemyActor::Update()
 {
+
 }
 
 /**************************************
@@ -82,4 +87,11 @@ void DemoEnemyActor::Draw()
 ***************************************/
 void DemoEnemyActor::OnColliderHit(ColliderObserver * other)
 {
+	hp--;
+
+	if (hp <= 0)
+	{
+		GameParticleManager::Instance()->Generate(GameEffect::EnemyExplosion, transform->GetPosition());
+		Uninit();
+	}
 }

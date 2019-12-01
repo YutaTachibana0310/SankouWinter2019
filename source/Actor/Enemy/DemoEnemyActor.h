@@ -36,6 +36,8 @@ public:
 private:
 	MeshContainer * mesh;
 	std::shared_ptr<BoxCollider3D> collider;
+
+	int hp;
 };
 
 #endif
