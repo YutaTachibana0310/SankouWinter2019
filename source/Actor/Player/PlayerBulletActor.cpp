@@ -11,6 +11,8 @@
 #include "../../../Framework/Camera/Camera.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 
+#include "../../Effect/GameParticleManager.h"
+
 /**************************************
 staticƒƒ“ƒo
 ***************************************/
@@ -124,4 +126,5 @@ bool PlayerBulletActor::_IsOutBorder()
 void PlayerBulletActor::OnColliderHit(ColliderObserver * other)
 {
 	active = false;
+	GameParticleManager::Instance()->Generate(GameEffect::PlayerBulletHit, transform->GetPosition());
 }

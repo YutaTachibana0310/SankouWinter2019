@@ -106,6 +106,8 @@
     <ClCompile Include="Framework\Renderer2D\RenderingTarget.cpp" />
     <ClCompile Include="source\Actor\Enemy\DemoEnemyActor.cpp" />
     <ClCompile Include="source\Camera\GameCamera.cpp" />
+    <ClCompile Include="source\Effect\GameParticleManager.cpp" />
+    <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -229,6 +231,8 @@
     <ClInclude Include="Framework\Renderer2D\RenderingTarget.h" />
     <ClInclude Include="source\Actor\Enemy\DemoEnemyActor.h" />
     <ClInclude Include="source\Camera\GameCamera.h" />
+    <ClInclude Include="source\Effect\GameParticleManager.h" />
+    <ClInclude Include="source\Effect\Game\PlayerBulletHit.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

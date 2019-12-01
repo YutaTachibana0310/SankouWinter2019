@@ -111,6 +111,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -240,6 +241,8 @@
     <ClCompile Include="source\BackGround\GameSkybox.cpp" />
     <ClCompile Include="source\Camera\GameCamera.cpp" />
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
+    <ClCompile Include="source\Effect\GameParticleManager.cpp" />
+    <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
   </ItemGroup>
@@ -362,6 +365,8 @@
     <ClInclude Include="source\BackGround\GameSkybox.h" />
     <ClInclude Include="source\Camera\GameCamera.h" />
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
+    <ClInclude Include="source\Effect\GameParticleManager.h" />
+    <ClInclude Include="source\Effect\Game\PlayerBulletHit.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
     <ClInclude Include="source\Scene\GameScene.h" />

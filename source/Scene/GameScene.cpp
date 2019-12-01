@@ -14,6 +14,7 @@
 #include "../../Framework/PostEffect/BloomController.h"
 #include "../../Framework/Collider/ColliderManager.h"
 
+#include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Player/PlayerActor.h"
@@ -35,6 +36,9 @@ void GameScene::Init()
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	ResourceManager::Instance()->LoadMesh("DemoEnemy", "data/MODEL/Enemy/Enemy00.x");
 	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
+
+	particleManager = GameParticleManager::Instance();
+	particleManager->Init();
 
 	sceneCamera = gameCamera = new GameCamera();
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -69,6 +73,8 @@ void GameScene::Uninit()
 	SAFE_DELETE(bloom);
 	SAFE_DELETE(enemy);
 
+	particleManager->Uninit();
+
 	sceneCamera = nullptr;
 }
 
@@ -84,6 +90,8 @@ void GameScene::Update()
 	enemy->Update();
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
+
+	particleManager->Update();
 }
 
 /**************************************
@@ -108,6 +116,8 @@ void GameScene::Draw()
 
 	//ƒuƒ‹[ƒ€‚ð‚©‚¯‚é
 	bloom->Draw(bloomTarget->GetTexture());
+
+	particleManager->Draw();
 
 	_DrawDebug();
 }
