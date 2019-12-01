@@ -8,6 +8,7 @@
 #include "EnemyExplosion.h"
 #include "../../../Framework/Math/Easing.h"
 #include "../../Controller/EnemyTimeController.h"
+#include "../Enemy/EnemyParticleEmitter.h"
 
 namespace Effect::Game
 {
@@ -46,7 +47,7 @@ namespace Effect::Game
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new BaseEmitter(NumEmit, DurationEmit);
+			emitter = new Enemy::EnemyParticleEmitter(NumEmit, DurationEmit);
 		}
 	}
 

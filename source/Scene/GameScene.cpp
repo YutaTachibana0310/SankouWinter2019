@@ -13,6 +13,7 @@
 
 #include "../../Framework/PostEffect/BloomController.h"
 #include "../../Framework/Collider/ColliderManager.h"
+#include "../../Framework/Input/input.h"
 
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
@@ -20,6 +21,7 @@
 #include "../Actor/Player/PlayerActor.h"
 #include "../Controller/PlayerBulletController.h"
 #include "../Controller/EnemyController.h"
+#include "../Controller/EnemyTimeController.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -82,6 +84,11 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
+	if (Keyboard::GetTrigger(DIK_C))
+		EnemyTimeController::SetTimeScale(0.2f);
+	if (Keyboard::GetRelease(DIK_C))
+		EnemyTimeController::SetTimeScale(1.0f);
+
 	gameCamera->Update();
 	skybox->Update();
 	player->Update();

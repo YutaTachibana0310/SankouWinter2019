@@ -10,7 +10,7 @@
 #include "../../Framework/Tool/DebugWindow.h"
 
 #include "Game\PlayerBulletHit.h"
-#include "Game\EnemyExplosion.h"
+#include "Enemy\EnemyExplosion.h"
 
 /**************************************
 staticƒƒ“ƒo
