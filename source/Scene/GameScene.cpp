@@ -13,6 +13,7 @@
 
 #include "../../Framework/PostEffect/BloomController.h"
 
+#include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Player/PlayerActor.h"
 #include "../Controller/PlayerBulletController.h"
@@ -34,7 +35,7 @@ void GameScene::Init()
 	ResourceManager::Instance()->LoadMesh("DemoEnemy", "data/MODEL/Enemy/Enemy00.x");
 	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 
-	sceneCamera = new Camera();
+	sceneCamera = gameCamera = new GameCamera();
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	skybox = new GameSkybox();
 	player = new PlayerActor();
@@ -42,7 +43,7 @@ void GameScene::Init()
 	bloom = new BloomController();
 	enemy = new DemoEnemyActor();
 
-	Camera::SetMainCamera(sceneCamera);
+	Camera::SetMainCamera(gameCamera);
 
 	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1);
 	player->onFireBullet = onFireBullet;
@@ -59,13 +60,15 @@ void GameScene::Init()
 ***************************************/
 void GameScene::Uninit()
 {
-	SAFE_DELETE(sceneCamera);
+	SAFE_DELETE(gameCamera);
 	SAFE_DELETE(bloomTarget);
 	SAFE_DELETE(skybox);
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
 	SAFE_DELETE(bloom);
 	SAFE_DELETE(enemy);
+
+	sceneCamera = nullptr;
 }
 
 /**************************************
@@ -73,7 +76,7 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
-	sceneCamera->Update();
+	gameCamera->Update();
 	skybox->Update();
 	player->Update();
 	bulletController->Update();

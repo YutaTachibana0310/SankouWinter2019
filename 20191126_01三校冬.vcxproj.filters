@@ -105,6 +105,7 @@
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
     <ClCompile Include="Framework\Renderer2D\RenderingTarget.cpp" />
     <ClCompile Include="source\Actor\Enemy\DemoEnemyActor.cpp" />
+    <ClCompile Include="source\Camera\GameCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -227,6 +228,7 @@
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
     <ClInclude Include="Framework\Renderer2D\RenderingTarget.h" />
     <ClInclude Include="source\Actor\Enemy\DemoEnemyActor.h" />
+    <ClInclude Include="source\Camera\GameCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
