@@ -22,6 +22,7 @@
 namespace Light
 {
 	void Init();
+	void Update();
 
 	D3DLIGHT9 GetData(int id);
 
