@@ -10,6 +10,7 @@
 #include "../../main.h"
 #include "../Math/Easing.h"
 #include "../Core/Transform.h"
+#include "Tweener/ValueTweener.h"
 
 #include <list>
 #include <memory>
@@ -19,10 +20,33 @@
 /**************************************
 前方宣言
 ***************************************/
+class BaseTweener;
+class Polygon2D;
 
 /**************************************
 マクロ・列挙子定義
 ***************************************/
+enum class ExpandType : int
+{
+	None,
+	LeftToRight,
+	RightToLeft,
+	UpToDown,
+	DownToUp,
+	ToUpDown,
+	ToLeftRight
+};
+
+enum class CloseType : int
+{
+	None,
+	LeftToRight,
+	RightToLeft,
+	UpToDown,
+	DownToUp,
+	FromUpDown,
+	FromLeftRight
+};
 
 /**************************************
 クラス定義
@@ -96,67 +120,54 @@ public:
 	***************************************/
 	static void Turn(GameObject& ref, const D3DXVECTOR3& endDirection, int duration, EaseType type, const D3DXVECTOR3& dummyAxis, std::function<void()> callback = nullptr);
 
+	/**************************************
+	値トゥイーン
+	引数 ref：トゥイーン対象の変数へのスマートポインタ
+	引数 start : 開始時の値
+	引数 end : 終了時の値
+	引数 duration : 変化にかける時間
+	引数 type : イージングタイプ
+	引数 callback : 終了時のコールバック関数
+	***************************************/
+	template<class T>
+	static void To(std::shared_ptr<T>& ref, const T& start, const T& end, int duration, EaseType type, std::function<void()> callback = nullptr)
+	{
+		ValueTweener<T> *tweener = new ValueTweener<T>(ref, start, end, duration, type, callback);
+		mInstance->tweenerContainer.push_back(tweener);
+	}
+
+	/**************************************
+	値トゥイーン
+	引数 ref：トゥイーン対象の変数へのスマートポインタ
+	引数 end : 終了時の値
+	引数 duration : 変化にかける時間
+	引数 type : イージングタイプ
+	引数 callback : 終了時のコールバック関数
+	***************************************/
+	template<class T>
+	static void To(std::shared_ptr<T>& ref, const T& end, int duration, EaseType type, std::function<void()> callback = nullptr)
+	{
+		T start = *ref;
+		ValueTweener<T> *tweener = new ValueTweener<T>(ref, start, end, duration, type, callback);
+		mInstance->tweenerContainer.push_back(tweener);
+	}
+
+	static void Expand(std::shared_ptr<Polygon2D>& ref, ExpandType expand, int duration, EaseType type, std::function<void()> callback = nullptr);
+
+	static void Close(std::shared_ptr<Polygon2D>& ref, CloseType close, int duration, EaseType type, std::function<void()> callback = nullptr);
+
+	static void Fade(std::shared_ptr<Polygon2D>& ref, float start, float end, int duration, EaseType type, std::function<void()> callback = nullptr);
+
 private:
 	void Update();
 	void ClearContainer();
 	void ClearAll();
 
-	class Tweener;
-	std::list<Tween::Tweener*> tweenerContainer;
+	std::list<BaseTweener*> tweenerContainer;
 
 	static Tween* mInstance;
 	Tween();
 	~Tween();
-
-	using Callback = std::function<void(void)>;
-
-	class Tweener
-	{
-	public:
-		Tweener(std::shared_ptr<Transform>& ref, int duration, EaseType type, Callback callback);
-		virtual ~Tweener();
-		inline bool IsFinished();
-		virtual void Update() = 0;
-		inline void CheckCallback();
-
-	protected:
-		std::weak_ptr<Transform> reference;
-		int cntFrame;
-		int duration;
-		EaseType type;
-		Callback callback;
-	};
-
-	class MoveTweener : public Tweener
-	{
-	public:
-		MoveTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback);
-		void Update();
-
-	private:
-		D3DXVECTOR3 start, end;
-	};
-
-	class ScaleTweener : public Tweener
-	{
-	public:
-		ScaleTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback);
-		void Update();
-
-	private:
-		D3DXVECTOR3 start, end;
-	};
-
-	class RotateTweener : public Tweener
-	{
-	public:
-		RotateTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback);
-		RotateTweener(std::shared_ptr<Transform>& ref, const D3DXQUATERNION& start, const D3DXQUATERNION& end, int duration, EaseType type, Callback callback);
-		void Update();
-
-	private:
-		D3DXQUATERNION start, end;
-	};
 };
 
 #endif

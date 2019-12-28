@@ -148,7 +148,9 @@ D3DXQUATERNION Quaternion::GetRotation(const D3DXMATRIX & m)
 		break;
 	}
 
-	return D3DXQUATERNION(q);
+	D3DXQUATERNION out = D3DXQUATERNION(q);
+	D3DXQuaternionNormalize(&out, &out);
+	return out;
 }
 
 /**************************************

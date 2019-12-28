@@ -24,6 +24,7 @@ class BoardPolygon
 public:
 	//コンストラクタ、デストラクタ
 	BoardPolygon();
+	BoardPolygon(SpriteEffect* effect);
 	~BoardPolygon();
 
 	//描画処理

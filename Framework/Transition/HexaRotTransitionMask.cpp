@@ -21,7 +21,7 @@ HexaRotTransitionMask::HexaRotTransitionMask()
 	//ƒ|ƒŠƒSƒ“‰Šú‰»
 	hex = new RotationHexa();
 	hex->LoadTexture("data/TRANSITION/HexaMask.png");
-	hex->SetSize((float)SCREEN_WIDTH, (float)SCREEN_WIDTH);
+	hex->SetSize({ (float)SCREEN_WIDTH, (float)SCREEN_WIDTH });
 	hex->SetPosition(D3DXVECTOR3((float)SCREEN_CENTER_X, (float)SCREEN_CENTER_Y, 0.0f));
 }
 

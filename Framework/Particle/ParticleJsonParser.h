@@ -30,7 +30,7 @@ public:
 	int GetParticleMax() const;
 	int GetEmitterMax() const;
 	int GetEmitNum() const;
-	float GetDuration() const;
+	int GetDuration() const;
 	D3DXVECTOR2 GetSize() const;
 	D3DXVECTOR2 GetTexDiv() const;
 	
@@ -39,7 +39,7 @@ private:
 	int particleMax;
 	int emitterMax;
 	int emitNumMin, emitNumMax;
-	float durationMin, durationMax;
+	int durationMin, durationMax;
 	D3DXVECTOR2 size;
 	D3DXVECTOR2 texDiv;
 };

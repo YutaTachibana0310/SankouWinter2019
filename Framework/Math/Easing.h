@@ -61,7 +61,7 @@ public:
 
 		if (type == EaseType::Linear)
 		{
-			result = (end - start) * time + start;
+			result = static_cast<T>((end - start) * time + start);
 		}
 		else
 		{
@@ -69,7 +69,7 @@ public:
 			GetController(c, type);
 
 			float x = CubicBezier(c[0], c[1], c[2], c[3], time);
-			result = (end - start) * CubicBezier(c[0], c[1], c[2], c[3], x) + start;
+			result = static_cast<T>((end - start) * CubicBezier(c[0], c[1], c[2], c[3], x) + start);
 		}
 
 		return result;

@@ -21,7 +21,7 @@ MistTransitionMask::MistTransitionMask()
 {
 	//ƒ|ƒŠƒSƒ“‰Šú‰»
 	polygon = new Polygon2D();
-	polygon->SetSize((float)SCREEN_WIDTH, (float)SCREEN_HEIGHT);
+	polygon->SetSize({ (float)SCREEN_WIDTH, (float)SCREEN_HEIGHT });
 	polygon->LoadTexture(MISTTRANSITION_TEX_NAME);
 	polygon->SetPosition(D3DXVECTOR3((float)SCREEN_CENTER_X, (float)SCREEN_CENTER_Y, 0.0f));
 }

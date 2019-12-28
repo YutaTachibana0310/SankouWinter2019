@@ -178,7 +178,7 @@ void BaseParticleController::MakeEmitterContainer(const ParticleJsonParser & dat
 	for (auto&& emitter : emitterContainer)
 	{
 		int emitNum = data.GetEmitNum();
-		float duration = data.GetDuration();
+		int duration = data.GetDuration();
 		emitter = new BaseEmitter(emitNum, duration);
 	}
 }

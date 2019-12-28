@@ -14,6 +14,7 @@
 マクロ定義
 ***************************************/
 #define INTERBAL_GETTIMER		(20)
+#define USE_DEBUGLOG
 
 /**************************************
 構造体定義
@@ -102,6 +103,7 @@ void Debug::Draw(void)
 		return;
 	}
 
+#ifdef USE_DEBUGLOG
 	Debug::Begin("Log");
 	if (Button("Clear"))
 		textLog.clear();
@@ -110,7 +112,8 @@ void Debug::Draw(void)
 		Text(log.c_str());
 	}
 	Debug::End();
-	
+#endif
+
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 #endif

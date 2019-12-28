@@ -19,7 +19,7 @@ Particle2D::Particle2D() :
 /**************************************
 コンストラクタ
 ***************************************/
-Particle2D::Particle2D(float life) :
+Particle2D::Particle2D(int life) :
 	BaseParticle(life),
 	GameObject(false)
 {
@@ -28,7 +28,7 @@ Particle2D::Particle2D(float life) :
 /**************************************
 コンストラクタ
 ***************************************/
-Particle2D::Particle2D(float minLife, float maxLife) :
+Particle2D::Particle2D(int minLife, int maxLife) :
 	BaseParticle(minLife, maxLife),
 	GameObject(false)
 {
@@ -37,7 +37,7 @@ Particle2D::Particle2D(float minLife, float maxLife) :
 /**************************************
 コンストラクタ
 ***************************************/
-Particle2D::Particle2D(float u, float v, float minLife, float maxLife) :
+Particle2D::Particle2D(float u, float v, int minLife, int maxLife) :
 	BaseParticle(u, v, minLife, maxLife),
 	GameObject(false)
 {

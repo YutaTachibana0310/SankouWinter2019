@@ -5,13 +5,67 @@
 //
 //=====================================
 #include "Tween.h"
-#include "../Math/Quaternion.h"
+
+#include "Tweener/MoveTweener.h"
+#include "Tweener/RotateTweener.h"
+#include "Tweener/ScaleTweener.h"
+#include "Tweener/ViewerTweener.h"
+
 #include <algorithm>
 
 using namespace std;
+
 /**************************************
-マクロ定義
+展開タイプ変換
 ***************************************/
+ViewerTweener::ExpandType ConvertExpandType(ExpandType type)
+{
+	if (type == ExpandType::DownToUp)
+		return ViewerTweener::ExpandType::DownToUp;
+
+	if (type == ExpandType::LeftToRight)
+		return ViewerTweener::ExpandType::LeftToRight;
+
+	if (type == ExpandType::RightToLeft)
+		return ViewerTweener::ExpandType::RightToLeft;
+
+	if (type == ExpandType::ToLeftRight)
+		return ViewerTweener::ExpandType::ToLeftRight;
+
+	if (type == ExpandType::ToUpDown)
+		return ViewerTweener::ExpandType::ToUpDown;
+
+	if (type == ExpandType::UpToDown)
+		return ViewerTweener::ExpandType::UpToDown;
+
+	return ViewerTweener::ExpandType::None;
+}
+
+/**************************************
+圧縮タイプ変換
+***************************************/
+ViewerTweener::CloseType ConvertCloseType(CloseType type)
+{
+	if (type == CloseType::DownToUp)
+		return ViewerTweener::CloseType::DownToUp;
+
+	if (type == CloseType::LeftToRight)
+		return ViewerTweener::CloseType::LeftToRight;
+
+	if (type == CloseType::RightToLeft)
+		return ViewerTweener::CloseType::RightToLeft;
+
+	if (type == CloseType::FromLeftRight)
+		return ViewerTweener::CloseType::FromLeftRight;
+
+	if (type == CloseType::FromUpDown)
+		return ViewerTweener::CloseType::FromUpDown;
+
+	if (type == CloseType::UpToDown)
+		return ViewerTweener::CloseType::UpToDown;
+
+	return ViewerTweener::CloseType::None;
+}
 
 /**************************************
 コンストラクタ
@@ -169,141 +223,28 @@ void Tween::Turn(GameObject & ref, const D3DXVECTOR3 & end, int duration, EaseTy
 }
 
 /**************************************
-Tweenerコンストラクタ
+ビューア展開
 ***************************************/
-Tween::Tweener::Tweener(std::shared_ptr<Transform>& ref, int duration, EaseType type, Callback callback) :
-	reference(ref),
-	cntFrame(0),
-	duration(duration),
-	type(type),
-	callback(callback)
+void Tween::Expand(std::shared_ptr<Polygon2D>& ref, ExpandType expand, int duration, EaseType type, std::function<void()> callback)
 {
-
+	ViewerTweener* tweener = new ViewerTweener(ref, ConvertExpandType(expand), duration, type, callback);
+	mInstance->tweenerContainer.push_back(tweener);
 }
 
 /**************************************
-Tweenerデストラクタ
+ビューア圧縮
 ***************************************/
-Tween::Tweener::~Tweener()
+void Tween::Close(std::shared_ptr<Polygon2D>& ref, CloseType close, int duration, EaseType type, std::function<void()> callback)
 {
-	reference.reset();
+	ViewerTweener* tweener = new ViewerTweener(ref, ConvertCloseType(close), duration, type, callback);
+	mInstance->tweenerContainer.push_back(tweener);
 }
 
 /**************************************
-Tweener終了判定
+ビューアフェード
 ***************************************/
-inline bool Tween::Tweener::IsFinished()
+void Tween::Fade(std::shared_ptr<Polygon2D>& ref, float start, float end, int duration, EaseType type, std::function<void()> callback)
 {
-	if (reference.expired())
-		return true;
-
-	return cntFrame >= duration;
-}
-
-/**************************************
-コールバックのチェック判定
-***************************************/
-inline void Tween::Tweener::CheckCallback()
-{
-	if (cntFrame < duration)
-		return;
-
-	if (callback == nullptr)
-		return;
-
-	callback();
-}
-
-/**************************************
-MoveTweenerコンストラクタ
-***************************************/
-Tween::MoveTweener::MoveTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
-	Tweener(ref, duration, type, callback),
-	start(start),
-	end(end)
-{
-
-}
-
-/**************************************
-MoveTweener更新処理
-***************************************/
-void Tween::MoveTweener::Update()
-{
-	cntFrame++;
-
-	shared_ptr<Transform> transform = reference.lock();
-	if (transform)
-	{
-		float t = (float)cntFrame / duration;
-		transform->SetPosition(Easing::EaseValue(t, start, end, type));
-		CheckCallback();
-	}
-}
-
-/**************************************
-ScaleTweenerコンストラクタ
-***************************************/
-Tween::ScaleTweener::ScaleTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
-	Tweener(ref, duration, type, callback),
-	start(start),
-	end(end)
-{
-
-}
-
-/**************************************
-ScaleTweener更新処理
-***************************************/
-void Tween::ScaleTweener::Update()
-{
-	cntFrame++;
-
-	shared_ptr<Transform> transform = reference.lock();
-	if (transform)
-	{
-		float t = (float)cntFrame / duration;
-		transform->SetScale(Easing::EaseValue(t, start, end, type));
-		CheckCallback();
-	}
-}
-
-/**************************************
-RotateTweenerコンストラクタ
-***************************************/
-Tween::RotateTweener::RotateTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
-	Tweener(ref, duration, type, callback),
-	start(Quaternion::ToQuaternion(start)),
-	end(Quaternion::ToQuaternion(end))
-{
-
-}
-
-/**************************************
-RotateTweenerコンストラクタ
-***************************************/
-Tween::RotateTweener::RotateTweener(std::shared_ptr<Transform>& ref, const D3DXQUATERNION & start, const D3DXQUATERNION & end, int duration, EaseType type, Callback callback) :
-	Tweener(ref, duration, type, callback),
-	start(start),
-	end(end)
-{
-
-}
-
-/**************************************
-RotateTweener更新処理
-***************************************/
-void Tween::RotateTweener::Update()
-{
-	cntFrame++;
-
-	shared_ptr<Transform> transform = reference.lock();
-	if (transform)
-	{
-		float t = Easing::EaseValue((float)cntFrame / duration, 0.0f, 1.0f, type);
-		D3DXQUATERNION quaternion;
-		D3DXQuaternionSlerp(&quaternion, &start, &end, t);
-		transform->SetRotation(quaternion);
-		CheckCallback();
-	}
+	ViewerTweener* tweener = new ViewerTweener(ref, start, end, duration, type, callback);
+	mInstance->tweenerContainer.push_back(tweener);
 }

@@ -27,7 +27,7 @@ TransitionController::TransitionController()
 
 	transitionBG = new Polygon2D();
 	transitionBG->LoadTexture("data/TRANSITION/Transition.jpg");
-	transitionBG->SetSize(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f);
+	transitionBG->SetSize({ SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f });
 	transitionBG->SetPosition(D3DXVECTOR3((float)SCREEN_CENTER_X, (float)SCREEN_CENTER_Y, 0.0f));
 
 	maskContainer.resize(TransitionType::TransitionMax);

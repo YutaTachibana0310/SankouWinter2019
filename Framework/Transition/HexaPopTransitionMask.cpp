@@ -13,7 +13,7 @@ staticメンバ
 ***************************************/
 const int HexaPopTransitionMask::DivineX = 10;
 const int HexaPopTransitionMask::DivineY = 10;
-const float HexaPopTransitionMask::Duration = 0.5f;
+const float HexaPopTransitionMask::Duration = 1.0f;
 const float HexaPopTransitionMask::Interval = 0.08f;
 
 typedef BaseTransitionMask Base;
@@ -27,7 +27,7 @@ HexaPopTransitionMask::HexaPopTransitionMask()
 	//ポリゴンの大きさを計算
 	float sizeX = (float)SCREEN_WIDTH / DivineX;
 	float sizeY = (float)SCREEN_HEIGHT / DivineY;
-	polygon->SetSize(sizeX, sizeY);
+	polygon->SetSize({ sizeX, sizeY });
 	polygon->LoadTexture("data/TRANSITION/HexaMask.png");
 
 	//X方向1列で一つのベクターとして

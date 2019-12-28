@@ -38,3 +38,11 @@ void TransformObject::Draw()
 	transform->SetWorld();
 	mesh->Draw();
 }
+
+/**************************************
+Žw’è‚ÌÀ•W‚ðŒü‚©‚¹‚é
+***************************************/
+void TransformObject::LookAt(const D3DXVECTOR3 & target)
+{
+	transform->LookAt(target);
+}

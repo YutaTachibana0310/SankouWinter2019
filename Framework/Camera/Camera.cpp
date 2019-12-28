@@ -18,8 +18,8 @@ Camera* Camera::mainCamera = NULL;
 ***************************************/
 Camera::Camera()
 {
-	const D3DXVECTOR3 InitPos = D3DXVECTOR3(0.0f, 0.0f, -50.0f);
-	const D3DXVECTOR3 InitTarget = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	const D3DXVECTOR3 InitPos = D3DXVECTOR3(0.0f, 30.0f, -80.0f);
+	const D3DXVECTOR3 InitTarget = D3DXVECTOR3(0.0f, 15.0f, 0.0f);
 	const float InitViewAngle = D3DXToRadian(60.0f);
 	const float InitViewAspect = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
 	const float InitViewNear = 10.0f;
@@ -195,9 +195,9 @@ D3DXMATRIX Camera::GetProjectionMtx() const
 /**************************************
 Ž‹‘äŽæ“¾ˆ—
 ***************************************/
-ViewFrustum Camera::GetViewFrustrum() const
+const ViewFrustum* Camera::GetViewFrustrum() const
 {
-	return viewFrustrum;
+	return &viewFrustrum;
 }
 
 /**************************************
@@ -205,11 +205,14 @@ ViewFrustum Camera::GetViewFrustrum() const
 ***************************************/
 Camera & Camera::operator=(const Camera & rhs)
 {
-	this->transform = rhs.transform;
+	*(this->transform) = *(rhs.transform);
 	this->viewAngle = rhs.viewAngle;
 	this->viewAspect = rhs.viewAspect;
 	this->viewNear = rhs.viewNear;
 	this->viewFar = rhs.viewFar;
+	this->view = rhs.view;
+	this->projection = rhs.projection;
+
 	return *this;
 }
 

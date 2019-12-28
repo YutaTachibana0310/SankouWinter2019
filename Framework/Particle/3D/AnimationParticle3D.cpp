@@ -22,7 +22,7 @@ AnimationParticle3D::AnimationParticle3D(float divX, float divY) :
 /**************************************
 コンストラクタ
 ***************************************/
-AnimationParticle3D::AnimationParticle3D(float divX, float divY, float life) :
+AnimationParticle3D::AnimationParticle3D(float divX, float divY, int life) :
 	Particle3D(life)
 {
 	SetAnimParameter(divX, divY);
@@ -31,7 +31,7 @@ AnimationParticle3D::AnimationParticle3D(float divX, float divY, float life) :
 /**************************************
 コンストラクタ
 ***************************************/
-AnimationParticle3D::AnimationParticle3D(float divX, float divY, float lifeMin, float lifeMax) :
+AnimationParticle3D::AnimationParticle3D(float divX, float divY, int lifeMin, int lifeMax) :
 	Particle3D(lifeMin, lifeMax)
 {
 	SetAnimParameter(divX, divY);

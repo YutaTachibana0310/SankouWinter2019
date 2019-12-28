@@ -130,14 +130,8 @@ void BaseGame::Draw()
 	//バックバッファへ描画
 	pDevice->SetTexture(0, renderTexture);
 	pDevice->SetStreamSource(0, screenVtx, 0, sizeof(VERTEX_2D));
-	pDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
-	pDevice->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
 	pDevice->SetFVF(FVF_VERTEX_2D);
-
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, NUM_POLYGON);
-
-	pDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);
-	pDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);
 
 	//デバッグウィンドウ描画
 	ProfilerCPU::Instance()->Draw();

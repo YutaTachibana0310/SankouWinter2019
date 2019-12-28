@@ -17,7 +17,7 @@ Particle3D::Particle3D()
 /**************************************
 コンストラクタ
 ***************************************/
-Particle3D::Particle3D(float life) :
+Particle3D::Particle3D(int life) :
 	BaseParticle(life),
 	BillboardObject(false)
 {
@@ -26,7 +26,7 @@ Particle3D::Particle3D(float life) :
 /**************************************
 コンストラクタ
 ***************************************/
-Particle3D::Particle3D(float minLife, float maxLife) :
+Particle3D::Particle3D(int minLife, int maxLife) :
 	BaseParticle(minLife, maxLife),
 	BillboardObject(false)
 {
@@ -35,7 +35,7 @@ Particle3D::Particle3D(float minLife, float maxLife) :
 /**************************************
 コンストラクタ
 ***************************************/
-Particle3D::Particle3D(float u, float v, float minLife, float maxLife) :
+Particle3D::Particle3D(float u, float v, int minLife, int maxLife) :
 	BaseParticle(u, v, minLife, maxLife),
 	BillboardObject(false)
 {

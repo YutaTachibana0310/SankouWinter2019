@@ -29,6 +29,8 @@ public:
 
 	void Draw();
 
+	void LookAt(const D3DXVECTOR3& target);
+
 private:
 	MeshContainer *mesh;
 };

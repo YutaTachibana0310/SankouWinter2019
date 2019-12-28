@@ -6,6 +6,8 @@
 //=====================================
 #include "AnimationManager.h"
 #include "AnimContainer.h"
+#include "../Resource/ResourceManager.h"
+
 #include <assert.h>
 
 using namespace std;
@@ -43,9 +45,6 @@ void AnimationManager::Update()
 	{
 		ChangeAnim(transitionMap[currentAnimID], true);
 	}
-
-	//アニメーションの更新
-	container->Update(deltaTimeList[currentAnimID]);
 }
 
 /**************************************
@@ -53,6 +52,9 @@ void AnimationManager::Update()
 ***************************************/
 void AnimationManager::Draw(LPD3DXMATRIX mtxWorld)
 {
+	//アニメーションの更新
+	container->Update(deltaTimeList[currentAnimID]);
+
 	container->Draw(mtxWorld);
 }
 
@@ -62,7 +64,7 @@ Xファイル読み込み処理
 HRESULT AnimationManager::LoadXFile(LPCSTR fileName, const char* errorSrc)
 {
 	bool res = S_OK;
-	res = container->LoadXFile(fileName, errorSrc);
+	ResourceManager::Instance()->GetSkinMesh(fileName, container);
 
 	if (res != S_OK)
 		return res;

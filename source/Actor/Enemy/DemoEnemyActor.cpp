@@ -76,10 +76,6 @@ void DemoEnemyActor::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
-
-#ifdef _DEBUG
-	collider->Draw();
-#endif
 }
 
 /**************************************

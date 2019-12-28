@@ -114,6 +114,12 @@
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyParticleEmitter.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyExplosion.cpp" />
+    <ClCompile Include="Framework\Effect\MophingEffect.cpp" />
+    <ClCompile Include="Framework\Renderer2D\TextOutline.cpp" />
+    <ClCompile Include="Framework\Renderer3D\MeshField.cpp" />
+    <ClCompile Include="Framework\Renderer3D\MophingMeshContainer.cpp" />
+    <ClCompile Include="Framework\Resource\AnimationResource.cpp" />
+    <ClCompile Include="Framework\Resource\FontManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -245,6 +251,19 @@
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyParticleEmitter.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyExplosion.h" />
+    <ClInclude Include="Framework\Effect\MophingEffect.h" />
+    <ClInclude Include="Framework\Renderer2D\TextOutLine.h" />
+    <ClInclude Include="Framework\Renderer3D\MeshField.h" />
+    <ClInclude Include="Framework\Renderer3D\MophingMeshContainer.h" />
+    <ClInclude Include="Framework\Resource\AnimationResource.h" />
+    <ClInclude Include="Framework\Resource\FontManager.h" />
+    <ClInclude Include="Framework\Tool\MemoryDetect.h" />
+    <ClInclude Include="Framework\Tween\Tweener\MoveTweener.h" />
+    <ClInclude Include="Framework\Tween\Tweener\RotateTweener.h" />
+    <ClInclude Include="Framework\Tween\Tweener\ScaleTweener.h" />
+    <ClInclude Include="Framework\Tween\Tweener\Tweener.h" />
+    <ClInclude Include="Framework\Tween\Tweener\ValueTweener.h" />
+    <ClInclude Include="Framework\Tween\Tweener\ViewerTweener.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

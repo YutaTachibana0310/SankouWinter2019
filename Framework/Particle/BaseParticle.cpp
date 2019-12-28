@@ -30,7 +30,7 @@ BaseParticle::BaseParticle() :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseParticle::BaseParticle(float life) :
+BaseParticle::BaseParticle(int life) :
 	uv(ParticleUV()),
 	lifeFrame(life)
 {
@@ -40,7 +40,7 @@ BaseParticle::BaseParticle(float life) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseParticle::BaseParticle(float lifeMin, float lifeMax) :
+BaseParticle::BaseParticle(int lifeMin, int lifeMax) :
 	uv(ParticleUV()),
 	lifeFrame(Math::RandomRange(lifeMin, lifeMax))
 {
@@ -50,7 +50,7 @@ BaseParticle::BaseParticle(float lifeMin, float lifeMax) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseParticle::BaseParticle(float u, float v, float lifeMin, float lifeMax) :
+BaseParticle::BaseParticle(float u, float v, int lifeMin, int lifeMax) :
 	uv(ParticleUV(u, v)),
 	lifeFrame(Math::RandomRange(lifeMin, lifeMax))
 {
