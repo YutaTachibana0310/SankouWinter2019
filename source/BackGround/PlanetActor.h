@@ -1,32 +1,36 @@
 //=====================================
 //
-//Light.h
-//機能:ライト
-//Author:GP12B332 21 立花雄太
+// PlanetActor.h
+// 機能:惑星アクター
+// Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _LIGHT_H_
-#define _LIGHT_H_
+#ifndef _PLANETACTOR_H_
+#define _PLANETACTOR_H_
 
 #include "../../main.h"
-
-#define NUM_LIGHT (3)
 
 /**************************************
 前方宣言
 ***************************************/
+class MeshContainer;
 
 /**************************************
 クラス定義
 ***************************************/
-namespace Light
+class PlanetActor : public GameObject
 {
-	void Init();
+public:
+	PlanetActor();
+	virtual ~PlanetActor();
+
 	void Update();
+	void Draw();
 
-	D3DLIGHT9 GetData(int id);
+	static const D3DXVECTOR3 InitPos;
 
-	int LightMax();
-}
+private:
+	MeshContainer *mesh;
+};
 
 #endif

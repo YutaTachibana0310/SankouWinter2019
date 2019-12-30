@@ -9,6 +9,7 @@
 #include "../Framework/Core/SceneManager.h"
 #include "../Framework/Tool/DebugWindow.h"
 #include "../Framework/Core/PlayerPrefs.h"
+#include "../Framework/Light/Light.h"
 
 #include "GameConfig.h"
 
@@ -34,4 +35,5 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 void GameMain::Update()
 {
 	BaseGame::Update();
+	//Light::Update();
 }

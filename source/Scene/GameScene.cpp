@@ -18,6 +18,7 @@
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
+#include "../BackGround/PlanetActor.h"
 #include "../Actor/Player/PlayerActor.h"
 #include "../Controller/PlayerBulletController.h"
 #include "../Controller/EnemyController.h"
@@ -37,6 +38,8 @@ void GameScene::Init()
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	ResourceManager::Instance()->LoadMesh("DemoEnemy", "data/MODEL/Enemy/Enemy00.x");
+	ResourceManager::Instance()->LoadMesh("Planet", "data/MODEL/Planet/GreyMoon.x");
+
 	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 
 	particleManager = GameParticleManager::Instance();
@@ -49,6 +52,7 @@ void GameScene::Init()
 	bulletController = new PlayerBulletController();
 	bloom = new BloomController();
 	enemyController = new EnemyController();
+	planet = new PlanetActor();
 
 	Camera::SetMainCamera(gameCamera);
 
@@ -73,6 +77,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(bulletController);
 	SAFE_DELETE(bloom);
 	SAFE_DELETE(enemyController);
+	SAFE_DELETE(planet);
 
 	particleManager->Uninit();
 
@@ -94,6 +99,7 @@ void GameScene::Update()
 	player->Update();
 	bulletController->Update();
 	enemyController->Update();
+	planet->Update();
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 
@@ -111,6 +117,7 @@ void GameScene::Draw()
 
 	bloomTarget->Set();
 
+	planet->Draw();
 	player->Draw();
 	enemyController->Draw();
 
