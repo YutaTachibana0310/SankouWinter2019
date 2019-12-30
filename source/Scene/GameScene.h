@@ -22,6 +22,7 @@ class RenderingTarget;
 class EnemyController;
 class GameCamera;
 class GameParticleManager;
+class PlanetActor;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -48,6 +49,7 @@ private:
 	PlayerActor *player;
 	PlayerBulletController *bulletController;
 	EnemyController *enemyController;
+	PlanetActor *planet;
 
 	BloomController *bloom;
 

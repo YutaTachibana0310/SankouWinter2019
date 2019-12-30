@@ -33,5 +33,5 @@ GameSkybox::~GameSkybox()
 ***************************************/
 void GameSkybox::Update()
 {
-	transform->Rotate(-0.050f, Vector3::Up);
+	transform->Rotate(-0.01f, Vector3::Up);
 }
