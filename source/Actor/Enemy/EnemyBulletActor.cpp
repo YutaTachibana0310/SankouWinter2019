@@ -75,7 +75,7 @@ void EnemyBulletActor::Update()
 		++indexAnim;
 	}
 
-	transform->Move(transform->Forward() * 0.5f);
+	transform->Move(transform->Forward() * speed);
 
 	if (!CheckMoveBorder())
 	{
@@ -113,6 +113,14 @@ void EnemyBulletActor::DrawBloom()
 void EnemyBulletActor::SetType(EnemyBulletConfig::Type type)
 {
 	this->type = type;
+}
+
+/**************************************
+ƒ^ƒCƒvİ’è
+***************************************/
+void EnemyBulletActor::SetSpeed(float speed)
+{
+	this->speed = speed;
 }
 
 /**************************************

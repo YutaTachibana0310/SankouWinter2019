@@ -35,6 +35,7 @@ public:
 	void DrawBloom();
 
 	void SetType(EnemyBulletConfig::Type type);
+	void SetSpeed(float speed);
 
 	static const D3DXVECTOR3 SizeCollider;
 	static const int IntervalAnimation;
@@ -51,6 +52,8 @@ private:
 
 	int cntFrame;
 	int indexAnim;
+
+	float speed;
 
 	bool CheckMoveBorder() const;
 };

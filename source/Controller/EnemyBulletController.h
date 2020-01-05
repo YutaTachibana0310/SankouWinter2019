@@ -30,7 +30,7 @@ public:
 	void Update();
 	void Draw();
 	
-	void SetBullet(const Transform& shotTransform, EnemyBulletConfig::Type type);
+	void SetBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed);
 
 	static const unsigned MaxBullet;
 

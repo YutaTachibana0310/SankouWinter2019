@@ -78,7 +78,7 @@ void EnemyBulletController::Update()
 	if (Debug::Button("Shot"))
 	{
 		Transform transform;
-		SetBullet(transform,  EnemyBulletConfig::Type(bulletType));
+		SetBullet(transform,  EnemyBulletConfig::Type(bulletType), 0.5f);
 	}
 
 	for (int i = 0; i < EnemyBulletConfig::Type::EnemyBulletMax; i++)
@@ -114,7 +114,7 @@ void EnemyBulletController::Draw()
 /**************************************
 バレットセット処理
 ***************************************/
-void EnemyBulletController::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type)
+void EnemyBulletController::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed)
 {
 	if (cntBullet > MaxBullet)
 	{
@@ -126,6 +126,7 @@ void EnemyBulletController::SetBullet(const Transform & shotTransform, EnemyBull
 	bullet->Init(shotTransform);
 
 	bullet->SetType(type);
+	bullet->SetSpeed(speed);
 
 	bulletContainer.push_back(bullet);
 }
