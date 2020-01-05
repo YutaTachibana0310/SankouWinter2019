@@ -121,6 +121,8 @@
     <ClCompile Include="Framework\Resource\AnimationResource.cpp" />
     <ClCompile Include="Framework\Resource\FontManager.cpp" />
     <ClCompile Include="source\BackGround\PlanetActor.cpp" />
+    <ClCompile Include="source\Actor\Enemy\EnemyBulletActor.cpp" />
+    <ClCompile Include="source\Controller\EnemyBulletController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -266,6 +268,8 @@
     <ClInclude Include="Framework\Tween\Tweener\ValueTweener.h" />
     <ClInclude Include="Framework\Tween\Tweener\ViewerTweener.h" />
     <ClInclude Include="source\BackGround\PlanetActor.h" />
+    <ClInclude Include="source\Actor\Enemy\EnemyBulletActor.h" />
+    <ClInclude Include="source\Controller\EnemyBulletController.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
