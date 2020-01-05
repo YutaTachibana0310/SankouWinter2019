@@ -16,6 +16,8 @@
 
 #include <algorithm>
 
+#include "../Handler/EnemyBulletHandler.h"
+
 /**************************************
 ÉOÉçÅ[ÉoÉãïœêî
 ***************************************/
@@ -79,6 +81,30 @@ void EnemyBulletController::Update()
 	{
 		Transform transform;
 		SetBullet(transform,  EnemyBulletConfig::Type(bulletType), 0.5f);
+	}
+
+	if (Debug::Button("Way Shot"))
+	{
+		Transform transform;
+		EnemyBulletHandler handle(this);
+
+		handle.SetWayBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 5, 60);
+	}
+
+	if (Debug::Button("Circle Shot"))
+	{
+		Transform transform;
+		EnemyBulletHandler handle(this);
+
+		handle.SetCircleBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 16);
+	}
+
+	if (Debug::Button("Strew Shot"))
+	{
+		Transform transform;
+		EnemyBulletHandler handle(this);
+
+		handle.SetStrewBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 30.0f);
 	}
 
 	for (int i = 0; i < EnemyBulletConfig::Type::EnemyBulletMax; i++)
