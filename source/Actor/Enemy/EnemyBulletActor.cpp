@@ -90,6 +90,18 @@ void EnemyBulletActor::Draw()
 }
 
 /**************************************
+ñæÇ©ÇËèàóù
+***************************************/
+void EnemyBulletActor::DrawBloom()
+{
+	int indexTexture = EnemyBulletConfig::GetBloomTextureIndex(type, indexAnim);
+	polygon->SetTextureIndex(indexTexture);
+
+	D3DXMATRIX mtxWorld = transform->GetMatrix();
+	polygon->Draw(mtxWorld);
+}
+
+/**************************************
 É^ÉCÉvê›íË
 ***************************************/
 void EnemyBulletActor::SetType(EnemyBulletConfig::Type type)

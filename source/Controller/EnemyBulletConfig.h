@@ -35,6 +35,7 @@ public:
 	};
 
 	static int GetTextureIndex(Type type, int indexAnim);
+	static int GetBloomTextureIndex(Type type, int indexAnim);
 
 private:
 	EnemyBulletConfig() {}

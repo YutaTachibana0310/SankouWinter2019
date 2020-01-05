@@ -32,6 +32,7 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
+	void DrawBloom();
 
 	void SetType(EnemyBulletConfig::Type type);
 

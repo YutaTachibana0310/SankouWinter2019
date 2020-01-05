@@ -22,3 +22,14 @@ int EnemyBulletConfig::GetTextureIndex(Type type, int indexAnim)
 
 	return bias + index;
 }
+
+/**************************************
+ブルームテクスチャ通し番号取得
+***************************************/
+int EnemyBulletConfig::GetBloomTextureIndex(Type type, int indexAnim)
+{
+	int bias = type * PeriodAnimation * 2 + PeriodAnimation;
+	int index = indexAnim % PeriodAnimation;
+
+	return bias + index;
+}

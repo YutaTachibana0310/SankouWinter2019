@@ -101,6 +101,11 @@ void EnemyBulletController::Draw()
 
 	for (auto&& bullet : bulletContainer)
 	{
+		bullet->DrawBloom();
+	}
+
+	for (auto&& bullet : bulletContainer)
+	{
 		bullet->Draw();
 	}
 
