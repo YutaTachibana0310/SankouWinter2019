@@ -69,6 +69,16 @@ void EnemyBulletController::Update()
 		return ptr == nullptr;
 	});
 	bulletContainer.erase(itr, bulletContainer.end());
+
+	Debug::Begin("EnemyBullet");
+
+	if (Debug::Button("Shot"))
+	{
+		Transform transform;
+		SetBullet(transform);
+	}
+
+	Debug::End();
 }
 
 /**************************************
@@ -76,10 +86,15 @@ void EnemyBulletController::Update()
 ***************************************/
 void EnemyBulletController::Draw()
 {
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+	pDevice->SetRenderState(D3DRS_ZENABLE, false);
+
 	for (auto&& bullet : bulletContainer)
 	{
 		bullet->Draw();
 	}
+
+	pDevice->SetRenderState(D3DRS_ZENABLE, true);
 }
 
 /**************************************

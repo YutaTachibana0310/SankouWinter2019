@@ -10,6 +10,7 @@
 
 #include "../../../main.h"
 #include "../../../Framework/Collider/ColliderObserver.h"
+#include "../../../Framework/Renderer3D/BillboardObject.h"
 
 /**************************************
 前方宣言
@@ -32,7 +33,7 @@ enum EnemyBulletType
 /**************************************
 クラス定義
 ***************************************/
-class EnemyBulletActor : public GameObject, public ColliderObserver
+class EnemyBulletActor : public BillboardObject, public ColliderObserver
 {
 public:
 	EnemyBulletActor();
