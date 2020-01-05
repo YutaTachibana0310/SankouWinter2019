@@ -132,6 +132,8 @@ void GameScene::Draw()
 
 	particleManager->Draw();
 
+	enemyController->DrawBullet();
+
 	_DrawDebug();
 }
 

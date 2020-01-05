@@ -21,7 +21,7 @@ class BoardPolygon;
 class PolygonResource
 {
 public:
-	PolygonResource(const D3DXVECTOR2& size, const D3DXVECTOR2& uv = { 0.0f, 0.0f}, const char* texturePath = nullptr);
+	PolygonResource(const D3DXVECTOR2& size, const D3DXVECTOR2& split = { 0.0f, 0.0f}, const char* texturePath = nullptr);
 	~PolygonResource();
 
 	void Clone(BoardPolygon* entity);
@@ -30,6 +30,9 @@ public:
 private:
 	LPDIRECT3DVERTEXBUFFER9 vtxBuff;
 	LPDIRECT3DTEXTURE9 texture;
+
+	D3DXVECTOR2 size;
+	D3DXVECTOR2 split;
 
 	unsigned cntRef;
 };

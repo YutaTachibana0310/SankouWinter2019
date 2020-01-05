@@ -11,10 +11,12 @@
 /**************************************
 コンストラクタ
 ***************************************/
-PolygonResource::PolygonResource(const D3DXVECTOR2 & size, const D3DXVECTOR2 & uv, const char* path) :
+PolygonResource::PolygonResource(const D3DXVECTOR2 & size, const D3DXVECTOR2 & split, const char* path) :
 	vtxBuff(nullptr),
 	texture(nullptr),
-	cntRef(0)
+	cntRef(0),
+	size(size),
+	split(split)
 {
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 
@@ -36,9 +38,9 @@ PolygonResource::PolygonResource(const D3DXVECTOR2 & size, const D3DXVECTOR2 & u
 	pVtx[3].vtx = D3DXVECTOR3(size.x, -size.y, 0.0f);
 
 	pVtx[0].tex = D3DXVECTOR2(0.0f, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(1.0f / uv.x, 0.0f);
-	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f / uv.y);
-	pVtx[3].tex = D3DXVECTOR2(1.0f / uv.x, 1.0f / uv.y);
+	pVtx[1].tex = D3DXVECTOR2(1.0f / split.x, 0.0f);
+	pVtx[2].tex = D3DXVECTOR2(0.0f, 1.0f / split.y);
+	pVtx[3].tex = D3DXVECTOR2(1.0f / split.x, 1.0f / split.y);
 
 	pVtx[0].nor =
 		pVtx[1].nor =
@@ -82,6 +84,8 @@ void PolygonResource::Clone(BoardPolygon * entity)
 
 	entity->resource = this;
 	cntRef++;
+
+	entity->SetTexDiv(split);
 }
 
 /**************************************

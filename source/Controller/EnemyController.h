@@ -14,6 +14,7 @@
 前方宣言
 ***************************************/
 class BaseEnemy;
+class EnemyBulletController;
 
 /**************************************
 クラス定義
@@ -26,9 +27,11 @@ public:
 
 	void Update();
 	void Draw();
+	void DrawBullet();
 
 private:
 	BaseEnemy * enemy;
+	EnemyBulletController *bulletController;
 };
 
 #endif

@@ -243,12 +243,15 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Actor\Enemy\BaseEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\DemoEnemyActor.cpp" />
+    <ClCompile Include="source\Actor\Enemy\EnemyBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerTurretActor.cpp" />
     <ClCompile Include="source\BackGround\GameSkybox.cpp" />
     <ClCompile Include="source\BackGround\PlanetActor.cpp" />
     <ClCompile Include="source\Camera\GameCamera.cpp" />
+    <ClCompile Include="source\Controller\EnemyBulletConfig.cpp" />
+    <ClCompile Include="source\Controller\EnemyBulletController.cpp" />
     <ClCompile Include="source\Controller\EnemyController.cpp" />
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
@@ -257,6 +260,7 @@
     <ClCompile Include="source\Effect\Enemy\EnemyExplosion.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
+    <ClCompile Include="source\Handler\EnemyBulletHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
   </ItemGroup>
@@ -387,12 +391,15 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="source\Actor\Enemy\BaseEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\DemoEnemyActor.h" />
+    <ClInclude Include="source\Actor\Enemy\EnemyBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerTurretActor.h" />
     <ClInclude Include="source\BackGround\GameSkybox.h" />
     <ClInclude Include="source\BackGround\PlanetActor.h" />
     <ClInclude Include="source\Camera\GameCamera.h" />
+    <ClInclude Include="source\Controller\EnemyBulletConfig.h" />
+    <ClInclude Include="source\Controller\EnemyBulletController.h" />
     <ClInclude Include="source\Controller\EnemyController.h" />
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
@@ -402,6 +409,7 @@
     <ClInclude Include="source\Effect\Game\PlayerBulletHit.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
+    <ClInclude Include="source\Handler\EnemyBulletHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
   </ItemGroup>

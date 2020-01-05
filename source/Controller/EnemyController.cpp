@@ -9,6 +9,7 @@
 #include "../../Framework/Tool/DebugWindow.h"
 
 #include "EnemyTimeController.h"
+#include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
 #include "../Actor/Enemy/DemoEnemyActor.h"
 
@@ -25,6 +26,8 @@ EnemyController::EnemyController()
 	if (EnemyTween::mInstance == nullptr)
 		EnemyTween::mInstance = new EnemyTween();
 
+	bulletController = new EnemyBulletController();
+
 	enemy = new DemoEnemyActor();
 	enemy->Init();
 }
@@ -37,6 +40,8 @@ EnemyController::~EnemyController()
 	EnemyTween::mInstance->ClearAll();
 	SAFE_DELETE(EnemyTween::mInstance);
 
+	SAFE_DELETE(bulletController);
+
 	SAFE_DELETE(enemy);
 }
 
@@ -47,6 +52,8 @@ void EnemyController::Update()
 {
 	enemy->Update();
 	EnemyTween::mInstance->Update();
+
+	bulletController->Update();
 }
 
 /**************************************
@@ -55,4 +62,12 @@ void EnemyController::Update()
 void EnemyController::Draw()
 {
 	enemy->Draw();
+}
+
+/**************************************
+ƒoƒŒƒbƒg•`‰æˆ—
+***************************************/
+void EnemyController::DrawBullet()
+{
+	bulletController->Draw();
 }
