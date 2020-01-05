@@ -32,8 +32,8 @@ EnemyBulletController::EnemyBulletController() :
 	ResourceManager::Instance()->MakePolygon(
 		"EnemyBullet",
 		"data/TEXTURE/Enemy/EnemyBullet.png",
-		{ 2.0f, 2.0f },
-		{ 8.0f, 8.0f });
+		EnemyBulletConfig::SizePolygon,
+		EnemyBulletConfig::SplitTexture);
 }
 
 /**************************************
@@ -62,13 +62,12 @@ void EnemyBulletController::Update()
 			return;
 
 		ObjectPool::Instance()->Destroy<EnemyBulletActor>(bullet);
-		bullet = nullptr;
 	});
 
 	//削除したバレットをコンテナから除外
 	auto itr = std::remove_if(bulletContainer.begin(), bulletContainer.end(), [](auto ptr)
 	{
-		return ptr == nullptr;
+		return !ptr->IsActive();
 	});
 	bulletContainer.erase(itr, bulletContainer.end());
 

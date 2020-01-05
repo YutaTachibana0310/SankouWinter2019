@@ -36,6 +36,9 @@ public:
 
 	static int GetTextureIndex(Type type, int indexAnim);
 	static int GetBloomTextureIndex(Type type, int indexAnim);
+	
+	static const D3DXVECTOR2 SizePolygon;
+	static const D3DXVECTOR2 SplitTexture;
 
 private:
 	EnemyBulletConfig() {}

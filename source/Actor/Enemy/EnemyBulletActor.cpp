@@ -15,6 +15,8 @@
 ***************************************/
 const D3DXVECTOR3 EnemyBulletActor::SizeCollider = { 1.0f, 1.0f, 1.0f };
 const int EnemyBulletActor::IntervalAnimation = 3;
+const D3DXVECTOR3 EnemyBulletActor::BorderLeftTop = { 0.0f, 40.0f, -60.0f };
+const D3DXVECTOR3 EnemyBulletActor::BorderRightBottom = { 0.0f, -40.0f, 60.0f };
 
 /**************************************
 コンストラクタ
@@ -29,7 +31,6 @@ EnemyBulletActor::EnemyBulletActor() :
 
 	polygon = new BoardPolygon();
 	ResourceManager::Instance()->GetPolygon("EnemyBullet", polygon);
-	polygon->SetTexDiv({ 8.0f, 8.0f });
 }
 
 /**************************************
@@ -75,6 +76,11 @@ void EnemyBulletActor::Update()
 	}
 
 	transform->Move(transform->Forward() * 0.5f);
+
+	if (!CheckMoveBorder())
+	{
+		Uninit();
+	}
 }
 
 /**************************************
@@ -114,4 +120,28 @@ void EnemyBulletActor::SetType(EnemyBulletConfig::Type type)
 ***************************************/
 void EnemyBulletActor::OnColliderHit(ColliderObserver * other)
 {
+	Uninit();
+}
+
+/**************************************
+移動の境界判定
+***************************************/
+bool EnemyBulletActor::CheckMoveBorder() const
+{
+	D3DXVECTOR3 position = transform->GetPosition();
+	D3DXVECTOR2 size = EnemyBulletConfig::SizePolygon;
+
+	if (position.z - size.x < BorderLeftTop.z)
+		return false;
+
+	if (position.z + size.x > BorderRightBottom.z)
+		return false;
+
+	if (position.y + size.y > BorderLeftTop.y)
+		return false;
+
+	if (position.y - size.y < BorderRightBottom.y)
+		return false;
+
+	return true;
 }

@@ -11,6 +11,8 @@
 グローバル変数
 ***************************************/
 const int EnemyBulletConfig::PeriodAnimation = 4;
+const D3DXVECTOR2 EnemyBulletConfig::SizePolygon = { 2.0f, 2.0f };
+const D3DXVECTOR2 EnemyBulletConfig::SplitTexture = { 8.0f, 8.0f };
 
 /**************************************
 テクスチャ通し番号取得

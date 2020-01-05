@@ -38,6 +38,8 @@ public:
 
 	static const D3DXVECTOR3 SizeCollider;
 	static const int IntervalAnimation;
+	static const D3DXVECTOR3 BorderLeftTop;
+	static const D3DXVECTOR3 BorderRightBottom;
 
 	void OnColliderHit(ColliderObserver * other) override;
 
@@ -50,6 +52,7 @@ private:
 	int cntFrame;
 	int indexAnim;
 
+	bool CheckMoveBorder() const;
 };
 
 #endif
