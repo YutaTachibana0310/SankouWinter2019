@@ -14,11 +14,13 @@
 グローバル変数
 ***************************************/
 const D3DXVECTOR3 EnemyBulletActor::SizeCollider = { 1.0f, 1.0f, 1.0f };
+const int EnemyBulletActor::IntervalAnimation = 3;
 
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyBulletActor::EnemyBulletActor()
+EnemyBulletActor::EnemyBulletActor() :
+	indexAnim(0)
 {
 	collider = BoxCollider3D::Create("EnemyBullet", transform);
 	collider->SetSize(SizeCollider);
@@ -48,6 +50,8 @@ void EnemyBulletActor::Init(const Transform& shotTransform)
 
 	collider->SetActive(true);
 	active = true;
+
+	indexAnim = 0;
 }
 
 /**************************************
@@ -64,6 +68,12 @@ void EnemyBulletActor::Uninit()
 ***************************************/
 void EnemyBulletActor::Update()
 {
+	cntFrame = Math::WrapAround(0, IntervalAnimation, ++cntFrame);
+	if (cntFrame == 0)
+	{
+		++indexAnim;
+	}
+
 	transform->Move(transform->Forward() * 0.5f);
 }
 
@@ -72,6 +82,9 @@ void EnemyBulletActor::Update()
 ***************************************/
 void EnemyBulletActor::Draw()
 {
+	int indexTexture = EnemyBulletConfig::GetTextureIndex(type, indexAnim);
+	polygon->SetTextureIndex(indexTexture);
+
 	D3DXMATRIX mtxWorld = transform->GetMatrix();
 	polygon->Draw(mtxWorld);
 }
