@@ -130,9 +130,9 @@ void GameScene::Draw()
 	//ƒuƒ‹[ƒ€‚ð‚©‚¯‚é
 	bloom->Draw(bloomTarget->GetTexture());
 
-	enemyController->DrawBullet();
-
 	particleManager->Draw();
+
+	enemyController->DrawBullet();
 
 	_DrawDebug();
 }
