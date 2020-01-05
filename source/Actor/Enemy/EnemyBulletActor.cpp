@@ -9,6 +9,7 @@
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
+#include "../../Controller/EnemyTimeController.h"
 
 /**************************************
 グローバル変数
@@ -72,24 +73,15 @@ void EnemyBulletActor::Uninit()
 ***************************************/
 void EnemyBulletActor::Update()
 {
-	cntFrame = Math::WrapAround(0, IntervalAnimation, ++cntFrame);
-	if (cntFrame == 0)
-	{
-		++indexAnim;
-	}
+	Animation();
 
-	transform->Move(transform->Forward() * speed);
+	Move();
 
-	if (!CheckMoveBorder())
-	{
-		Uninit();
-	}
+	CheckMoveBorder();
 
 	//描画用のSRT情報設定
 	renderTransform->SetPosition(transform->GetPosition());
-
 	renderTransform->SetScale(transform->GetScale());
-
 	D3DXVECTOR3 eulerAngle = transform->GetEulerAngle();
 	renderTransform->SetRotation({ eulerAngle.z, 0.0f, 0.0f });
 }
@@ -148,6 +140,27 @@ D3DXVECTOR2 EnemyBulletActor::GetBloomUV() const
 void EnemyBulletActor::OnColliderHit(ColliderObserver * other)
 {
 	Uninit();
+}
+
+/**************************************
+アニメーション
+***************************************/
+void EnemyBulletActor::Animation()
+{
+	cntFrame = Math::WrapAround(0, IntervalAnimation, ++cntFrame);
+	if (cntFrame == 0)
+	{
+		++indexAnim;
+	}
+}
+
+/**************************************
+移動
+***************************************/
+void EnemyBulletActor::Move()
+{
+	D3DXVECTOR3 offset = -transform->Forward() * speed * EnemyTimeController::GetTimeScale();
+	transform->Move(offset);
 }
 
 /**************************************

@@ -60,6 +60,8 @@ private:
 
 	float speed;
 
+	void Animation();
+	void Move();
 	bool CheckMoveBorder() const;
 };
 
