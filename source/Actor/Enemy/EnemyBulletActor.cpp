@@ -9,7 +9,6 @@
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
-#include "../../../Framework/Renderer3D/BillboardTransform.h"
 
 /**************************************
 グローバル変数
@@ -100,25 +99,7 @@ void EnemyBulletActor::Update()
 ***************************************/
 void EnemyBulletActor::Draw()
 {
-	int indexTexture = EnemyBulletConfig::GetTextureIndex(type, indexAnim);
-	polygon->SetTextureIndex(indexTexture);
-
-	D3DXMATRIX mtxWorld = renderTransform->GetMatrix();
-	polygon->Draw(mtxWorld);
-
 	collider->Draw();
-}
-
-/**************************************
-明かり処理
-***************************************/
-void EnemyBulletActor::DrawBloom()
-{
-	int indexTexture = EnemyBulletConfig::GetBloomTextureIndex(type, indexAnim);
-	polygon->SetTextureIndex(indexTexture);
-
-	D3DXMATRIX mtxWorld = renderTransform->GetMatrix();
-	polygon->Draw(mtxWorld);
 }
 
 /**************************************
@@ -135,6 +116,30 @@ void EnemyBulletActor::SetType(EnemyBulletConfig::Type type)
 void EnemyBulletActor::SetSpeed(float speed)
 {
 	this->speed = speed;
+}
+
+/**************************************
+ワールド変換行列取得処理
+***************************************/
+D3DXMATRIX EnemyBulletActor::GetWorldMtx() const
+{
+	return renderTransform->GetMatrix();
+}
+
+/**************************************
+UV座標取得処理
+***************************************/
+D3DXVECTOR2 EnemyBulletActor::GetUV() const
+{
+	return EnemyBulletConfig::GetTextureUV(type, indexAnim, false);
+}
+
+/**************************************
+ブルームのUV座標取得処理
+***************************************/
+D3DXVECTOR2 EnemyBulletActor::GetBloomUV() const
+{
+	return EnemyBulletConfig::GetTextureUV(type, indexAnim, true);
 }
 
 /**************************************

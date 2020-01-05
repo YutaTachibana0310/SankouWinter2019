@@ -120,6 +120,7 @@ technique tech {
 		ZWRITEENABLE = false;
 		ALPHABLENDENABLE = true;
 		ALPHATESTENABLE = true;
+		CULLMODE = NONE;
 
 		VertexShader = compile vs_2_0 VS_3D();
 		PixelShader = compile ps_2_0 psMain();
@@ -130,6 +131,7 @@ technique tech {
 		ZWRITEENABLE = false;
 		ALPHABLENDENABLE = true;
 		ALPHATESTENABLE = true;
+		CULLMODE = NONE;
 
 		VertexShader = compile vs_2_0 VS_2D();
 		PixelShader = compile ps_2_0 psMain();

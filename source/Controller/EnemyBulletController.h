@@ -35,8 +35,48 @@ public:
 	static const unsigned MaxBullet;
 
 private:
+	class BulletRenderer;
+
 	std::vector<EnemyBulletActor*> bulletContainer;
 	unsigned cntBullet;
+
+	BulletRenderer *renderer;
+};
+
+/**************************************
+EnemyBulletActor•`‰æ—pƒNƒ‰ƒX
+***************************************/
+class EnemyBulletController::BulletRenderer
+{
+public:
+	BulletRenderer(EnemyBulletController *entity);
+	~BulletRenderer();
+
+	void Draw();
+
+private:
+	EnemyBulletController *entity;
+
+	LPDIRECT3DVERTEXBUFFER9 vtxBuff;
+	LPDIRECT3DVERTEXBUFFER9 transformBuffer;
+	LPDIRECT3DVERTEXBUFFER9 uvBuffer;
+	LPDIRECT3DINDEXBUFFER9 indexBuff;
+	LPDIRECT3DVERTEXDECLARATION9 declare;
+	LPD3DXEFFECT effect;
+	D3DXHANDLE hMtxView, hMtxProjection, hMtxInvView;
+	LPDIRECT3DTEXTURE9 texture;
+
+	int cntBullet;
+
+	void LoadEffect();
+	void MakeVtxBuffer();
+	void MakeDeclaration();
+	void MakeTransformBuffer();
+	void MakeUVBuffer();
+	void MakeIndexBuffer();
+
+	void SetTransformBuffer();
+	void SetUVBuffer();
 };
 
 #endif

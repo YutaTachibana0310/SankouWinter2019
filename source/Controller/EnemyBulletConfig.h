@@ -36,8 +36,11 @@ public:
 
 	static int GetTextureIndex(Type type, int indexAnim);
 	static int GetBloomTextureIndex(Type type, int indexAnim);
+
+	static D3DXVECTOR2 GetTextureUV(Type type, int indexAnim, bool isBloom);
 	
 	static const D3DXVECTOR2 SizePolygon;
+	static const D3DXVECTOR2 SizeUV;
 	static const D3DXVECTOR2 SplitTexture;
 
 private:

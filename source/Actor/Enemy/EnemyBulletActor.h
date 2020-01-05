@@ -32,10 +32,13 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
-	void DrawBloom();
 
 	void SetType(EnemyBulletConfig::Type type);
 	void SetSpeed(float speed);
+
+	D3DXMATRIX GetWorldMtx() const;
+	D3DXVECTOR2 GetUV() const;
+	D3DXVECTOR2 GetBloomUV() const;
 
 	static const D3DXVECTOR3 SizeCollider;
 	static const int IntervalAnimation;
