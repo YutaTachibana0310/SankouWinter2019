@@ -9,6 +9,7 @@
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
+#include "../../../Framework/Renderer3D/BillboardTransform.h"
 
 /**************************************
 グローバル変数
@@ -31,6 +32,8 @@ EnemyBulletActor::EnemyBulletActor() :
 
 	polygon = new BoardPolygon();
 	ResourceManager::Instance()->GetPolygon("EnemyBullet", polygon);
+
+	renderTransform = new BillboardTransform();
 }
 
 /**************************************
@@ -39,6 +42,7 @@ EnemyBulletActor::EnemyBulletActor() :
 EnemyBulletActor::~EnemyBulletActor()
 {
 	SAFE_DELETE(polygon);
+	SAFE_DELETE(renderTransform);
 	collider.reset();
 }
 
@@ -81,6 +85,14 @@ void EnemyBulletActor::Update()
 	{
 		Uninit();
 	}
+
+	//描画用のSRT情報設定
+	renderTransform->SetPosition(transform->GetPosition());
+
+	renderTransform->SetScale(transform->GetScale());
+
+	D3DXVECTOR3 eulerAngle = transform->GetEulerAngle();
+	renderTransform->SetRotation({ eulerAngle.z, 0.0f, 0.0f });
 }
 
 /**************************************
@@ -91,8 +103,10 @@ void EnemyBulletActor::Draw()
 	int indexTexture = EnemyBulletConfig::GetTextureIndex(type, indexAnim);
 	polygon->SetTextureIndex(indexTexture);
 
-	D3DXMATRIX mtxWorld = transform->GetMatrix();
+	D3DXMATRIX mtxWorld = renderTransform->GetMatrix();
 	polygon->Draw(mtxWorld);
+
+	collider->Draw();
 }
 
 /**************************************
@@ -103,7 +117,7 @@ void EnemyBulletActor::DrawBloom()
 	int indexTexture = EnemyBulletConfig::GetBloomTextureIndex(type, indexAnim);
 	polygon->SetTextureIndex(indexTexture);
 
-	D3DXMATRIX mtxWorld = transform->GetMatrix();
+	D3DXMATRIX mtxWorld = renderTransform->GetMatrix();
 	polygon->Draw(mtxWorld);
 }
 

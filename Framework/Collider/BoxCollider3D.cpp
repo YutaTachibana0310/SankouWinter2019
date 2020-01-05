@@ -12,6 +12,7 @@ using namespace std;
 /**************************************
 マクロ定義
 ***************************************/
+#define BOXCOLLIDER3D_USE_DEBUG
 
 /**************************************
 構造体定義
@@ -22,10 +23,11 @@ static変数
 ***************************************/
 unsigned BoxCollider3D::incrementID = 0;
 
-#ifdef BOXCOLLIDER3D_USE_DEBUG
 UINT BoxCollider3D::instanceCount;
-D3DMATERIAL9 BoxCollider3D::material;
-LPD3DXMESH BoxCollider3D::mesh;
+
+#ifdef BOXCOLLIDER3D_USE_DEBUG
+D3DMATERIAL9 material;
+LPD3DXMESH mesh;
 #endif
 
 /**************************************

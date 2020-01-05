@@ -7,8 +7,6 @@
 #ifndef _BOXCOLLIDER3D_H_
 #define _BOXCOLLIDER3D_H_
 
-//#define BOXCOLLIDER3D_USE_DEBUG
-
 #include "../../main.h"
 #include "BaseCollider.h"
 #include "ColliderObserver.h"
@@ -47,12 +45,8 @@ private:
 
 	BoxCollider3D(const std::string& tag, const std::shared_ptr<Transform>& transform);
 
-#ifdef BOXCOLLIDER3D_USE_DEBUG
 	static UINT instanceCount;		//インスタンスカウント
 	static void CreateRenderTool();
-	static D3DMATERIAL9 material;	//描画用マテリアル
-	static LPD3DXMESH mesh;			//描画用メッシュ
-#endif
 };
 
 using PtrBoxCollider3D = std::shared_ptr<BoxCollider3D>;

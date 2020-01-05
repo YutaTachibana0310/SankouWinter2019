@@ -81,6 +81,7 @@ technique tech
 	pass P0 {
 		ALPHABLENDENABLE = true;
 		ALPHATESTENABLE = true;
+		CULLMODE = NONE;
 		VertexShader = compile vs_2_0 VS_3D();
 		PixelShader = compile ps_2_0 PS();
 	}
@@ -89,6 +90,7 @@ technique tech
 		ALPHABLENDENABLE = true;
 		ALPHATESTENABLE = true;
 		ZWRITEENABLE = false;
+		CULLMODE = NONE;
 		VertexShader = compile vs_2_0 VS_2D();
 		PixelShader = compile ps_2_0 PS();
 	}

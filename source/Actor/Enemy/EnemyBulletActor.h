@@ -48,6 +48,8 @@ private:
 	std::shared_ptr<BoxCollider3D> collider;
 	BoardPolygon *polygon;
 
+	BillboardTransform *renderTransform;
+
 	EnemyBulletConfig::Type type;
 
 	int cntFrame;
