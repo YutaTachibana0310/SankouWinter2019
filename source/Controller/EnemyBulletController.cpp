@@ -10,6 +10,8 @@
 #include "../../Framework/Core/ObjectPool.h"
 #include "../../Framework/Tool/DebugWindow.h"
 
+#include "../../Library/nameof/nameof.hpp"
+
 #include "../Actor/Enemy/EnemyBulletActor.h"
 
 #include <algorithm>
@@ -70,12 +72,20 @@ void EnemyBulletController::Update()
 	});
 	bulletContainer.erase(itr, bulletContainer.end());
 
+	//デバッグメニュー
 	Debug::Begin("EnemyBullet");
+	static int bulletType = EnemyBulletConfig::Type(0);
 
 	if (Debug::Button("Shot"))
 	{
 		Transform transform;
-		SetBullet(transform);
+		SetBullet(transform,  EnemyBulletConfig::Type(bulletType));
+	}
+
+	for (int i = 0; i < EnemyBulletConfig::Type::EnemyBulletMax; i++)
+	{
+		std::string label = std::string(NAMEOF_ENUM(EnemyBulletConfig::Type(i)));
+		Debug::RadioButton(label.c_str(), bulletType, i);
 	}
 
 	Debug::End();
@@ -100,7 +110,7 @@ void EnemyBulletController::Draw()
 /**************************************
 バレットセット処理
 ***************************************/
-void EnemyBulletController::SetBullet(const Transform & shotTransform)
+void EnemyBulletController::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type)
 {
 	if (cntBullet > MaxBullet)
 	{
@@ -110,6 +120,8 @@ void EnemyBulletController::SetBullet(const Transform & shotTransform)
 
 	EnemyBulletActor* bullet = ObjectPool::Instance()->Create<EnemyBulletActor>();
 	bullet->Init(shotTransform);
+
+	bullet->SetType(type);
 
 	bulletContainer.push_back(bullet);
 }

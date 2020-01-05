@@ -31,6 +31,7 @@ public:
 		BlueLarge,
 		BlueSphere,
 		BlueNeedle,
+		EnemyBulletMax
 	};
 
 	static int GetTextureIndex(Type type, int indexAnim);

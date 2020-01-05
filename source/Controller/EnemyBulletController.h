@@ -9,6 +9,7 @@
 #define _ENEMYBULLETCONTROLLER_H_
 
 #include "../../main.h"
+#include "EnemyBulletConfig.h"
 
 #include <vector>
 
@@ -29,7 +30,7 @@ public:
 	void Update();
 	void Draw();
 	
-	void SetBullet(const Transform& shotTransform);
+	void SetBullet(const Transform& shotTransform, EnemyBulletConfig::Type type);
 
 	static const unsigned MaxBullet;
 

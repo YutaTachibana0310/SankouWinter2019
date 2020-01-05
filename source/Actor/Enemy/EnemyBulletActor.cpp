@@ -90,6 +90,14 @@ void EnemyBulletActor::Draw()
 }
 
 /**************************************
+ƒ^ƒCƒvİ’è
+***************************************/
+void EnemyBulletActor::SetType(EnemyBulletConfig::Type type)
+{
+	this->type = type;
+}
+
+/**************************************
 Õ“Ë‚Ìˆ—
 ***************************************/
 void EnemyBulletActor::OnColliderHit(ColliderObserver * other)
