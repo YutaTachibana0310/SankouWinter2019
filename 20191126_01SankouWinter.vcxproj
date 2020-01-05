@@ -250,6 +250,7 @@
     <ClCompile Include="source\BackGround\GameSkybox.cpp" />
     <ClCompile Include="source\BackGround\PlanetActor.cpp" />
     <ClCompile Include="source\Camera\GameCamera.cpp" />
+    <ClCompile Include="source\Controller\EnemyBulletConfig.cpp" />
     <ClCompile Include="source\Controller\EnemyBulletController.cpp" />
     <ClCompile Include="source\Controller\EnemyController.cpp" />
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
@@ -396,6 +397,7 @@
     <ClInclude Include="source\BackGround\GameSkybox.h" />
     <ClInclude Include="source\BackGround\PlanetActor.h" />
     <ClInclude Include="source\Camera\GameCamera.h" />
+    <ClInclude Include="source\Controller\EnemyBulletConfig.h" />
     <ClInclude Include="source\Controller\EnemyBulletController.h" />
     <ClInclude Include="source\Controller\EnemyController.h" />
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
