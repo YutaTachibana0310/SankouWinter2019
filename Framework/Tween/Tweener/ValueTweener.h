@@ -27,8 +27,8 @@ public:
 	/**************************************
 	コンストラクタ
 	***************************************/
-	ValueTweener(std::shared_ptr<T>& ref, const T& start, const T& end, float duration, EaseType type, Callback callback) :
-		Tweener(ref, duration, type, callback),
+	ValueTweener(std::shared_ptr<T>& ref, const T& start, const T& end, float duration, EaseType type, bool ignoreTimeScale, Callback callback) :
+		Tweener(ref, duration, type, ignoreTimeScale, callback),
 		start(start),
 		end(end)
 	{
@@ -40,7 +40,7 @@ public:
 	***************************************/
 	void Update()
 	{
-		cntFrame += FixedTime::GetTimeScale();
+		CountUp();
 
 		std::shared_ptr<T> value = reference.lock();
 		if (value)

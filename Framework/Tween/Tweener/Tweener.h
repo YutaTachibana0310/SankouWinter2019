@@ -28,11 +28,12 @@ public:
 	/**************************************
 	コンストラクタ
 	***************************************/
-	BaseTweener(float duration, EaseType type, Callback callback) :
+	BaseTweener(float duration, EaseType type, bool ignoreTimeScale, Callback callback) :
 		cntFrame(0),
 		duration(duration),
 		easeType(type),
-		callback(callback)
+		callback(callback),
+		ignoreTimeScale(ignoreTimeScale)
 	{
 	}
 
@@ -68,11 +69,23 @@ public:
 		callback();
 	}
 
+	/**************************************
+	カウントアップ
+	***************************************/
+	inline void CountUp()
+	{
+		if (ignoreTimeScale)
+			cntFrame += 1.0f;
+		else
+			cntFrame += FixedTime::GetTimeScale();
+	}
+
 protected:
 	float cntFrame;
 	float duration;
 	EaseType easeType;
 	Callback callback;
+	bool ignoreTimeScale;
 };
 
 /**************************************
@@ -86,8 +99,8 @@ public:
 	/**************************************
 	コンストラクタ
 	***************************************/
-	Tweener(std::shared_ptr<T>& ref, float duration, EaseType type, Callback callback) :
-		BaseTweener(duration, type, callback),
+	Tweener(std::shared_ptr<T>& ref, float duration, EaseType type, bool ignoreTimeScale, Callback callback) :
+		BaseTweener(duration, type, ignoreTimeScale, callback),
 		reference(ref)
 	{
 

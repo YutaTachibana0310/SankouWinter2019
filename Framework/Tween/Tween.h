@@ -66,13 +66,26 @@ public:
 	引数 type : イージングタイプ
 	引数 callback : 終了時のコールバック関数
 	***************************************/
-	static void Move(GameObject& ref, const D3DXVECTOR3& startPosition, const D3DXVECTOR3& endPosition, float duration, EaseType type, std::function<void(void)> callback = nullptr);
+	static void Move(
+		GameObject& ref, 
+		const D3DXVECTOR3& startPosition, 
+		const D3DXVECTOR3& endPosition,
+		float duration, 
+		EaseType type, 
+		bool ignoreTimeScale,
+		std::function<void(void)> callback = nullptr);
 
 	/**************************************
 	移動トゥイーン
 	基本的には上記と一緒だが、移動開始座標を現在座標に自動で設定してくれる
 	***************************************/
-	static void Move(GameObject& ref, const D3DXVECTOR3& endPosition, float duratino, EaseType type, std::function<void(void)> callback = nullptr);
+	static void Move(
+		GameObject& ref, 
+		const D3DXVECTOR3& endPosition, 
+		float duratino, 
+		EaseType type, 
+		bool ignoreTimeScale,
+		std::function<void(void)> callback = nullptr);
 
 	/**************************************
 	スケールトゥイーン
@@ -83,13 +96,26 @@ public:
 	引数 type : イージングタイプ
 	引数 callback : 終了時のコールバック関数
 	***************************************/
-	static void Scale(GameObject& ref, const D3DXVECTOR3& startScale, const D3DXVECTOR3& endScale, float duration, EaseType type, std::function<void(void)> callback = nullptr);
+	static void Scale(
+		GameObject& ref, 
+		const D3DXVECTOR3& startScale, 
+		const D3DXVECTOR3& endScale,
+		float duration, 
+		EaseType type, 
+		bool ignoreTimeScale,
+		std::function<void(void)> callback = nullptr);
 
 	/**************************************
 	スケールトゥイーン
 	基本的には上記と一緒だが開始時のスケールを現在スケールに自動で設定してくれる
 	***************************************/
-	static void Scale(GameObject& ref, const D3DXVECTOR3& endScale, float duration, EaseType type, std::function<void(void)> callback = nullptr);
+	static void Scale(
+		GameObject& ref,
+		const D3DXVECTOR3& endScale,
+		float duration,
+		EaseType type,
+		bool ignoreTimeScale,
+		std::function<void(void)> callback = nullptr);
 
 	/**************************************
 	回転トゥイーン
@@ -101,13 +127,26 @@ public:
 	引数 callback : 終了時のコールバック関数
 	※回転角度は自動で0.0f~360.0fに補正されてしまうので注意
 	***************************************/
-	static void Rotate(GameObject& ref, const D3DXVECTOR3& startEulerAngle, const D3DXVECTOR3& endEulerAngle, float duration, EaseType type, std::function<void(void)> callback = nullptr);
+	static void Rotate(
+		GameObject& ref,
+		const D3DXVECTOR3& startEulerAngle, 
+		const D3DXVECTOR3& endEulerAngle,
+		float duration, 
+		EaseType type,
+		bool ignoreTimeScale,
+		std::function<void(void)> callback = nullptr);
 
 	/**************************************
 	回転トゥイーン
 	基本的には上記と一緒だが開始の回転角度を自動で現在角度に設定してくれる
 	***************************************/
-	static void Rotate(GameObject& ref, const D3DXVECTOR3& endEulaerAngle, float duration, EaseType type, std::function<void(void)> callback = nullptr);
+	static void Rotate(
+		GameObject& ref, 
+		const D3DXVECTOR3& endEulaerAngle, 
+		float duration,
+		EaseType type,
+		bool ignoreTimeScale,
+		std::function<void(void)> callback = nullptr);
 
 	/**************************************
 	方向トゥイーン
@@ -118,7 +157,14 @@ public:
 	引数 dummyAxis : 始点の向きと終点の向きが平行だった場合に使用する回転軸
 	引数 callback : 終了時のコールバック関数
 	***************************************/
-	static void Turn(GameObject& ref, const D3DXVECTOR3& endDirection, float duration, EaseType type, const D3DXVECTOR3& dummyAxis, std::function<void()> callback = nullptr);
+	static void Turn(
+		GameObject& ref, 
+		const D3DXVECTOR3& endDirection, 
+		float duration, 
+		EaseType type, 
+		const D3DXVECTOR3& dummyAxis, 
+		bool ignoreTimeScale,
+		std::function<void()> callback = nullptr);
 
 	/**************************************
 	値トゥイーン
@@ -130,9 +176,16 @@ public:
 	引数 callback : 終了時のコールバック関数
 	***************************************/
 	template<class T>
-	static void To(std::shared_ptr<T>& ref, const T& start, const T& end, float duration, EaseType type, std::function<void()> callback = nullptr)
+	static void To(
+		std::shared_ptr<T>& ref, 
+		const T& start, 
+		const T& end,
+		float duration, 
+		EaseType type, 
+		bool ignoreTimeScale,
+		std::function<void()> callback = nullptr)
 	{
-		ValueTweener<T> *tweener = new ValueTweener<T>(ref, start, end, duration, type, callback);
+		ValueTweener<T> *tweener = new ValueTweener<T>(ref, start, end, duration, type, ignoreTimeScale, callback);
 		mInstance->tweenerContainer.push_back(tweener);
 	}
 
@@ -145,18 +198,71 @@ public:
 	引数 callback : 終了時のコールバック関数
 	***************************************/
 	template<class T>
-	static void To(std::shared_ptr<T>& ref, const T& end, float duration, EaseType type, std::function<void()> callback = nullptr)
+	static void To(
+		std::shared_ptr<T>& ref,
+		const T& end, 
+		float duration,
+		EaseType type,
+		bool ignoreTimeScale,
+		std::function<void()> callback = nullptr)
 	{
 		T start = *ref;
-		ValueTweener<T> *tweener = new ValueTweener<T>(ref, start, end, duration, type, callback);
+		ValueTweener<T> *tweener = new ValueTweener<T>(ref, start, end, duration, type, ignoreTimeScale, callback);
 		mInstance->tweenerContainer.push_back(tweener);
 	}
 
-	static void Expand(std::shared_ptr<Polygon2D>& ref, ExpandType expand, float duration, EaseType type, std::function<void()> callback = nullptr);
+	/**************************************
+	UI展開トゥイーン
+	引数 ref：トゥイーン対象
+	引数 expand : 展開タイプ
+	引数 duration : 時間
+	引数 type : トゥイーンタイプ
+	引数 ignoreTimeScale : タイムスケールを無視するか
+	引数 callback : コールバック
+	***************************************/
+	static void Expand(
+		std::shared_ptr<Polygon2D>& ref,
+		ExpandType expand, 
+		float duration, 
+		EaseType type, 
+		bool ignoreTimeScale, 
+		std::function<void()> callback = nullptr);
 
-	static void Close(std::shared_ptr<Polygon2D>& ref, CloseType close, float duration, EaseType type, std::function<void()> callback = nullptr);
+	/**************************************
+	UI縮小トゥイーン
+	引数 ref：トゥイーン対象
+	引数 close : 縮小タイプ
+	引数 duration : 時間
+	引数 type : トゥイーンタイプ
+	引数 ignoreTimeScale : タイムスケールを無視するか
+	引数 callback : コールバック
+	***************************************/
+	static void Close(
+		std::shared_ptr<Polygon2D>& ref, 
+		CloseType close, 
+		float duration,
+		EaseType type,
+		bool ignoreTimeScale,
+		std::function<void()> callback = nullptr);
 
-	static void Fade(std::shared_ptr<Polygon2D>& ref, float start, float end, float duration, EaseType type, std::function<void()> callback = nullptr);
+	/**************************************
+	UIフェードトゥイーン
+	引数 ref：トゥイーン対象
+	引数 start : 開始時のアルファ
+	引数 end : 終了時のアルファ
+	引数 duration : 時間
+	引数 type : トゥイーンタイプ
+	引数 ignoreTimeScale : タイムスケールを無視するか
+	引数 callback : コールバック
+	***************************************/
+	static void Fade(
+		std::shared_ptr<Polygon2D>& ref, 
+		float start, 
+		float end, 
+		float duration, 
+		EaseType type,
+		bool ignoreTimeScale,
+		std::function<void()> callback = nullptr);
 
 private:
 	void Update();
