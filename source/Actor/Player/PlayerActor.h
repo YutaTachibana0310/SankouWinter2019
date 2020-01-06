@@ -44,7 +44,7 @@ private:
 	Transform *turretTransform;
 	std::vector<PlayerTurretActor*> turretContainer;
 
-	int cntShotFrame;
+	float cntShotFrame;
 
 	void _Move(const D3DXVECTOR3& dir);
 	void _Rotate(float dir);

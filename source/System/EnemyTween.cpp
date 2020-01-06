@@ -238,7 +238,7 @@ void EnemyTween::MoveEnemyTweener::Update()
 	shared_ptr<Transform> transform = reference.lock();
 	if (transform)
 	{
-		float t = (float)cntFrame / duration;
+		float t = cntFrame / duration;
 		transform->SetPosition(Easing::EaseValue(t, start, end, type));
 		CheckCallback();
 	}
@@ -265,7 +265,7 @@ void EnemyTween::ScaleEnemyTweener::Update()
 	shared_ptr<Transform> transform = reference.lock();
 	if (transform)
 	{
-		float t = (float)cntFrame / duration;
+		float t = cntFrame / duration;
 		transform->SetScale(Easing::EaseValue(t, start, end, type));
 		CheckCallback();
 	}
@@ -303,7 +303,7 @@ void EnemyTween::RotateEnemyTweener::Update()
 	shared_ptr<Transform> transform = reference.lock();
 	if (transform)
 	{
-		float t = Easing::EaseValue((float)cntFrame / duration, 0.0f, 1.0f, type);
+		float t = Easing::EaseValue(cntFrame / duration, 0.0f, 1.0f, type);
 		D3DXQUATERNION quaternion;
 		D3DXQuaternionSlerp(&quaternion, &start, &end, t);
 		transform->SetRotation(quaternion);

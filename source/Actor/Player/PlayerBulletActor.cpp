@@ -66,7 +66,7 @@ void PlayerBulletActor::Uninit()
 ***************************************/
 void PlayerBulletActor::Update()
 {
-	transform->Move(Vector3::Forward * SpeedMove);
+	transform->Move(Vector3::Forward * SpeedMove * FixedTime::GetTimeScale());
 
 	if (_IsOutBorder())
 	{
