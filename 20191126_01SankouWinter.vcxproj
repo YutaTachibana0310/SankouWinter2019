@@ -282,6 +282,7 @@
     <ClInclude Include="Framework\Core\ObjectPool.h" />
     <ClInclude Include="Framework\Core\PlayerPrefs.h" />
     <ClInclude Include="Framework\Core\SceneManager.h" />
+    <ClInclude Include="Framework\Core\FixedTime.h" />
     <ClInclude Include="Framework\Core\Transform.h" />
     <ClInclude Include="Framework\Core\Utility.h" />
     <ClInclude Include="Framework\Effect\InstancingMeshEffect.h" />

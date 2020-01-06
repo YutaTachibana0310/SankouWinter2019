@@ -274,6 +274,7 @@
     <ClInclude Include="source\Controller\EnemyBulletController.h" />
     <ClInclude Include="source\Controller\EnemyBulletConfig.h" />
     <ClInclude Include="source\Handler\EnemyBulletHandler.h" />
+    <ClInclude Include="Framework\Core\FixedTime.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

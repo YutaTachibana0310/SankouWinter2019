@@ -13,12 +13,15 @@
 #include "../Task/TaskManager.h"
 #include "../Transition/TransitionController.h"
 #include "../Effect/RendererEffect.h"
-
 #include "../Sound/sound.h"
+#include "FixedTime.h"
+
 #include "../Sound/BackgroundMusic.h"
 #include "../Sound/SoundEffect.h"
 
 Tween* Tween::mInstance = NULL;
+float FixedTime::timeScale = 1.0f;
+
 /**************************************
 コンストラクタ
 ***************************************/
