@@ -88,7 +88,7 @@ void PlayerActor::Update()
 	_Rotate(direction.y);
 
 	const float AngleRotateTurret = 3.0f;
-	turretTransform->Rotate(AngleRotateTurret, Vector3::Forward);
+	turretTransform->Rotate(AngleRotateTurret * FixedTime::GetTimeScale(), Vector3::Forward);
 
 	_Shot();
 
@@ -117,7 +117,7 @@ void PlayerActor::Draw()
 ***************************************/
 void PlayerActor::_Move(const D3DXVECTOR3 & dir)
 {
-	D3DXVECTOR3 position = transform->GetPosition() + Vector3::Normalize(dir) * SpeedMove;
+	D3DXVECTOR3 position = transform->GetPosition() + Vector3::Normalize(dir) * SpeedMove * FixedTime::GetTimeScale();
 
 	position = Vector3::Clamp(-BorderMove, BorderMove, position);
 
@@ -138,7 +138,7 @@ void PlayerActor::_Rotate(float dir)
 
 	float rotAngle = (targetAngle - currentAngle) * 0.075f;
 
-	transform->Rotate(rotAngle, Vector3::Forward);
+	transform->Rotate(rotAngle * FixedTime::GetTimeScale(), Vector3::Forward);
 }
 
 /**************************************
@@ -146,15 +146,17 @@ void PlayerActor::_Rotate(float dir)
 ***************************************/
 void PlayerActor::_Shot()
 {
-	const int ShotInterval = 3;
+	const float ShotInterval = 3.0f;
 
-	cntShotFrame = Math::WrapAround(0, ShotInterval, ++cntShotFrame);
+	cntShotFrame += FixedTime::GetTimeScale();
 	
-	if (cntShotFrame != 0)
+	if (cntShotFrame < ShotInterval)
 		return;
 
 	for (auto&& turret : turretContainer)
 	{
 		onFireBullet(turret->GetShotPosition());
 	}
+
+	cntShotFrame = 0.0f;
 }

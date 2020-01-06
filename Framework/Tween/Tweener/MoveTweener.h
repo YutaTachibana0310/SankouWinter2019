@@ -24,7 +24,7 @@ public:
 	/**************************************
 	コンストラクタ
 	***************************************/
-	MoveTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
+	MoveTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, Callback callback) :
 		Tweener<Transform>(ref, duration, type, callback),
 		start(start),
 		end(end)
@@ -36,12 +36,12 @@ public:
 	***************************************/
 	void Update()
 	{
-		cntFrame++;
+		cntFrame += FixedTime::GetTimeScale();
 
 		std::shared_ptr<Transform> transform = reference.lock();
 		if (transform)
 		{
-			float t = (float)cntFrame / duration;
+			float t = cntFrame / duration;
 			transform->SetPosition(Easing::EaseValue(t, start, end, easeType));
 			CheckCallback();
 		}

@@ -27,7 +27,8 @@ BaseEmitter::BaseEmitter() :
 	GameObject(false),
 	emitNum(1),
 	duration(1),
-	useCull(false)
+	useCull(false),
+	prevEmitTime(-1.0f)
 {
 
 }
@@ -47,7 +48,7 @@ BaseEmitter::BaseEmitter(int emitNum) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEmitter::BaseEmitter(int emitNum, int duration) :
+BaseEmitter::BaseEmitter(int emitNum, float duration) :
 	GameObject(false),
 	emitNum(emitNum),
 	duration(duration),
@@ -59,7 +60,7 @@ BaseEmitter::BaseEmitter(int emitNum, int duration) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEmitter::BaseEmitter(int emitNum, int durationMin, int durationMax) :
+BaseEmitter::BaseEmitter(int emitNum, float durationMin, float durationMax) :
 	GameObject(false),
 	emitNum(emitNum),
 	duration(Math::RandomRange(durationMin, durationMax)),
@@ -71,7 +72,7 @@ BaseEmitter::BaseEmitter(int emitNum, int durationMin, int durationMax) :
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEmitter::BaseEmitter(int emitNumMin, int emitNumMax, int durationMin, int durationMax) :
+BaseEmitter::BaseEmitter(int emitNumMin, int emitNumMax, float durationMin, float durationMax) :
 	GameObject(false),
 	emitNum(Math::RandomRange(emitNumMin, emitNumMax)),
 	duration(Math::RandomRange(durationMin, durationMax)),
@@ -94,6 +95,7 @@ BaseEmitter::~BaseEmitter()
 void BaseEmitter::Init(std::function<void(void)>& callback)
 {
 	cntFrame = 0;
+	prevEmitTime = -1.0f;
 	active = true;
 	this->callback = callback;
 }
@@ -106,9 +108,9 @@ void BaseEmitter::Update()
 	if (!IsActive())
 		return;
 
-	cntFrame++;
+	cntFrame += FixedTime::GetTimeScale();
 
-	if (cntFrame == duration && callback != nullptr)
+	if (cntFrame >= duration && callback != nullptr)
 	{
 		callback();
 	}
@@ -122,10 +124,15 @@ bool BaseEmitter::Emit(std::vector<BaseParticle*>& container)
 	if (!IsActive())
 		return true;
 
-	D3DXVECTOR3 screenPos = Camera::MainCamera()->Projection(transform->GetPosition());
+	if (cntFrame < prevEmitTime)
+		return true;
+
+	prevEmitTime = ceilf(cntFrame);
+
 
 	if (useCull)
 	{
+		D3DXVECTOR3 screenPos = Camera::MainCamera()->Projection(transform->GetPosition());
 		if (screenPos.x < 0.0f || screenPos.x > SCREEN_WIDTH || screenPos.y < 0.0f || screenPos.y > SCREEN_HEIGHT)
 			return true;
 	}

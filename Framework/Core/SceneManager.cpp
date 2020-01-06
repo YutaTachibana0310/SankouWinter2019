@@ -6,6 +6,7 @@
 //=====================================
 #include "SceneManager.h"
 #include "BaseScene.h"
+#include "FixedTime.h"
 #include "../Resource/ResourceManager.h"
 #include "../Tool/ProfilerCPU.h"
 #include "../Tween/Tween.h"
@@ -71,6 +72,7 @@ void SceneManager::_ChengeScene(const int sceneID)
 	if (current != NULL)
 	{
 		current->Uninit();
+		FixedTime::timeScale = 1.0f;
 		ObjectPool::Instance()->ClearAll();
 		ResourceManager::Instance()->AllRelease();
 		ProfilerCPU::Instance()->Clear();

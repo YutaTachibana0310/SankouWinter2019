@@ -17,7 +17,7 @@ float EnemyTimeController::timeScale = 1.0f;
 ***************************************/
 float EnemyTimeController::GetTimeScale()
 {
-	return timeScale;
+	return timeScale * FixedTime::GetTimeScale();
 }
 
 /**************************************

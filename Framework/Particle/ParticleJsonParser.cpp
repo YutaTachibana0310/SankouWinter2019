@@ -41,8 +41,8 @@ ParticleJsonParser::ParticleJsonParser(const char * fileName)
 	emitterMax = data["emitterMax"].int_value();
 	emitNumMin = data["emitNumMin"].int_value();
 	emitNumMax = data["emitNumMax"].int_value();
-	durationMin = data["durationMin"].int_value();
-	durationMax = data["durationMax"].int_value();
+	durationMin = (float)data["durationMin"].number_value();
+	durationMax = (float)data["durationMax"].number_value();
 	size.x = (float)data["sizeX"].number_value();
 	size.y = (float)data["sizeY"].number_value();
 	texDiv.x = (float)data["divX"].number_value();
@@ -90,7 +90,7 @@ int ParticleJsonParser::GetEmitNum() const
 /**************************************
 •úoŠúŠÔæ“¾
 ***************************************/
-int ParticleJsonParser::GetDuration() const
+float ParticleJsonParser::GetDuration() const
 {
 	if (durationMin != 0 && durationMax != 0)
 		return Math::RandomRange(durationMin, durationMax);

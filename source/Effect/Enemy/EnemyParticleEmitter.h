@@ -21,12 +21,7 @@ namespace Effect::Enemy
 		using BaseEmitter::BaseEmitter;
 
 	public:
-		virtual void Init(std::function<void()>& callback);
 		virtual void Update() override;
-		virtual bool Emit(std::vector<BaseParticle*>& container);
-
-	protected:
-		float prevEmit;
 	};
 }
 

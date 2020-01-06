@@ -9,15 +9,6 @@
 #include "../../Controller/EnemyTimeController.h"
 
 /**************************************
-‰Šú‰»ˆ—
-***************************************/
-void Effect::Enemy::EnemyParticleEmitter::Init(std::function<void()>& callback)
-{
-	prevEmit = 0.0f;
-	BaseEmitter::Init(callback);
-}
-
-/**************************************
 XVˆ—
 ***************************************/
 void Effect::Enemy::EnemyParticleEmitter::Update()
@@ -31,16 +22,4 @@ void Effect::Enemy::EnemyParticleEmitter::Update()
 	{
 		callback();
 	}
-}
-
-/**************************************
-•úoˆ—
-***************************************/
-bool Effect::Enemy::EnemyParticleEmitter::Emit(std::vector<BaseParticle*>& container)
-{
-	if (cntFrame < prevEmit)
-		return true;
-
-	prevEmit = floorf(cntFrame);
-	return BaseEmitter::Emit(container);
 }

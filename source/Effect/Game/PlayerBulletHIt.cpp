@@ -70,13 +70,13 @@ namespace Effect::Game
 		if (!IsActive())
 			return;
 
-		cntFrame++;
+		cntFrame += FixedTime::GetTimeScale();
 
 		float t = (float)cntFrame / lifeFrame;
 
 		float scale = Easing::EaseValue(t, initScale, 0.0f, EaseType::InExpo);
 		transform->SetScale(Vector3::One * scale);
 
-		transform->Move(moveDir * 0.2f);
+		transform->Move(moveDir * 0.2f * FixedTime::GetTimeScale());
 	}
 }

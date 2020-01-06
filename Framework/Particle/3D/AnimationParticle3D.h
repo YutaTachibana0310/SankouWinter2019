@@ -23,8 +23,8 @@ class AnimationParticle3D : public Particle3D
 	using Particle3D::Particle3D;
 public:
 	AnimationParticle3D(float fivX, float divY);
-	AnimationParticle3D(float divX, float divY, int life);
-	AnimationParticle3D(float divX, float divY, int lifeMin, int lifeMax);
+	AnimationParticle3D(float divX, float divY, float life);
+	AnimationParticle3D(float divX, float divY, float lifeMin, float lifeMax);
 
 	void SetAnimParameter(float texDixX, float texDivY);
 	void SetAnimParameter(const D3DXVECTOR2& texDiv);
