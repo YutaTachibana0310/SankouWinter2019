@@ -28,7 +28,7 @@ public:
 	/**************************************
 	コンストラクタ
 	***************************************/
-	BaseTweener(int duration, EaseType type, Callback callback) :
+	BaseTweener(float duration, EaseType type, Callback callback) :
 		cntFrame(0),
 		duration(duration),
 		easeType(type),
@@ -69,8 +69,8 @@ public:
 	}
 
 protected:
-	int cntFrame;
-	int duration;
+	float cntFrame;
+	float duration;
 	EaseType easeType;
 	Callback callback;
 };
@@ -86,7 +86,7 @@ public:
 	/**************************************
 	コンストラクタ
 	***************************************/
-	Tweener(std::shared_ptr<T>& ref, int duration, EaseType type, Callback callback) :
+	Tweener(std::shared_ptr<T>& ref, float duration, EaseType type, Callback callback) :
 		BaseTweener(duration, type, callback),
 		reference(ref)
 	{

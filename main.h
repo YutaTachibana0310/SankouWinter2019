@@ -23,6 +23,7 @@
 #include "Framework\Math\TMath.h"
 #include "Framework\Math\Vector3.h"
 #include "Framework\Core\Utility.h"
+#include "Framework/Core/FixedTime.h"
 
 #define DIRECTINPUT_VERSION (0x0800)	// åxçêëŒçÙ
 #include "dinput.h"

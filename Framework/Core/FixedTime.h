@@ -22,12 +22,12 @@ class FixedTime
 	friend class BaseGame;
 	friend class SceneManager;
 public:
-	inline void SetTimeScale(float scale)
+	static inline void SetTimeScale(float scale)
 	{
 		timeScale = scale;
 	}
 
-	inline float GetTimeScale()
+	static inline float GetTimeScale()
 	{
 		return timeScale;
 	}

@@ -53,7 +53,7 @@ public:
 	/**************************************
 	コンストラクタ（展開タイプ）
 	***************************************/
-	ViewerTweener(std::shared_ptr<Polygon2D>& ref, ExpandType type, int duration, EaseType easeType, Callback callback) :
+	ViewerTweener(std::shared_ptr<Polygon2D>& ref, ExpandType type, float duration, EaseType easeType, Callback callback) :
 		Tweener(ref, duration, easeType, callback),
 		expandType(type),
 		closeType(CloseType::None),
@@ -67,7 +67,7 @@ public:
 	/**************************************
 	コンストラクタ（圧縮タイプ）
 	***************************************/
-	ViewerTweener(std::shared_ptr<Polygon2D>& ref, CloseType type, int duration, EaseType easeType, Callback callback) :
+	ViewerTweener(std::shared_ptr<Polygon2D>& ref, CloseType type, float duration, EaseType easeType, Callback callback) :
 		Tweener(ref, duration, easeType, callback),
 		expandType(ExpandType::None),
 		closeType(type),
@@ -81,7 +81,7 @@ public:
 	/**************************************
 	コンストラクタ（フェード）
 	***************************************/
-	ViewerTweener(std::shared_ptr<Polygon2D>& ref, float startAlpha, float endAlpha, int duration, EaseType easeType, Callback callback) :
+	ViewerTweener(std::shared_ptr<Polygon2D>& ref, float startAlpha, float endAlpha, float duration, EaseType easeType, Callback callback) :
 		Tweener(ref, duration, easeType, callback),
 		expandType(ExpandType::None),
 		closeType(CloseType::None),
@@ -97,7 +97,7 @@ public:
 	***************************************/
 	void Update()
 	{
-		cntFrame++;
+		cntFrame += FixedTime::GetTimeScale();
 
 		std::shared_ptr<Polygon2D> polygon = reference.lock();
 		if (polygon)
@@ -128,7 +128,7 @@ private:
 	***************************************/
 	void _Expand(std::shared_ptr<Polygon2D>& polygon)
 	{
-		float t = (float)cntFrame / duration;
+		float t = cntFrame / duration;
 
 		if (expandType == ExpandType::DownToUp)
 			_ExpandDownToUp(t, polygon);
@@ -154,7 +154,7 @@ private:
 	***************************************/
 	void _Close(std::shared_ptr<Polygon2D>& polygon)
 	{
-		float t = (float)cntFrame / duration;
+		float t = cntFrame / duration;
 
 		if (closeType == CloseType::DownToUp)
 			_CloseDownToUp(t, polygon);
@@ -180,7 +180,7 @@ private:
 	***************************************/
 	void _Fade(std::shared_ptr<Polygon2D>& polygon)
 	{
-		float t = (float)cntFrame / duration;
+		float t = cntFrame / duration;
 		float alpha = Easing::EaseValue(t, startAlpha, endAlpha, easeType);
 		for (int i = 0; i < NUM_VERTEX; i++)
 		{

@@ -143,7 +143,7 @@ void Tween::ClearAll()
 /**************************************
 移動処理
 ***************************************/
-void Tween::Move(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void Tween::Move(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	MoveTweener *tweener = new MoveTweener(ref.transform, start, end, duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -152,7 +152,7 @@ void Tween::Move(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& e
 /**************************************
 移動処理
 ***************************************/
-void Tween::Move(GameObject& ref, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void Tween::Move(GameObject& ref, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	D3DXVECTOR3 start = ref.transform->GetPosition();
 	Move(ref, start, end, duration, type, callback);
@@ -161,7 +161,7 @@ void Tween::Move(GameObject& ref, const D3DXVECTOR3& end, int duration, EaseType
 /**************************************
 スケール処理
 ***************************************/
-void Tween::Scale(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void Tween::Scale(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	ScaleTweener *tweener = new ScaleTweener(ref.transform, start, end, duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -170,7 +170,7 @@ void Tween::Scale(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& 
 /**************************************
 スケール処理
 ***************************************/
-void Tween::Scale(GameObject& ref, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void Tween::Scale(GameObject& ref, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	D3DXVECTOR3 start = ref.transform->GetScale();
 	Scale(ref, start, end, duration, type, callback);
@@ -179,7 +179,7 @@ void Tween::Scale(GameObject& ref, const D3DXVECTOR3& end, int duration, EaseTyp
 /**************************************
 回転処理
 ***************************************/
-void Tween::Rotate(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void Tween::Rotate(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	RotateTweener *tweener = new RotateTweener(ref.transform, start, end, duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -188,7 +188,7 @@ void Tween::Rotate(GameObject& ref, const D3DXVECTOR3& start, const D3DXVECTOR3&
 /**************************************
 回転処理
 ***************************************/
-void Tween::Rotate(GameObject& ref, const D3DXVECTOR3& end, int duration, EaseType type, std::function<void(void)> callback)
+void Tween::Rotate(GameObject& ref, const D3DXVECTOR3& end, float duration, EaseType type, std::function<void(void)> callback)
 {
 	D3DXVECTOR3 start = ref.transform->GetEulerAngle();
 	Rotate(ref, start, end, duration, type, callback);
@@ -197,7 +197,7 @@ void Tween::Rotate(GameObject& ref, const D3DXVECTOR3& end, int duration, EaseTy
 /**************************************
 方向処理
 ***************************************/
-void Tween::Turn(GameObject & ref, const D3DXVECTOR3 & end, int duration, EaseType type, const D3DXVECTOR3& dummyAxis, std::function<void()> callback)
+void Tween::Turn(GameObject & ref, const D3DXVECTOR3 & end, float duration, EaseType type, const D3DXVECTOR3& dummyAxis, std::function<void()> callback)
 {
 	//始点となるクォータニオンを求める
 	D3DXQUATERNION start = ref.transform->GetRotation();
@@ -225,7 +225,7 @@ void Tween::Turn(GameObject & ref, const D3DXVECTOR3 & end, int duration, EaseTy
 /**************************************
 ビューア展開
 ***************************************/
-void Tween::Expand(std::shared_ptr<Polygon2D>& ref, ExpandType expand, int duration, EaseType type, std::function<void()> callback)
+void Tween::Expand(std::shared_ptr<Polygon2D>& ref, ExpandType expand, float duration, EaseType type, std::function<void()> callback)
 {
 	ViewerTweener* tweener = new ViewerTweener(ref, ConvertExpandType(expand), duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -234,7 +234,7 @@ void Tween::Expand(std::shared_ptr<Polygon2D>& ref, ExpandType expand, int durat
 /**************************************
 ビューア圧縮
 ***************************************/
-void Tween::Close(std::shared_ptr<Polygon2D>& ref, CloseType close, int duration, EaseType type, std::function<void()> callback)
+void Tween::Close(std::shared_ptr<Polygon2D>& ref, CloseType close, float duration, EaseType type, std::function<void()> callback)
 {
 	ViewerTweener* tweener = new ViewerTweener(ref, ConvertCloseType(close), duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);
@@ -243,7 +243,7 @@ void Tween::Close(std::shared_ptr<Polygon2D>& ref, CloseType close, int duration
 /**************************************
 ビューアフェード
 ***************************************/
-void Tween::Fade(std::shared_ptr<Polygon2D>& ref, float start, float end, int duration, EaseType type, std::function<void()> callback)
+void Tween::Fade(std::shared_ptr<Polygon2D>& ref, float start, float end, float duration, EaseType type, std::function<void()> callback)
 {
 	ViewerTweener* tweener = new ViewerTweener(ref, start, end, duration, type, callback);
 	mInstance->tweenerContainer.push_back(tweener);

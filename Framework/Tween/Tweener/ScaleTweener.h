@@ -24,7 +24,7 @@ public:
 	/**************************************
 	コンストラクタ
 	***************************************/
-	ScaleTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, int duration, EaseType type, Callback callback) :
+	ScaleTweener(std::shared_ptr<Transform>& ref, const D3DXVECTOR3& start, const D3DXVECTOR3& end, float duration, EaseType type, Callback callback) :
 		Tweener<Transform>(ref, duration, type, callback),
 		start(start),
 		end(end)
@@ -37,7 +37,7 @@ public:
 	***************************************/
 	void Update()
 	{
-		cntFrame++;
+		cntFrame += FixedTime::GetTimeScale();
 
 		std::shared_ptr<Transform> transform = reference.lock();
 		if (transform)
