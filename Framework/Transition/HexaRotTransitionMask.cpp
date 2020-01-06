@@ -100,7 +100,7 @@ void RotationHexa::Init(bool isTransitionOut)
 	const D3DXVECTOR3 EndScale = Vector3::One - InitScale;
 	const EaseType Type = isTransitionOut ? EaseType::InExpo : EaseType::OutExpo;
 
-	Tween::Scale(*this, InitScale, EndScale, HEXATRANSITION_DURATION, Type);
+	Tween::Scale(*this, InitScale, EndScale, HEXATRANSITION_DURATION, Type, true);
 }
 
 /**************************************

@@ -53,8 +53,8 @@ public:
 	/**************************************
 	コンストラクタ（展開タイプ）
 	***************************************/
-	ViewerTweener(std::shared_ptr<Polygon2D>& ref, ExpandType type, float duration, EaseType easeType, Callback callback) :
-		Tweener(ref, duration, easeType, callback),
+	ViewerTweener(std::shared_ptr<Polygon2D>& ref, ExpandType type, float duration, EaseType easeType, bool ignoreTimeScale, Callback callback) :
+		Tweener(ref, duration, easeType, ignoreTimeScale, callback),
 		expandType(type),
 		closeType(CloseType::None),
 		isFade(false),
@@ -67,8 +67,8 @@ public:
 	/**************************************
 	コンストラクタ（圧縮タイプ）
 	***************************************/
-	ViewerTweener(std::shared_ptr<Polygon2D>& ref, CloseType type, float duration, EaseType easeType, Callback callback) :
-		Tweener(ref, duration, easeType, callback),
+	ViewerTweener(std::shared_ptr<Polygon2D>& ref, CloseType type, float duration, EaseType easeType, bool ignoreTimeScale, Callback callback) :
+		Tweener(ref, duration, easeType, ignoreTimeScale, callback),
 		expandType(ExpandType::None),
 		closeType(type),
 		isFade(false),
@@ -81,8 +81,8 @@ public:
 	/**************************************
 	コンストラクタ（フェード）
 	***************************************/
-	ViewerTweener(std::shared_ptr<Polygon2D>& ref, float startAlpha, float endAlpha, float duration, EaseType easeType, Callback callback) :
-		Tweener(ref, duration, easeType, callback),
+	ViewerTweener(std::shared_ptr<Polygon2D>& ref, float startAlpha, float endAlpha, float duration, EaseType easeType, bool ignoreTimeScale, Callback callback) :
+		Tweener(ref, duration, easeType, ignoreTimeScale, callback),
 		expandType(ExpandType::None),
 		closeType(CloseType::None),
 		isFade(true),
@@ -97,7 +97,7 @@ public:
 	***************************************/
 	void Update()
 	{
-		cntFrame += FixedTime::GetTimeScale();
+		CountUp();
 
 		std::shared_ptr<Polygon2D> polygon = reference.lock();
 		if (polygon)
