@@ -1,36 +1,37 @@
 //=====================================
 //
-// GameViewer.h
-// 機能:ゲームビューワ
+// ScoreViewer.h
+// 機能:スコアビューワ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMEVIEWER_H_
-#define _GAMEVIEWER_H_
+#ifndef _SCOREVIEWER_H_
+#define _SCOREVIEWER_H_
 
 #include "../../../main.h"
 
 /**************************************
 前方宣言
 ***************************************/
-class Polygon2D;
-class ScoreViewer;
+class TextViewer;
 
 /**************************************
 クラス定義
 ***************************************/
-class GameViewer
+class ScoreViewer
 {
 public:
-	GameViewer();
-	~GameViewer();
+	ScoreViewer();
+	~ScoreViewer();
 
 	void Update();
 	void Draw();
 
+	void SetScore(int score);
+
 private:
-	Polygon2D *bg;
-	ScoreViewer *scoreViewer;
+	TextViewer *caption;
+	TextViewer *num;
 };
 
 #endif

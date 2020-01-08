@@ -264,6 +264,7 @@
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
+    <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -415,6 +416,7 @@
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
+    <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx">

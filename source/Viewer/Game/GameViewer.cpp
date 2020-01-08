@@ -7,6 +7,7 @@
 //=====================================
 #include "GameViewer.h"
 #include "../../../Framework/Renderer2D/Polygon2D.h"
+#include "ScoreViewer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -22,7 +23,8 @@ GameViewer::GameViewer()
 	bg->SetPosition({ SCREEN_CENTER_X, 55.0f, 0.0f });
 	bg->LoadTexture("data/TEXTURE/Viewer/ViewerBelt.png");
 	bg->SetUV(0.0f, 0.0f, 1.0f, 1.0f);
-	
+
+	scoreViewer = new ScoreViewer();
 }
 
 /**************************************
@@ -31,6 +33,7 @@ GameViewer::GameViewer()
 GameViewer::~GameViewer()
 {
 	SAFE_DELETE(bg);
+	SAFE_DELETE(scoreViewer);
 }
 
 /**************************************
@@ -38,7 +41,7 @@ GameViewer::~GameViewer()
 ***************************************/
 void GameViewer::Update()
 {
-
+	scoreViewer->Update();
 }
 
 /**************************************
@@ -52,6 +55,8 @@ void GameViewer::Draw()
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 
 	bg->Draw();
+
+	scoreViewer->Draw();
 
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
