@@ -263,6 +263,7 @@
     <ClCompile Include="source\Handler\EnemyBulletHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
+    <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -413,6 +414,7 @@
     <ClInclude Include="source\Handler\EnemyBulletHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
+    <ClInclude Include="source\Viewer\Game\GameViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx">

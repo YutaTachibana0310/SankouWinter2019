@@ -23,6 +23,7 @@ class EnemyController;
 class GameCamera;
 class GameParticleManager;
 class PlanetActor;
+class GameViewer;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -52,6 +53,8 @@ private:
 	PlanetActor *planet;
 
 	BloomController *bloom;
+
+	GameViewer *viewer;
 
 	void _DrawDebug();
 
