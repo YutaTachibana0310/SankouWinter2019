@@ -35,6 +35,12 @@ public:
 	{
 
 	}
+
+	ParticleUV(const ParticleUV& rhs) :
+		u(rhs.u), v(rhs.v)
+	{
+
+	}
 };
 
 /**************************************
@@ -60,6 +66,8 @@ public:
 	virtual void SetActive(bool state) = 0;
 
 	virtual D3DXMATRIX GetWorldMtx() = 0;
+
+	virtual ParticleUV GetUV() const;
 
 	ParticleUV uv;
 
