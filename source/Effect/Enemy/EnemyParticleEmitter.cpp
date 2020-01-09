@@ -13,13 +13,14 @@
 ***************************************/
 void Effect::Enemy::EnemyParticleEmitter::Update()
 {
-	if (!IsActive())
+	if (!active)
 		return;
 
 	cntFrame += EnemyTimeController::GetTimeScale();
 
-	if (cntFrame >= duration && callback != nullptr)
-	{
-		callback();
-	}
+	Emit();
+
+	UpdateParticle();
+
+	CheckFinish();
 }
