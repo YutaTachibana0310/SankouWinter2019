@@ -6,6 +6,7 @@
 //=====================================
 #include "BaseEmitter.h"
 #include "BaseParticle.h"
+#include "ParticleRenderer.h"
 #include "../Camera/Camera.h"
 
 /**************************************
@@ -105,7 +106,7 @@ BaseEmitter::BaseEmitter(int emitNumMin, int emitNumMax, float durationMin, floa
 ***************************************/
 BaseEmitter::~BaseEmitter()
 {
-
+	Utility::DeleteContainer(particleContainer);
 }
 
 /**************************************
@@ -231,4 +232,40 @@ void BaseEmitter::CheckFinish()
 
 	if (callback != nullptr)
 		callback();
+}
+
+/**************************************
+描画情報をパーティクルレンダラーにわたす
+***************************************/
+void BaseEmitter::PushRenderParameter(std::shared_ptr<ParticleRenderer> renderer)
+{
+	if (!active)
+		return;
+
+	for (auto&& particle : particleContainer)
+	{
+		if (!particle->IsActive())
+			continue;
+
+		D3DXMATRIX mtxWorld = particle->GetWorldMtx();
+		ParticleUV uv = particle->GetUV();
+
+		renderer->PushParticleParameter(mtxWorld, uv);
+	}
+}
+
+/**************************************
+パーティクル放出の停止
+***************************************/
+void BaseEmitter::Stop()
+{
+	enableEmit = false;
+}
+
+/**************************************
+ループ設定
+***************************************/
+void BaseEmitter::Loop(bool state)
+{
+	flgLoop = state;
 }
