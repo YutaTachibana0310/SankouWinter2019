@@ -7,7 +7,9 @@
 //=====================================
 #include "GameViewer.h"
 #include "../../../Framework/Renderer2D/Polygon2D.h"
+
 #include "ScoreViewer.h"
+#include "EnergyViewer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -25,6 +27,7 @@ GameViewer::GameViewer()
 	bg->SetUV(0.0f, 0.0f, 1.0f, 1.0f);
 
 	scoreViewer = new ScoreViewer();
+	energyViewer = new EnergyViewer();
 }
 
 /**************************************
@@ -34,6 +37,7 @@ GameViewer::~GameViewer()
 {
 	SAFE_DELETE(bg);
 	SAFE_DELETE(scoreViewer);
+	SAFE_DELETE(energyViewer);
 }
 
 /**************************************
@@ -42,6 +46,7 @@ GameViewer::~GameViewer()
 void GameViewer::Update()
 {
 	scoreViewer->Update();
+	energyViewer->Update();
 }
 
 /**************************************
@@ -57,6 +62,8 @@ void GameViewer::Draw()
 	bg->Draw();
 
 	scoreViewer->Draw();
+
+	energyViewer->Draw();
 
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);

@@ -127,6 +127,8 @@
     <ClCompile Include="source\Handler\EnemyBulletHandler.cpp" />
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
+    <ClCompile Include="source\Viewer\Game\EnergyViewer.cpp" />
+    <ClCompile Include="Framework\Renderer2D\GaugeViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -279,6 +281,8 @@
     <ClInclude Include="Framework\Core\FixedTime.h" />
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
     <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />
+    <ClInclude Include="source\Viewer\Game\EnergyViewer.h" />
+    <ClInclude Include="Framework\Renderer2D\GaugeViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

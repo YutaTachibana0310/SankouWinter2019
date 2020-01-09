@@ -1,38 +1,38 @@
 //=====================================
 //
-// GameViewer.h
-// 機能:ゲームビューワ
+// EnergyViewer.h
+// 機能:エネルギービューワ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMEVIEWER_H_
-#define _GAMEVIEWER_H_
+#ifndef _ENERGYVIEWER_H_
+#define _ENERGYVIEWER_H_
 
 #include "../../../main.h"
+#include "../../../Framework/Renderer2D/GaugeViewer.h"
 
 /**************************************
 前方宣言
 ***************************************/
-class Polygon2D;
-class ScoreViewer;
-class EnergyViewer;
+class GaugeViewer;
+class TextViewer;
 
 /**************************************
 クラス定義
 ***************************************/
-class GameViewer
+class EnergyViewer : public GaugeViewer
 {
 public:
-	GameViewer();
-	~GameViewer();
+	EnergyViewer();
+	~EnergyViewer();
 
 	void Update();
-	void Draw();
+	void Draw() override;
+
+	static const float GaugeAlpha;
 
 private:
-	Polygon2D *bg;
-	ScoreViewer *scoreViewer;
-	EnergyViewer *energyViewer;
+	TextViewer *caption;
 };
 
 #endif

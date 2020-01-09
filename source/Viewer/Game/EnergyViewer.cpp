@@ -1,54 +1,53 @@
 //=====================================
 //
-// ScoreViewer.cpp
+// EnergyViewer.cpp
 // 機能:
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "ScoreViewer.h"
+#include "EnergyViewer.h"
 #include "../../../Framework/Renderer2D/TextViewer.h"
-
 #include "../../../Framework/Tool/DebugWindow.h"
 
 /**************************************
 グローバル変数
 ***************************************/
+const float EnergyViewer::GaugeAlpha = 0.9f;
 
 /**************************************
 コンストラクタ
 ***************************************/
-ScoreViewer::ScoreViewer()
+EnergyViewer::EnergyViewer()
 {
+	LoadTexture("data/TEXTURE/Viewer/EnergyGauge.png");
+	SetSize({ 250.0f, 25.0f});
+	transform->SetPosition({ 900.0f, 75.0f, 0.0f });
+
 	caption = new TextViewer("BadFennec", 40);
-	num = new TextViewer("BadFennec", 80);
-
 	caption->SetHorizontalAlignment(TextViewer::HorizontalAlignment::Right);
-	num->SetHorizontalAlignment(TextViewer::HorizontalAlignment::Right);
-
-	caption->SetText("SCORE");
-	num->SetText("999,999,999,999");
-
+	caption->SetText("ENERGY");
+	
 	caption->UseOutLine(true);
 	caption->SetOutlineColor(D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.0f));
 	caption->SetOutlineWidth(5);
 
-	caption->SetPosition({1850.0f, 30.0f, 0.0f});
-	num->SetPosition({ 1850.0f, 80.0f, 0.0f });
+	caption->SetPosition({ 1150.0f, 30.0f, 0.0f });
+
+	SetPercent(1.0f);
 }
 
 /**************************************
 デストラクタ
 ***************************************/
-ScoreViewer::~ScoreViewer()
+EnergyViewer::~EnergyViewer()
 {
 	SAFE_DELETE(caption);
-	SAFE_DELETE(num);
 }
 
 /**************************************
 更新処理
 ***************************************/
-void ScoreViewer::Update()
+void EnergyViewer::Update()
 {
 
 }
@@ -56,16 +55,24 @@ void ScoreViewer::Update()
 /**************************************
 描画処理
 ***************************************/
-void ScoreViewer::Draw()
+void EnergyViewer::Draw()
 {
 	caption->Draw();
-	num->Draw();
-}
 
-/**************************************
-数字設定処理
-***************************************/
-void ScoreViewer::SetScore(int score)
-{
-	num->SetText(std::to_string(score));
+	if (percent < 0.2f)
+	{
+		SetColor({ 1.0f, 0.0f, 0.0f, GaugeAlpha });
+	}
+	else if (percent < 0.4f)
+	{
+		SetColor({ 1.0f, 1.0f, 0.0f, GaugeAlpha });
+	}
+	else
+	{
+		SetColor({ 0.0f, 1.0f, 1.0f, GaugeAlpha });
+	}
+	DrawGauge();
+
+	SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
+	DrawFrame();
 }

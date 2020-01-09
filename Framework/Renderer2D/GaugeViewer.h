@@ -23,16 +23,16 @@ class GaugeViewer : public Polygon2D
 public:
 	GaugeViewer();
 
-	void DrawFrame();
-	void DrawGauge();
+	virtual void DrawFrame();
+	virtual void DrawGauge();
 	
 	//Š„‡İ’èi1.0f ~ 0.0f)
-	void SetPercent(float percent);
+	virtual void SetPercent(float percent);
 
-private:
+protected:
 	float percent;
 
-	void Draw() {}
+	virtual void Draw() {}
 
 	void SetGaugeVertex();
 };
