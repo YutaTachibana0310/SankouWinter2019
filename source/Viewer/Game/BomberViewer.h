@@ -1,40 +1,40 @@
 //=====================================
 //
-// GameViewer.h
-// 機能:ゲームビューワ
+// BomberViewer.h
+// 機能:ボンバービューワ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMEVIEWER_H_
-#define _GAMEVIEWER_H_
+#ifndef _BOMBERVIEWER_H_
+#define _BOMBERVIEWER_H_
 
 #include "../../../main.h"
+#include "../../../Framework/Renderer2D/TextViewer.h"
+
+#include <vector>
 
 /**************************************
 前方宣言
 ***************************************/
 class Polygon2D;
-class ScoreViewer;
-class EnergyViewer;
-class BomberViewer;
 
 /**************************************
 クラス定義
 ***************************************/
-class GameViewer
+class BomberViewer : public TextViewer
 {
 public:
-	GameViewer();
-	~GameViewer();
+	BomberViewer();
+	~BomberViewer();
 
 	void Update();
 	void Draw();
 
+	void SetCount(int num);
+
 private:
-	Polygon2D *bg;
-	ScoreViewer *scoreViewer;
-	EnergyViewer *energyViewer;
-	BomberViewer *bomberViewer;
+	std::vector<Polygon2D*> container;
+	int count;
 };
 
 #endif

@@ -264,6 +264,7 @@
     <ClCompile Include="source\Handler\EnemyBulletHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
+    <ClCompile Include="source\Viewer\Game\BomberViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\EnergyViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
@@ -418,6 +419,7 @@
     <ClInclude Include="source\Handler\EnemyBulletHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
+    <ClInclude Include="source\Viewer\Game\BomberViewer.h" />
     <ClInclude Include="source\Viewer\Game\EnergyViewer.h" />
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
     <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />

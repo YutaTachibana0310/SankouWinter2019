@@ -10,6 +10,7 @@
 
 #include "ScoreViewer.h"
 #include "EnergyViewer.h"
+#include "BomberViewer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -28,6 +29,7 @@ GameViewer::GameViewer()
 
 	scoreViewer = new ScoreViewer();
 	energyViewer = new EnergyViewer();
+	bomberViewer = new BomberViewer();
 }
 
 /**************************************
@@ -38,6 +40,7 @@ GameViewer::~GameViewer()
 	SAFE_DELETE(bg);
 	SAFE_DELETE(scoreViewer);
 	SAFE_DELETE(energyViewer);
+	SAFE_DELETE(bomberViewer);
 }
 
 /**************************************
@@ -47,6 +50,7 @@ void GameViewer::Update()
 {
 	scoreViewer->Update();
 	energyViewer->Update();
+	bomberViewer->Update();
 }
 
 /**************************************
@@ -64,6 +68,8 @@ void GameViewer::Draw()
 	scoreViewer->Draw();
 
 	energyViewer->Draw();
+
+	bomberViewer->Draw();
 
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
