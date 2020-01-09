@@ -32,22 +32,16 @@ namespace Effect::Game
 		//テクスチャ読み込み
 		LoadTexture("data/TEXTURE/Particle/EnemyExplosion.png");
 
-		//パーティクルコンテナ作成
-		const unsigned MaxParticle = 512;
-		particleContainer.resize(MaxParticle, nullptr);
-		for (auto&& particle : particleContainer)
-		{
-			particle = new EnemyExplosion();
-		}
-
 		//エミッタコンテナ作成
-		const unsigned MaxEmitter = 64;
+		const unsigned MaxParticle = 32;
+		const unsigned MaxEmitter = 16;
 		const int NumEmit = 5;
 		const float DurationEmit = 5.0f;
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
 			emitter = new Enemy::EnemyParticleEmitter(NumEmit, DurationEmit);
+			emitter->CreateParticleContainer<EnemyExplosion>(MaxParticle);
 		}
 	}
 

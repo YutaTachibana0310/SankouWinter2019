@@ -47,34 +47,6 @@ public:
 	BaseParticleController(ParticleType type, bool useCrossFilter = true);
 	virtual ~BaseParticleController();
 
-	template<class T>
-	BaseParticleController(const T& src, const ParticleJsonParser& data) :
-		unitBuff(NULL), texture(NULL)
-	{
-		if (!mRenderer)
-		{
-			mRenderer.reset(new ParticleRenderer());
-		}
-		renderer = mRenderer;
-
-		//テクスチャロード
-		LoadTexture(data.GetTexturePath().c_str());
-
-		//単位頂点バッファ作成
-		MakeUnitBuffer(data.GetSize(), data.GetTexDiv());
-
-		//パーティクルコンテナ作成
-		particleContainer.resize(data.GetParticleMax());
-		for (auto&& particle : particleContainer)
-		{
-			particle = new T();
-		}
-
-		//エミッタコンテナ作成
-		MakeEmitterContainer(data);
-
-	};
-
 	//エミッタセット処理
 	virtual BaseEmitter* SetEmitter(const D3DXVECTOR3& pos, std::function<void(void)> callback = nullptr);
 	virtual BaseEmitter* SetEmitter(const Transform& transform, std::function<void(void)> callback = nullptr);
@@ -99,14 +71,13 @@ public:
 protected:
 	LPDIRECT3DVERTEXBUFFER9 unitBuff;				//単位頂点バッファ
 	LPDIRECT3DTEXTURE9 texture;						//テクスチャ
-	std::vector<BaseParticle*> particleContainer;	//パーティクルコンテナ
 	std::vector<BaseEmitter*> emitterContainer;		//エミッタコンテナ
 	std::shared_ptr<ParticleRenderer> renderer;		//レンダラー
 
 	unsigned particleCount;							//描画パーティクル数
 
 	//単位頂点バッファ作成処理
-	void MakeUnitBuffer(const D3DXVECTOR2& size, const D3DXVECTOR2& texDix = D3DXVECTOR2(1.0f, 1.0f));	
+	void MakeUnitBuffer(const D3DXVECTOR2& size, const D3DXVECTOR2& texDix = D3DXVECTOR2(1.0f, 1.0f));
 	void LoadTexture(const char* filePath);			//テクスチャ読み込み処理
 
 	//コンテナ作成

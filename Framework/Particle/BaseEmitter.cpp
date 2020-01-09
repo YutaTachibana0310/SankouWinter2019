@@ -6,6 +6,7 @@
 //=====================================
 #include "BaseEmitter.h"
 #include "BaseParticle.h"
+#include "ParticleRenderer.h"
 #include "../Camera/Camera.h"
 
 /**************************************
@@ -28,6 +29,9 @@ BaseEmitter::BaseEmitter() :
 	emitNum(1),
 	duration(1),
 	useCull(false),
+	isFinished(true),
+	enableEmit(false),
+	flgLoop(false),
 	prevEmitTime(-1.0f)
 {
 
@@ -40,7 +44,11 @@ BaseEmitter::BaseEmitter(int emitNum) :
 	GameObject(false),
 	emitNum(emitNum),
 	duration(2),
-	useCull(false)
+	useCull(false),
+	isFinished(true),
+	enableEmit(false),
+	flgLoop(false),
+	prevEmitTime(-1.0f)
 {
 
 }
@@ -52,7 +60,11 @@ BaseEmitter::BaseEmitter(int emitNum, float duration) :
 	GameObject(false),
 	emitNum(emitNum),
 	duration(duration),
-	useCull(false)
+	useCull(false),
+	isFinished(true),
+	enableEmit(false),
+	flgLoop(false),
+	prevEmitTime(-1.0f)
 {
 
 }
@@ -64,7 +76,11 @@ BaseEmitter::BaseEmitter(int emitNum, float durationMin, float durationMax) :
 	GameObject(false),
 	emitNum(emitNum),
 	duration(Math::RandomRange(durationMin, durationMax)),
-	useCull(false)
+	useCull(false),
+	isFinished(true),
+	enableEmit(false),
+	flgLoop(false),
+	prevEmitTime(-1.0f)
 {
 
 }
@@ -76,7 +92,11 @@ BaseEmitter::BaseEmitter(int emitNumMin, int emitNumMax, float durationMin, floa
 	GameObject(false),
 	emitNum(Math::RandomRange(emitNumMin, emitNumMax)),
 	duration(Math::RandomRange(durationMin, durationMax)),
-	useCull(false)
+	useCull(false),
+	isFinished(true),
+	enableEmit(false),
+	flgLoop(false),
+	prevEmitTime(-1.0f)
 {
 
 }
@@ -86,18 +106,27 @@ BaseEmitter::BaseEmitter(int emitNumMin, int emitNumMax, float durationMin, floa
 ***************************************/
 BaseEmitter::~BaseEmitter()
 {
-
+	Utility::DeleteContainer(particleContainer);
 }
 
 /**************************************
 初期化処理
 ***************************************/
-void BaseEmitter::Init(std::function<void(void)>& callback)
+void BaseEmitter::Init(const std::function<void(void)>& callback)
 {
-	cntFrame = 0;
+	cntFrame = 0.0f;
 	prevEmitTime = -1.0f;
 	active = true;
+
+	isFinished = false;
+	enableEmit = true;
+
 	this->callback = callback;
+
+	for (auto&& particle : particleContainer)
+	{
+		particle->SetActive(false);
+	}
 }
 
 /**************************************
@@ -105,30 +134,30 @@ void BaseEmitter::Init(std::function<void(void)>& callback)
 ***************************************/
 void BaseEmitter::Update()
 {
-	if (!IsActive())
+	if (!active)
 		return;
 
 	cntFrame += FixedTime::GetTimeScale();
 
-	if (cntFrame >= duration && callback != nullptr)
-	{
-		callback();
-	}
+	Emit();
+
+	UpdateParticle();
+
+	CheckFinish();
 }
 
 /**************************************
 放出処理
 ***************************************/
-bool BaseEmitter::Emit(std::vector<BaseParticle*>& container)
+bool BaseEmitter::Emit()
 {
-	if (!IsActive())
+	if (!enableEmit)
 		return true;
 
 	if (cntFrame < prevEmitTime)
 		return true;
 
 	prevEmitTime = ceilf(cntFrame);
-
 
 	if (useCull)
 	{
@@ -138,7 +167,7 @@ bool BaseEmitter::Emit(std::vector<BaseParticle*>& container)
 	}
 
 	UINT cntEmit = 0;
-	for (auto& particle : container)
+	for (auto& particle : particleContainer)
 	{
 		if (particle->IsActive())
 			continue;
@@ -159,23 +188,84 @@ bool BaseEmitter::Emit(std::vector<BaseParticle*>& container)
 }
 
 /**************************************
-アクティブ判定
-***************************************/
-bool BaseEmitter::IsActive() const
-{
-	if (!active)
-		return false;
-
-	if (duration == 0)
-		return true;
-
-	return cntFrame <= duration;
-}
-
-/**************************************
 カリング使用設定
 ***************************************/
 void BaseEmitter::UseCulling(bool value)
 {
 	useCull = value;
+}
+
+/**************************************
+パーティクル更新処理
+***************************************/
+void BaseEmitter::UpdateParticle()
+{
+	isFinished = true;
+	for (auto&& particle : particleContainer)
+	{
+		if (!particle->IsActive())
+			continue;
+
+		isFinished = false;
+
+		particle->Update();
+	}
+}
+
+/**************************************
+終了確認
+***************************************/
+void BaseEmitter::CheckFinish()
+{
+	if (flgLoop)
+		return;
+
+	if (cntFrame < duration)
+		return;
+
+	enableEmit = false;
+
+	if (!isFinished)
+		return;
+
+	active = false;
+
+	if (callback != nullptr)
+		callback();
+}
+
+/**************************************
+描画情報をパーティクルレンダラーにわたす
+***************************************/
+void BaseEmitter::PushRenderParameter(std::shared_ptr<ParticleRenderer> renderer)
+{
+	if (!active)
+		return;
+
+	for (auto&& particle : particleContainer)
+	{
+		if (!particle->IsActive())
+			continue;
+
+		D3DXMATRIX mtxWorld = particle->GetWorldMtx();
+		ParticleUV uv = particle->GetUV();
+
+		renderer->PushParticleParameter(mtxWorld, uv);
+	}
+}
+
+/**************************************
+パーティクル放出の停止
+***************************************/
+void BaseEmitter::Stop()
+{
+	enableEmit = false;
+}
+
+/**************************************
+ループ設定
+***************************************/
+void BaseEmitter::Loop(bool state)
+{
+	flgLoop = state;
 }

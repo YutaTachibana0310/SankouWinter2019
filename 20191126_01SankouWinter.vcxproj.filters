@@ -131,6 +131,7 @@
     <ClCompile Include="Framework\Renderer2D\GaugeViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\BomberViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\LifeViewer.cpp" />
+    <ClCompile Include="source\Effect\Enemy\EnemyDebris.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -287,6 +288,7 @@
     <ClInclude Include="Framework\Renderer2D\GaugeViewer.h" />
     <ClInclude Include="source\Viewer\Game\BomberViewer.h" />
     <ClInclude Include="source\Viewer\Game\LifeViewer.h" />
+    <ClInclude Include="source\Effect\Enemy\EnemyDebris.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

@@ -70,3 +70,11 @@ bool BaseParticle::_IsActive() const
 {
 	return cntFrame <= lifeFrame;
 }
+
+/**************************************
+UVÀ•WŽæ“¾
+***************************************/
+ParticleUV BaseParticle::GetUV() const
+{
+	return uv;
+}

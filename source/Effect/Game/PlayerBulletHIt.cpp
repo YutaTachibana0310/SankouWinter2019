@@ -24,20 +24,14 @@ namespace Effect::Game
 		const D3DXVECTOR2 Size = { 0.5f, 0.5f };
 		MakeUnitBuffer(Size);
 
-		//パーティクルコンテナ作成
-		const unsigned MaxParticle = 1024;
-		particleContainer.resize(MaxParticle, nullptr);
-		for (auto&& particle : particleContainer)
-		{
-			particle = new PlayerBulletHit();
-		}
-
 		//エミッタコンテナ作成
-		const unsigned MaxEmitter = 128;
+		const unsigned MaxParticle = 16;
+		const unsigned MaxEmitter = 32;
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
 			emitter = new BaseEmitter(5, 3);
+			emitter->CreateParticleContainer<PlayerBulletHit>(MaxParticle);
 		}
 	}
 

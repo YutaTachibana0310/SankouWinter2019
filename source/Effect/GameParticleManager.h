@@ -21,6 +21,7 @@ namespace GameEffect
 	{
 		PlayerBulletHit,
 		EnemyExplosion,
+		EnemyDebris,
 		Max
 	};
 }
@@ -33,6 +34,8 @@ class GameParticleManager : public SceneParticleManager, public BaseSingleton<Ga
 public:
 	void Init() override;
 	void Update() override;
+
+	void GenerateEnemyExplostion(const D3DXVECTOR3& position);
 
 private:
 	static const float BloomPower[3];

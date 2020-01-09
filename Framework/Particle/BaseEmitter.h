@@ -17,6 +17,7 @@
 BaseEmitterƒNƒ‰ƒX
 ***************************************/
 class BaseParticle;
+class ParticleRenderer;
 
 class BaseEmitter : public GameObject
 {
@@ -29,22 +30,45 @@ public:
 
 	virtual ~BaseEmitter();
 
-	virtual void Init(std::function<void(void)>& callback);
+	virtual void Init(const std::function<void(void)>& callback);
 	virtual void Update();
-	virtual bool Emit(std::vector<BaseParticle*>& container);
-
-	virtual bool IsActive() const override;
+	virtual bool Emit();
 
 	virtual void UseCulling(bool value);
+
+	void PushRenderParameter(std::shared_ptr<ParticleRenderer> renderer);
+
+	virtual void Stop();
+	virtual void Loop(bool state);
+
+	template<class T>
+	void CreateParticleContainer(unsigned sizeContainer)
+	{
+		particleContainer.resize(sizeContainer, nullptr);
+		for (auto&& particle : particleContainer)
+		{
+			particle = new T();
+		}
+	}
 
 protected:
 	float cntFrame;
 	float duration;
 	int emitNum;
+
 	bool useCull;
+	bool isFinished;
+	bool enableEmit;
+	bool flgLoop;
+	
 	float prevEmitTime;
 
+	std::vector<BaseParticle*> particleContainer;
+
 	std::function<void(void)> callback;
+
+	void UpdateParticle();
+	void CheckFinish();
 };
 
 #endif
