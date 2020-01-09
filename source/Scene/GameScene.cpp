@@ -23,6 +23,7 @@
 #include "../Controller/PlayerBulletController.h"
 #include "../Controller/EnemyController.h"
 #include "../Controller/EnemyTimeController.h"
+#include "../Viewer/Game/GameViewer.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -53,6 +54,7 @@ void GameScene::Init()
 	bloom = new BloomController();
 	enemyController = new EnemyController();
 	planet = new PlanetActor();
+	viewer = new GameViewer();
 
 	Camera::SetMainCamera(gameCamera);
 
@@ -78,6 +80,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(bloom);
 	SAFE_DELETE(enemyController);
 	SAFE_DELETE(planet);
+	SAFE_DELETE(viewer);
 
 	particleManager->Uninit();
 
@@ -104,6 +107,8 @@ void GameScene::Update()
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 
 	particleManager->Update();
+
+	viewer->Update();
 }
 
 /**************************************
@@ -133,6 +138,8 @@ void GameScene::Draw()
 	particleManager->Draw();
 
 	enemyController->DrawBullet();
+
+	viewer->Draw();
 
 	_DrawDebug();
 }

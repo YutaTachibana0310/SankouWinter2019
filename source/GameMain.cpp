@@ -10,6 +10,7 @@
 #include "../Framework/Tool/DebugWindow.h"
 #include "../Framework/Core/PlayerPrefs.h"
 #include "../Framework/Light/Light.h"
+#include "../Framework/Resource/FontManager.h"
 
 #include "GameConfig.h"
 
@@ -21,12 +22,24 @@
 GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 	BaseGame(hInstance, hWnd)
 {
+	//ゲーム内で使用するフォントを読み込み
+	FontManager::Instance()->LoadFont("data/FONT/badfennec.otf");
+
 	//シーンマネージャにシーンのインスタンスを追加
 	sceneManager->Add(GameConfig::SceneID::Game, new GameScene(renderTexture, renderSurface));
 
 	//初期シーンに遷移
 	const int InitScene = GameConfig::SceneID::Game;
 	sceneManager->ChangeScene(InitScene);
+}
+
+/**************************************
+デストラクタ
+***************************************/
+GameMain::~GameMain()
+{
+	//読み込んだフォントを解放
+	FontManager::Instance()->RemoveFont("data/FONT/badfennec.otf");
 }
 
 /**************************************

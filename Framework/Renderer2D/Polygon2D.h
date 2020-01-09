@@ -22,13 +22,13 @@ public:
 	Polygon2D();
 	virtual ~Polygon2D();
 
-	void Draw();
+	virtual void Draw();
 
-	void SetSize(const D3DXVECTOR2& size);
-	void SetColor(D3DXCOLOR color);
-	void SetUV(float left, float top, float width, float height);
+	virtual void SetSize(const D3DXVECTOR2& size);
+	virtual void SetColor(D3DXCOLOR color);
+	virtual void SetUV(float left, float top, float width, float height);
 
-	void LoadTexture(const char* path);
+	virtual void LoadTexture(const char* path);
 
 protected:
 	VERTEX_2D vtxWk[NUM_VERTEX];
