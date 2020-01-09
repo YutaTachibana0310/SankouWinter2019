@@ -87,7 +87,7 @@ void DemoEnemyActor::OnColliderHit(ColliderObserver * other)
 
 	if (hp <= 0)
 	{
-		GameParticleManager::Instance()->Generate(GameEffect::EnemyExplosion, transform->GetPosition());
+		GameParticleManager::Instance()->GenerateEnemyExplostion(transform->GetPosition());
 		Uninit();
 	}
 }

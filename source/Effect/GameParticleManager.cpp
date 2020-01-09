@@ -11,6 +11,7 @@
 
 #include "Game\PlayerBulletHit.h"
 #include "Enemy\EnemyExplosion.h"
+#include "Enemy/EnemyDebris.h"
 
 /**************************************
 staticメンバ
@@ -28,6 +29,7 @@ void GameParticleManager::Init()
 	controllers.resize(GameEffect::Max);
 	controllers[GameEffect::PlayerBulletHit] = new Effect::Game::PlayerBulletHitController();
 	controllers[GameEffect::EnemyExplosion] = new Effect::Game::EnemyExplosionController();
+	controllers[GameEffect::EnemyDebris] = new Effect::Game::EnemyDebrisController();
 
 	crossFilter->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	crossFilter->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
@@ -53,4 +55,13 @@ void GameParticleManager::Update()
 	Debug::End();
 
 	SceneParticleManager::Update();
+}
+
+/**************************************
+エネミーの爆発設定処理
+***************************************/
+void GameParticleManager::GenerateEnemyExplostion(const D3DXVECTOR3 & position)
+{
+	controllers[GameEffect::EnemyExplosion]->SetEmitter(position);
+	controllers[GameEffect::EnemyDebris]->SetEmitter(position);
 }
