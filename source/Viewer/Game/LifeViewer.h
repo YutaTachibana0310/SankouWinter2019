@@ -1,42 +1,40 @@
 //=====================================
 //
-// GameViewer.h
-// 機能:ゲームビューワ
+// LifeViewer.h
+// 機能:残機ビューワ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _GAMEVIEWER_H_
-#define _GAMEVIEWER_H_
+#ifndef _LIFEVIEWER_H_
+#define _LIFEVIEWER_H_
 
 #include "../../../main.h"
+#include "../../../Framework/Renderer2D/TextViewer.h"
+
+#include <vector>
 
 /**************************************
 前方宣言
 ***************************************/
 class Polygon2D;
-class ScoreViewer;
-class EnergyViewer;
-class BomberViewer;
-class LifeViewer;
 
 /**************************************
 クラス定義
 ***************************************/
-class GameViewer
+class LifeViewer : public TextViewer
 {
 public:
-	GameViewer();
-	~GameViewer();
+	LifeViewer();
+	~LifeViewer();
 
 	void Update();
 	void Draw();
 
+	void SetCount(int num);
+
 private:
-	Polygon2D *bg;
-	ScoreViewer *scoreViewer;
-	EnergyViewer *energyViewer;
-	BomberViewer *bomberViewer;
-	LifeViewer *lifeViewer;
+	int count;
+	std::vector<Polygon2D*> container;
 };
 
 #endif

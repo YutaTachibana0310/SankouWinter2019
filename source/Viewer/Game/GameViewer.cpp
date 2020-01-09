@@ -11,6 +11,7 @@
 #include "ScoreViewer.h"
 #include "EnergyViewer.h"
 #include "BomberViewer.h"
+#include "LifeViewer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -30,6 +31,7 @@ GameViewer::GameViewer()
 	scoreViewer = new ScoreViewer();
 	energyViewer = new EnergyViewer();
 	bomberViewer = new BomberViewer();
+	lifeViewer = new LifeViewer();
 }
 
 /**************************************
@@ -41,6 +43,7 @@ GameViewer::~GameViewer()
 	SAFE_DELETE(scoreViewer);
 	SAFE_DELETE(energyViewer);
 	SAFE_DELETE(bomberViewer);
+	SAFE_DELETE(lifeViewer);
 }
 
 /**************************************
@@ -51,6 +54,7 @@ void GameViewer::Update()
 	scoreViewer->Update();
 	energyViewer->Update();
 	bomberViewer->Update();
+	lifeViewer->Update();
 }
 
 /**************************************
@@ -70,6 +74,8 @@ void GameViewer::Draw()
 	energyViewer->Draw();
 
 	bomberViewer->Draw();
+
+	lifeViewer->Draw();
 
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);

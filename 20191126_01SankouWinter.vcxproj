@@ -267,6 +267,7 @@
     <ClCompile Include="source\Viewer\Game\BomberViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\EnergyViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
+    <ClCompile Include="source\Viewer\Game\LifeViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -422,6 +423,7 @@
     <ClInclude Include="source\Viewer\Game\BomberViewer.h" />
     <ClInclude Include="source\Viewer\Game\EnergyViewer.h" />
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
+    <ClInclude Include="source\Viewer\Game\LifeViewer.h" />
     <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />
   </ItemGroup>
   <ItemGroup>
