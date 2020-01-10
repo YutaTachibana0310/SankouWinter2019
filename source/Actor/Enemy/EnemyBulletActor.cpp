@@ -77,7 +77,8 @@ void EnemyBulletActor::Update()
 
 	Move();
 
-	CheckMoveBorder();
+	if (!CheckMoveBorder())
+		active = false;
 
 	//•`‰æ—p‚ÌSRTî•ñÝ’è
 	renderTransform->SetPosition(transform->GetPosition());
