@@ -15,8 +15,6 @@
 前方宣言
 ***************************************/
 class GameSkybox;
-class PlayerActor;
-class PlayerBulletController;
 class BloomController;
 class RenderingTarget;
 class EnemyController;
@@ -24,6 +22,7 @@ class GameCamera;
 class GameParticleManager;
 class PlanetActor;
 class GameViewer;
+class PlayerController;
 
 /**************************************
 クラス定義
@@ -47,8 +46,8 @@ private:
 
 	GameParticleManager *particleManager;
 
-	PlayerActor *player;
-	PlayerBulletController *bulletController;
+	PlayerController *playerController;
+
 	EnemyController *enemyController;
 	PlanetActor *planet;
 
