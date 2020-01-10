@@ -23,13 +23,18 @@ PeriodicTaskクラス
 class PeriodicTask : public Task
 {
 public:
-	PeriodicTask(int interval, const std::function<void(void)>& task);	//コンストラクタ
+	//コンストラクタ
+	PeriodicTask(
+		float interval, 
+		const std::function<void(void)>& task,
+		bool ignoreTimeScale);	
 
 private:	
 	void Run();			//実行処理
 
-	int cntFrame;		//フレームカウント
-	const int Interval;	//インターバル
+	float cntFrame;		//フレームカウント
+	const float Interval;	//インターバル
+	bool ignoreTimeScale;
 };
 
 #endif

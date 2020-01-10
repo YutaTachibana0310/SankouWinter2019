@@ -5,6 +5,7 @@
 //
 //=====================================
 #include "DelayedTask.h"
+#include "../Core/FixedTime.h"
 
 /**************************************
 マクロ定義
@@ -13,10 +14,11 @@
 /**************************************
 コンストラクタ
 ***************************************/
-DelayedTask::DelayedTask(int delay, const std::function<void(void)>& task) :
+DelayedTask::DelayedTask(float delay, const std::function<void(void)>& task, bool ignoreTimeScale) :
 	cntFrame(0),
 	Delay(delay),
-	Task(task)
+	Task(task),
+	ignoreTimeScale(ignoreTimeScale)
 {
 
 }
@@ -29,7 +31,10 @@ void DelayedTask::Run()
 	if (state != State::Idle)
 		return;
 
-	cntFrame++;
+	if (ignoreTimeScale)
+		cntFrame += 1.0f;
+	else
+		cntFrame += FixedTime::GetTimeScale();
 
 	if (cntFrame == Delay)
 	{

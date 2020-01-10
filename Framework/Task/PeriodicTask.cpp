@@ -6,6 +6,7 @@
 //=====================================
 #include "PeriodicTask.h"
 #include "../Math/TMath.h"
+#include "../Core/FixedTime.h"
 
 /**************************************
 マクロ定義
@@ -14,10 +15,11 @@
 /**************************************
 コンストラクタ
 ***************************************/
-PeriodicTask::PeriodicTask(int interval, const std::function<void(void)>& task) :
+PeriodicTask::PeriodicTask(float interval, const std::function<void(void)>& task, bool ignoreTimeScale) :
 	Task(task),
 	cntFrame(0),
-	Interval(interval)
+	Interval(interval),
+	ignoreTimeScale(ignoreTimeScale)
 {
 
 }
@@ -30,10 +32,14 @@ void PeriodicTask::Run()
 	if (state != State::Idle)
 		return;
 
-	cntFrame = Math::WrapAround(0, Interval, cntFrame + 1);
+	if (!ignoreTimeScale)
+		cntFrame += FixedTime::GetTimeScale();
+	else
+		cntFrame += 1.0f;
 
-	if (cntFrame == 0)
+	if (cntFrame >= Interval)
 	{
+		cntFrame -= Interval;
 		func();
 	}
 }
