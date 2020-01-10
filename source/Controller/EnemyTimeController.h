@@ -23,8 +23,12 @@ public:
 	static float GetTimeScale();
 	static void SetTimeScale(float scale);
 
+	static float GetBulletTimeScale();
+	static void  SlowDownBullet(bool enable);
+
 private:
 	static float timeScale;
+	static bool isSlowDownBullet;
 };
 
 #endif

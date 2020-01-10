@@ -160,7 +160,8 @@ void EnemyBulletActor::Animation()
 ***************************************/
 void EnemyBulletActor::Move()
 {
-	D3DXVECTOR3 offset = -transform->Forward() * speed * EnemyTimeController::GetTimeScale();
+	float deltaTime = type < EnemyBulletConfig::BlueRotate ? EnemyTimeController::GetTimeScale() : EnemyTimeController::GetBulletTimeScale();
+	D3DXVECTOR3 offset = -transform->Forward() * speed * deltaTime;
 	transform->Move(offset);
 }
 
