@@ -50,25 +50,6 @@ EnemyBulletController::~EnemyBulletController()
 ***************************************/
 void EnemyBulletController::Update()
 {
-	/*
-	速度変更のデバッグ発射用
-	*/
-	{
-		static int cntDebugShot = 0;
-
-		if (cntDebugShot % 5 == 0)
-		{
-			Transform shotTransform;
-			EnemyBulletHandler handle(this);
-
-			handle.SetCircleBullet(shotTransform, EnemyBulletConfig::BlueRotate, 0.5f, 18);
-			shotTransform.Rotate(10.0f, Vector3::Right);
-			handle.SetCircleBullet(shotTransform, EnemyBulletConfig::RedRotate, 0.5f, 18);
-		}
-
-		cntDebugShot = Math::WrapAround(0, 5, cntDebugShot + 1);
-	}
-
 	//更新
 	for (auto&& bullet : bulletContainer)
 	{
