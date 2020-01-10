@@ -23,13 +23,18 @@ DelayedTaskクラス
 class DelayedTask : public Task
 {
 public:
-	DelayedTask(int delay, const std::function<void(void)>& task);	//コンストラクタ
+	//コンストラクタ
+	DelayedTask(
+		float delay, 
+		const std::function<void(void)>& task,
+		bool ignoreTimeScale);
 
 private:
 	void Run();			//実行処理
 	
-	int cntFrame;		//フレームカウント
-	const int Delay;	//遅延フレーム
+	float cntFrame;		//フレームカウント
+	const float Delay;	//遅延フレーム
+	bool ignoreTimeScale;
 };
 
 #endif
