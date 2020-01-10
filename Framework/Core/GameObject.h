@@ -53,6 +53,10 @@ public:
 	virtual void SetScale(const D3DXVECTOR3& scale);
 	virtual void SetTransform(const Transform& transform);
 
+	//親設定
+	virtual void SetParent(const GameObject& object);
+	virtual void SetParent(const std::shared_ptr<Transform>& transform);
+
 protected:
 	//アクティブ状態
 	bool active;

@@ -177,3 +177,19 @@ void GameObject::SetTransform(const Transform& transform)
 {
 	*this->transform = transform;
 }
+
+/**************************************
+eİ’è
+***************************************/
+void GameObject::SetParent(const GameObject & object)
+{
+	transform->SetParent(object.transform);
+}
+
+/**************************************
+eİ’è
+***************************************/
+void GameObject::SetParent(const std::shared_ptr<Transform>& transform)
+{
+	transform->SetParent(transform);
+}
