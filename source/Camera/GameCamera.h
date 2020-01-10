@@ -24,7 +24,16 @@ public:
 	GameCamera();
 	~GameCamera();
 
-private:
+	void Update() override;
 
+	void Focus(const D3DXVECTOR3& position);
+
+	static const D3DXVECTOR3 InitPosition;
+
+private:
+	int cntFocus;
+	bool inFocus;
+
+	std::shared_ptr<float> tweenViewAngle;
 };
 #endif

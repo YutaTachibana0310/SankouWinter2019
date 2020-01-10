@@ -165,9 +165,5 @@ void GameScene::_DrawDebug()
 	bloom->SetPower(bloomPower[0], bloomPower[1], bloomPower[2]);
 	bloom->SetThrethold(bloomThrethold[0], bloomThrethold[1], bloomThrethold[2]);
 
-	static float timeScale = 1.0f;
-	Debug::Slider("TimeScale", timeScale, 0.01f, 1.0f);
-	FixedTime::SetTimeScale(timeScale);
-
 	Debug::End();
 }
