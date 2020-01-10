@@ -272,3 +272,12 @@ void Transform::LookAt(const D3DXVECTOR3 & target)
 	D3DXQUATERNION rot = Quaternion::GetRotation(m);
 	rotation = rot;
 }
+
+/**************************************
+êeéqê›íË
+***************************************/
+void Transform::SetParent(const std::shared_ptr<Transform>& transform)
+{
+	parent.reset();
+	parent = transform;
+}

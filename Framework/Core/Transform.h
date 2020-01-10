@@ -9,7 +9,7 @@
 
 #include "../../main.h"
 #include "../Math/Quaternion.h"
-
+#include <memory>
 /**************************************
 マクロ定義
 ***************************************/
@@ -58,11 +58,16 @@ public:
 
 	//指定の位置を向かせる処理
 	void LookAt(const D3DXVECTOR3& target);
+
+	//親設定
+	void SetParent(const std::shared_ptr<Transform>& transform);
 	
 protected:
 	D3DXVECTOR3 position;	//座標
 	D3DXVECTOR3 scale;	//スケール
 	D3DXQUATERNION rotation;	//回転
+
+	std::weak_ptr<Transform> parent;
 };
 
 #endif
