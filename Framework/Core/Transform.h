@@ -26,7 +26,7 @@ public:
 	//コンストラクタ
 	Transform();
 	Transform(const Transform&);
-	virtual ~Transform() {}
+	virtual ~Transform();
 
 	//演算子
 	virtual Transform operator = (const Transform&);

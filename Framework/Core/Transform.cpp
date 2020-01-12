@@ -37,6 +37,18 @@ Transform::Transform(const Transform& src) :
 }
 
 /**************************************
+デストラクタ
+***************************************/
+Transform::~Transform()
+{
+	for (auto&& wptr : listChildren)
+	{
+		wptr.reset();
+	}
+	listChildren.clear();
+}
+
+/**************************************
 代入演算子
 ***************************************/
 Transform Transform::operator=(const Transform& src)
