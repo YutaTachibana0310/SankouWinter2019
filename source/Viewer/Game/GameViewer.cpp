@@ -80,3 +80,13 @@ void GameViewer::Draw()
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 }
+
+/**************************************
+•`‰æƒpƒ‰ƒ[ƒ^Ý’èˆ—
+***************************************/
+void GameViewer::SetParameter(const GameViewerParameter & param)
+{
+	energyViewer->SetPercent(param.percentEnergy);
+	bomberViewer->SetCount(param.cntBomb);
+	lifeViewer->SetCount(param.cntLife);
+}

@@ -29,13 +29,21 @@ public:
 	void Draw();
 	void DrawBullet();
 
+	float GetPercentEnergy() const;
+	int GetCntLife() const;
+	int GetCntBomb() const;
+
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;
 
 	float cntEnergy;
+	int cntBomb;
+	int cntLife;
 
 	static const float MaxEnergy;
+	static const int MaxLife;
+	static const int MaxBomb;
 
 	void InputEnemyBulletSlowDown();
 };

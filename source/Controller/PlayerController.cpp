@@ -17,12 +17,16 @@
 グローバル変数
 ***************************************/
 const float PlayerController::MaxEnergy = 100.0f;
+const int PlayerController::MaxBomb = 3;
+const int PlayerController::MaxLife = 2;
 
 /**************************************
 コンストラクタ
 ***************************************/
 PlayerController::PlayerController() :
-	cntEnergy(100.0f)
+	cntEnergy(MaxEnergy),
+	cntLife(MaxLife),
+	cntBomb(MaxBomb)
 {
 	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
@@ -72,6 +76,30 @@ void PlayerController::Draw()
 void PlayerController::DrawBullet()
 {
 	bulletController->Draw();
+}
+
+/**************************************
+エナジーの残り割合取得処理
+***************************************/
+float PlayerController::GetPercentEnergy() const
+{
+	return cntEnergy / MaxEnergy;
+}
+
+/**************************************
+残機数取得処理
+***************************************/
+int PlayerController::GetCntLife() const
+{
+	return cntLife;
+}
+
+/**************************************
+ボンバー残数取得処理
+***************************************/
+int PlayerController::GetCntBomb() const
+{
+	return cntBomb;
 }
 
 /**************************************

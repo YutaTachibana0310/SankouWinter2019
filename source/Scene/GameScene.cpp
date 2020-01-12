@@ -130,6 +130,12 @@ void GameScene::Draw()
 
 	enemyController->DrawBullet();
 
+	GameViewerParameter param(
+		playerController->GetPercentEnergy(),
+		playerController->GetCntLife(),
+		playerController->GetCntBomb()
+	);
+	viewer->SetParameter(param);
 	viewer->Draw();
 
 	_DrawDebug();
