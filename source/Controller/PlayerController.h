@@ -32,5 +32,11 @@ public:
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;
+
+	float cntEnergy;
+
+	static const float MaxEnergy;
+
+	void InputEnemyBulletSlowDown();
 };
 #endif

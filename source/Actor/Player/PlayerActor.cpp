@@ -49,7 +49,6 @@ PlayerActor::PlayerActor() :
 	turretContainer[1]->SetPosition({ -OffsetTurret, 0.0f, PositionTurret });
 	turretContainer[2]->SetPosition({ 0.0f, OffsetTurret, PositionTurret });
 	turretContainer[3]->SetPosition({ 0.0f, -OffsetTurret, PositionTurret });
-
 }
 
 /**************************************
