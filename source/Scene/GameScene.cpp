@@ -24,6 +24,7 @@
 #include "../Controller/EnemyController.h"
 #include "../Controller/EnemyTimeController.h"
 #include "../Viewer/Game/GameViewer.h"
+#include "../Controller/PlayerController.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -36,12 +37,8 @@ const float GameScene::BloomThrethold[] = { 0.4f, 0.3f, 0.24f };		//ƒuƒ‹[ƒ€‚ð‚©
 ***************************************/
 void GameScene::Init()
 {
-	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
-	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	ResourceManager::Instance()->LoadMesh("DemoEnemy", "data/MODEL/Enemy/Enemy00.x");
 	ResourceManager::Instance()->LoadMesh("Planet", "data/MODEL/Planet/GreyMoon.x");
-
-	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 
 	particleManager = GameParticleManager::Instance();
 	particleManager->Init();
@@ -49,19 +46,13 @@ void GameScene::Init()
 	sceneCamera = gameCamera = new GameCamera();
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	skybox = new GameSkybox();
-	player = new PlayerActor();
-	bulletController = new PlayerBulletController();
+	playerController = new PlayerController();
 	bloom = new BloomController();
 	enemyController = new EnemyController();
 	planet = new PlanetActor();
 	viewer = new GameViewer();
 
 	Camera::SetMainCamera(gameCamera);
-
-	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1);
-	player->onFireBullet = onFireBullet;
-
-	player->Init();
 
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
@@ -75,8 +66,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(gameCamera);
 	SAFE_DELETE(bloomTarget);
 	SAFE_DELETE(skybox);
-	SAFE_DELETE(player);
-	SAFE_DELETE(bulletController);
+	SAFE_DELETE(playerController);
 	SAFE_DELETE(bloom);
 	SAFE_DELETE(enemyController);
 	SAFE_DELETE(planet);
@@ -99,8 +89,7 @@ void GameScene::Update()
 
 	gameCamera->Update();
 	skybox->Update();
-	player->Update();
-	bulletController->Update();
+	playerController->Update();
 	enemyController->Update();
 	planet->Update();
 
@@ -123,10 +112,12 @@ void GameScene::Draw()
 	bloomTarget->Set();
 
 	planet->Draw();
-	player->Draw();
+	
+	playerController->Draw();
+
 	enemyController->Draw();
 
-	bulletController->Draw();
+	playerController->DrawBullet();
 
 	bloomTarget->Restore();
 
@@ -139,6 +130,12 @@ void GameScene::Draw()
 
 	enemyController->DrawBullet();
 
+	GameViewerParameter param(
+		playerController->GetPercentEnergy(),
+		playerController->GetCntLife(),
+		playerController->GetCntBomb()
+	);
+	viewer->SetParameter(param);
 	viewer->Draw();
 
 	_DrawDebug();

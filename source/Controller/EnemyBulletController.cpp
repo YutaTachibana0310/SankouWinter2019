@@ -51,22 +51,24 @@ EnemyBulletController::~EnemyBulletController()
 void EnemyBulletController::Update()
 {
 	/*
-	速度変更のデバッグ発射用
+	テスト用処理
 	*/
 	{
-		static int cntDebugShot = 0;
-
-		if (cntDebugShot % 5 == 0)
+		static float cntDebug = 0.0f;
+		if (cntDebug >= 10.0f)
 		{
 			Transform shotTransform;
 			EnemyBulletHandler handle(this);
+			
+			shotTransform.Rotate(30.0f, Vector3::Right);
+			handle.SetWayBullet(shotTransform, EnemyBulletConfig::BlueNeedle, 0.5f, 3, 15.0f);
 
-			handle.SetCircleBullet(shotTransform, EnemyBulletConfig::BlueRotate, 0.5f, 18);
-			shotTransform.Rotate(10.0f, Vector3::Right);
-			handle.SetCircleBullet(shotTransform, EnemyBulletConfig::RedRotate, 0.5f, 18);
+			shotTransform.Rotate(-60.0f, Vector3::Right);
+			handle.SetWayBullet(shotTransform, EnemyBulletConfig::RedNeedle, 0.5f, 3, -15.0f);
+
+			cntDebug -= 10.0f;
 		}
-
-		cntDebugShot = Math::WrapAround(0, 5, cntDebugShot + 1);
+		cntDebug += FixedTime::GetTimeScale();
 	}
 
 	//更新

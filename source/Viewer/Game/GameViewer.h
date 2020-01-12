@@ -20,6 +20,25 @@ class BomberViewer;
 class LifeViewer;
 
 /**************************************
+GameViewerParameterクラス
+***************************************/
+class GameViewerParameter
+{
+public:
+	float percentEnergy;
+	int cntLife;
+	int cntBomb;
+
+	GameViewerParameter(float percentEnergy, int cntLife, int cntBomb) :
+		percentEnergy(percentEnergy),
+		cntLife(cntLife),
+		cntBomb(cntBomb)
+	{
+		
+	}
+};
+
+/**************************************
 クラス定義
 ***************************************/
 class GameViewer
@@ -30,6 +49,8 @@ public:
 
 	void Update();
 	void Draw();
+
+	void SetParameter(const GameViewerParameter& param);
 
 private:
 	Polygon2D *bg;

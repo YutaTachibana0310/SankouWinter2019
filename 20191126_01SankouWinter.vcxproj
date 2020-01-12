@@ -256,6 +256,7 @@
     <ClCompile Include="source\Controller\EnemyController.cpp" />
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
+    <ClCompile Include="source\Controller\PlayerController.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyDebris.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyParticleEmitter.cpp" />
     <ClCompile Include="source\Effect\GameParticleManager.cpp" />
@@ -412,6 +413,7 @@
     <ClInclude Include="source\Controller\EnemyController.h" />
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
+    <ClInclude Include="source\Controller\PlayerController.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyDebris.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyParticleEmitter.h" />
     <ClInclude Include="source\Effect\GameParticleManager.h" />
