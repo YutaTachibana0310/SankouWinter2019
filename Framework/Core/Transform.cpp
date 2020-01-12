@@ -125,7 +125,11 @@ void Transform::Rotate(float deg, const D3DXVECTOR3& axis)
 void Transform::Rotate(const D3DXQUATERNION& quaternion)
 {
 	D3DXQuaternionMultiply(&rotation, &rotation, &quaternion);
+	D3DXQuaternionNormalize(&rotation, &rotation);
+
 	D3DXQuaternionMultiply(&localRotation, &localRotation, &quaternion);
+	D3DXQuaternionNormalize(&localRotation, &localRotation);
+
 	RotateMatrix(quaternion);
 }
 
@@ -422,7 +426,7 @@ void Transform::OnUpdateParentMatrix(const D3DXMATRIX& mtxWorld)
 	scale.y = D3DXVec3Length(&scaleY);
 	scale.z = D3DXVec3Length(&scaleZ);
 
-	D3DXQuaternionRotationMatrix(&rotation, &mtxWorld);
+	D3DXQuaternionRotationMatrix(&rotation, &mtxWorldGlobal);
 	D3DXQuaternionNormalize(&rotation, &rotation);
 
 	UpdateChildMatrix();
@@ -449,11 +453,41 @@ void Transform::MoveMatrix(const D3DXVECTOR3& offset)
 ***************************************/
 void Transform::RotateMatrix(const D3DXQUATERNION& rotate)
 {
-	D3DXMATRIX mtxRot;
-	D3DXMatrixRotationQuaternion(&mtxRot, &rotate);
+	D3DXMatrixRotationQuaternion(&mtxWorldGlobal, &rotation);
 
-	D3DXMatrixMultiply(&mtxWorldGlobal, &mtxWorldGlobal, &mtxRot);
-	D3DXMatrixMultiply(&mtxWorldLocal, &mtxWorldLocal, &mtxRot);
+	mtxWorldGlobal._11 *= scale.x;
+	mtxWorldGlobal._12 *= scale.x;
+	mtxWorldGlobal._13 *= scale.x;
+
+	mtxWorldGlobal._21 *= scale.y;
+	mtxWorldGlobal._22 *= scale.y;
+	mtxWorldGlobal._23 *= scale.y;
+
+	mtxWorldGlobal._31 *= scale.z;
+	mtxWorldGlobal._32 *= scale.z;
+	mtxWorldGlobal._33 *= scale.z;
+
+	mtxWorldGlobal._41 = position.x;
+	mtxWorldGlobal._42 = position.y;
+	mtxWorldGlobal._43 = position.z;
+
+	D3DXMatrixRotationQuaternion(&mtxWorldLocal, &localRotation);
+
+	mtxWorldLocal._11 *= localScale.x;
+	mtxWorldLocal._12 *= localScale.x;
+	mtxWorldLocal._13 *= localScale.x;
+
+	mtxWorldLocal._21 *= localScale.y;
+	mtxWorldLocal._22 *= localScale.y;
+	mtxWorldLocal._23 *= localScale.y;
+
+	mtxWorldLocal._31 *= localScale.z;
+	mtxWorldLocal._32 *= localScale.z;
+	mtxWorldLocal._33 *= localScale.z;
+
+	mtxWorldLocal._41 = localPosition.x;
+	mtxWorldLocal._42 = localPosition.y;
+	mtxWorldLocal._43 = localPosition.z;
 
 	UpdateChildMatrix();
 }
