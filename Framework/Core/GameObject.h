@@ -43,19 +43,25 @@ public:
 
 	//SRT情報ゲッター（なるべく使いたくない）
 	virtual D3DXVECTOR3 GetPosition() const;
+	virtual D3DXVECTOR3 GetLocalPosition() const;
 	virtual D3DXVECTOR3 GetRotation() const;
+	virtual D3DXVECTOR3 GetLocalRotation() const;
 	virtual D3DXVECTOR3 GetScale() const;
+	virtual D3DXVECTOR3 GetLocalScale() const;
 	virtual Transform GetTransform() const;
 
 	//SRT情報セッター（なるべく使いたくない）
 	virtual void SetPosition(const D3DXVECTOR3& position);
+	virtual void SetLocalPosition(const D3DXVECTOR3 position);
 	virtual void SetRotatition(const D3DXVECTOR3& rotation);
+	virtual void SetLocalRotatition(const D3DXVECTOR3& rotation);
 	virtual void SetScale(const D3DXVECTOR3& scale);
+	virtual void SetLocalScale(const D3DXVECTOR3& scale);
 	virtual void SetTransform(const Transform& transform);
 
-	//親設定
-	virtual void SetParent(const GameObject& object);
-	virtual void SetParent(const std::shared_ptr<Transform>& transform);
+	//親子設定
+	virtual void AddChild(GameObject* gameObject);
+	virtual void RemoveChild(GameObject* gameObject);
 
 protected:
 	//アクティブ状態

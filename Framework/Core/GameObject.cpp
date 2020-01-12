@@ -122,12 +122,29 @@ D3DXVECTOR3 GameObject::GetPosition() const
 {
 	return transform->GetPosition();
 }
+
+/**************************************
+座標セット
+***************************************/
+D3DXVECTOR3 GameObject::GetLocalPosition() const
+{
+	return transform->GetLocalPosition();
+}
+
 /**************************************
 座標ゲット
 ***************************************/
 void GameObject::SetPosition(const D3DXVECTOR3& position)
 {
 	transform->SetPosition(position);
+}
+
+/**************************************
+座標ゲット
+***************************************/
+void GameObject::SetLocalPosition(const D3DXVECTOR3 position)
+{
+	transform->SetLocalPosition(position);
 }
 
 /**************************************
@@ -139,11 +156,27 @@ D3DXVECTOR3 GameObject::GetRotation() const
 }
 
 /**************************************
+回転角度ゲット
+***************************************/
+D3DXVECTOR3 GameObject::GetLocalRotation() const
+{
+	return transform->GetLocalEulerAngle();
+}
+
+/**************************************
 回転角度セット
 ***************************************/
 void GameObject::SetRotatition(const D3DXVECTOR3& rotation)
 {
 	transform->SetRotation(rotation);
+}
+
+/**************************************
+回転角度セット
+***************************************/
+void GameObject::SetLocalRotatition(const D3DXVECTOR3& rotation)
+{
+	transform->SetLocalRotation(rotation);
 }
 
 /**************************************
@@ -155,11 +188,27 @@ D3DXVECTOR3 GameObject::GetScale() const
 }
 
 /**************************************
+スケールゲット
+***************************************/
+D3DXVECTOR3 GameObject::GetLocalScale() const
+{
+	return transform->GetLocalScale();
+}
+
+/**************************************
 スケールセット
 ***************************************/
 void GameObject::SetScale(const D3DXVECTOR3& scale)
 {
 	transform->SetScale(scale);
+}
+
+/**************************************
+スケールセット
+***************************************/
+void GameObject::SetLocalScale(const D3DXVECTOR3& scale)
+{
+	transform->SetLocalScale(scale);
 }
 
 /**************************************
@@ -179,17 +228,17 @@ void GameObject::SetTransform(const Transform& transform)
 }
 
 /**************************************
-親設定
+子追加
 ***************************************/
-void GameObject::SetParent(const GameObject & object)
+void GameObject::AddChild(GameObject* gameObject)
 {
-	transform->SetParent(object.transform);
+	transform->AddChild(gameObject->transform);
 }
 
 /**************************************
-親設定
+スケール情報ゲット
 ***************************************/
-void GameObject::SetParent(const std::shared_ptr<Transform>& transform)
+void GameObject::RemoveChild(GameObject *gameObject)
 {
-	transform->SetParent(transform);
+	transform->RemoveChild(gameObject->transform.get());
 }

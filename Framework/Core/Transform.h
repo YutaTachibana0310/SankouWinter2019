@@ -9,7 +9,10 @@
 
 #include "../../main.h"
 #include "../Math/Quaternion.h"
+
+#include <list>
 #include <memory>
+
 /**************************************
 マクロ定義
 ***************************************/
@@ -22,7 +25,6 @@ class Transform
 public:
 	//コンストラクタ
 	Transform();
-	Transform(D3DXVECTOR3 pos, D3DXVECTOR3 rot, D3DXVECTOR3 scale);
 	Transform(const Transform&);
 	virtual ~Transform() {}
 
@@ -31,21 +33,37 @@ public:
 
 	//移動処理
 	virtual void Move(const D3DXVECTOR3& velocity);
+
 	virtual void SetPosition(const D3DXVECTOR3& position);
+	virtual void SetLocalPosition(const D3DXVECTOR3& position);
+
 	virtual D3DXVECTOR3 GetPosition() const;
+	virtual D3DXVECTOR3 GetLocalPosition() const;
 
 	//回転処理
 	virtual void Rotate(float degreeX, float degreeY, float degreeZ);
 	virtual void Rotate(float degree, const D3DXVECTOR3& axis);
+	virtual void Rotate(const D3DXQUATERNION& quaternion);
+
 	virtual void SetRotation(const D3DXVECTOR3& rotation);
 	virtual void SetRotation(const D3DXQUATERNION& rotation);
+	virtual void SetLocalRotation(const D3DXVECTOR3& rotation);
+	virtual void SetLocalRotation(const D3DXQUATERNION& rotation);
+
 	virtual D3DXVECTOR3 GetEulerAngle() const;
+	virtual D3DXVECTOR3 GetLocalEulerAngle() const;
+
 	virtual D3DXQUATERNION GetRotation() const;
+	virtual D3DXQUATERNION GetLocalRotation() const;
 
 	//スケール処理
 	virtual void Scale(const D3DXVECTOR3& delta);
+
 	virtual void SetScale(const D3DXVECTOR3& scale);
+	virtual void SetLocalScale(const D3DXVECTOR3& scale);
+
 	virtual D3DXVECTOR3 GetScale() const;
+	virtual D3DXVECTOR3 GetLocalScale() const;
 
 	//向き
 	virtual D3DXVECTOR3 Forward() const;
@@ -53,21 +71,38 @@ public:
 	virtual D3DXVECTOR3 Up() const;
 
 	//ワールド変換設定処理
-	virtual void SetWorld(const D3DXMATRIX* parent = NULL) const;
+	virtual void SetWorld() const;
 	virtual D3DXMATRIX GetMatrix() const;
 
 	//指定の位置を向かせる処理
 	void LookAt(const D3DXVECTOR3& target);
 
-	//親設定
-	void SetParent(const std::shared_ptr<Transform>& transform);
+	//親子設定
+	virtual void AddChild(const std::shared_ptr<Transform>& transform);
+	virtual void RemoveChild(Transform* transform);
 	
 protected:
-	D3DXVECTOR3 position;	//座標
-	D3DXVECTOR3 scale;	//スケール
-	D3DXQUATERNION rotation;	//回転
+	D3DXMATRIX mtxWorldGlobal;		//グローバル空間での変換行列
+	D3DXVECTOR3 position;			//座標
+	D3DXVECTOR3 scale;				//スケール
+	D3DXQUATERNION rotation;		//回転
 
-	std::weak_ptr<Transform> parent;
+	D3DXMATRIX mtxWorldLocal;		//ローカル空間での変換行列
+	D3DXVECTOR3 localPosition;		//ローカル座標
+	D3DXVECTOR3 localScale;			//ローカルスケール
+	D3DXQUATERNION localRotation;	//ローカル回転
+
+	void OnUpdateParentMatrix(const D3DXMATRIX& mtxWorld);
+
+	void MoveMatrix(const D3DXVECTOR3& offset);
+	void RotateMatrix(const D3DXQUATERNION& rotate);
+	void ScaleMatrix(const D3DXVECTOR3& scale);
+
+	void _SetScale(const D3DXVECTOR3& scale);
+
+	void UpdateChildMatrix();
+
+	std::list<std::weak_ptr<Transform>> listChildren;
 };
 
 #endif
