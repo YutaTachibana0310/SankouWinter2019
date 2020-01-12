@@ -17,7 +17,7 @@
 /**************************************
 遅延タスク作成処理
 ***************************************/
-TaskHandle TaskManager::CreateDelayedTask(int delay, bool ignoreTimeScale, const std::function<void(void)>& task)
+TaskHandle TaskManager::CreateDelayedTask(float delay, bool ignoreTimeScale, const std::function<void(void)>& task)
 {
 	std::shared_ptr<DelayedTask> ptr = std::make_shared<DelayedTask>(delay, task, ignoreTimeScale);
 	taskList.push_back(ptr);
@@ -28,7 +28,7 @@ TaskHandle TaskManager::CreateDelayedTask(int delay, bool ignoreTimeScale, const
 /**************************************
 定期タスク作成処理
 ***************************************/
-TaskHandle TaskManager::CreatePeriodicTask(int interval, bool ignoreTimeScale, const std::function<void(void)>& task)
+TaskHandle TaskManager::CreatePeriodicTask(float interval, bool ignoreTimeScale, const std::function<void(void)>& task)
 {
 	std::shared_ptr<PeriodicTask> ptr = std::make_shared<PeriodicTask>(interval, task, ignoreTimeScale);
 	taskList.push_back(ptr);
