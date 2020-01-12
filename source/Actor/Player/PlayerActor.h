@@ -17,6 +17,7 @@
 ***************************************/
 class MeshContainer;
 class PlayerTurretActor;
+class PlayerTurretRoot;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -41,7 +42,7 @@ public:
 private:
 	MeshContainer * mesh;
 
-	Transform *turretTransform;
+	PlayerTurretRoot *turretRoot;
 	std::vector<PlayerTurretActor*> turretContainer;
 
 	float cntShotFrame;

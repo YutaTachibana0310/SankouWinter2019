@@ -24,8 +24,6 @@ public:
 	PlayerTurretActor();
 	~PlayerTurretActor();
 
-	void Init(Transform* parent);
-	void Uninit();
 	void Update();
 	void Draw();
 
@@ -33,9 +31,18 @@ public:
 
 private:
 	MeshContainer * mesh;
-	Transform *parent;
 
 	static const D3DXVECTOR3 OffsetShot;
 };
 
+/**************************************
+PlayerTurretRootƒNƒ‰ƒX
+***************************************/
+class PlayerTurretRoot : public GameObject
+{
+	using GameObject::GameObject;
+
+public:
+	void Update();
+};
 #endif

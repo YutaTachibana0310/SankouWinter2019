@@ -32,27 +32,11 @@ PlayerTurretActor::~PlayerTurretActor()
 }
 
 /**************************************
-初期化処理
-***************************************/
-void PlayerTurretActor::Init(Transform * parent)
-{
-	this->parent = parent;
-}
-
-/**************************************
-終了処理
-***************************************/
-void PlayerTurretActor::Uninit()
-{
-	parent = nullptr;
-}
-
-/**************************************
 更新処理
 ***************************************/
 void PlayerTurretActor::Update()
 {
-	transform->Rotate(-2.0f, Vector3::Forward);
+	transform->Rotate(-2.0f * FixedTime::GetTimeScale(), Vector3::Forward);
 }
 
 /**************************************
@@ -60,7 +44,7 @@ void PlayerTurretActor::Update()
 ***************************************/
 void PlayerTurretActor::Draw()
 {
-	transform->SetWorld(&parent->GetMatrix());
+	transform->SetWorld();
 	mesh->Draw();
 }
 
@@ -69,9 +53,14 @@ void PlayerTurretActor::Draw()
 ***************************************/
 D3DXVECTOR3 PlayerTurretActor::GetShotPosition() const
 {
-	D3DXMATRIX mtxWorld = transform->GetMatrix();
-	mtxWorld *= parent->GetMatrix();
+	return transform->GetPosition() + OffsetShot;
+}
 
-	D3DXVECTOR3 shotPos = { mtxWorld._41, mtxWorld._42, mtxWorld._43 };
-	return shotPos + OffsetShot;
+/**************************************
+PlayerTurretRoot更新処理
+***************************************/
+void PlayerTurretRoot::Update()
+{
+	const float AngleRotateTurret = 3.0f;
+	transform->Rotate(AngleRotateTurret * FixedTime::GetTimeScale(), Vector3::Forward);
 }

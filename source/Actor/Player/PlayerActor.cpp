@@ -29,14 +29,18 @@ PlayerActor::PlayerActor() :
 	cntShotFrame(0)
 {
 	mesh = new MeshContainer();
-	turretTransform = new Transform();
+	ResourceManager::Instance()->GetMesh("Player", mesh);
+
+	turretRoot = new PlayerTurretRoot();
+	AddChild(turretRoot);
+	turretRoot->SetLocalPosition(Vector3::Zero);
 
 	const unsigned MaxTurret = 4;
 	turretContainer.reserve(MaxTurret);
 	for (int i = 0; i < MaxTurret; i++)
 	{
 		turretContainer.push_back(new PlayerTurretActor());
-		turretContainer[i]->Init(turretTransform);
+		turretRoot->AddChild(turretContainer[i]);
 	}
 
 	const float PositionTurret = -2.0f;
@@ -46,7 +50,6 @@ PlayerActor::PlayerActor() :
 	turretContainer[2]->SetPosition({ 0.0f, OffsetTurret, PositionTurret });
 	turretContainer[3]->SetPosition({ 0.0f, -OffsetTurret, PositionTurret });
 
-	ResourceManager::Instance()->GetMesh("Player", mesh);
 }
 
 /**************************************
@@ -55,7 +58,7 @@ PlayerActor::PlayerActor() :
 PlayerActor::~PlayerActor()
 {
 	SAFE_DELETE(mesh);
-
+	SAFE_DELETE(turretRoot);
 	Utility::DeleteContainer(turretContainer);
 }
 
@@ -87,14 +90,20 @@ void PlayerActor::Update()
 
 	_Rotate(direction.y);
 
-	const float AngleRotateTurret = 3.0f;
-	turretTransform->Rotate(AngleRotateTurret * FixedTime::GetTimeScale(), Vector3::Forward);
-
 	_Shot();
+
+	turretRoot->Update();
+	for (auto&& turret : turretContainer)
+	{
+		turret->Update();
+	}
 
 	Debug::Begin("Player");
 
 	Debug::Text(transform->GetPosition(), "PlayerPos");
+	Debug::Text(transform->GetScale(), "PlayerScale");
+	Debug::Text(Quaternion::ToEuler(transform->GetRotation()), "PlayerRotation");
+	Debug::Text(turretContainer[0]->GetPosition(), "Turretposition");
 	Debug::End();
 }
 
@@ -122,7 +131,6 @@ void PlayerActor::_Move(const D3DXVECTOR3 & dir)
 	position = Vector3::Clamp(-BorderMove, BorderMove, position);
 
 	transform->SetPosition(position);
-	turretTransform->SetPosition(position);
 }
 
 /**************************************
