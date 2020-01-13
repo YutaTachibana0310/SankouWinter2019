@@ -22,6 +22,7 @@ staticƒƒ“ƒo
 ***************************************/
 const float PlayerActor::SpeedMove = 0.6f;
 const D3DXVECTOR3 PlayerActor::BorderMove = { 0.0f, 25.0f, 45.0f };
+const D3DXVECTOR3 PlayerActor::ShotPosition = { 0.0f, 0.0f, 5.0f };
 const float PlayerActor::MaxAngle = 40.0f;
 
 /**************************************
@@ -52,7 +53,7 @@ PlayerActor::PlayerActor() :
 	}
 
 	const float PositionTurret = -2.0f;
-	const float OffsetTurret = 5.0f;
+	const float OffsetTurret = 7.5f;
 	turretContainer[0]->SetPosition({ OffsetTurret, 0.0f, PositionTurret });
 	turretContainer[1]->SetPosition({ -OffsetTurret, 0.0f, PositionTurret });
 	turretContainer[2]->SetPosition({ 0.0f, OffsetTurret, PositionTurret });
@@ -204,8 +205,10 @@ void PlayerActor::_Shot()
 
 	for (auto&& turret : turretContainer)
 	{
-		onFireBullet(turret->GetShotPosition());
+		onFireBullet(turret->GetShotPosition(), false);
 	}
+
+	onFireBullet(transform->GetPosition() + ShotPosition, true);
 
 	cntShotFrame = 0.0f;
 }

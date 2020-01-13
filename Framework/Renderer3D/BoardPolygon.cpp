@@ -44,6 +44,7 @@ BoardPolygon::BoardPolygon(SpriteEffect * effect) :
 BoardPolygon::~BoardPolygon()
 {
 	ReleaseResource();
+	SAFE_DELETE(effect);
 }
 
 /**************************************
@@ -98,7 +99,6 @@ void BoardPolygon::ReleaseResource()
 {
 	SAFE_RELEASE(vtxBuff);
 	SAFE_RELEASE(texture);
-	SAFE_DELETE(effect);
 
 	if (resource != NULL)
 		resource->OnRelease();

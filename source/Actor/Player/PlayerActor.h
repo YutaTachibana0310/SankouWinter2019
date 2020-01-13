@@ -36,13 +36,14 @@ public:
 	virtual void Update();
 	virtual void Draw();
 
-	std::function<void(const D3DXVECTOR3)> onFireBullet;
+	std::function<void(const D3DXVECTOR3, bool)> onFireBullet;
 	std::function<void(ColliderObserver* other)> onColliderHit;
 	std::function<void(bool slowDown)> onSlowdownEnemyBullet;
 	std::function<void()> onFireBomber;
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
+	static const D3DXVECTOR3 ShotPosition;
 	static const float MaxAngle;
 
 private:

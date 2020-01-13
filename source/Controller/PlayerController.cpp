@@ -33,14 +33,13 @@ PlayerController::PlayerController(GameCamera *camera) :
 	cntLife(MaxLife),
 	cntBomb(MaxBomb)
 {
-	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
 
-	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1);
+	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1, std::placeholders::_2);
 	player->onFireBullet = onFireBullet;
 
 	auto onHitPlayer = std::bind(&PlayerController::CollisionPlayer, this, std::placeholders::_1);
