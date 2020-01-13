@@ -16,6 +16,7 @@
 #include "EnemyTimeController.h"
 #include "../Camera/GameCamera.h"
 #include "../Effect/GameParticleManager.h"
+#include "../Actor/Player/PlayerColliderViewer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -35,7 +36,8 @@ PlayerController::PlayerController(GameCamera *camera) :
 {
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
-	
+	ResourceManager::Instance()->MakePolygon("PlayerCollider", "data/TEXTURE/Player/playerCollider.png", { 1.0f, 1.0f }, { 3.0f, 2.0f });
+
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
 
@@ -84,6 +86,14 @@ void PlayerController::Draw()
 void PlayerController::DrawBullet()
 {
 	bulletController->Draw();
+}
+
+/**************************************
+“–‚½‚è”»’è•`‰æˆ—
+***************************************/
+void PlayerController::DrawCollider()
+{
+	player->DrawCollider();
 }
 
 /**************************************

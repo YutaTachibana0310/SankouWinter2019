@@ -126,6 +126,8 @@ void GameScene::Draw()
 
 	enemyController->DrawBullet();
 
+	playerController->DrawCollider();
+
 	GameViewerParameter param(
 		playerController->GetPercentEnergy(),
 		playerController->GetCntLife(),

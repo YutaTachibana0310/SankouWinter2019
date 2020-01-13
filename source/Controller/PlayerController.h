@@ -30,6 +30,7 @@ public:
 	void Update();
 	void Draw();
 	void DrawBullet();
+	void DrawCollider();
 
 	float GetPercentEnergy() const;
 	int GetCntLife() const;

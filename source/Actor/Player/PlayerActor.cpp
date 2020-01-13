@@ -16,6 +16,7 @@
 
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
+#include "PlayerColliderViewer.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -44,6 +45,9 @@ PlayerActor::PlayerActor() :
 	collider->SetSize({ 0.5f, 0.5f, 0.5f });
 	collider->AddObserver(this);
 
+	colliderViewer = new PlayerColliderViewer();
+	AddChild(colliderViewer);
+
 	const unsigned MaxTurret = 4;
 	turretContainer.reserve(MaxTurret);
 	for (int i = 0; i < MaxTurret; i++)
@@ -67,6 +71,7 @@ PlayerActor::~PlayerActor()
 {
 	SAFE_DELETE(mesh);
 	SAFE_DELETE(turretRoot);
+	SAFE_DELETE(colliderViewer);
 	collider.reset();
 	Utility::DeleteContainer(turretContainer);
 }
@@ -121,6 +126,8 @@ void PlayerActor::Update()
 		turret->Update();
 	}
 
+	colliderViewer->Update();
+
 	Debug::Begin("Player");
 
 	Debug::Text(transform->GetPosition(), "PlayerPos");
@@ -152,6 +159,14 @@ void PlayerActor::Draw()
 	collider->Draw();
 	pDevice->SetRenderState(D3DRS_ZENABLE, true);
 #endif
+}
+
+/**************************************
+“–‚½‚è”»’è•`‰æˆ—
+***************************************/
+void PlayerActor::DrawCollider()
+{
+	colliderViewer->Draw();
 }
 
 /**************************************

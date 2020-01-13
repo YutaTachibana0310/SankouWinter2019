@@ -21,6 +21,7 @@ class MeshContainer;
 class PlayerTurretActor;
 class PlayerTurretRoot;
 class BoxCollider3D;
+class PlayerColliderViewer;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -35,6 +36,7 @@ public:
 	virtual void Uninit();
 	virtual void Update();
 	virtual void Draw();
+	virtual void DrawCollider();
 
 	std::function<void(const D3DXVECTOR3, bool)> onFireBullet;
 	std::function<void(ColliderObserver* other)> onColliderHit;
@@ -53,6 +55,8 @@ private:
 	std::vector<PlayerTurretActor*> turretContainer;
 
 	std::shared_ptr<BoxCollider3D> collider;
+
+	PlayerColliderViewer *colliderViewer;
 
 	float cntShotFrame;
 
