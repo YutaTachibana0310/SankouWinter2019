@@ -11,6 +11,8 @@
 #include "../../main.h"
 #include "../../Framework/Camera/Camera.h"
 
+#include <functional>
+
 /**************************************
 ëOï˚êÈåæ
 ***************************************/
@@ -26,14 +28,17 @@ public:
 
 	void Update() override;
 
-	void Focus(const D3DXVECTOR3& position);
+	void Focus(const D3DXVECTOR3& position, const std::function<void()>& callback);
 
 	static const D3DXVECTOR3 InitPosition;
+	static const float DurationFocusTransition;
+	static const int DurationFocus;
 
 private:
 	int cntFocus;
 	bool inFocus;
 
 	std::shared_ptr<float> tweenViewAngle;
+	std::function<void()> callback;
 };
 #endif

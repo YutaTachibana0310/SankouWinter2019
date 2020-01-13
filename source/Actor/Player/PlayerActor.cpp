@@ -12,6 +12,7 @@
 #include "../../../Framework/Tool/DebugWindow.h"
 #include "../../../Framework/Core/ObjectPool.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
+#include "../../../Framework/Tween/Tween.h"
 
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
@@ -72,8 +73,11 @@ PlayerActor::~PlayerActor()
 ***************************************/
 void PlayerActor::Init()
 {
-	transform->SetPosition({0.0f, 0.0f, -10.0f});
+	const D3DXVECTOR3 InitPos = { 0.0f, 0.0f, -55.0f };
+	const D3DXVECTOR3 StartPos = { 0.0f, 0.0f, -20.0f };
+	Tween::Move(*this, InitPos, StartPos, 60.0f, EaseType::OutBack, false);
 	collider->SetActive(true);
+	active = true;
 }
 
 /**************************************
@@ -82,6 +86,7 @@ void PlayerActor::Init()
 void PlayerActor::Uninit()
 {
 	collider->SetActive(false);
+	active = false;
 }
 
 /**************************************
@@ -89,6 +94,9 @@ void PlayerActor::Uninit()
 ***************************************/
 void PlayerActor::Update()
 {
+	if (!active)
+		return;
+
 	D3DXVECTOR3 direction = Vector3::Zero;
 	direction.z = Input::GetPressHorizontail();
 	direction.y = Input::GetPressVertical();
@@ -119,6 +127,9 @@ void PlayerActor::Update()
 ***************************************/
 void PlayerActor::Draw()
 {
+	if (!active)
+		return;
+
 	transform->SetWorld();
 	mesh->Draw();
 
@@ -188,5 +199,6 @@ void PlayerActor::_Shot()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
+	collider->SetActive(false);
 	onColliderHit(other);
 }

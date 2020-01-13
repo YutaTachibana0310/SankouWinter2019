@@ -46,7 +46,7 @@ void GameScene::Init()
 	sceneCamera = gameCamera = new GameCamera();
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	skybox = new GameSkybox();
-	playerController = new PlayerController();
+	playerController = new PlayerController(gameCamera);
 	bloom = new BloomController();
 	enemyController = new EnemyController();
 	planet = new PlanetActor();

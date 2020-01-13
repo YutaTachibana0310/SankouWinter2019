@@ -140,7 +140,7 @@ D3DXVECTOR2 EnemyBulletActor::GetBloomUV() const
 ***************************************/
 void EnemyBulletActor::OnColliderHit(ColliderObserver * other)
 {
-	Uninit();
+	//Uninit();
 }
 
 /**************************************

@@ -9,6 +9,7 @@
 #include "../../Framework/Resource/ResourceManager.h"
 #include "../../Framework/Input/input.h"
 #include "../../Framework/Tool/DebugWindow.h"
+#include "../../Framework/Task/TaskManager.h"
 
 #include "../Actor/Player/PlayerActor.h"
 #include "PlayerBulletController.h"
@@ -26,7 +27,8 @@ const int PlayerController::MaxLife = 2;
 /**************************************
 コンストラクタ
 ***************************************/
-PlayerController::PlayerController() :
+PlayerController::PlayerController(GameCamera *camera) :
+	camera(camera),
 	cntEnergy(MaxEnergy),
 	cntLife(MaxLife),
 	cntBomb(MaxBomb)
@@ -129,8 +131,25 @@ void PlayerController::InputEnemyBulletSlowDown()
 ***************************************/
 void PlayerController::CollisionPlayer(ColliderObserver * other)
 {
-	Debug::Log("Hit Player");
-
-	player->Uninit();
 	GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());	
+
+	auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
+	camera->Focus(player->GetPosition(), callback);
+}
+
+/**************************************
+カメラフォーカス終了時のコールバック
+***************************************/
+void PlayerController::OnFinishCameraFocus()
+{
+	player->Uninit();
+
+	if (cntLife > 0)
+	{
+		cntLife--;
+		TaskManager::Instance()->CreateDelayedTask(180.0f, true, [this]()
+		{
+			player->Init();
+		});
+	}
 }
