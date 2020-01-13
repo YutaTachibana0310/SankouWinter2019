@@ -49,7 +49,7 @@ private:
 	static const int MaxLife;
 	static const int MaxBomb;
 
-	void InputEnemyBulletSlowDown();
+	void SlowDownEnemyBullet(bool isSlow);
 	void CollisionPlayer(ColliderObserver* other);
 	void OnFinishCameraFocus();
 };

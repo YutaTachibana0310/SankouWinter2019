@@ -46,6 +46,9 @@ PlayerController::PlayerController(GameCamera *camera) :
 	auto onHitPlayer = std::bind(&PlayerController::CollisionPlayer, this, std::placeholders::_1);
 	player->onColliderHit = onHitPlayer;
 
+	auto onSlowDownEnemyBullet = std::bind(&PlayerController::SlowDownEnemyBullet, this, std::placeholders::_1);
+	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
+
 	player->Init();
 }
 
@@ -63,8 +66,6 @@ PlayerController::~PlayerController()
 ***************************************/
 void PlayerController::Update()
 {
-	InputEnemyBulletSlowDown();
-
 	player->Update();
 
 	bulletController->Update();
@@ -113,9 +114,9 @@ int PlayerController::GetCntBomb() const
 /**************************************
 ƒoƒŒƒbƒg‚ðŽ~‚ß‚é“ü—Í‚Ìˆ—
 ***************************************/
-void PlayerController::InputEnemyBulletSlowDown()
+void PlayerController::SlowDownEnemyBullet(bool isSlow)
 {
-	if (Keyboard::GetPress(DIK_X) && cntEnergy >= 0.0f)
+	if (cntEnergy > 0.0f && isSlow)
 	{
 		cntEnergy -= Math::Clamp(0.0f, MaxEnergy, 0.2f * FixedTime::GetTimeScale());
 		EnemyTimeController::SlowDownBullet(true);

@@ -82,11 +82,6 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
-	if (Keyboard::GetTrigger(DIK_C))
-		EnemyTimeController::SetTimeScale(0.2f);
-	if (Keyboard::GetRelease(DIK_C))
-		EnemyTimeController::SetTimeScale(1.0f);
-
 	gameCamera->Update();
 	skybox->Update();
 	playerController->Update();

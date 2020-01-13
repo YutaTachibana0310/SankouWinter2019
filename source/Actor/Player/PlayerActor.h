@@ -38,6 +38,8 @@ public:
 
 	std::function<void(const D3DXVECTOR3)> onFireBullet;
 	std::function<void(ColliderObserver* other)> onColliderHit;
+	std::function<void(bool slowDown)> onSlowdownEnemyBullet;
+	std::function<void()> onFireBomber;
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
@@ -59,6 +61,7 @@ private:
 	void _Move(const D3DXVECTOR3& dir);
 	void _Rotate(float dir);
 	void _Shot();
+	void _SlowDownEnemyBullet();
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
 	virtual void OnFinishInitMove();

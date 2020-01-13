@@ -112,6 +112,8 @@ void PlayerActor::Update()
 
 	_Shot();
 
+	_SlowDownEnemyBullet();
+
 	turretRoot->Update();
 	for (auto&& turret : turretContainer)
 	{
@@ -206,6 +208,18 @@ void PlayerActor::_Shot()
 	}
 
 	cntShotFrame = 0.0f;
+}
+
+/**************************************
+ìGíeÇÃå∏ë¨èàóù
+***************************************/
+void PlayerActor::_SlowDownEnemyBullet()
+{
+	if (!enableShot)
+		onSlowdownEnemyBullet(false);
+
+	bool input = Keyboard::GetPress(DIK_C);
+	onSlowdownEnemyBullet(input);
 }
 
 /**************************************
