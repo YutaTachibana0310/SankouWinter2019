@@ -53,11 +53,15 @@ private:
 
 	float cntShotFrame;
 
+	bool enableShot;
+	bool enableMove;
+
 	void _Move(const D3DXVECTOR3& dir);
 	void _Rotate(float dir);
 	void _Shot();
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
+	virtual void OnFinishInitMove();
 };
 
 #endif

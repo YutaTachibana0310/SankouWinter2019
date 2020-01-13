@@ -66,10 +66,10 @@ void GameCamera::Update()
 /**************************************
 éwíËÇÃà íuÇíçéãÇ≥ÇπÇÈ
 ***************************************/
-void GameCamera::Focus(const D3DXVECTOR3 & position, const std::function<void()>& callback)
+bool GameCamera::Focus(const D3DXVECTOR3 & position, const std::function<void()>& callback)
 {
 	if (inFocus)
-		return;
+		return false;
 
 	D3DXVECTOR3 target = position;
 	target.x = 50.0f;
@@ -81,4 +81,6 @@ void GameCamera::Focus(const D3DXVECTOR3 & position, const std::function<void()>
 	cntFocus = 0;
 	inFocus = true;
 	this->callback = callback;
+
+	return true;
 }

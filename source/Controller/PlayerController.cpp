@@ -134,7 +134,12 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 	GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());	
 
 	auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
-	camera->Focus(player->GetPosition(), callback);
+	bool res = camera->Focus(player->GetPosition(), callback);
+
+	if (!res)
+	{
+		OnFinishCameraFocus();
+	}
 }
 
 /**************************************
@@ -147,7 +152,7 @@ void PlayerController::OnFinishCameraFocus()
 	if (cntLife > 0)
 	{
 		cntLife--;
-		TaskManager::Instance()->CreateDelayedTask(180.0f, true, [this]()
+		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
 		{
 			player->Init();
 		});

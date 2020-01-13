@@ -28,7 +28,9 @@ const float PlayerActor::MaxAngle = 40.0f;
 コンストラクタ
 ***************************************/
 PlayerActor::PlayerActor() :
-	cntShotFrame(0)
+	cntShotFrame(0),
+	enableShot(false),
+	enableMove(false)
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("Player", mesh);
@@ -73,11 +75,14 @@ PlayerActor::~PlayerActor()
 ***************************************/
 void PlayerActor::Init()
 {
+	active = true;
+
+	transform->SetRotation(Quaternion::Identity);
+
 	const D3DXVECTOR3 InitPos = { 0.0f, 0.0f, -55.0f };
 	const D3DXVECTOR3 StartPos = { 0.0f, 0.0f, -20.0f };
-	Tween::Move(*this, InitPos, StartPos, 60.0f, EaseType::OutBack, false);
-	collider->SetActive(true);
-	active = true;
+	auto callback = std::bind(&PlayerActor::OnFinishInitMove, this);
+	Tween::Move(*this, InitPos, StartPos, 60.0f, EaseType::OutBack, false, callback);
 }
 
 /**************************************
@@ -151,6 +156,9 @@ void PlayerActor::Draw()
 ***************************************/
 void PlayerActor::_Move(const D3DXVECTOR3 & dir)
 {
+	if (!enableMove)
+		return;
+
 	D3DXVECTOR3 position = transform->GetPosition() + Vector3::Normalize(dir) * SpeedMove * FixedTime::GetTimeScale();
 
 	position = Vector3::Clamp(-BorderMove, BorderMove, position);
@@ -163,6 +171,9 @@ void PlayerActor::_Move(const D3DXVECTOR3 & dir)
 ***************************************/
 void PlayerActor::_Rotate(float dir)
 {
+	if (!enableMove)
+		return;
+
 	float targetAngle = dir * MaxAngle;
 	float currentAngle = transform->GetEulerAngle().z;
 
@@ -179,6 +190,9 @@ void PlayerActor::_Rotate(float dir)
 ***************************************/
 void PlayerActor::_Shot()
 {
+	if (!enableShot)
+		return;
+
 	const float ShotInterval = 3.0f;
 
 	cntShotFrame += FixedTime::GetTimeScale();
@@ -200,5 +214,18 @@ void PlayerActor::_Shot()
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
 	collider->SetActive(false);
+	enableMove = false;
+	enableShot = false;
+
 	onColliderHit(other);
+}
+
+/**************************************
+初期化の移動終了コールバック
+***************************************/
+void PlayerActor::OnFinishInitMove()
+{
+	collider->SetActive(true);
+	enableMove = true;
+	enableShot = true;
 }

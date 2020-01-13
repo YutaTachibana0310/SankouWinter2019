@@ -28,7 +28,7 @@ public:
 
 	void Update() override;
 
-	void Focus(const D3DXVECTOR3& position, const std::function<void()>& callback);
+	bool Focus(const D3DXVECTOR3& position, const std::function<void()>& callback);
 
 	static const D3DXVECTOR3 InitPosition;
 	static const float DurationFocusTransition;
