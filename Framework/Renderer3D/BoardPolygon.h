@@ -39,6 +39,9 @@ public:
 	//ディフューズ設定処理
 	void SetDiffuse(const D3DXCOLOR& color);
 
+	//リソース解放
+	void ReleaseResource();
+
 protected:
 	LPDIRECT3DDEVICE9 pDevice;
 
@@ -48,6 +51,8 @@ protected:
 	PolygonResource *resource;
 
 	SpriteEffect *effect;
+
+	bool initialized;
 };
 
 #endif
