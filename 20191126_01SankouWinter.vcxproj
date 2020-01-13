@@ -262,6 +262,7 @@
     <ClCompile Include="source\Effect\GameParticleManager.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyExplosion.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
+    <ClCompile Include="source\Effect\Game\PlayerExplosion.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Handler\EnemyBulletHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
@@ -419,6 +420,7 @@
     <ClInclude Include="source\Effect\GameParticleManager.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyExplosion.h" />
     <ClInclude Include="source\Effect\Game\PlayerBulletHit.h" />
+    <ClInclude Include="source\Effect\Game\PlayerExplosion.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
     <ClInclude Include="source\Handler\EnemyBulletHandler.h" />

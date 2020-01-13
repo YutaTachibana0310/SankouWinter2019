@@ -13,6 +13,8 @@
 #include "../Actor/Player/PlayerActor.h"
 #include "PlayerBulletController.h"
 #include "EnemyTimeController.h"
+#include "../Camera/GameCamera.h"
+#include "../Effect/GameParticleManager.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -128,4 +130,7 @@ void PlayerController::InputEnemyBulletSlowDown()
 void PlayerController::CollisionPlayer(ColliderObserver * other)
 {
 	Debug::Log("Hit Player");
+
+	player->Uninit();
+	GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());	
 }

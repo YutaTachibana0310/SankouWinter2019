@@ -72,7 +72,8 @@ PlayerActor::~PlayerActor()
 ***************************************/
 void PlayerActor::Init()
 {
-	transform->SetPosition(Vector3::Zero);
+	transform->SetPosition({0.0f, 0.0f, -10.0f});
+	collider->SetActive(true);
 }
 
 /**************************************
@@ -80,6 +81,7 @@ void PlayerActor::Init()
 ***************************************/
 void PlayerActor::Uninit()
 {
+	collider->SetActive(false);
 }
 
 /**************************************

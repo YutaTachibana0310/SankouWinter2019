@@ -12,6 +12,7 @@
 #include "Game\PlayerBulletHit.h"
 #include "Enemy\EnemyExplosion.h"
 #include "Enemy/EnemyDebris.h"
+#include "Game/PlayerExplosion.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -30,6 +31,7 @@ void GameParticleManager::Init()
 	controllers[GameEffect::PlayerBulletHit] = new Effect::Game::PlayerBulletHitController();
 	controllers[GameEffect::EnemyExplosion] = new Effect::Game::EnemyExplosionController();
 	controllers[GameEffect::EnemyDebris] = new Effect::Game::EnemyDebrisController();
+	controllers[GameEffect::PlayerExplosion] = new Effect::Game::PlayerExplosionController();
 
 	crossFilter->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	crossFilter->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
