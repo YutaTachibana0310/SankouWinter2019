@@ -11,22 +11,28 @@
 #include "../../../Framework/Input/input.h"
 #include "../../../Framework/Tool/DebugWindow.h"
 #include "../../../Framework/Core/ObjectPool.h"
+#include "../../../Framework/Collider/BoxCollider3D.h"
+#include "../../../Framework/Tween/Tween.h"
 
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
+#include "PlayerColliderViewer.h"
 
 /**************************************
 staticメンバ
 ***************************************/
 const float PlayerActor::SpeedMove = 0.6f;
 const D3DXVECTOR3 PlayerActor::BorderMove = { 0.0f, 25.0f, 45.0f };
+const D3DXVECTOR3 PlayerActor::ShotPosition = { 0.0f, 0.0f, 5.0f };
 const float PlayerActor::MaxAngle = 40.0f;
 
 /**************************************
 コンストラクタ
 ***************************************/
 PlayerActor::PlayerActor() :
-	cntShotFrame(0)
+	cntShotFrame(0),
+	enableShot(false),
+	enableMove(false)
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("Player", mesh);
@@ -34,6 +40,13 @@ PlayerActor::PlayerActor() :
 	turretRoot = new PlayerTurretRoot();
 	AddChild(turretRoot);
 	turretRoot->SetLocalPosition(Vector3::Zero);
+
+	collider = BoxCollider3D::Create("Player", transform);
+	collider->SetSize({ 0.5f, 0.5f, 0.5f });
+	collider->AddObserver(this);
+
+	colliderViewer = new PlayerColliderViewer();
+	AddChild(colliderViewer);
 
 	const unsigned MaxTurret = 4;
 	turretContainer.reserve(MaxTurret);
@@ -44,7 +57,7 @@ PlayerActor::PlayerActor() :
 	}
 
 	const float PositionTurret = -2.0f;
-	const float OffsetTurret = 5.0f;
+	const float OffsetTurret = 7.5f;
 	turretContainer[0]->SetPosition({ OffsetTurret, 0.0f, PositionTurret });
 	turretContainer[1]->SetPosition({ -OffsetTurret, 0.0f, PositionTurret });
 	turretContainer[2]->SetPosition({ 0.0f, OffsetTurret, PositionTurret });
@@ -58,6 +71,8 @@ PlayerActor::~PlayerActor()
 {
 	SAFE_DELETE(mesh);
 	SAFE_DELETE(turretRoot);
+	SAFE_DELETE(colliderViewer);
+	collider.reset();
 	Utility::DeleteContainer(turretContainer);
 }
 
@@ -66,7 +81,14 @@ PlayerActor::~PlayerActor()
 ***************************************/
 void PlayerActor::Init()
 {
-	transform->SetPosition(Vector3::Zero);
+	active = true;
+
+	transform->SetRotation(Quaternion::Identity);
+
+	const D3DXVECTOR3 InitPos = { 0.0f, 0.0f, -55.0f };
+	const D3DXVECTOR3 StartPos = { 0.0f, 0.0f, -20.0f };
+	auto callback = std::bind(&PlayerActor::OnFinishInitMove, this);
+	Tween::Move(*this, InitPos, StartPos, 60.0f, EaseType::OutBack, false, callback);
 }
 
 /**************************************
@@ -74,6 +96,8 @@ void PlayerActor::Init()
 ***************************************/
 void PlayerActor::Uninit()
 {
+	collider->SetActive(false);
+	active = false;
 }
 
 /**************************************
@@ -81,6 +105,9 @@ void PlayerActor::Uninit()
 ***************************************/
 void PlayerActor::Update()
 {
+	if (!active)
+		return;
+
 	D3DXVECTOR3 direction = Vector3::Zero;
 	direction.z = Input::GetPressHorizontail();
 	direction.y = Input::GetPressVertical();
@@ -91,11 +118,15 @@ void PlayerActor::Update()
 
 	_Shot();
 
+	_SlowDownEnemyBullet();
+
 	turretRoot->Update();
 	for (auto&& turret : turretContainer)
 	{
 		turret->Update();
 	}
+
+	colliderViewer->Update();
 
 	Debug::Begin("Player");
 
@@ -111,6 +142,9 @@ void PlayerActor::Update()
 ***************************************/
 void PlayerActor::Draw()
 {
+	if (!active)
+		return;
+
 	transform->SetWorld();
 	mesh->Draw();
 
@@ -118,6 +152,21 @@ void PlayerActor::Draw()
 	{
 		turret->Draw();
 	}
+
+#ifdef _DEBUG
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+	pDevice->SetRenderState(D3DRS_ZENABLE, false);
+	collider->Draw();
+	pDevice->SetRenderState(D3DRS_ZENABLE, true);
+#endif
+}
+
+/**************************************
+当たり判定描画処理
+***************************************/
+void PlayerActor::DrawCollider()
+{
+	colliderViewer->Draw();
 }
 
 /**************************************
@@ -125,6 +174,9 @@ void PlayerActor::Draw()
 ***************************************/
 void PlayerActor::_Move(const D3DXVECTOR3 & dir)
 {
+	if (!enableMove)
+		return;
+
 	D3DXVECTOR3 position = transform->GetPosition() + Vector3::Normalize(dir) * SpeedMove * FixedTime::GetTimeScale();
 
 	position = Vector3::Clamp(-BorderMove, BorderMove, position);
@@ -137,6 +189,9 @@ void PlayerActor::_Move(const D3DXVECTOR3 & dir)
 ***************************************/
 void PlayerActor::_Rotate(float dir)
 {
+	if (!enableMove)
+		return;
+
 	float targetAngle = dir * MaxAngle;
 	float currentAngle = transform->GetEulerAngle().z;
 
@@ -153,6 +208,9 @@ void PlayerActor::_Rotate(float dir)
 ***************************************/
 void PlayerActor::_Shot()
 {
+	if (!enableShot)
+		return;
+
 	const float ShotInterval = 3.0f;
 
 	cntShotFrame += FixedTime::GetTimeScale();
@@ -162,8 +220,44 @@ void PlayerActor::_Shot()
 
 	for (auto&& turret : turretContainer)
 	{
-		onFireBullet(turret->GetShotPosition());
+		onFireBullet(turret->GetShotPosition(), false);
 	}
 
+	onFireBullet(transform->GetPosition() + ShotPosition, true);
+
 	cntShotFrame = 0.0f;
+}
+
+/**************************************
+敵弾の減速処理
+***************************************/
+void PlayerActor::_SlowDownEnemyBullet()
+{
+	if (!enableShot)
+		onSlowdownEnemyBullet(false);
+
+	bool input = Keyboard::GetPress(DIK_C);
+	onSlowdownEnemyBullet(input);
+}
+
+/**************************************
+当たり判定処理
+***************************************/
+void PlayerActor::OnColliderHit(ColliderObserver * other)
+{
+	collider->SetActive(false);
+	enableMove = false;
+	enableShot = false;
+
+	onColliderHit(other);
+}
+
+/**************************************
+初期化の移動終了コールバック
+***************************************/
+void PlayerActor::OnFinishInitMove()
+{
+	collider->SetActive(true);
+	enableMove = true;
+	enableShot = true;
 }

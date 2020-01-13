@@ -9,6 +9,8 @@
 #define _PLAYERACTOR_H_
 
 #include "../../../main.h"
+#include "../../../Framework/Collider/ColliderObserver.h"
+
 #include <vector>
 #include <functional>
 
@@ -18,11 +20,13 @@
 class MeshContainer;
 class PlayerTurretActor;
 class PlayerTurretRoot;
+class BoxCollider3D;
+class PlayerColliderViewer;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
 ***************************************/
-class PlayerActor : public GameObject
+class PlayerActor : public GameObject, public ColliderObserver
 {
 public:
 	PlayerActor();
@@ -32,11 +36,16 @@ public:
 	virtual void Uninit();
 	virtual void Update();
 	virtual void Draw();
+	virtual void DrawCollider();
 
-	std::function<void(const D3DXVECTOR3)> onFireBullet;
+	std::function<void(const D3DXVECTOR3, bool)> onFireBullet;
+	std::function<void(ColliderObserver* other)> onColliderHit;
+	std::function<void(bool slowDown)> onSlowdownEnemyBullet;
+	std::function<void()> onFireBomber;
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
+	static const D3DXVECTOR3 ShotPosition;
 	static const float MaxAngle;
 
 private:
@@ -45,11 +54,22 @@ private:
 	PlayerTurretRoot *turretRoot;
 	std::vector<PlayerTurretActor*> turretContainer;
 
+	std::shared_ptr<BoxCollider3D> collider;
+
+	PlayerColliderViewer *colliderViewer;
+
 	float cntShotFrame;
+
+	bool enableShot;
+	bool enableMove;
 
 	void _Move(const D3DXVECTOR3& dir);
 	void _Rotate(float dir);
 	void _Shot();
+	void _SlowDownEnemyBullet();
+
+	virtual void OnColliderHit(ColliderObserver * other) override;
+	virtual void OnFinishInitMove();
 };
 
 #endif

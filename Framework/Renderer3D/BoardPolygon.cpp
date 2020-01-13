@@ -19,7 +19,8 @@
 BoardPolygon::BoardPolygon() :
 	vtxBuff(nullptr),
 	texture(nullptr),
-	effect(nullptr)
+	effect(nullptr),
+	initialized(false)
 {
 	pDevice = GetDevice();
 	effect = new SpriteEffect();
@@ -31,7 +32,8 @@ BoardPolygon::BoardPolygon() :
 BoardPolygon::BoardPolygon(SpriteEffect * effect) :
 	vtxBuff(nullptr),
 	texture(nullptr),
-	effect(effect)
+	effect(effect),
+	initialized(false)
 {
 	pDevice = GetDevice();
 }
@@ -41,12 +43,8 @@ BoardPolygon::BoardPolygon(SpriteEffect * effect) :
 ***************************************/
 BoardPolygon::~BoardPolygon()
 {
-	SAFE_RELEASE(vtxBuff);
-	SAFE_RELEASE(texture);
+	ReleaseResource();
 	SAFE_DELETE(effect);
-
-	if (resource != NULL)
-		resource->OnRelease();
 }
 
 /**************************************
@@ -92,4 +90,16 @@ void BoardPolygon::SetTextureIndex(int index)
 void BoardPolygon::SetDiffuse(const D3DXCOLOR & color)
 {
 	effect->SetDiffuse(color);
+}
+
+/**************************************
+ƒŠƒ\[ƒX‰ð•ú
+***************************************/
+void BoardPolygon::ReleaseResource()
+{
+	SAFE_RELEASE(vtxBuff);
+	SAFE_RELEASE(texture);
+
+	if (resource != NULL)
+		resource->OnRelease();
 }

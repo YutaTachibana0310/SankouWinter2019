@@ -8,10 +8,15 @@
 #include "PlayerController.h"
 #include "../../Framework/Resource/ResourceManager.h"
 #include "../../Framework/Input/input.h"
+#include "../../Framework/Tool/DebugWindow.h"
+#include "../../Framework/Task/TaskManager.h"
 
 #include "../Actor/Player/PlayerActor.h"
 #include "PlayerBulletController.h"
 #include "EnemyTimeController.h"
+#include "../Camera/GameCamera.h"
+#include "../Effect/GameParticleManager.h"
+#include "../Actor/Player/PlayerColliderViewer.h"
 
 /**************************************
 グローバル変数
@@ -23,20 +28,27 @@ const int PlayerController::MaxLife = 2;
 /**************************************
 コンストラクタ
 ***************************************/
-PlayerController::PlayerController() :
+PlayerController::PlayerController(GameCamera *camera) :
+	camera(camera),
 	cntEnergy(MaxEnergy),
 	cntLife(MaxLife),
 	cntBomb(MaxBomb)
 {
-	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
-	
+	ResourceManager::Instance()->MakePolygon("PlayerCollider", "data/TEXTURE/Player/playerCollider.png", { 1.0f, 1.0f }, { 3.0f, 2.0f });
+
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
 
-	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1);
+	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1, std::placeholders::_2);
 	player->onFireBullet = onFireBullet;
+
+	auto onHitPlayer = std::bind(&PlayerController::CollisionPlayer, this, std::placeholders::_1);
+	player->onColliderHit = onHitPlayer;
+
+	auto onSlowDownEnemyBullet = std::bind(&PlayerController::SlowDownEnemyBullet, this, std::placeholders::_1);
+	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
 
 	player->Init();
 }
@@ -55,8 +67,6 @@ PlayerController::~PlayerController()
 ***************************************/
 void PlayerController::Update()
 {
-	InputEnemyBulletSlowDown();
-
 	player->Update();
 
 	bulletController->Update();
@@ -76,6 +86,14 @@ void PlayerController::Draw()
 void PlayerController::DrawBullet()
 {
 	bulletController->Draw();
+}
+
+/**************************************
+当たり判定描画処理
+***************************************/
+void PlayerController::DrawCollider()
+{
+	player->DrawCollider();
 }
 
 /**************************************
@@ -105,9 +123,9 @@ int PlayerController::GetCntBomb() const
 /**************************************
 バレットを止める入力の処理
 ***************************************/
-void PlayerController::InputEnemyBulletSlowDown()
+void PlayerController::SlowDownEnemyBullet(bool isSlow)
 {
-	if (Keyboard::GetPress(DIK_X) && cntEnergy >= 0.0f)
+	if (cntEnergy > 0.0f && isSlow)
 	{
 		cntEnergy -= Math::Clamp(0.0f, MaxEnergy, 0.2f * FixedTime::GetTimeScale());
 		EnemyTimeController::SlowDownBullet(true);
@@ -115,5 +133,38 @@ void PlayerController::InputEnemyBulletSlowDown()
 	else
 	{
 		EnemyTimeController::SlowDownBullet(false);
+	}
+}
+
+/**************************************
+プレイヤーの当たり判定
+***************************************/
+void PlayerController::CollisionPlayer(ColliderObserver * other)
+{
+	GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());	
+
+	auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
+	bool res = camera->Focus(player->GetPosition(), callback);
+
+	if (!res)
+	{
+		OnFinishCameraFocus();
+	}
+}
+
+/**************************************
+カメラフォーカス終了時のコールバック
+***************************************/
+void PlayerController::OnFinishCameraFocus()
+{
+	player->Uninit();
+
+	if (cntLife > 0)
+	{
+		cntLife--;
+		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
+		{
+			player->Init();
+		});
 	}
 }

@@ -76,6 +76,11 @@ void PolygonResource::Clone(BoardPolygon * entity)
 	if (entity == nullptr)
 		return;
 
+	if (entity->initialized)
+	{
+		entity->ReleaseResource();
+	}
+
 	entity->vtxBuff = vtxBuff;
 	vtxBuff->AddRef();
 
@@ -86,6 +91,8 @@ void PolygonResource::Clone(BoardPolygon * entity)
 	cntRef++;
 
 	entity->SetTexDiv(split);
+
+	entity->initialized = true;
 }
 
 /**************************************

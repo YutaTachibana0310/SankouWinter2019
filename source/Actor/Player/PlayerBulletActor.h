@@ -26,12 +26,17 @@ public:
 	PlayerBulletActor();
 	~PlayerBulletActor();
 
-	void Init(const D3DXVECTOR3& position);
+	void Init(const D3DXVECTOR3& position, bool isMain);
 	void Uninit();
 	void Update();
 	void Draw();
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
+
+	inline float Power()
+	{
+		return power;
+	}
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 MoveBorder;
@@ -46,6 +51,8 @@ private:
 	std::shared_ptr<BoxCollider3D> collider;
 
 	bool _IsOutBorder();
+
+	float power;
 
 };
 #endif

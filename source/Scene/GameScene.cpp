@@ -46,7 +46,7 @@ void GameScene::Init()
 	sceneCamera = gameCamera = new GameCamera();
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	skybox = new GameSkybox();
-	playerController = new PlayerController();
+	playerController = new PlayerController(gameCamera);
 	bloom = new BloomController();
 	enemyController = new EnemyController();
 	planet = new PlanetActor();
@@ -82,11 +82,6 @@ void GameScene::Uninit()
 ***************************************/
 void GameScene::Update()
 {
-	if (Keyboard::GetTrigger(DIK_C))
-		EnemyTimeController::SetTimeScale(0.2f);
-	if (Keyboard::GetRelease(DIK_C))
-		EnemyTimeController::SetTimeScale(1.0f);
-
 	gameCamera->Update();
 	skybox->Update();
 	playerController->Update();
@@ -94,6 +89,7 @@ void GameScene::Update()
 	planet->Update();
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
+	ColliderManager::Instance()->CheckRoundRobin("Player", "EnemyBullet");
 
 	particleManager->Update();
 
@@ -129,6 +125,8 @@ void GameScene::Draw()
 	particleManager->Draw();
 
 	enemyController->DrawBullet();
+
+	playerController->DrawCollider();
 
 	GameViewerParameter param(
 		playerController->GetPercentEnergy(),

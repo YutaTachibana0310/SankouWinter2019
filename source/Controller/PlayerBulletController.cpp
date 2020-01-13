@@ -8,6 +8,7 @@
 #include "PlayerBulletController.h"
 #include "../../Framework/Tool/DebugWindow.h"
 #include "../../Framework/Core/ObjectPool.h"
+#include "../../Framework/Resource/ResourceManager.h"
 
 #include "../Actor/Player/PlayerBulletActor.h"
 
@@ -19,6 +20,8 @@
 ***************************************/
 PlayerBulletController::PlayerBulletController()
 {
+	ResourceManager::Instance()->MakePolygon("PlayerBullet", "data/TEXTURE/Player/BlazeBullet.png", { 2.0f, 1.0f });
+	ResourceManager::Instance()->MakePolygon("PlayerBulletMain", "data/TEXTURE/Player/PlayerMainBullet.png", { 3.0f, 1.5f });
 }
 
 /**************************************
@@ -74,9 +77,9 @@ void PlayerBulletController::Draw()
 /**************************************
 ”­ŽËˆ—
 ***************************************/
-void PlayerBulletController::FireBullet(const D3DXVECTOR3 & pos)
+void PlayerBulletController::FireBullet(const D3DXVECTOR3 & pos, bool isMain)
 {
 	PlayerBulletActor* bullet = ObjectPool::Instance()->Create<PlayerBulletActor>();
-	bullet->Init(pos);
+	bullet->Init(pos, isMain);
 	bulletContainer.push_back(bullet);
 }

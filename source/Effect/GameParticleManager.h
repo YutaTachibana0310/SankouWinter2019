@@ -22,6 +22,7 @@ namespace GameEffect
 		PlayerBulletHit,
 		EnemyExplosion,
 		EnemyDebris,
+		PlayerExplosion,
 		Max
 	};
 }

@@ -22,15 +22,15 @@ const D3DXVECTOR2 PlayerBulletActor::Size = { 2.0f, 1.0f };
 /**************************************
 コンストラクタ
 ***************************************/
-PlayerBulletActor::PlayerBulletActor()
+PlayerBulletActor::PlayerBulletActor() :
+	power(1.0f)
 {
 	polygon = new BoardPolygon();
-	ResourceManager::Instance()->GetPolygon("PlayerBullet", polygon);
 	transform->Rotate(-90.0f, Vector3::Up);
 
 	collider = BoxCollider3D::Create("PlayerBullet", transform);
 	collider->AddObserver(this);
-	collider->SetSize({ 2.0f, 1.0f, 2.0f });
+	collider->SetSize({ 5.0f, 1.0f, 2.0f });
 }
 
 /**************************************
@@ -45,8 +45,19 @@ PlayerBulletActor::~PlayerBulletActor()
 /**************************************
 初期化処理
 ***************************************/
-void PlayerBulletActor::Init(const D3DXVECTOR3& position)
+void PlayerBulletActor::Init(const D3DXVECTOR3& position, bool isMain)
 {
+	if (isMain)
+	{
+		ResourceManager::Instance()->GetPolygon("PlayerBulletMain", polygon);
+		power = 1.25f;
+	}
+	else
+	{
+		ResourceManager::Instance()->GetPolygon("PlayerBullet", polygon);
+		power = 1.0f;
+	}
+
 	active = true;
 	transform->SetPosition(position);
 
@@ -128,3 +139,4 @@ void PlayerBulletActor::OnColliderHit(ColliderObserver * other)
 	active = false;
 	GameParticleManager::Instance()->Generate(GameEffect::PlayerBulletHit, transform->GetPosition());
 }
+

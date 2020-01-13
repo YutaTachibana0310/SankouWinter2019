@@ -14,11 +14,15 @@
 staticメンバ
 ***************************************/
 const D3DXVECTOR3 GameCamera::InitPosition = { 50.0f, 0.0f, 0.0f };
+const float GameCamera::DurationFocusTransition = 20.0f;
+const int GameCamera::DurationFocus = 60;
+
 /**************************************
 コンストラクタ
 ***************************************/
-GameCamera::GameCamera()
-{;
+GameCamera::GameCamera() :
+	callback(nullptr)
+{
 	transform->SetPosition(InitPosition);
 	transform->LookAt(Vector3::Zero);
 
@@ -42,12 +46,15 @@ void GameCamera::Update()
 	if (inFocus)
 	{
 		cntFocus++;
-		if (cntFocus > 60)
+		if (cntFocus > DurationFocus)
 		{
-			Tween::Move(*this, InitPosition, 10.0f, EaseType::OutCubic, true);
-			Tween::To(tweenViewAngle, D3DXToRadian(60.0f), 10.0f, EaseType::OutCubic, true);
+			Tween::Move(*this, InitPosition, DurationFocusTransition, EaseType::OutCubic, true);
+			Tween::To(tweenViewAngle, D3DXToRadian(60.0f), DurationFocusTransition, EaseType::OutCubic, true);
 			FixedTime::SetTimeScale(1.0f);
 			inFocus = false;
+
+			if (callback != nullptr)
+				callback();
 		}
 	}
 	
@@ -59,15 +66,21 @@ void GameCamera::Update()
 /**************************************
 指定の位置を注視させる
 ***************************************/
-void GameCamera::Focus(const D3DXVECTOR3 & position)
+bool GameCamera::Focus(const D3DXVECTOR3 & position, const std::function<void()>& callback)
 {
+	if (inFocus)
+		return false;
+
 	D3DXVECTOR3 target = position;
 	target.x = 50.0f;
 
-	Tween::Move(*this, target, 10.0f, EaseType::OutCubic, true);
-	Tween::To(tweenViewAngle, D3DXToRadian(50.0f), 10.0f, EaseType::OutCubic, true);
+	Tween::Move(*this, target, DurationFocusTransition, EaseType::OutCubic, true);
+	Tween::To(tweenViewAngle, D3DXToRadian(50.0f), DurationFocusTransition, EaseType::OutCubic, true);
 	FixedTime::SetTimeScale(0.05f);
 
 	cntFocus = 0;
 	inFocus = true;
+	this->callback = callback;
+
+	return true;
 }
