@@ -11,6 +11,7 @@
 #include "../../../Framework/Input/input.h"
 #include "../../../Framework/Tool/DebugWindow.h"
 #include "../../../Framework/Core/ObjectPool.h"
+#include "../../../Framework/Collider/BoxCollider3D.h"
 
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
@@ -35,6 +36,10 @@ PlayerActor::PlayerActor() :
 	AddChild(turretRoot);
 	turretRoot->SetLocalPosition(Vector3::Zero);
 
+	collider = BoxCollider3D::Create("Player", transform);
+	collider->SetSize({ 0.5f, 0.5f, 0.5f });
+	collider->AddObserver(this);
+
 	const unsigned MaxTurret = 4;
 	turretContainer.reserve(MaxTurret);
 	for (int i = 0; i < MaxTurret; i++)
@@ -58,6 +63,7 @@ PlayerActor::~PlayerActor()
 {
 	SAFE_DELETE(mesh);
 	SAFE_DELETE(turretRoot);
+	collider.reset();
 	Utility::DeleteContainer(turretContainer);
 }
 
@@ -118,6 +124,13 @@ void PlayerActor::Draw()
 	{
 		turret->Draw();
 	}
+
+#ifdef _DEBUG
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+	pDevice->SetRenderState(D3DRS_ZENABLE, false);
+	collider->Draw();
+	pDevice->SetRenderState(D3DRS_ZENABLE, true);
+#endif
 }
 
 /**************************************
@@ -166,4 +179,12 @@ void PlayerActor::_Shot()
 	}
 
 	cntShotFrame = 0.0f;
+}
+
+/**************************************
+“–‚½‚è”»’èˆ—
+***************************************/
+void PlayerActor::OnColliderHit(ColliderObserver * other)
+{
+	onColliderHit(other);
 }

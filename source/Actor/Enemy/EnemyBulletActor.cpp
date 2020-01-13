@@ -14,7 +14,7 @@
 /**************************************
 ÉOÉçÅ[ÉoÉãïœêî
 ***************************************/
-const D3DXVECTOR3 EnemyBulletActor::SizeCollider = { 0.1f, 0.1f, 0.1f };
+const D3DXVECTOR3 EnemyBulletActor::SizeCollider = { 0.25f, 0.25f, 0.25f };
 const int EnemyBulletActor::IntervalAnimation = 3;
 const D3DXVECTOR3 EnemyBulletActor::BorderLeftTop = { 0.0f, 40.0f, -60.0f };
 const D3DXVECTOR3 EnemyBulletActor::BorderRightBottom = { 0.0f, -40.0f, 60.0f };

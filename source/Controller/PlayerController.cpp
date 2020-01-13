@@ -8,6 +8,7 @@
 #include "PlayerController.h"
 #include "../../Framework/Resource/ResourceManager.h"
 #include "../../Framework/Input/input.h"
+#include "../../Framework/Tool/DebugWindow.h"
 
 #include "../Actor/Player/PlayerActor.h"
 #include "PlayerBulletController.h"
@@ -37,6 +38,9 @@ PlayerController::PlayerController() :
 
 	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1);
 	player->onFireBullet = onFireBullet;
+
+	auto onHitPlayer = std::bind(&PlayerController::CollisionPlayer, this, std::placeholders::_1);
+	player->onColliderHit = onHitPlayer;
 
 	player->Init();
 }
@@ -116,4 +120,12 @@ void PlayerController::InputEnemyBulletSlowDown()
 	{
 		EnemyTimeController::SlowDownBullet(false);
 	}
+}
+
+/**************************************
+ƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è
+***************************************/
+void PlayerController::CollisionPlayer(ColliderObserver * other)
+{
+	Debug::Log("Hit Player");
 }

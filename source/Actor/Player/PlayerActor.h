@@ -9,6 +9,8 @@
 #define _PLAYERACTOR_H_
 
 #include "../../../main.h"
+#include "../../../Framework/Collider/ColliderObserver.h"
+
 #include <vector>
 #include <functional>
 
@@ -18,11 +20,12 @@
 class MeshContainer;
 class PlayerTurretActor;
 class PlayerTurretRoot;
+class BoxCollider3D;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
 ***************************************/
-class PlayerActor : public GameObject
+class PlayerActor : public GameObject, public ColliderObserver
 {
 public:
 	PlayerActor();
@@ -34,6 +37,7 @@ public:
 	virtual void Draw();
 
 	std::function<void(const D3DXVECTOR3)> onFireBullet;
+	std::function<void(ColliderObserver* other)> onColliderHit;
 
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
@@ -45,11 +49,15 @@ private:
 	PlayerTurretRoot *turretRoot;
 	std::vector<PlayerTurretActor*> turretContainer;
 
+	std::shared_ptr<BoxCollider3D> collider;
+
 	float cntShotFrame;
 
 	void _Move(const D3DXVECTOR3& dir);
 	void _Rotate(float dir);
 	void _Shot();
+
+	virtual void OnColliderHit(ColliderObserver * other) override;
 };
 
 #endif

@@ -94,6 +94,7 @@ void GameScene::Update()
 	planet->Update();
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
+	ColliderManager::Instance()->CheckRoundRobin("Player", "EnemyBullet");
 
 	particleManager->Update();
 

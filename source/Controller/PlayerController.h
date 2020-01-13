@@ -15,6 +15,7 @@
 ***************************************/
 class PlayerActor;
 class PlayerBulletController;
+class ColliderObserver;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -46,5 +47,6 @@ private:
 	static const int MaxBomb;
 
 	void InputEnemyBulletSlowDown();
+	void CollisionPlayer(ColliderObserver* other);
 };
 #endif
