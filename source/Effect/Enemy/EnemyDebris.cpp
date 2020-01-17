@@ -38,8 +38,7 @@ namespace Effect::Game
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new Enemy::EnemyParticleEmitter(NumEmit, DurationEmit);
-			emitter->CreateParticleContainer<EnemyDebris>(MaxParticle);
+			emitter = new EnemyDebrisEmitter();
 		}
 	}
 
@@ -81,5 +80,17 @@ namespace Effect::Game
 		transform->SetScale(Vector3::One * scale);
 
 		transform->Move(EnemyTimeController::GetTimeScale() * moveDir * speed);
+	}
+
+	/**************************************
+	EnemyDebrisEmitterコンストラクタ
+	***************************************/
+	EnemyDebrisEmitter::EnemyDebrisEmitter()
+	{
+		particleContainer.resize(256);
+		for (auto&& particle : particleContainer)
+		{
+			particle = new EnemyDebris();
+		}
 	}
 }
