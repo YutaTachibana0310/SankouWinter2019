@@ -109,7 +109,6 @@
     <ClCompile Include="source\Effect\GameParticleManager.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
-    <ClCompile Include="source\Actor\Enemy\BaseEnemy.cpp" />
     <ClCompile Include="source\Controller\EnemyController.cpp" />
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyParticleEmitter.cpp" />
@@ -135,7 +134,8 @@
     <ClCompile Include="source\Controller\PlayerController.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerExplosion.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerColliderViewer.cpp" />
-    <ClCompile Include="source\Actor\Enemy\BaseSmallEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\Base\BaseEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\Base\BaseSmallEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -262,7 +262,6 @@
     <ClInclude Include="source\Effect\GameParticleManager.h" />
     <ClInclude Include="source\Effect\Game\PlayerBulletHit.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
-    <ClInclude Include="source\Actor\Enemy\BaseEnemy.h" />
     <ClInclude Include="source\Controller\EnemyController.h" />
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyParticleEmitter.h" />
@@ -296,7 +295,8 @@
     <ClInclude Include="source\Controller\PlayerController.h" />
     <ClInclude Include="source\Effect\Game\PlayerExplosion.h" />
     <ClInclude Include="source\Actor\Player\PlayerColliderViewer.h" />
-    <ClInclude Include="source\Actor\Enemy\BaseSmallEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\Base\BaseEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\Base\BaseSmallEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

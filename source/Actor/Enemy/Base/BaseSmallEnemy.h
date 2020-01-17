@@ -8,7 +8,7 @@
 #ifndef _BASESMALLENEMY_H_
 #define _BASESMALLENEMY_H_
 
-#include "../../../main.h"
+#include "../../../../main.h"
 #include "BaseEnemy.h"
 
 /**************************************

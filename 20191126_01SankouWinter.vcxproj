@@ -242,8 +242,8 @@
     <ClCompile Include="Library\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Library\json11\json11.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source\Actor\Enemy\BaseEnemy.cpp" />
-    <ClCompile Include="source\Actor\Enemy\BaseSmallEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\Base\BaseEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\Base\BaseSmallEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\DemoEnemyActor.cpp" />
     <ClCompile Include="source\Actor\Enemy\EnemyBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
@@ -402,8 +402,8 @@
     <ClInclude Include="Library\nameof\nameof.hpp" />
     <ClInclude Include="Library\picojson\picojson.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="source\Actor\Enemy\BaseEnemy.h" />
-    <ClInclude Include="source\Actor\Enemy\BaseSmallEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\Base\BaseEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\Base\BaseSmallEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\DemoEnemyActor.h" />
     <ClInclude Include="source\Actor\Enemy\EnemyBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />

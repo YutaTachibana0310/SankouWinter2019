@@ -10,7 +10,7 @@
 
 #include "../../../main.h"
 #include "../../../Framework/Collider/ColliderObserver.h"
-#include "BaseEnemy.h"
+#include "Base/BaseEnemy.h"
 
 /**************************************
 ‘O•ûéŒ¾

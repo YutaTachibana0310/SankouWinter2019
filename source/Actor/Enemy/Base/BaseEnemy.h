@@ -8,7 +8,7 @@
 #ifndef _BASEENEMY_H_
 #define _BASEENEMY_H_
 
-#include "../../../main.h"
+#include "../../../../main.h"
 #include <vector>
 
 /**************************************

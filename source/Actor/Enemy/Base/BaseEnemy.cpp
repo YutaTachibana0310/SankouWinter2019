@@ -6,8 +6,8 @@
 //
 //=====================================
 #include "BaseEnemy.h"
-#include "../../../Framework/Collider/BoxCollider3D.h"
-#include "../../../Framework/Renderer3D/MeshContainer.h"
+#include "../../../../Framework/Collider/BoxCollider3D.h"
+#include "../../../../Framework/Renderer3D/MeshContainer.h"
 
 /**************************************
 コンストラクタ
