@@ -11,6 +11,7 @@
 #include "../../../main.h"
 #include "../../../Framework/Particle/BaseParticleController.h"
 #include "../../../Framework/Particle/3D/Particle3D.h"
+#include "EnemyParticleEmitter.h"
 
 namespace Effect::Game
 {
@@ -41,6 +42,15 @@ namespace Effect::Game
 	private:
 		D3DXVECTOR3 moveDir;
 		float speed;
+	};
+
+	/**************************************
+	EnemyDebrisEmitter
+	***************************************/
+	class EnemyDebrisEmitter : public Enemy::EnemyParticleEmitter
+	{
+	public:
+		EnemyDebrisEmitter();
 	};
 }
 #endif

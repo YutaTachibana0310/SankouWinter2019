@@ -66,7 +66,11 @@ void DemoEnemyActor::Uninit()
 ***************************************/
 void DemoEnemyActor::Update()
 {
-
+	if (hp <= 0)
+	{
+		GameParticleManager::Instance()->GenerateEnemyExplostion(transform->GetPosition());
+		Uninit();
+	}
 }
 
 /**************************************
@@ -76,18 +80,4 @@ void DemoEnemyActor::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
-}
-
-/**************************************
-ìñÇΩÇËîªíËèàóù
-***************************************/
-void DemoEnemyActor::OnColliderHit(ColliderObserver * other)
-{
-	hp -= 1.0f;
-
-	if (hp <= 0)
-	{
-		GameParticleManager::Instance()->GenerateEnemyExplostion(transform->GetPosition());
-		Uninit();
-	}
 }

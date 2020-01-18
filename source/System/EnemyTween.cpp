@@ -6,7 +6,7 @@
 //=====================================
 #include "EnemyTween.h"
 #include "../../Framework/Math/Quaternion.h"
-#include "../Actor/Enemy/BaseEnemy.h"
+#include "../Actor/Enemy/Base/BaseEnemy.h"
 #include "../Controller/EnemyTimeController.h"
 
 #include <algorithm>

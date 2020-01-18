@@ -8,7 +8,9 @@
 #ifndef _BASEENEMY_H_
 #define _BASEENEMY_H_
 
-#include "../../../main.h"
+#include "../../../../main.h"
+#include "../../../../Framework/Collider/ColliderObserver.h"
+
 #include <vector>
 
 /**************************************
@@ -20,7 +22,7 @@ class MeshContainer;
 /**************************************
 ƒNƒ‰ƒX’è‹`
 ***************************************/
-class BaseEnemy : public GameObject
+class BaseEnemy : public GameObject, public ColliderObserver
 {
 	friend class EnemyTween;
 public:
@@ -39,5 +41,7 @@ protected:
 	std::vector<std::shared_ptr<BoxCollider3D>> colliders;
 	MeshContainer *mesh;
 	
+	virtual void OnColliderHit(ColliderObserver * other) override;
+
 };
 #endif

@@ -40,8 +40,7 @@ namespace Effect::Game
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new Enemy::EnemyParticleEmitter(NumEmit, DurationEmit);
-			emitter->CreateParticleContainer<EnemyExplosion>(MaxParticle);
+			emitter = new EnemyExplosionEmitter();
 		}
 	}
 
@@ -85,5 +84,18 @@ namespace Effect::Game
 		transform->Move(speed * moveDir * EnemyTimeController::GetTimeScale());
 
 		Animation(t);
+	}
+
+	/**************************************
+	EnemyExplosionEmitterコンストラクタ
+	***************************************/
+	EnemyExplosionEmitter::EnemyExplosionEmitter() :
+		EnemyParticleEmitter(5, 5.0f)
+	{
+		particleContainer.resize(32, nullptr);
+		for (auto&& particle : particleContainer)
+		{
+			particle = new EnemyExplosion();
+		}
 	}
 }
