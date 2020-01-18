@@ -85,7 +85,8 @@ namespace Effect::Game
 	/**************************************
 	EnemyDebrisEmitterコンストラクタ
 	***************************************/
-	EnemyDebrisEmitter::EnemyDebrisEmitter()
+	EnemyDebrisEmitter::EnemyDebrisEmitter() :
+		EnemyParticleEmitter(128, 3.0f)
 	{
 		particleContainer.resize(256);
 		for (auto&& particle : particleContainer)

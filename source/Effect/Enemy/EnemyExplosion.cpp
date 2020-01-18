@@ -89,7 +89,8 @@ namespace Effect::Game
 	/**************************************
 	EnemyExplosionEmitterコンストラクタ
 	***************************************/
-	EnemyExplosionEmitter::EnemyExplosionEmitter()
+	EnemyExplosionEmitter::EnemyExplosionEmitter() :
+		EnemyParticleEmitter(5, 5.0f)
 	{
 		particleContainer.resize(32, nullptr);
 		for (auto&& particle : particleContainer)
