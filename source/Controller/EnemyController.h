@@ -9,6 +9,7 @@
 #define _ENEMYCONTROLLER_H_
 
 #include "../../main.h"
+#include <list>
 
 /**************************************
 前方宣言
@@ -16,6 +17,7 @@
 class BaseEnemy;
 class EnemyBulletController;
 
+#undef small
 /**************************************
 クラス定義
 ***************************************/
@@ -30,7 +32,8 @@ public:
 	void DrawBullet();
 
 private:
-	BaseEnemy * enemy;
+	std::list<BaseEnemy*> enemyContainer;
+
 	EnemyBulletController *bulletController;
 };
 
