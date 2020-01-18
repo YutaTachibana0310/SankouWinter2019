@@ -8,6 +8,9 @@
 #include "BaseEnemy.h"
 #include "../../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../../Framework/Renderer3D/MeshContainer.h"
+#include "../../../../Framework/Tool/DebugWindow.h"
+
+#include "../../Player/PlayerBulletActor.h"
 
 /**************************************
 コンストラクタ
@@ -38,5 +41,18 @@ void BaseEnemy::SetCollider(bool state)
 	for (auto&& collider : colliders)
 	{
 		collider->SetActive(state);
+	}
+}
+
+/**************************************
+衝突処理
+***************************************/
+void BaseEnemy::OnColliderHit(ColliderObserver * other)
+{
+	if (typeid(*other) == typeid(PlayerBulletActor))
+	{
+		PlayerBulletActor *bullet = dynamic_cast<PlayerBulletActor*>(other);
+		hp -= 1.0f;
+		//Debug::Log("Hit");
 	}
 }

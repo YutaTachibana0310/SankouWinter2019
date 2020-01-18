@@ -21,7 +21,7 @@ class BoxCollider3D;
 /**************************************
 ƒNƒ‰ƒX’è‹`
 ***************************************/
-class DemoEnemyActor : public BaseEnemy, public ColliderObserver
+class DemoEnemyActor : public BaseEnemy
 {
 public:
 	DemoEnemyActor();
@@ -31,8 +31,6 @@ public:
 	void Uninit();
 	void Update();
 	void Draw();
-
-	virtual void OnColliderHit(ColliderObserver * other) override;
 
 private:
 
