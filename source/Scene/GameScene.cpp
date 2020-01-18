@@ -37,7 +37,6 @@ const float GameScene::BloomThrethold[] = { 0.4f, 0.3f, 0.24f };		//ƒuƒ‹[ƒ€‚ð‚©
 ***************************************/
 void GameScene::Init()
 {
-	ResourceManager::Instance()->LoadMesh("DemoEnemy", "data/MODEL/Enemy/Enemy00.x");
 	ResourceManager::Instance()->LoadMesh("Planet", "data/MODEL/Planet/GreyMoon.x");
 
 	particleManager = GameParticleManager::Instance();

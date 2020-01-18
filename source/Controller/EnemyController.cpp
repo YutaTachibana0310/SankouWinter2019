@@ -7,11 +7,14 @@
 //=====================================
 #include "EnemyController.h"
 #include "../../Framework/Tool/DebugWindow.h"
+#include "../../Framework/Resource/ResourceManager.h"
 
 #include "EnemyTimeController.h"
 #include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
+
 #include "../Actor/Enemy/DemoEnemyActor.h"
+#include "../Actor/Enemy/RotateChargeEnemy.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -26,9 +29,12 @@ EnemyController::EnemyController()
 	if (EnemyTween::mInstance == nullptr)
 		EnemyTween::mInstance = new EnemyTween();
 
+	ResourceManager::Instance()->LoadMesh("DemoEnemy", "data/MODEL/Enemy/Enemy00.x");
+	ResourceManager::Instance()->LoadMesh("RotateEnemy", "data/MODEL/SmallEnemy/SmallEnemy.x");
+
 	bulletController = new EnemyBulletController();
 
-	enemy = new DemoEnemyActor();
+	enemy = new RotateChargeEnemy();
 	enemy->Init();
 }
 

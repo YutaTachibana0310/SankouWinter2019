@@ -136,6 +136,7 @@
     <ClCompile Include="source\Actor\Player\PlayerColliderViewer.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseSmallEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\RotateChargeEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -297,6 +298,7 @@
     <ClInclude Include="source\Actor\Player\PlayerColliderViewer.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseSmallEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\RotateChargeEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
