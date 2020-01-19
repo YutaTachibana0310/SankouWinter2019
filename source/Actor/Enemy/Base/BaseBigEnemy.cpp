@@ -11,7 +11,8 @@
 /*************************************
 コンストラクタ
 ***************************************/
-BaseBigEnemy::BaseBigEnemy() :
+BaseBigEnemy::BaseBigEnemy(EnemyHandler* handler) :
+	BaseEnemy(handler),
 	isDestroied(false)
 {
 

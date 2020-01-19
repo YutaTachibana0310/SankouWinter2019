@@ -21,7 +21,7 @@
 class BaseBigEnemy : public BaseEnemy
 {
 public:
-	BaseBigEnemy();
+	BaseBigEnemy(EnemyHandler* handler);
 
 	void Explode();
 	EnemyType GetType();

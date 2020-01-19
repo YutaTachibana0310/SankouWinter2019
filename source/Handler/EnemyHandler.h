@@ -32,6 +32,10 @@ public:
 
 	void VanishAllBullet();
 
+	void GenerateScoreItem(const D3DXVECTOR3& position);
+
+	void AddScore(int point);
+
 private:
 	EnemyBulletController *controller;
 };

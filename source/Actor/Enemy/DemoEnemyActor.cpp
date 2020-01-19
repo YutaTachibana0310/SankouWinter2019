@@ -17,7 +17,8 @@
 /**************************************
 コンストラクタ
 ***************************************/
-DemoEnemyActor::DemoEnemyActor()
+DemoEnemyActor::DemoEnemyActor(EnemyHandler* handler) :
+	BaseMiddleEnemy(handler)
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("DemoEnemy", mesh);

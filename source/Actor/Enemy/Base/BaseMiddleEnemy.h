@@ -20,6 +20,7 @@
 ***************************************/
 class BaseMiddleEnemy : public BaseEnemy
 {
+	using BaseEnemy::BaseEnemy;
 public:
 	void Explode();
 	EnemyType GetType();

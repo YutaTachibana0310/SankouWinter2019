@@ -21,8 +21,9 @@
 /**************************************
 コンストラクタ
 ***************************************/
-RotateChargeEnemy::RotateChargeEnemy()
-{
+RotateChargeEnemy::RotateChargeEnemy(EnemyHandler* handler) :
+	BaseSmallEnemy(handler)
+{ 
 	colliders.reserve(1);
 	colliders.push_back(BoxCollider3D::Create("Enemy", transform));
 	colliders[0]->SetSize({ 5.0f, 2.0f, 2.0f });

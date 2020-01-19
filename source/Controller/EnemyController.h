@@ -17,6 +17,7 @@
 class BaseEnemy;
 class EnemyBulletController;
 class GameCamera;
+class EnemyHandler;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -37,6 +38,8 @@ private:
 	std::list<BaseEnemy*> enemyContainer;
 
 	EnemyBulletController *bulletController;
+
+	EnemyHandler* enemyHandler;
 
 	GameCamera *gameCamera;
 };

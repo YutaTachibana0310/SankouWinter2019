@@ -13,6 +13,7 @@
 #include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
 #include "../Camera/GameCamera.h"
+#include "../Handler/EnemyHandler.h"
 
 #include "../Actor/Enemy/DemoEnemyActor.h"
 #include "../Actor/Enemy/RotateChargeEnemy.h"
@@ -39,20 +40,21 @@ EnemyController::EnemyController(GameCamera *gameCamera) :
 	ResourceManager::Instance()->LoadMesh("FleetEnemy", "data/MODEL/BigEnemy/BigEnemy.x");
 
 	bulletController = new EnemyBulletController();
+	enemyHandler = new EnemyHandler(bulletController);
 
 	BaseEnemy *enemy = nullptr;
 
-	enemy = new RotateChargeEnemy();
+	enemy = new RotateChargeEnemy(enemyHandler);
 	enemy->SetPosition({ 0.0f, 10.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
 
-	enemy = new DemoEnemyActor();
+	enemy = new DemoEnemyActor(enemyHandler);
 	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
 
-	enemy = new FleetEnemy();
+	enemy = new FleetEnemy(enemyHandler);
 	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();

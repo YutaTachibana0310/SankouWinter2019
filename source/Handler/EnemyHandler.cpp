@@ -78,3 +78,19 @@ void EnemyHandler::VanishAllBullet()
 {
 }
 
+/**************************************
+スコアアイテム生成処理
+***************************************/
+void EnemyHandler::GenerateScoreItem(const D3DXVECTOR3 & position)
+{
+
+}
+
+/**************************************
+スコア加算処理
+***************************************/
+void EnemyHandler::AddScore(int point)
+{
+
+}
+

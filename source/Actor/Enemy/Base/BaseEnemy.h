@@ -18,6 +18,7 @@
 ***************************************/
 class BoxCollider3D;
 class MeshContainer;
+class EnemyHandler;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -34,7 +35,7 @@ public:
 		EnemyTypeMax
 	};
 
-	BaseEnemy();
+	BaseEnemy(EnemyHandler* handle);
 	virtual ~BaseEnemy();
 
 	virtual void Init() = 0;
@@ -55,6 +56,8 @@ protected:
 	std::vector<std::shared_ptr<BoxCollider3D>> colliders;
 	MeshContainer *mesh;
 	
+	EnemyHandler *handle;
+
 	virtual void OnColliderHit(ColliderObserver * other) override;
 
 };

@@ -21,7 +21,8 @@
 /**************************************
 コンストラクタ
 ***************************************/
-FleetEnemy::FleetEnemy()
+FleetEnemy::FleetEnemy(EnemyHandler* handler) :
+	BaseBigEnemy(handler)
 {	
 	ResourceManager::Instance()->GetMesh("FleetEnemy", mesh);
 
