@@ -19,3 +19,11 @@ void BaseMiddleEnemy::Explode()
 {
 	GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
 }
+
+/**************************************
+ƒ^ƒCƒv”»’è
+***************************************/
+BaseEnemy::EnemyType BaseMiddleEnemy::GetType()
+{
+	return EnemyType::Middle;
+}

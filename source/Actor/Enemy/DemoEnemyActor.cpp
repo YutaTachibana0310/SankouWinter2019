@@ -9,6 +9,7 @@
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
+#include "../../../Framework/Core/ObjectPool.h"
 
 #include "../../Effect/GameParticleManager.h"
 #include "../../System/EnemyTween.h"
@@ -46,6 +47,7 @@ void DemoEnemyActor::Init()
 	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
 
 	SetCollider(true);
+	active = true;
 
 	hp = 50.0f;
 }
@@ -56,9 +58,8 @@ void DemoEnemyActor::Init()
 void DemoEnemyActor::Uninit()
 {
 	SetCollider(false);
-
-	//ƒ¿—p‚ÉÅ‰Šú‰»‚·‚é
-	Init();
+	active = false;
+	ObjectPool::Instance()->Destroy<DemoEnemyActor>(this);
 }
 
 /**************************************
@@ -66,11 +67,7 @@ void DemoEnemyActor::Uninit()
 ***************************************/
 void DemoEnemyActor::Update()
 {
-	if (hp <= 0)
-	{
-		Explode();
-		Uninit();
-	}
+
 }
 
 /**************************************

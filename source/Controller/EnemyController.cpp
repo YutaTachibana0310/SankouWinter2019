@@ -12,10 +12,13 @@
 #include "EnemyTimeController.h"
 #include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
+#include "../Camera/GameCamera.h"
 
 #include "../Actor/Enemy/DemoEnemyActor.h"
 #include "../Actor/Enemy/RotateChargeEnemy.h"
 #include "../Actor/Enemy/FleetEnemy.h"
+
+#include <type_traits>
 
 /**************************************
 グローバル変数
@@ -25,7 +28,8 @@ EnemyTween* EnemyTween::mInstance = nullptr;
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyController::EnemyController()
+EnemyController::EnemyController(GameCamera *gameCamera) :
+	gameCamera(gameCamera)
 {
 	if (EnemyTween::mInstance == nullptr)
 		EnemyTween::mInstance = new EnemyTween();
@@ -99,4 +103,37 @@ void EnemyController::Draw()
 void EnemyController::DrawBullet()
 {
 	bulletController->Draw();
+}
+
+/**************************************
+エネミーの撃墜チェック
+***************************************/
+void EnemyController::CheckEnemyDestroy()
+{
+	//撃墜判定
+	for (auto&& enemy : enemyContainer)
+	{
+		if (!enemy->IsDestroied())
+			continue;
+
+		if(enemy->GetType() == BaseEnemy::Big)
+		{
+			enemy->Explode();
+			gameCamera->Focus(enemy->GetPosition(), [=]()
+			{
+				enemy->Uninit();
+			});
+		}
+		else
+		{
+			enemy->Explode();
+			enemy->Uninit();
+		}
+	}
+
+	//非アクティブになったエネミーをリストから削除
+	enemyContainer.remove_if([](auto enemy)
+	{
+		return !enemy->IsActive();
+	});
 }

@@ -22,6 +22,7 @@ class BaseMiddleEnemy : public BaseEnemy
 {
 public:
 	void Explode();
+	EnemyType GetType();
 };
 
 #endif

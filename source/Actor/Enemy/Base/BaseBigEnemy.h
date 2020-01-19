@@ -21,7 +21,15 @@
 class BaseBigEnemy : public BaseEnemy
 {
 public:
+	BaseBigEnemy();
+
 	void Explode();
+	EnemyType GetType();
+
+	virtual bool IsDestroied() override;
+
+protected:
+	bool isDestroied;
 };
 
 #endif

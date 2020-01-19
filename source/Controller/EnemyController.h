@@ -16,25 +16,29 @@
 ***************************************/
 class BaseEnemy;
 class EnemyBulletController;
+class GameCamera;
 
-#undef small
 /**************************************
 ƒNƒ‰ƒX’è‹`
 ***************************************/
 class EnemyController
 {
 public:
-	EnemyController();
+	EnemyController(GameCamera *gameCamera);
 	~EnemyController();
 
 	void Update();
 	void Draw();
 	void DrawBullet();
 
+	void CheckEnemyDestroy();
+
 private:
 	std::list<BaseEnemy*> enemyContainer;
 
 	EnemyBulletController *bulletController;
+
+	GameCamera *gameCamera;
 };
 
 #endif

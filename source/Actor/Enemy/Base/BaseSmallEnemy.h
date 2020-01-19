@@ -22,6 +22,8 @@ class BaseSmallEnemy : public BaseEnemy
 {
 public:
 	void Explode();
+
+	EnemyType GetType();
 };
 
 #endif

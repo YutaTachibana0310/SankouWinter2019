@@ -9,6 +9,7 @@
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
+#include "../../../Framework/Core/ObjectPool.h"
 
 #include "../../System/EnemyTween.h"
 #include "../../Effect/GameParticleManager.h"
@@ -53,6 +54,9 @@ void FleetEnemy::Init()
 	SetCollider(true);
 
 	hp = 50.0f;
+	active = true;
+
+	isDestroied = false;
 }
 
 /**************************************
@@ -61,9 +65,8 @@ void FleetEnemy::Init()
 void FleetEnemy::Uninit()
 {
 	SetCollider(false);
-
-	//ƒ¿—p‚ÉÅ‰Šú‰»‚·‚é
-	Init();
+	active = false;
+	ObjectPool::Instance()->Destroy<FleetEnemy>(this);
 }
 
 /**************************************
@@ -71,11 +74,7 @@ void FleetEnemy::Uninit()
 ***************************************/
 void FleetEnemy::Update()
 {
-	if (hp <= 0)
-	{
 
-		Uninit();
-	}
 }
 
 /**************************************

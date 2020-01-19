@@ -9,6 +9,7 @@
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
+#include "../../../Framework/Core/ObjectPool.h"
 
 #include "../../System/EnemyTween.h"
 #include "../../Effect/GameParticleManager.h"
@@ -52,6 +53,7 @@ void RotateChargeEnemy::Init()
 	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
 
 	SetCollider(true);
+	active = true;
 
 	hp = 5.0f;
 }
@@ -62,9 +64,8 @@ void RotateChargeEnemy::Init()
 void RotateChargeEnemy::Uninit()
 {
 	SetCollider(false);
-
-	//ƒ¿—p‚ÉÅ‰Šú‰»‚·‚é
-	Init();
+	active = false;
+	ObjectPool::Instance()->Destroy<RotateChargeEnemy>(this);
 }
 
 /**************************************
@@ -73,11 +74,6 @@ void RotateChargeEnemy::Uninit()
 void RotateChargeEnemy::Update()
 {
 	transform->Rotate(5.0f, Vector3::Forward);
-
-	if (hp <= 0)
-	{
-		Uninit();
-	}
 }
 
 /**************************************

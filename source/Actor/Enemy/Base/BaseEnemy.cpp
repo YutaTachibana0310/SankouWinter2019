@@ -45,6 +45,14 @@ void BaseEnemy::SetCollider(bool state)
 }
 
 /**************************************
+Œ‚’Ä”»’è
+***************************************/
+bool BaseEnemy::IsDestroied()
+{
+	return hp <= 0.0f;
+}
+
+/**************************************
 Õ“Ëˆ—
 ***************************************/
 void BaseEnemy::OnColliderHit(ColliderObserver * other)

@@ -19,3 +19,11 @@ void BaseSmallEnemy::Explode()
 {
 	GameParticleManager::Instance()->GenerateEnemySmallExplositon(transform->GetPosition());
 }
+
+/**************************************
+ƒ^ƒCƒv”»’è
+***************************************/
+BaseEnemy::EnemyType BaseSmallEnemy::GetType()
+{
+	return EnemyType::Small;
+}

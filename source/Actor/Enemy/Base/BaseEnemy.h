@@ -26,6 +26,14 @@ class BaseEnemy : public GameObject, public ColliderObserver
 {
 	friend class EnemyTween;
 public:
+	enum EnemyType
+	{
+		Small,
+		Middle,
+		Big,
+		EnemyTypeMax
+	};
+
 	BaseEnemy();
 	virtual ~BaseEnemy();
 
@@ -35,6 +43,12 @@ public:
 	virtual void Draw() = 0;
 
 	virtual void SetCollider(bool state);
+
+	virtual void Explode() = 0;
+
+	virtual EnemyType GetType() = 0;
+
+	virtual bool IsDestroied();
 
 protected:
 	float hp;

@@ -83,6 +83,7 @@ void EnemyBulletController::Update()
 		if (bullet->IsActive())
 			continue;
 
+		bullet->Uninit();
 		ObjectPool::Instance()->Destroy<EnemyBulletActor>(bullet);
 		cntBullet--;
 	}

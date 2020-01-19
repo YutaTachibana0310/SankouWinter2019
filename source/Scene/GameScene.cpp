@@ -47,7 +47,7 @@ void GameScene::Init()
 	skybox = new GameSkybox();
 	playerController = new PlayerController(gameCamera);
 	bloom = new BloomController();
-	enemyController = new EnemyController();
+	enemyController = new EnemyController(gameCamera);
 	planet = new PlanetActor();
 	viewer = new GameViewer();
 
@@ -89,6 +89,8 @@ void GameScene::Update()
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 	ColliderManager::Instance()->CheckRoundRobin("Player", "EnemyBullet");
+
+	enemyController->CheckEnemyDestroy();
 
 	particleManager->Update();
 
