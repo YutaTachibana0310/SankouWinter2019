@@ -76,7 +76,6 @@ void RotateChargeEnemy::Update()
 
 	if (hp <= 0)
 	{
-		GameParticleManager::Instance()->GenerateEnemySmallExplositon(transform->GetPosition());
 		Uninit();
 	}
 }

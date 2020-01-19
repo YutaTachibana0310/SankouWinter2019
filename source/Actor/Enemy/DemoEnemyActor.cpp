@@ -68,7 +68,7 @@ void DemoEnemyActor::Update()
 {
 	if (hp <= 0)
 	{
-		GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
+		Explode();
 		Uninit();
 	}
 }

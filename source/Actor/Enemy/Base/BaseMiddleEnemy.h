@@ -1,21 +1,27 @@
 //=====================================
 //
-// BaseBigEnemy.cpp
-// 機能:
+// BaseMiddleEnemy.h
+// 機能:中型エネミー基底クラス
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "BaseBigEnemy.h"
-#include "../../../Effect/GameParticleManager.h"
+#ifndef _BASEMIDDLENEMY_H_
+#define _BASEMIDDLENEMY_H_
+
+#include "../../../../main.h"
+#include "BaseEnemy.h"
 
 /**************************************
-グローバル変数
+前方宣言
 ***************************************/
 
 /**************************************
-爆発処理
+クラス定義
 ***************************************/
-void BaseBigEnemy::Explode()
+class BaseMiddleEnemy : public BaseEnemy
 {
-	GameParticleManager::Instance()->GenerateEnemyBigExplosion(transform->GetPosition());
-}
+public:
+	void Explode();
+};
+
+#endif

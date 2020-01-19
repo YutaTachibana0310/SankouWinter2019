@@ -1,11 +1,11 @@
 //=====================================
 //
-//BaseSmallEnemy.cpp
-//‹@”\:
-//Author:GP12B332 21 —§‰Ô—Y‘¾
+// BaseMiddleEnemy.cpp
+// ‹@”\:
+// Author:GP12B332 21 —§‰Ô—Y‘¾
 //
 //=====================================
-#include "BaseSmallEnemy.h"
+#include "BaseMiddleEnemy.h"
 #include "../../../Effect/GameParticleManager.h"
 
 /**************************************
@@ -15,7 +15,7 @@
 /**************************************
 ”š”­ˆ—
 ***************************************/
-void BaseSmallEnemy::Explode()
+void BaseMiddleEnemy::Explode()
 {
-	GameParticleManager::Instance()->GenerateEnemySmallExplositon(transform->GetPosition());
+	GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
 }

@@ -10,7 +10,7 @@
 
 #include "../../../main.h"
 #include "../../../Framework/Collider/ColliderObserver.h"
-#include "Base/BaseEnemy.h"
+#include "Base/BaseMiddleEnemy.h"
 
 /**************************************
 前方宣言
@@ -21,7 +21,7 @@ class BoxCollider3D;
 /**************************************
 クラス定義
 ***************************************/
-class DemoEnemyActor : public BaseEnemy
+class DemoEnemyActor : public BaseMiddleEnemy
 {
 public:
 	DemoEnemyActor();

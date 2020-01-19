@@ -244,6 +244,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseBigEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\Base\BaseMiddleEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseSmallEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\DemoEnemyActor.cpp" />
     <ClCompile Include="source\Actor\Enemy\EnemyBulletActor.cpp" />
@@ -410,6 +411,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseBigEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\Base\BaseMiddleEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseSmallEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\DemoEnemyActor.h" />
     <ClInclude Include="source\Actor\Enemy\EnemyBulletActor.h" />

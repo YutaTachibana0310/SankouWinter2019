@@ -73,7 +73,7 @@ void FleetEnemy::Update()
 {
 	if (hp <= 0)
 	{
-		GameParticleManager::Instance()->GenerateEnemyBigExplosion(transform->GetPosition());
+
 		Uninit();
 	}
 }
