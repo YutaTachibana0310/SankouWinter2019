@@ -32,7 +32,7 @@ DemoEnemyActor::DemoEnemyActor()
 ***************************************/
 DemoEnemyActor::~DemoEnemyActor()
 {
-	SAFE_DELETE(mesh);
+
 }
 
 /**************************************

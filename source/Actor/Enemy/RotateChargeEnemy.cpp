@@ -21,7 +21,7 @@ RotateChargeEnemy::RotateChargeEnemy()
 {
 	colliders.reserve(1);
 	colliders.push_back(BoxCollider3D::Create("Enemy", transform));
-	colliders[0]->SetSize({ 10.0f, 2.0f, 2.0f });
+	colliders[0]->SetSize({ 5.0f, 2.0f, 2.0f });
 
 	ResourceManager::Instance()->GetMesh("RotateEnemy", mesh);
 }
@@ -40,7 +40,7 @@ RotateChargeEnemy::~RotateChargeEnemy()
 void RotateChargeEnemy::Init()
 {
 	active = true;
-	SetCollider(false);
+	SetCollider(true);
 }
 
 /**************************************
@@ -66,4 +66,6 @@ void RotateChargeEnemy::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
+
+	colliders[0]->Draw();
 }

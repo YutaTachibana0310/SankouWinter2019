@@ -83,7 +83,7 @@ void GameScene::Update()
 {
 	gameCamera->Update();
 	skybox->Update();
-	playerController->Update();
+	//playerController->Update();
 	enemyController->Update();
 	planet->Update();
 
