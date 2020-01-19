@@ -25,6 +25,7 @@
 #include "../Controller/EnemyTimeController.h"
 #include "../Viewer/Game/GameViewer.h"
 #include "../Controller/PlayerController.h"
+#include "../Sound/MusicPlayer.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -41,6 +42,9 @@ void GameScene::Init()
 
 	particleManager = GameParticleManager::Instance();
 	particleManager->Init();
+
+	MusicPlayer::Load();
+	MusicPlayer::PlayBGM(GameBGM);
 
 	sceneCamera = gameCamera = new GameCamera();
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);

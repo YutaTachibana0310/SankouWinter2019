@@ -274,6 +274,7 @@
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Handler\EnemyHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
+    <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
     <ClCompile Include="source\System\GameInput.cpp" />
     <ClCompile Include="source\Viewer\Game\BomberViewer.cpp" />
@@ -442,6 +443,7 @@
     <ClInclude Include="source\GameMain.h" />
     <ClInclude Include="source\Handler\EnemyHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
+    <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
     <ClInclude Include="source\System\GameInput.h" />
     <ClInclude Include="source\Viewer\Game\BomberViewer.h" />
