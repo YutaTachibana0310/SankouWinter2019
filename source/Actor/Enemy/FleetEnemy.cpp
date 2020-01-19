@@ -10,6 +10,9 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 
+#include "../../System/EnemyTween.h"
+#include "../../Effect/GameParticleManager.h"
+
 /**************************************
 グローバル変数
 ***************************************/
@@ -41,6 +44,15 @@ void FleetEnemy::Init()
 {
 	active = true;
 	SetCollider(true);
+
+	D3DXVECTOR3 InitPos = { 0.0f, -10.0f, 50.0f };
+	D3DXVECTOR3 GoalPos = { 0.0f, -10.0f, 25.0f };
+
+	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
+
+	SetCollider(true);
+
+	hp = 50.0f;
 }
 
 /**************************************
@@ -48,6 +60,10 @@ void FleetEnemy::Init()
 ***************************************/
 void FleetEnemy::Uninit()
 {
+	SetCollider(false);
+
+	//α用に最初期化する
+	Init();
 }
 
 /**************************************
@@ -55,7 +71,11 @@ void FleetEnemy::Uninit()
 ***************************************/
 void FleetEnemy::Update()
 {
-
+	if (hp <= 0)
+	{
+		GameParticleManager::Instance()->GenerateEnemyBigExplosion(transform->GetPosition());
+		Uninit();
+	}
 }
 
 /**************************************

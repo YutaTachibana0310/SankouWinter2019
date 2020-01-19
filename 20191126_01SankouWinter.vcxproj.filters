@@ -140,6 +140,8 @@
     <ClCompile Include="source\Actor\Enemy\FleetEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseBigEnemy.cpp" />
     <ClCompile Include="source\System\GameInput.cpp" />
+    <ClCompile Include="source\Effect\Enemy\EnemyFlame.cpp" />
+    <ClCompile Include="source\Effect\Enemy\EnemySmallDebris.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -305,6 +307,8 @@
     <ClInclude Include="source\Actor\Enemy\FleetEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseBigEnemy.h" />
     <ClInclude Include="source\System\GameInput.h" />
+    <ClInclude Include="source\Effect\Enemy\EnemyFlame.h" />
+    <ClInclude Include="source\Effect\Enemy\EnemySmallDebris.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

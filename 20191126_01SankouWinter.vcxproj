@@ -263,7 +263,9 @@
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
     <ClCompile Include="source\Controller\PlayerController.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyDebris.cpp" />
+    <ClCompile Include="source\Effect\Enemy\EnemyFlame.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyParticleEmitter.cpp" />
+    <ClCompile Include="source\Effect\Enemy\EnemySmallDebris.cpp" />
     <ClCompile Include="source\Effect\GameParticleManager.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyExplosion.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
@@ -427,7 +429,9 @@
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
     <ClInclude Include="source\Controller\PlayerController.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyDebris.h" />
+    <ClInclude Include="source\Effect\Enemy\EnemyFlame.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyParticleEmitter.h" />
+    <ClInclude Include="source\Effect\Enemy\EnemySmallDebris.h" />
     <ClInclude Include="source\Effect\GameParticleManager.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyExplosion.h" />
     <ClInclude Include="source\Effect\Game\PlayerBulletHit.h" />

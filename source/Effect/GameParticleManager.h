@@ -23,6 +23,8 @@ namespace GameEffect
 		EnemyExplosion,
 		EnemyDebris,
 		PlayerExplosion,
+		EnemyFlame,
+		EnemySmallDebris,
 		Max
 	};
 }
@@ -36,7 +38,9 @@ public:
 	void Init() override;
 	void Update() override;
 
-	void GenerateEnemyExplostion(const D3DXVECTOR3& position);
+	void GenerateEnemyExplosion(const D3DXVECTOR3& position);
+	void GenerateEnemySmallExplositon(const D3DXVECTOR3& position);
+	void GenerateEnemyBigExplosion(const D3DXVECTOR3& position);
 
 private:
 	static const float BloomPower[3];
