@@ -123,7 +123,6 @@
     <ClCompile Include="source\Actor\Enemy\EnemyBulletActor.cpp" />
     <ClCompile Include="source\Controller\EnemyBulletController.cpp" />
     <ClCompile Include="source\Controller\EnemyBulletConfig.cpp" />
-    <ClCompile Include="source\Handler\EnemyBulletHandler.cpp" />
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\EnergyViewer.cpp" />
@@ -143,6 +142,7 @@
     <ClCompile Include="source\Effect\Enemy\EnemyFlame.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemySmallDebris.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseMiddleEnemy.cpp" />
+    <ClCompile Include="source\Handler\EnemyHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -290,7 +290,6 @@
     <ClInclude Include="source\Actor\Enemy\EnemyBulletActor.h" />
     <ClInclude Include="source\Controller\EnemyBulletController.h" />
     <ClInclude Include="source\Controller\EnemyBulletConfig.h" />
-    <ClInclude Include="source\Handler\EnemyBulletHandler.h" />
     <ClInclude Include="Framework\Core\FixedTime.h" />
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
     <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />
@@ -311,6 +310,7 @@
     <ClInclude Include="source\Effect\Enemy\EnemyFlame.h" />
     <ClInclude Include="source\Effect\Enemy\EnemySmallDebris.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseMiddleEnemy.h" />
+    <ClInclude Include="source\Handler\EnemyHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

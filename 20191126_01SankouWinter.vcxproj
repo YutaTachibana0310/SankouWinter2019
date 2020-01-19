@@ -272,7 +272,7 @@
     <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerExplosion.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
-    <ClCompile Include="source\Handler\EnemyBulletHandler.cpp" />
+    <ClCompile Include="source\Handler\EnemyHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
     <ClCompile Include="source\System\GameInput.cpp" />
@@ -440,7 +440,7 @@
     <ClInclude Include="source\Effect\Game\PlayerExplosion.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
-    <ClInclude Include="source\Handler\EnemyBulletHandler.h" />
+    <ClInclude Include="source\Handler\EnemyHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
     <ClInclude Include="source\System\GameInput.h" />
