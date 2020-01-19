@@ -15,7 +15,8 @@
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEnemy::BaseEnemy()
+BaseEnemy::BaseEnemy(EnemyHandler* handler) :
+	handle(handler)
 {
 	mesh = new MeshContainer();
 }
@@ -42,6 +43,14 @@ void BaseEnemy::SetCollider(bool state)
 	{
 		collider->SetActive(state);
 	}
+}
+
+/**************************************
+撃墜判定
+***************************************/
+bool BaseEnemy::IsDestroied()
+{
+	return hp <= 0.0f;
 }
 
 /**************************************

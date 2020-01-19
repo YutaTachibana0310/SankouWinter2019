@@ -1,11 +1,11 @@
 //=====================================
 //
-// EnemyBulletHandler.cpp
+// EnemyHandler.cpp
 // 機能:エネミーバレット操作ハンドラ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "EnemyBulletHandler.h"
+#include "EnemyHandler.h"
 #include "../Controller/EnemyBulletController.h"
 
 /**************************************
@@ -15,7 +15,7 @@
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyBulletHandler::EnemyBulletHandler(EnemyBulletController * controller) :
+EnemyHandler::EnemyHandler(EnemyBulletController * controller) :
 	controller(controller)
 {
 }
@@ -23,14 +23,14 @@ EnemyBulletHandler::EnemyBulletHandler(EnemyBulletController * controller) :
 /**************************************
 デストラクタ
 ***************************************/
-EnemyBulletHandler::~EnemyBulletHandler()
+EnemyHandler::~EnemyHandler()
 {
 }
 
 /**************************************
 バレットセット処理
 ***************************************/
-void EnemyBulletHandler::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed)
+void EnemyHandler::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed)
 {
 	controller->SetBullet(shotTransform, type, speed);
 }
@@ -38,7 +38,7 @@ void EnemyBulletHandler::SetBullet(const Transform & shotTransform, EnemyBulletC
 /**************************************
 WAY弾セット処理
 ***************************************/
-void EnemyBulletHandler::SetWayBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way, float angle)
+void EnemyHandler::SetWayBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way, float angle)
 {
 	Transform transform = shotTransform;
 	transform.Rotate(angle / 2.0f, Vector3::Right);
@@ -55,7 +55,7 @@ void EnemyBulletHandler::SetWayBullet(const Transform & shotTransform, EnemyBull
 /**************************************
 円形弾セット処理
 ***************************************/
-void EnemyBulletHandler::SetCircleBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way)
+void EnemyHandler::SetCircleBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way)
 {
 	SetWayBullet(shotTransform, type, speed, way, 360.0f);
 }
@@ -63,7 +63,7 @@ void EnemyBulletHandler::SetCircleBullet(const Transform & shotTransform, EnemyB
 /**************************************
 バラマキ弾セット処理
 ***************************************/
-void EnemyBulletHandler::SetStrewBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, float randomRange)
+void EnemyHandler::SetStrewBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, float randomRange)
 {
 	Transform transform = shotTransform;
 	transform.Rotate(Math::RandomRange(-randomRange / 2.0f, randomRange / 2.0f), Vector3::Right);	
@@ -74,7 +74,23 @@ void EnemyBulletHandler::SetStrewBullet(const Transform & shotTransform, EnemyBu
 /**************************************
 全バレット消失処理
 ***************************************/
-void EnemyBulletHandler::VanishAllBullet()
+void EnemyHandler::VanishAllBullet()
 {
+}
+
+/**************************************
+スコアアイテム生成処理
+***************************************/
+void EnemyHandler::GenerateScoreItem(const D3DXVECTOR3 & position)
+{
+
+}
+
+/**************************************
+スコア加算処理
+***************************************/
+void EnemyHandler::AddScore(int point)
+{
+
 }
 

@@ -18,6 +18,7 @@
 ***************************************/
 class BoxCollider3D;
 class MeshContainer;
+class EnemyHandler;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -26,7 +27,15 @@ class BaseEnemy : public GameObject, public ColliderObserver
 {
 	friend class EnemyTween;
 public:
-	BaseEnemy();
+	enum EnemyType
+	{
+		Small,
+		Middle,
+		Big,
+		EnemyTypeMax
+	};
+
+	BaseEnemy(EnemyHandler* handle);
 	virtual ~BaseEnemy();
 
 	virtual void Init() = 0;
@@ -36,11 +45,19 @@ public:
 
 	virtual void SetCollider(bool state);
 
+	virtual void Explode() = 0;
+
+	virtual EnemyType GetType() = 0;
+
+	virtual bool IsDestroied();
+
 protected:
 	float hp;
 	std::vector<std::shared_ptr<BoxCollider3D>> colliders;
 	MeshContainer *mesh;
 	
+	EnemyHandler *handle;
+
 	virtual void OnColliderHit(ColliderObserver * other) override;
 
 };

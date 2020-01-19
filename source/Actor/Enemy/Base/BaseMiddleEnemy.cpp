@@ -1,11 +1,11 @@
 //=====================================
 //
-//BaseSmallEnemy.cpp
-//機能:
-//Author:GP12B332 21 立花雄太
+// BaseMiddleEnemy.cpp
+// 機能:
+// Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "BaseSmallEnemy.h"
+#include "BaseMiddleEnemy.h"
 #include "../../../Effect/GameParticleManager.h"
 
 /**************************************
@@ -15,15 +15,15 @@
 /**************************************
 爆発処理
 ***************************************/
-void BaseSmallEnemy::Explode()
+void BaseMiddleEnemy::Explode()
 {
-	GameParticleManager::Instance()->GenerateEnemySmallExplositon(transform->GetPosition());
+	GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
 }
 
 /**************************************
 タイプ判定
 ***************************************/
-BaseEnemy::EnemyType BaseSmallEnemy::GetType()
+BaseEnemy::EnemyType BaseMiddleEnemy::GetType()
 {
-	return EnemyType::Small;
+	return EnemyType::Middle;
 }

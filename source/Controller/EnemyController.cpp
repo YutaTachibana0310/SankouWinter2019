@@ -12,10 +12,14 @@
 #include "EnemyTimeController.h"
 #include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
+#include "../Camera/GameCamera.h"
+#include "../Handler/EnemyHandler.h"
 
 #include "../Actor/Enemy/DemoEnemyActor.h"
 #include "../Actor/Enemy/RotateChargeEnemy.h"
 #include "../Actor/Enemy/FleetEnemy.h"
+
+#include <type_traits>
 
 /**************************************
 グローバル変数
@@ -25,7 +29,8 @@ EnemyTween* EnemyTween::mInstance = nullptr;
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyController::EnemyController()
+EnemyController::EnemyController(GameCamera *gameCamera) :
+	gameCamera(gameCamera)
 {
 	if (EnemyTween::mInstance == nullptr)
 		EnemyTween::mInstance = new EnemyTween();
@@ -35,20 +40,21 @@ EnemyController::EnemyController()
 	ResourceManager::Instance()->LoadMesh("FleetEnemy", "data/MODEL/BigEnemy/BigEnemy.x");
 
 	bulletController = new EnemyBulletController();
+	enemyHandler = new EnemyHandler(bulletController);
 
 	BaseEnemy *enemy = nullptr;
 
-	enemy = new RotateChargeEnemy();
+	enemy = new RotateChargeEnemy(enemyHandler);
 	enemy->SetPosition({ 0.0f, 10.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
 
-	enemy = new DemoEnemyActor();
+	enemy = new DemoEnemyActor(enemyHandler);
 	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
 
-	enemy = new FleetEnemy();
+	enemy = new FleetEnemy(enemyHandler);
 	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
@@ -99,4 +105,37 @@ void EnemyController::Draw()
 void EnemyController::DrawBullet()
 {
 	bulletController->Draw();
+}
+
+/**************************************
+エネミーの撃墜チェック
+***************************************/
+void EnemyController::CheckEnemyDestroy()
+{
+	//撃墜判定
+	for (auto&& enemy : enemyContainer)
+	{
+		if (!enemy->IsDestroied())
+			continue;
+
+		if(enemy->GetType() == BaseEnemy::Big)
+		{
+			enemy->Explode();
+			gameCamera->Focus(enemy->GetPosition(), [=]()
+			{
+				enemy->Uninit();
+			});
+		}
+		else
+		{
+			enemy->Explode();
+			enemy->Uninit();
+		}
+	}
+
+	//非アクティブになったエネミーをリストから削除
+	enemyContainer.remove_if([](auto enemy)
+	{
+		return !enemy->IsActive();
+	});
 }

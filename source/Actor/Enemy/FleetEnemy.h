@@ -21,7 +21,7 @@
 class FleetEnemy : public BaseBigEnemy
 {
 public:
-	FleetEnemy();
+	FleetEnemy(EnemyHandler* handler);
 	~FleetEnemy();
 
 	virtual void Init() override;

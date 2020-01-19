@@ -1,12 +1,12 @@
 //=====================================
 //
-// EnemyBulletHandler.h
+// EnemyHandler.h
 // 機能:エネミーバレット操作ハンドラ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _ENEMYBULLETHANDLER_H_
-#define _ENEMYBULLETHANDLER_H_
+#ifndef _EnemyHandler_H_
+#define _EnemyHandler_H_
 
 #include "../../main.h"
 #include "../Controller/EnemyBulletConfig.h"
@@ -19,11 +19,11 @@ class EnemyBulletController;
 /**************************************
 クラス定義
 ***************************************/
-class EnemyBulletHandler
+class EnemyHandler
 {
 public:
-	EnemyBulletHandler(EnemyBulletController* controller);
-	~EnemyBulletHandler();
+	EnemyHandler(EnemyBulletController* controller);
+	~EnemyHandler();
 
 	void SetBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed);
 	void SetWayBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed, int way, float angle);
@@ -31,6 +31,10 @@ public:
 	void SetStrewBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed, float randomRange);
 
 	void VanishAllBullet();
+
+	void GenerateScoreItem(const D3DXVECTOR3& position);
+
+	void AddScore(int point);
 
 private:
 	EnemyBulletController *controller;

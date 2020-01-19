@@ -9,6 +9,7 @@
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
+#include "../../../Framework/Core/ObjectPool.h"
 
 #include "../../Effect/GameParticleManager.h"
 #include "../../System/EnemyTween.h"
@@ -16,7 +17,8 @@
 /**************************************
 コンストラクタ
 ***************************************/
-DemoEnemyActor::DemoEnemyActor()
+DemoEnemyActor::DemoEnemyActor(EnemyHandler* handler) :
+	BaseMiddleEnemy(handler)
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("DemoEnemy", mesh);
@@ -32,7 +34,7 @@ DemoEnemyActor::DemoEnemyActor()
 ***************************************/
 DemoEnemyActor::~DemoEnemyActor()
 {
-	SAFE_DELETE(mesh);
+
 }
 
 /**************************************
@@ -46,6 +48,7 @@ void DemoEnemyActor::Init()
 	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
 
 	SetCollider(true);
+	active = true;
 
 	hp = 50.0f;
 }
@@ -56,9 +59,8 @@ void DemoEnemyActor::Init()
 void DemoEnemyActor::Uninit()
 {
 	SetCollider(false);
-
-	//α用に最初期化する
-	Init();
+	active = false;
+	ObjectPool::Instance()->Destroy<DemoEnemyActor>(this);
 }
 
 /**************************************
@@ -66,11 +68,7 @@ void DemoEnemyActor::Uninit()
 ***************************************/
 void DemoEnemyActor::Update()
 {
-	if (hp <= 0)
-	{
-		GameParticleManager::Instance()->GenerateEnemyExplostion(transform->GetPosition());
-		Uninit();
-	}
+
 }
 
 /**************************************

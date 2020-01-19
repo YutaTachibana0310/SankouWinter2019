@@ -78,8 +78,6 @@ public:
 		if (object == nullptr)
 			return;
 
-		object->Uninit();
-
 		std::string key = typeid(*object).name();
 		objectPool[key].push_back(object);
 

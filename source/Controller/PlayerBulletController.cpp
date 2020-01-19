@@ -48,7 +48,7 @@ void PlayerBulletController::Update()
 			continue;
 
 		bullet->Uninit();
-		ObjectPool::Instance()->Destroy(bullet);
+		ObjectPool::Instance()->Destroy<PlayerBulletActor>(bullet);
 		bullet = nullptr;
 	}
 

@@ -18,7 +18,7 @@
 
 #include <algorithm>
 
-#include "../Handler/EnemyBulletHandler.h"
+#include "../Handler/EnemyHandler.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -58,7 +58,7 @@ void EnemyBulletController::Update()
 	//	if (cntDebug >= 10.0f)
 	//	{
 	//		Transform shotTransform;
-	//		EnemyBulletHandler handle(this);
+	//		EnemyHandler handle(this);
 	//		
 	//		shotTransform.Rotate(30.0f, Vector3::Right);
 	//		handle.SetWayBullet(shotTransform, EnemyBulletConfig::BlueNeedle, 0.5f, 3, 15.0f);
@@ -83,6 +83,7 @@ void EnemyBulletController::Update()
 		if (bullet->IsActive())
 			continue;
 
+		bullet->Uninit();
 		ObjectPool::Instance()->Destroy<EnemyBulletActor>(bullet);
 		cntBullet--;
 	}
@@ -107,7 +108,7 @@ void EnemyBulletController::Update()
 	if (Debug::Button("Way Shot"))
 	{
 		Transform transform;
-		EnemyBulletHandler handle(this);
+		EnemyHandler handle(this);
 
 		handle.SetWayBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 5, 60);
 	}
@@ -115,7 +116,7 @@ void EnemyBulletController::Update()
 	if (Debug::Button("Circle Shot"))
 	{
 		Transform transform;
-		EnemyBulletHandler handle(this);
+		EnemyHandler handle(this);
 
 		handle.SetCircleBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 16);
 	}
@@ -123,7 +124,7 @@ void EnemyBulletController::Update()
 	if (Debug::Button("Strew Shot"))
 	{
 		Transform transform;
-		EnemyBulletHandler handle(this);
+		EnemyHandler handle(this);
 
 		handle.SetStrewBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 30.0f);
 	}

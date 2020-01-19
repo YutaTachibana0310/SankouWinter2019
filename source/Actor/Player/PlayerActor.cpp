@@ -18,6 +18,8 @@
 #include "PlayerBulletActor.h"
 #include "PlayerColliderViewer.h"
 
+#include "../../System/GameInput.h"
+
 /**************************************
 staticÉÅÉìÉo
 ***************************************/
@@ -212,10 +214,12 @@ void PlayerActor::_Shot()
 		return;
 
 	const float ShotInterval = 3.0f;
-
 	cntShotFrame += FixedTime::GetTimeScale();
 	
 	if (cntShotFrame < ShotInterval)
+		return;
+
+	if (!GameInput::GetShotButtonPress())
 		return;
 
 	for (auto&& turret : turretContainer)
