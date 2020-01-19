@@ -13,6 +13,8 @@
 #include "../Framework/Resource/FontManager.h"
 
 #include "GameConfig.h"
+#include "Sound/MusicPlayer.h"
+#include "Sound/SoundPlayer.h"
 
 #include "Scene\GameScene.h"
 
@@ -24,6 +26,10 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 {
 	//ゲーム内で使用するフォントを読み込み
 	FontManager::Instance()->LoadFont("data/FONT/badfennec.otf");
+
+	//サウンド読み込み
+	MusicPlayer::Load();
+	SoundPlayer::Instance()->Load();
 
 	//シーンマネージャにシーンのインスタンスを追加
 	sceneManager->Add(GameConfig::SceneID::Game, new GameScene(renderTexture, renderSurface));

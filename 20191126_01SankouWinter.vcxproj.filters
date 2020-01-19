@@ -144,6 +144,7 @@
     <ClCompile Include="source\Actor\Enemy\Base\BaseMiddleEnemy.cpp" />
     <ClCompile Include="source\Handler\EnemyHandler.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
+    <ClCompile Include="source\Sound\SoundPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -313,6 +314,7 @@
     <ClInclude Include="source\Actor\Enemy\Base\BaseMiddleEnemy.h" />
     <ClInclude Include="source\Handler\EnemyHandler.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
+    <ClInclude Include="source\Sound\SoundPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

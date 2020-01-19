@@ -43,7 +43,6 @@ void GameScene::Init()
 	particleManager = GameParticleManager::Instance();
 	particleManager->Init();
 
-	MusicPlayer::Load();
 	MusicPlayer::PlayBGM(GameBGM);
 
 	sceneCamera = gameCamera = new GameCamera();

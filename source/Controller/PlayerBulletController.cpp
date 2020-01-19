@@ -11,6 +11,7 @@
 #include "../../Framework/Resource/ResourceManager.h"
 
 #include "../Actor/Player/PlayerBulletActor.h"
+#include "../Sound/SoundPlayer.h"
 
 #include <algorithm>
 #include <functional>
@@ -82,4 +83,6 @@ void PlayerBulletController::FireBullet(const D3DXVECTOR3 & pos, bool isMain)
 	PlayerBulletActor* bullet = ObjectPool::Instance()->Create<PlayerBulletActor>();
 	bullet->Init(pos, isMain);
 	bulletContainer.push_back(bullet);
+
+	SoundPlayer::Instance()->Play("PlayerShot");
 }
