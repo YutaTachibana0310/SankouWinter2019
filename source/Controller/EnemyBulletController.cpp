@@ -15,6 +15,7 @@
 #include "../../Library/nameof/nameof.hpp"
 
 #include "../Actor/Enemy/EnemyBulletActor.h"
+#include "EnemyTimeController.h"
 
 #include <algorithm>
 
@@ -69,7 +70,7 @@ void EnemyBulletController::Update()
 
 			cntDebug -= 10.0f;
 		}
-		cntDebug += FixedTime::GetTimeScale();
+		cntDebug += EnemyTimeController::GetTimeScale();
 	}
 
 	//çXêV

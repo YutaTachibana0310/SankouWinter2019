@@ -106,7 +106,7 @@ void EnemyHandler::AddScore(int point)
 ***************************************/
 void EnemyHandler::SlowdownEnemy()
 {
-	if (!playerController->InSlowdown())
+	if (!inSlowdown)
 		return;
 
 	EnemyTimeController::SetTimeScale(0.01f);
@@ -115,5 +115,13 @@ void EnemyHandler::SlowdownEnemy()
 	{
 		EnemyTimeController::SetTimeScale(1.0f);
 	});
+}
+
+/**************************************
+スローダウン判定の保存
+***************************************/
+void EnemyHandler::FetchSlowdownState()
+{
+	inSlowdown = playerController->InSlowdown();
 }
 

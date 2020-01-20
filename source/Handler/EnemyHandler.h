@@ -42,9 +42,13 @@ public:
 
 	void SlowdownEnemy();
 
+	void FetchSlowdownState();
+
 private:
 	EnemyBulletController *bulletController;
 	PlayerController *playerController;
+
+	bool inSlowdown;
 };
 
 #endif

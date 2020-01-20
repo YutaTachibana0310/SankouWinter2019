@@ -103,6 +103,7 @@ void EnemyController::CheckEnemyDestroy()
 		if(enemy->GetType() == BaseEnemy::Big)
 		{
 			enemy->Explode();
+			enemyHandler->FetchSlowdownState();
 			gameCamera->Focus(enemy->GetPosition(), [=]()
 			{
 				enemy->Uninit();
