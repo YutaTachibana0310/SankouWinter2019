@@ -43,14 +43,14 @@ public:
 
 	void FetchSlowdownState();
 
-	void GiveEnemtBulletController();
-	void GivePlayerController();
-	void GiveBackViewer();
+	void GiveEnemyBulletController(EnemyBulletController *controller);
+	void GivePlayerController(PlayerController *controller);
+	void GiveBackViewer(BackViewer *viewer);
 
 private:
 	EnemyBulletController *bulletController;
 	PlayerController *playerController;
-	BackViewer *viewer;
+	BackViewer *backViewer;
 
 	bool inSlowdown;
 };

@@ -35,18 +35,16 @@ public:
 
 	void CheckEnemyDestroy();
 
-	void CreateEnemyEventHandler(
-		PlayerController *playerController
-	);
+	void SetEnemyEventHandler(EnemyEventHandler *handler);
 
 private:
 	std::list<BaseEnemy*> enemyContainer;
 
 	EnemyBulletController *bulletController;
 
-	EnemyEventHandler* enemyHandler;
-
 	GameCamera *gameCamera;
+
+	EnemyEventHandler* enemyEventHandler;
 };
 
 #endif

@@ -24,6 +24,7 @@ class PlanetActor;
 class GameViewer;
 class PlayerController;
 class BackViewer;
+class EnemyEventHandler;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -56,6 +57,8 @@ private:
 
 	GameViewer *viewer;
 	BackViewer *backViewer;
+
+	EnemyEventHandler *handler;
 
 	void _DrawDebug();
 

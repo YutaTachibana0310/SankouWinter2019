@@ -11,6 +11,7 @@
 #include "../Controller/EnemyBulletController.h"
 #include "../Controller/PlayerController.h"
 #include "../Controller/EnemyTimeController.h"
+#include "../Viewer/Back/BackViewer.h"
 
 /**************************************
 グローバル変数
@@ -107,6 +108,7 @@ void EnemyEventHandler::SlowdownEnemy()
 	if (!inSlowdown)
 		return;
 
+	backViewer->PlayTimeBreak();
 	EnemyTimeController::SetTimeScale(0.01f);
 
 	TaskManager::Instance()->CreateDelayedTask(300.0f, false, []()
@@ -121,5 +123,29 @@ void EnemyEventHandler::SlowdownEnemy()
 void EnemyEventHandler::FetchSlowdownState()
 {
 	inSlowdown = playerController->InSlowdown();
+}
+
+/**************************************
+エネミーバレットコントローラ設定処理
+***************************************/
+void EnemyEventHandler::GiveEnemyBulletController(EnemyBulletController * controller)
+{
+	bulletController = controller;
+}
+
+/**************************************
+プレイヤーコントローラ設定処理
+***************************************/
+void EnemyEventHandler::GivePlayerController(PlayerController * controller)
+{
+	playerController = controller;
+}
+
+/**************************************
+バックビューワ設定処理
+***************************************/
+void EnemyEventHandler::GiveBackViewer(BackViewer * viewer)
+{
+	backViewer = viewer;
 }
 

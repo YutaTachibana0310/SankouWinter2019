@@ -103,7 +103,7 @@ void EnemyController::CheckEnemyDestroy()
 		if(enemy->GetType() == BaseEnemy::Big)
 		{
 			enemy->Explode();
-			enemyHandler->FetchSlowdownState();
+			enemyEventHandler->FetchSlowdownState();
 			gameCamera->Focus(enemy->GetPosition(), [=]()
 			{
 				enemy->Uninit();
@@ -127,24 +127,24 @@ void EnemyController::CheckEnemyDestroy()
 /**************************************
 ƒnƒ“ƒhƒ‰[ì¬
 ***************************************/
-void EnemyController::CreateEnemyEventHandler(
-	PlayerController *playerController)
+void EnemyController::SetEnemyEventHandler(EnemyEventHandler *handler)
 {
-	enemyHandler = new EnemyEventHandler();
+	enemyEventHandler = handler;
+	enemyEventHandler->GiveEnemyBulletController(bulletController);
 
 	BaseEnemy *enemy = nullptr;
 
-	enemy = new RotateChargeEnemy(enemyHandler);
+	enemy = new RotateChargeEnemy(enemyEventHandler);
 	enemy->SetPosition({ 0.0f, 10.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
 
-	enemy = new DemoEnemyActor(enemyHandler);
+	enemy = new DemoEnemyActor(enemyEventHandler);
 	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
 
-	enemy = new FleetEnemy(enemyHandler);
+	enemy = new FleetEnemy(enemyEventHandler);
 	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();

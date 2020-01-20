@@ -27,6 +27,7 @@
 #include "../Controller/PlayerController.h"
 #include "../Sound/MusicPlayer.h"
 #include "../Viewer/Back/BackViewer.h"
+#include "../Handler/EnemyEventHandler.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -55,10 +56,13 @@ void GameScene::Init()
 	planet = new PlanetActor();
 	viewer = new GameViewer();
 	backViewer = new BackViewer();
+	handler = new EnemyEventHandler();
 
 	Camera::SetMainCamera(gameCamera);
 
-	enemyController->CreateEnemyHandler(playerController);
+	handler->GivePlayerController(playerController);
+	handler->GiveBackViewer(backViewer);
+	enemyController->SetEnemyEventHandler(handler);
 
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
@@ -78,6 +82,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(planet);
 	SAFE_DELETE(viewer);
 	SAFE_DELETE(backViewer);
+	SAFE_DELETE(handler);
 
 	particleManager->Uninit();
 
