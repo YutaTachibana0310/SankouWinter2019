@@ -15,6 +15,7 @@
 前方宣言
 ***************************************/
 class EnemyBulletController;
+class PlayerController;
 
 /**************************************
 クラス定義
@@ -22,7 +23,10 @@ class EnemyBulletController;
 class EnemyHandler
 {
 public:
-	EnemyHandler(EnemyBulletController* controller);
+	EnemyHandler(
+		EnemyBulletController* Bulletcontroller,
+		PlayerController* playerController);
+
 	~EnemyHandler();
 
 	void SetBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed);
@@ -36,8 +40,11 @@ public:
 
 	void AddScore(int point);
 
+	void SlowdownEnemy();
+
 private:
-	EnemyBulletController *controller;
+	EnemyBulletController *bulletController;
+	PlayerController *playerController;
 };
 
 #endif

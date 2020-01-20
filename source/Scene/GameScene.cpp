@@ -56,6 +56,8 @@ void GameScene::Init()
 
 	Camera::SetMainCamera(gameCamera);
 
+	enemyController->CreateEnemyHandler(playerController);
+
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
 }

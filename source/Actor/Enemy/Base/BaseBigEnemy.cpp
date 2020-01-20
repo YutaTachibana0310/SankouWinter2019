@@ -9,6 +9,8 @@
 #include "../../../Effect/GameParticleManager.h"
 #include "../../../Sound/SoundPlayer.h"
 
+#include "../../../Handler/EnemyHandler.h"
+
 /*************************************
 コンストラクタ
 ***************************************/
@@ -25,6 +27,7 @@ BaseBigEnemy::BaseBigEnemy(EnemyHandler* handler) :
 void BaseBigEnemy::Uninit()
 {
 	SoundPlayer::Instance()->Play("BigExplosion");
+	handle->SlowdownEnemy();
 }
 
 /**************************************

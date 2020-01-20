@@ -18,6 +18,7 @@ class BaseEnemy;
 class EnemyBulletController;
 class GameCamera;
 class EnemyHandler;
+class PlayerController;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -33,6 +34,10 @@ public:
 	void DrawBullet();
 
 	void CheckEnemyDestroy();
+
+	void CreateEnemyHandler(
+		PlayerController *playerController
+	);
 
 private:
 	std::list<BaseEnemy*> enemyContainer;

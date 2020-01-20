@@ -6,7 +6,11 @@
 //
 //=====================================
 #include "EnemyHandler.h"
+#include "../../Framework/Task/TaskManager.h"
+
 #include "../Controller/EnemyBulletController.h"
+#include "../Controller/PlayerController.h"
+#include "../Controller/EnemyTimeController.h"
 
 /**************************************
 グローバル変数
@@ -15,8 +19,11 @@
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyHandler::EnemyHandler(EnemyBulletController * controller) :
-	controller(controller)
+EnemyHandler::EnemyHandler(
+	EnemyBulletController * bulletController,
+	PlayerController *playerController) :
+	bulletController(bulletController),
+	playerController(playerController)
 {
 }
 
@@ -32,7 +39,7 @@ EnemyHandler::~EnemyHandler()
 ***************************************/
 void EnemyHandler::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed)
 {
-	controller->SetBullet(shotTransform, type, speed);
+	bulletController->SetBullet(shotTransform, type, speed);
 }
 
 /**************************************
@@ -47,7 +54,7 @@ void EnemyHandler::SetWayBullet(const Transform & shotTransform, EnemyBulletConf
 
 	for (int i = 0; i < way; i++)
 	{
-		controller->SetBullet(transform, type, speed);
+		bulletController->SetBullet(transform, type, speed);
 		transform.Rotate(rotAngle, Vector3::Right);
 	}
 }
@@ -68,7 +75,7 @@ void EnemyHandler::SetStrewBullet(const Transform & shotTransform, EnemyBulletCo
 	Transform transform = shotTransform;
 	transform.Rotate(Math::RandomRange(-randomRange / 2.0f, randomRange / 2.0f), Vector3::Right);	
 
-	controller->SetBullet(transform, type, speed);
+	bulletController->SetBullet(transform, type, speed);
 }
 
 /**************************************
@@ -92,5 +99,21 @@ void EnemyHandler::GenerateScoreItem(const D3DXVECTOR3 & position)
 void EnemyHandler::AddScore(int point)
 {
 
+}
+
+/**************************************
+エネミー減速処理
+***************************************/
+void EnemyHandler::SlowdownEnemy()
+{
+	if (!playerController->InSlowdown())
+		return;
+
+	EnemyTimeController::SetTimeScale(0.01f);
+
+	TaskManager::Instance()->CreateDelayedTask(300.0f, false, []()
+	{
+		EnemyTimeController::SetTimeScale(1.0f);
+	});
 }
 

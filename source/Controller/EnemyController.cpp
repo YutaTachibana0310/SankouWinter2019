@@ -29,7 +29,7 @@ EnemyTween* EnemyTween::mInstance = nullptr;
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyController::EnemyController(GameCamera *gameCamera) :
+EnemyController::EnemyController(GameCamera* gameCamera) :
 	gameCamera(gameCamera)
 {
 	if (EnemyTween::mInstance == nullptr)
@@ -40,24 +40,6 @@ EnemyController::EnemyController(GameCamera *gameCamera) :
 	ResourceManager::Instance()->LoadMesh("FleetEnemy", "data/MODEL/BigEnemy/BigEnemy.x");
 
 	bulletController = new EnemyBulletController();
-	enemyHandler = new EnemyHandler(bulletController);
-
-	BaseEnemy *enemy = nullptr;
-
-	enemy = new RotateChargeEnemy(enemyHandler);
-	enemy->SetPosition({ 0.0f, 10.0f, 20.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
-
-	enemy = new DemoEnemyActor(enemyHandler);
-	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
-
-	enemy = new FleetEnemy(enemyHandler);
-	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
 }
 
 /**************************************
@@ -138,4 +120,31 @@ void EnemyController::CheckEnemyDestroy()
 	{
 		return !enemy->IsActive();
 	});
+}
+
+
+/**************************************
+ハンドラー作成
+***************************************/
+void EnemyController::CreateEnemyHandler(
+	PlayerController *playerController)
+{
+	enemyHandler = new EnemyHandler(bulletController, playerController);
+
+	BaseEnemy *enemy = nullptr;
+
+	enemy = new RotateChargeEnemy(enemyHandler);
+	enemy->SetPosition({ 0.0f, 10.0f, 20.0f });
+	enemyContainer.push_back(enemy);
+	enemy->Init();
+
+	enemy = new DemoEnemyActor(enemyHandler);
+	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
+	enemyContainer.push_back(enemy);
+	enemy->Init();
+
+	enemy = new FleetEnemy(enemyHandler);
+	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
+	enemyContainer.push_back(enemy);
+	enemy->Init();
 }
