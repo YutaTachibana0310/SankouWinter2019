@@ -23,6 +23,8 @@ class BaseBigEnemy : public BaseEnemy
 public:
 	BaseBigEnemy(EnemyHandler* handler);
 
+	virtual void Uninit();
+
 	void Explode();
 	EnemyType GetType();
 

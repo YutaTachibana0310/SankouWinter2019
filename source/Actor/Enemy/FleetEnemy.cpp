@@ -65,6 +65,8 @@ void FleetEnemy::Init()
 ***************************************/
 void FleetEnemy::Uninit()
 {
+	BaseBigEnemy::Uninit();
+
 	SetCollider(false);
 	active = false;
 	ObjectPool::Instance()->Destroy<FleetEnemy>(this);
