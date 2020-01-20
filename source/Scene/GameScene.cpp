@@ -26,6 +26,7 @@
 #include "../Viewer/Game/GameViewer.h"
 #include "../Controller/PlayerController.h"
 #include "../Sound/MusicPlayer.h"
+#include "../Viewer/Back/BackViewer.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -53,6 +54,7 @@ void GameScene::Init()
 	enemyController = new EnemyController(gameCamera);
 	planet = new PlanetActor();
 	viewer = new GameViewer();
+	backViewer = new BackViewer();
 
 	Camera::SetMainCamera(gameCamera);
 
@@ -75,6 +77,7 @@ void GameScene::Uninit()
 	SAFE_DELETE(enemyController);
 	SAFE_DELETE(planet);
 	SAFE_DELETE(viewer);
+	SAFE_DELETE(backViewer);
 
 	particleManager->Uninit();
 
@@ -110,6 +113,8 @@ void GameScene::Draw()
 	Camera::MainCamera()->Set();
 
 	skybox->Draw();
+
+	backViewer->Draw();
 
 	bloomTarget->Set();
 
@@ -165,6 +170,11 @@ void GameScene::_DrawDebug()
 
 	bloom->SetPower(bloomPower[0], bloomPower[1], bloomPower[2]);
 	bloom->SetThrethold(bloomThrethold[0], bloomThrethold[1], bloomThrethold[2]);
+
+	if (Debug::Button("TimeBreak"))
+	{
+		backViewer->PlayTimeBreak();
+	}
 
 	Debug::End();
 }

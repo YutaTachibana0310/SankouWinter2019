@@ -14,7 +14,7 @@
 /**************************************
 前方宣言
 ***************************************/
-class Polygon2D;
+class TimeBreakText;
 
 /**************************************
 クラス定義
@@ -37,7 +37,7 @@ public:
 	void PlayTimeBreak();
 
 private:
-	std::vector<Polygon2D*> viewerContainer;
+	TimeBreakText *timeBreak;
 
 	bool inPlaying;
 };

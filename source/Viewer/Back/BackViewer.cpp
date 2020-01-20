@@ -6,8 +6,7 @@
 //
 //=====================================
 #include "BackViewer.h"
-#include "../../../Framework/Tween/Tween.h"
-#include "../../../Framework/Renderer2D/Polygon2D.h"
+#include "TimeBreakText.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -18,6 +17,7 @@
 ***************************************/
 BackViewer::BackViewer()
 {
+	timeBreak = new TimeBreakText();
 }
 
 /**************************************
@@ -25,6 +25,7 @@ BackViewer::BackViewer()
 ***************************************/
 BackViewer::~BackViewer()
 {
+	SAFE_DELETE(timeBreak);
 }
 
 /**************************************
@@ -32,6 +33,17 @@ BackViewer::~BackViewer()
 ***************************************/
 void BackViewer::Draw()
 {
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
+	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
+	timeBreak->Draw();
+
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);
 }
 
 /**************************************
@@ -39,8 +51,5 @@ TimeBreakÄ¶ˆ—
 ***************************************/
 void BackViewer::PlayTimeBreak()
 {
-	Tween::Move(*viewerContainer[TimeBreakUpper], InitPositionUpper, PositionUpper, 60, EaseType::OutCubic, true, []()
-	{
-
-	});
+	timeBreak->Set();
 }
