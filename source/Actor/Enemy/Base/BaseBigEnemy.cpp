@@ -9,12 +9,12 @@
 #include "../../../Effect/GameParticleManager.h"
 #include "../../../Sound/SoundPlayer.h"
 
-#include "../../../Handler/EnemyHandler.h"
+#include "../../../Handler/EnemyEventHandler.h"
 
 /*************************************
 コンストラクタ
 ***************************************/
-BaseBigEnemy::BaseBigEnemy(EnemyHandler* handler) :
+BaseBigEnemy::BaseBigEnemy(EnemyEventHandler* handler) :
 	BaseEnemy(handler),
 	isDestroied(false)
 {

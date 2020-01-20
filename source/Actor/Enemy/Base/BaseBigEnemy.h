@@ -21,7 +21,7 @@
 class BaseBigEnemy : public BaseEnemy
 {
 public:
-	BaseBigEnemy(EnemyHandler* handler);
+	BaseBigEnemy(EnemyEventHandler* handler);
 
 	virtual void Uninit();
 

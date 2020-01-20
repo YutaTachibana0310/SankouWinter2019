@@ -13,7 +13,7 @@
 #include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
 #include "../Camera/GameCamera.h"
-#include "../Handler/EnemyHandler.h"
+#include "../Handler/EnemyEventHandler.h"
 
 #include "../Actor/Enemy/DemoEnemyActor.h"
 #include "../Actor/Enemy/RotateChargeEnemy.h"
@@ -127,10 +127,10 @@ void EnemyController::CheckEnemyDestroy()
 /**************************************
 ƒnƒ“ƒhƒ‰[ì¬
 ***************************************/
-void EnemyController::CreateEnemyHandler(
+void EnemyController::CreateEnemyEventHandler(
 	PlayerController *playerController)
 {
-	enemyHandler = new EnemyHandler(bulletController, playerController);
+	enemyHandler = new EnemyEventHandler();
 
 	BaseEnemy *enemy = nullptr;
 

@@ -142,11 +142,11 @@
     <ClCompile Include="source\Effect\Enemy\EnemyFlame.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemySmallDebris.cpp" />
     <ClCompile Include="source\Actor\Enemy\Base\BaseMiddleEnemy.cpp" />
-    <ClCompile Include="source\Handler\EnemyHandler.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\Sound\SoundPlayer.cpp" />
     <ClCompile Include="source\Viewer\Back\BackViewer.cpp" />
     <ClCompile Include="source\Viewer\Back\TimeBreakText.cpp" />
+    <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -314,11 +314,11 @@
     <ClInclude Include="source\Effect\Enemy\EnemyFlame.h" />
     <ClInclude Include="source\Effect\Enemy\EnemySmallDebris.h" />
     <ClInclude Include="source\Actor\Enemy\Base\BaseMiddleEnemy.h" />
-    <ClInclude Include="source\Handler\EnemyHandler.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\Sound\SoundPlayer.h" />
     <ClInclude Include="source\Viewer\Back\BackViewer.h" />
     <ClInclude Include="source\Viewer\Back\TimeBreakText.h" />
+    <ClInclude Include="source\Handler\EnemyEventHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

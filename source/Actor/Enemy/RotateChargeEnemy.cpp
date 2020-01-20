@@ -21,7 +21,7 @@
 /**************************************
 コンストラクタ
 ***************************************/
-RotateChargeEnemy::RotateChargeEnemy(EnemyHandler* handler) :
+RotateChargeEnemy::RotateChargeEnemy(EnemyEventHandler* handler) :
 	BaseSmallEnemy(handler)
 { 
 	colliders.reserve(1);

@@ -1,11 +1,11 @@
 //=====================================
 //
-// EnemyHandler.cpp
+// EventHandler.cpp
 // 機能:エネミーバレット操作ハンドラ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "EnemyHandler.h"
+#include "EnemyEventHandler.h"
 #include "../../Framework/Task/TaskManager.h"
 
 #include "../Controller/EnemyBulletController.h"
@@ -19,9 +19,7 @@
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyHandler::EnemyHandler(
-	EnemyBulletController * bulletController,
-	PlayerController *playerController) :
+EnemyEventHandler::EnemyEventHandler() :
 	bulletController(bulletController),
 	playerController(playerController)
 {
@@ -30,14 +28,14 @@ EnemyHandler::EnemyHandler(
 /**************************************
 デストラクタ
 ***************************************/
-EnemyHandler::~EnemyHandler()
+EnemyEventHandler::~EnemyEventHandler()
 {
 }
 
 /**************************************
 バレットセット処理
 ***************************************/
-void EnemyHandler::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed)
+void EnemyEventHandler::SetBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed)
 {
 	bulletController->SetBullet(shotTransform, type, speed);
 }
@@ -45,7 +43,7 @@ void EnemyHandler::SetBullet(const Transform & shotTransform, EnemyBulletConfig:
 /**************************************
 WAY弾セット処理
 ***************************************/
-void EnemyHandler::SetWayBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way, float angle)
+void EnemyEventHandler::SetWayBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way, float angle)
 {
 	Transform transform = shotTransform;
 	transform.Rotate(angle / 2.0f, Vector3::Right);
@@ -62,7 +60,7 @@ void EnemyHandler::SetWayBullet(const Transform & shotTransform, EnemyBulletConf
 /**************************************
 円形弾セット処理
 ***************************************/
-void EnemyHandler::SetCircleBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way)
+void EnemyEventHandler::SetCircleBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, int way)
 {
 	SetWayBullet(shotTransform, type, speed, way, 360.0f);
 }
@@ -70,7 +68,7 @@ void EnemyHandler::SetCircleBullet(const Transform & shotTransform, EnemyBulletC
 /**************************************
 バラマキ弾セット処理
 ***************************************/
-void EnemyHandler::SetStrewBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, float randomRange)
+void EnemyEventHandler::SetStrewBullet(const Transform & shotTransform, EnemyBulletConfig::Type type, float speed, float randomRange)
 {
 	Transform transform = shotTransform;
 	transform.Rotate(Math::RandomRange(-randomRange / 2.0f, randomRange / 2.0f), Vector3::Right);	
@@ -81,14 +79,14 @@ void EnemyHandler::SetStrewBullet(const Transform & shotTransform, EnemyBulletCo
 /**************************************
 全バレット消失処理
 ***************************************/
-void EnemyHandler::VanishAllBullet()
+void EnemyEventHandler::VanishAllBullet()
 {
 }
 
 /**************************************
 スコアアイテム生成処理
 ***************************************/
-void EnemyHandler::GenerateScoreItem(const D3DXVECTOR3 & position)
+void EnemyEventHandler::GenerateScoreItem(const D3DXVECTOR3 & position)
 {
 
 }
@@ -96,7 +94,7 @@ void EnemyHandler::GenerateScoreItem(const D3DXVECTOR3 & position)
 /**************************************
 スコア加算処理
 ***************************************/
-void EnemyHandler::AddScore(int point)
+void EnemyEventHandler::AddScore(int point)
 {
 
 }
@@ -104,7 +102,7 @@ void EnemyHandler::AddScore(int point)
 /**************************************
 エネミー減速処理
 ***************************************/
-void EnemyHandler::SlowdownEnemy()
+void EnemyEventHandler::SlowdownEnemy()
 {
 	if (!inSlowdown)
 		return;
@@ -120,7 +118,7 @@ void EnemyHandler::SlowdownEnemy()
 /**************************************
 スローダウン判定の保存
 ***************************************/
-void EnemyHandler::FetchSlowdownState()
+void EnemyEventHandler::FetchSlowdownState()
 {
 	inSlowdown = playerController->InSlowdown();
 }

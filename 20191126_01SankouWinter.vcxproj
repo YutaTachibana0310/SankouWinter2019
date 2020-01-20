@@ -272,7 +272,7 @@
     <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerExplosion.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
-    <ClCompile Include="source\Handler\EnemyHandler.cpp" />
+    <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\Sound\SoundPlayer.cpp" />
@@ -444,7 +444,7 @@
     <ClInclude Include="source\Effect\Game\PlayerExplosion.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
-    <ClInclude Include="source\Handler\EnemyHandler.h" />
+    <ClInclude Include="source\Handler\EnemyEventHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\Sound\SoundPlayer.h" />

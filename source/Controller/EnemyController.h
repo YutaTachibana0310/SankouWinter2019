@@ -17,7 +17,7 @@
 class BaseEnemy;
 class EnemyBulletController;
 class GameCamera;
-class EnemyHandler;
+class EnemyEventHandler;
 class PlayerController;
 
 /**************************************
@@ -35,7 +35,7 @@ public:
 
 	void CheckEnemyDestroy();
 
-	void CreateEnemyHandler(
+	void CreateEnemyEventHandler(
 		PlayerController *playerController
 	);
 
@@ -44,7 +44,7 @@ private:
 
 	EnemyBulletController *bulletController;
 
-	EnemyHandler* enemyHandler;
+	EnemyEventHandler* enemyHandler;
 
 	GameCamera *gameCamera;
 };

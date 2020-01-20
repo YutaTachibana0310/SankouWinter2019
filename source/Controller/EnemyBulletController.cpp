@@ -19,7 +19,7 @@
 
 #include <algorithm>
 
-#include "../Handler/EnemyHandler.h"
+#include "../Handler/EnemyEventHandler.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -60,7 +60,7 @@ void EnemyBulletController::Update()
 		{
 			Transform shotTransform;
 			shotTransform.SetPosition({ 0.0f, 0.0f, 20.0f });
-			EnemyHandler handle(this, nullptr);
+			EnemyEventHandler handle;
 			
 			shotTransform.Rotate(30.0f, Vector3::Right);
 			handle.SetWayBullet(shotTransform, EnemyBulletConfig::BlueNeedle, 0.5f, 3, 15.0f);
