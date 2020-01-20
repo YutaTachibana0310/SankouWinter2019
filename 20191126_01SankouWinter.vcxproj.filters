@@ -145,6 +145,8 @@
     <ClCompile Include="source\Handler\EnemyHandler.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\Sound\SoundPlayer.cpp" />
+    <ClCompile Include="source\Viewer\Back\BackViewer.cpp" />
+    <ClCompile Include="source\Viewer\Back\TimeBreakText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -315,6 +317,8 @@
     <ClInclude Include="source\Handler\EnemyHandler.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\Sound\SoundPlayer.h" />
+    <ClInclude Include="source\Viewer\Back\BackViewer.h" />
+    <ClInclude Include="source\Viewer\Back\TimeBreakText.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
