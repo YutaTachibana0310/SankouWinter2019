@@ -13,6 +13,7 @@
 
 #include "../../System/EnemyTween.h"
 #include "../../Effect/GameParticleManager.h"
+#include "../../Controller/EnemyTimeController.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -74,7 +75,7 @@ void RotateChargeEnemy::Uninit()
 ***************************************/
 void RotateChargeEnemy::Update()
 {
-	transform->Rotate(5.0f, Vector3::Forward);
+	transform->Rotate(5.0f * EnemyTimeController::GetTimeScale(), Vector3::Forward);
 }
 
 /**************************************
