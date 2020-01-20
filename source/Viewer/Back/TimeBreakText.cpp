@@ -79,7 +79,7 @@ void TimeBreakText::Set()
 ***************************************/
 void TimeBreakText::OnFinishIn()
 {
-	TaskManager::Instance()->CreateDelayedTask(60.0f, true, [=]()
+	TaskManager::Instance()->CreateDelayedTask(30.0f, true, [=]()
 	{
 		Tween::Move(*upper, LastPositionUpper, 60.0f, EaseType::InCubic, true);
 		Tween::Move(*lower, LastPositionLower, 60.0f, EaseType::InCubic, true);
