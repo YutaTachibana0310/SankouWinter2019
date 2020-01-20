@@ -17,7 +17,7 @@
 /**************************************
 コンストラクタ
 ***************************************/
-DemoEnemyActor::DemoEnemyActor(EnemyHandler* handler) :
+DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
 	BaseMiddleEnemy(handler)
 {
 	mesh = new MeshContainer();

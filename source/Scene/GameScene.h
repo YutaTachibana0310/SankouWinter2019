@@ -23,6 +23,8 @@ class GameParticleManager;
 class PlanetActor;
 class GameViewer;
 class PlayerController;
+class BackViewer;
+class EnemyEventHandler;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -54,6 +56,9 @@ private:
 	BloomController *bloom;
 
 	GameViewer *viewer;
+	BackViewer *backViewer;
+
+	EnemyEventHandler *handler;
 
 	void _DrawDebug();
 

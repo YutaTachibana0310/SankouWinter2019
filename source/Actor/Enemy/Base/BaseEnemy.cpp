@@ -15,7 +15,7 @@
 /**************************************
 コンストラクタ
 ***************************************/
-BaseEnemy::BaseEnemy(EnemyHandler* handler) :
+BaseEnemy::BaseEnemy(EnemyEventHandler* handler) :
 	handle(handler)
 {
 	mesh = new MeshContainer();

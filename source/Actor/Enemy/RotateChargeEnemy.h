@@ -22,7 +22,7 @@ class MeshContainer;
 class RotateChargeEnemy : public BaseSmallEnemy
 {
 public:
-	RotateChargeEnemy(EnemyHandler* handler);
+	RotateChargeEnemy(EnemyEventHandler* handler);
 	~RotateChargeEnemy();
 
 	virtual void Init() override;

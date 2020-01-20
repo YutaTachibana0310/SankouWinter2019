@@ -36,6 +36,8 @@ public:
 	int GetCntLife() const;
 	int GetCntBomb() const;
 
+	bool InSlowdown() const;
+
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;
@@ -43,6 +45,8 @@ private:
 	GameCamera *camera;
 
 	float cntEnergy;
+	bool inSlow;
+
 	int cntBomb;
 	int cntLife;
 

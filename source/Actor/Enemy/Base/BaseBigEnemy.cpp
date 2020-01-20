@@ -9,10 +9,12 @@
 #include "../../../Effect/GameParticleManager.h"
 #include "../../../Sound/SoundPlayer.h"
 
+#include "../../../Handler/EnemyEventHandler.h"
+
 /*************************************
 コンストラクタ
 ***************************************/
-BaseBigEnemy::BaseBigEnemy(EnemyHandler* handler) :
+BaseBigEnemy::BaseBigEnemy(EnemyEventHandler* handler) :
 	BaseEnemy(handler),
 	isDestroied(false)
 {
@@ -25,6 +27,7 @@ BaseBigEnemy::BaseBigEnemy(EnemyHandler* handler) :
 void BaseBigEnemy::Uninit()
 {
 	SoundPlayer::Instance()->Play("BigExplosion");
+	handle->SlowdownEnemy();
 }
 
 /**************************************

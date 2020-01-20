@@ -15,10 +15,11 @@
 #include "../../Library/nameof/nameof.hpp"
 
 #include "../Actor/Enemy/EnemyBulletActor.h"
+#include "EnemyTimeController.h"
 
 #include <algorithm>
 
-#include "../Handler/EnemyHandler.h"
+#include "../Handler/EnemyEventHandler.h"
 
 /**************************************
 グローバル変数
@@ -53,23 +54,25 @@ void EnemyBulletController::Update()
 	/*
 	テスト用処理
 	*/
-	//{
-	//	static float cntDebug = 0.0f;
-	//	if (cntDebug >= 10.0f)
-	//	{
-	//		Transform shotTransform;
-	//		EnemyHandler handle(this);
-	//		
-	//		shotTransform.Rotate(30.0f, Vector3::Right);
-	//		handle.SetWayBullet(shotTransform, EnemyBulletConfig::BlueNeedle, 0.5f, 3, 15.0f);
+	{
+		static float cntDebug = 0.0f;
+		if (cntDebug >= 10.0f)
+		{
+			Transform shotTransform;
+			shotTransform.SetPosition({ 0.0f, 0.0f, 20.0f });
+			EnemyEventHandler handle;
+			handle.GiveEnemyBulletController(this);
 
-	//		shotTransform.Rotate(-60.0f, Vector3::Right);
-	//		handle.SetWayBullet(shotTransform, EnemyBulletConfig::RedNeedle, 0.5f, 3, -15.0f);
+			shotTransform.Rotate(30.0f, Vector3::Right);
+			handle.SetWayBullet(shotTransform, EnemyBulletConfig::BlueNeedle, 0.5f, 3, 15.0f);
 
-	//		cntDebug -= 10.0f;
-	//	}
-	//	cntDebug += FixedTime::GetTimeScale();
-	//}
+			shotTransform.Rotate(-60.0f, Vector3::Right);
+			handle.SetWayBullet(shotTransform, EnemyBulletConfig::RedNeedle, 0.5f, 3, -15.0f);
+
+			cntDebug -= 10.0f;
+		}
+		cntDebug += EnemyTimeController::GetTimeScale();
+	}
 
 	//更新
 	for (auto&& bullet : bulletContainer)
@@ -94,48 +97,6 @@ void EnemyBulletController::Update()
 		return !ptr->IsActive();
 	});
 	bulletContainer.erase(itr, bulletContainer.end());
-
-	//デバッグメニュー
-	Debug::Begin("EnemyBullet");
-	static int bulletType = EnemyBulletConfig::Type(0);
-
-	if (Debug::Button("Shot"))
-	{
-		Transform transform;
-		SetBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f);
-	}
-
-	if (Debug::Button("Way Shot"))
-	{
-		Transform transform;
-		EnemyHandler handle(this);
-
-		handle.SetWayBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 5, 60);
-	}
-
-	if (Debug::Button("Circle Shot"))
-	{
-		Transform transform;
-		EnemyHandler handle(this);
-
-		handle.SetCircleBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 16);
-	}
-
-	if (Debug::Button("Strew Shot"))
-	{
-		Transform transform;
-		EnemyHandler handle(this);
-
-		handle.SetStrewBullet(transform, EnemyBulletConfig::Type(bulletType), 0.5f, 30.0f);
-	}
-
-	for (int i = 0; i < EnemyBulletConfig::Type::EnemyBulletMax; i++)
-	{
-		std::string label = std::string(NAMEOF_ENUM(EnemyBulletConfig::Type(i)));
-		Debug::RadioButton(label.c_str(), bulletType, i);
-	}
-
-	Debug::End();
 }
 
 /**************************************

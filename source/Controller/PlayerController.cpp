@@ -31,6 +31,7 @@ const int PlayerController::MaxLife = 2;
 PlayerController::PlayerController(GameCamera *camera) :
 	camera(camera),
 	cntEnergy(MaxEnergy),
+	inSlow(false),
 	cntLife(MaxLife),
 	cntBomb(MaxBomb)
 {
@@ -121,6 +122,14 @@ int PlayerController::GetCntBomb() const
 }
 
 /**************************************
+スロウダウン中かどうか
+***************************************/
+bool PlayerController::InSlowdown() const
+{
+	return inSlow;
+}
+
+/**************************************
 バレットを止める入力の処理
 ***************************************/
 void PlayerController::SlowDownEnemyBullet(bool isSlow)
@@ -129,10 +138,12 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 	{
 		cntEnergy -= Math::Clamp(0.0f, MaxEnergy, 0.2f * FixedTime::GetTimeScale());
 		EnemyTimeController::SlowDownBullet(true);
+		inSlow = true;
 	}
 	else
 	{
 		EnemyTimeController::SlowDownBullet(false);
+		inSlow = false;
 	}
 }
 

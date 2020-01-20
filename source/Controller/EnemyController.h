@@ -17,7 +17,8 @@
 class BaseEnemy;
 class EnemyBulletController;
 class GameCamera;
-class EnemyHandler;
+class EnemyEventHandler;
+class PlayerController;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -34,14 +35,16 @@ public:
 
 	void CheckEnemyDestroy();
 
+	void SetEnemyEventHandler(EnemyEventHandler *handler);
+
 private:
 	std::list<BaseEnemy*> enemyContainer;
 
 	EnemyBulletController *bulletController;
 
-	EnemyHandler* enemyHandler;
-
 	GameCamera *gameCamera;
+
+	EnemyEventHandler* enemyEventHandler;
 };
 
 #endif

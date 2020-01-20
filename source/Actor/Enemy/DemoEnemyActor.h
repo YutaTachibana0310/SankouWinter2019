@@ -24,7 +24,7 @@ class BoxCollider3D;
 class DemoEnemyActor : public BaseMiddleEnemy
 {
 public:
-	DemoEnemyActor(EnemyHandler* handler);
+	DemoEnemyActor(EnemyEventHandler* handler);
 	~DemoEnemyActor();
 
 	void Init();

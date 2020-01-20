@@ -13,7 +13,7 @@
 #include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
 #include "../Camera/GameCamera.h"
-#include "../Handler/EnemyHandler.h"
+#include "../Handler/EnemyEventHandler.h"
 
 #include "../Actor/Enemy/DemoEnemyActor.h"
 #include "../Actor/Enemy/RotateChargeEnemy.h"
@@ -29,7 +29,7 @@ EnemyTween* EnemyTween::mInstance = nullptr;
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyController::EnemyController(GameCamera *gameCamera) :
+EnemyController::EnemyController(GameCamera* gameCamera) :
 	gameCamera(gameCamera)
 {
 	if (EnemyTween::mInstance == nullptr)
@@ -40,24 +40,6 @@ EnemyController::EnemyController(GameCamera *gameCamera) :
 	ResourceManager::Instance()->LoadMesh("FleetEnemy", "data/MODEL/BigEnemy/BigEnemy.x");
 
 	bulletController = new EnemyBulletController();
-	enemyHandler = new EnemyHandler(bulletController);
-
-	BaseEnemy *enemy = nullptr;
-
-	enemy = new RotateChargeEnemy(enemyHandler);
-	enemy->SetPosition({ 0.0f, 10.0f, 20.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
-
-	enemy = new DemoEnemyActor(enemyHandler);
-	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
-
-	enemy = new FleetEnemy(enemyHandler);
-	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
 }
 
 /**************************************
@@ -121,6 +103,7 @@ void EnemyController::CheckEnemyDestroy()
 		if(enemy->GetType() == BaseEnemy::Big)
 		{
 			enemy->Explode();
+			enemyEventHandler->FetchSlowdownState();
 			gameCamera->Focus(enemy->GetPosition(), [=]()
 			{
 				enemy->Uninit();
@@ -138,4 +121,31 @@ void EnemyController::CheckEnemyDestroy()
 	{
 		return !enemy->IsActive();
 	});
+}
+
+
+/**************************************
+ハンドラー作成
+***************************************/
+void EnemyController::SetEnemyEventHandler(EnemyEventHandler *handler)
+{
+	enemyEventHandler = handler;
+	enemyEventHandler->GiveEnemyBulletController(bulletController);
+
+	BaseEnemy *enemy = nullptr;
+
+	enemy = new RotateChargeEnemy(enemyEventHandler);
+	enemy->SetPosition({ 0.0f, 10.0f, 20.0f });
+	enemyContainer.push_back(enemy);
+	enemy->Init();
+
+	enemy = new DemoEnemyActor(enemyEventHandler);
+	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
+	enemyContainer.push_back(enemy);
+	enemy->Init();
+
+	enemy = new FleetEnemy(enemyEventHandler);
+	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
+	enemyContainer.push_back(enemy);
+	enemy->Init();
 }

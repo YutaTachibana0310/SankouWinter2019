@@ -1,12 +1,12 @@
 //=====================================
 //
-// EnemyHandler.h
+// EventHandler.h
 // 機能:エネミーバレット操作ハンドラ
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _EnemyHandler_H_
-#define _EnemyHandler_H_
+#ifndef _EVENTHANDLER_H_
+#define _EVENTHANDLER_H_
 
 #include "../../main.h"
 #include "../Controller/EnemyBulletConfig.h"
@@ -15,15 +15,18 @@
 前方宣言
 ***************************************/
 class EnemyBulletController;
+class PlayerController;
+class BackViewer;
 
 /**************************************
 クラス定義
 ***************************************/
-class EnemyHandler
+class EnemyEventHandler
 {
 public:
-	EnemyHandler(EnemyBulletController* controller);
-	~EnemyHandler();
+	EnemyEventHandler();
+
+	~EnemyEventHandler();
 
 	void SetBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed);
 	void SetWayBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed, int way, float angle);
@@ -36,8 +39,20 @@ public:
 
 	void AddScore(int point);
 
+	void SlowdownEnemy();
+
+	void FetchSlowdownState();
+
+	void GiveEnemyBulletController(EnemyBulletController *controller);
+	void GivePlayerController(PlayerController *controller);
+	void GiveBackViewer(BackViewer *viewer);
+
 private:
-	EnemyBulletController *controller;
+	EnemyBulletController *bulletController;
+	PlayerController *playerController;
+	BackViewer *backViewer;
+
+	bool inSlowdown;
 };
 
 #endif
