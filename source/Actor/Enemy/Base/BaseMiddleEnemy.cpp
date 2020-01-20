@@ -7,6 +7,7 @@
 //=====================================
 #include "BaseMiddleEnemy.h"
 #include "../../../Effect/GameParticleManager.h"
+#include "../../../Sound/SoundPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -18,6 +19,7 @@
 void BaseMiddleEnemy::Explode()
 {
 	GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
+	SoundPlayer::Instance()->Play("MiddleExplosion");
 }
 
 /**************************************

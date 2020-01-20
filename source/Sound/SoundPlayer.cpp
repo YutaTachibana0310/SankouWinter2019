@@ -27,7 +27,10 @@ void SoundPlayer::Load()
 {
 	std::vector<SoundData> datas =
 	{
-		{"PlayerShot", "gun25.wav", 0.3f}
+		{"PlayerShot", "gun25.wav", 0.2f},
+		{"SmallExplosion", "smallExplosion.wav", 0.5f},
+		{"MiddleExplosion", "middleExplosion.wav", 0.65f},
+		{"BigExplosion", "bigExplosion.wav", 0.7f},
 	};
 
 	const std::string directoryPath = "data/SOUND/SE/";

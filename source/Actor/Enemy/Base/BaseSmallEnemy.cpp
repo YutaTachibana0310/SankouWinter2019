@@ -7,6 +7,7 @@
 //=====================================
 #include "BaseSmallEnemy.h"
 #include "../../../Effect/GameParticleManager.h"
+#include "../../../Sound/SoundPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -18,6 +19,7 @@
 void BaseSmallEnemy::Explode()
 {
 	GameParticleManager::Instance()->GenerateEnemySmallExplositon(transform->GetPosition());
+	SoundPlayer::Instance()->Play("SmallExplosion");
 }
 
 /**************************************

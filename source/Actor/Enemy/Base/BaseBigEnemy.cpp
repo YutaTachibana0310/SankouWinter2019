@@ -7,6 +7,7 @@
 //=====================================
 #include "BaseBigEnemy.h"
 #include "../../../Effect/GameParticleManager.h"
+#include "../../../Sound/SoundPlayer.h"
 
 /*************************************
 コンストラクタ
@@ -16,6 +17,14 @@ BaseBigEnemy::BaseBigEnemy(EnemyHandler* handler) :
 	isDestroied(false)
 {
 
+}
+
+/**************************************
+終了処理
+***************************************/
+void BaseBigEnemy::Uninit()
+{
+	SoundPlayer::Instance()->Play("BigExplosion");
 }
 
 /**************************************
