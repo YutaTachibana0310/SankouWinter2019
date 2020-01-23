@@ -126,6 +126,14 @@ void EnemyEventHandler::FetchSlowdownState()
 }
 
 /**************************************
+プレイヤー座標取得
+***************************************/
+D3DXVECTOR3 EnemyEventHandler::GetPlayerPosition() const
+{
+	return playerController->GetPlayerPosition();
+}
+
+/**************************************
 エネミーバレットコントローラ設定処理
 ***************************************/
 void EnemyEventHandler::GiveEnemyBulletController(EnemyBulletController * controller)

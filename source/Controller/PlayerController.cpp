@@ -130,6 +130,14 @@ bool PlayerController::InSlowdown() const
 }
 
 /**************************************
+プレイヤーの座標取得
+***************************************/
+D3DXVECTOR3 PlayerController::GetPlayerPosition() const
+{
+	return player->GetPosition();
+}
+
+/**************************************
 バレットを止める入力の処理
 ***************************************/
 void PlayerController::SlowDownEnemyBullet(bool isSlow)

@@ -43,6 +43,8 @@ public:
 
 	void FetchSlowdownState();
 
+	D3DXVECTOR3 GetPlayerPosition() const;
+
 	void GiveEnemyBulletController(EnemyBulletController *controller);
 	void GivePlayerController(PlayerController *controller);
 	void GiveBackViewer(BackViewer *viewer);

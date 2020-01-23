@@ -34,7 +34,7 @@ public:
 	virtual void Draw() override;
 
 private:
-
+	bool enableHoming;
 
 };
 

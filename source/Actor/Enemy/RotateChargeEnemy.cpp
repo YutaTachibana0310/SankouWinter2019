@@ -14,6 +14,7 @@
 #include "../../System/EnemyTween.h"
 #include "../../Effect/GameParticleManager.h"
 #include "../../Controller/EnemyTimeController.h"
+#include "../../Handler/EnemyEventHandler.h"
 
 /**************************************
 グローバル変数
@@ -23,7 +24,8 @@
 コンストラクタ
 ***************************************/
 RotateChargeEnemy::RotateChargeEnemy(EnemyEventHandler* handler) :
-	BaseSmallEnemy(handler)
+	BaseSmallEnemy(handler),
+	enableHoming(true)
 { 
 	colliders.reserve(1);
 	colliders.push_back(BoxCollider3D::Create("Enemy", transform));
@@ -48,14 +50,7 @@ void RotateChargeEnemy::Init()
 {
 	active = true;
 	SetCollider(true);
-
-	D3DXVECTOR3 InitPos = { 0.0f, 10.0f, 50.0f };
-	D3DXVECTOR3 GoalPos = { 0.0f, 10.0f, 25.0f };
-
-	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
-
-	SetCollider(true);
-	active = true;
+	enableHoming = true;
 
 	hp = 5.0f;
 }
@@ -75,7 +70,23 @@ void RotateChargeEnemy::Uninit()
 ***************************************/
 void RotateChargeEnemy::Update()
 {
-	transform->Rotate(5.0f * EnemyTimeController::GetTimeScale(), Vector3::Forward);
+	D3DXVECTOR3 playerPos = handle->GetPlayerPosition();
+	D3DXVECTOR3 diff = playerPos - transform->GetPosition();
+
+	float distance = D3DXVec3LengthSq(&diff);
+	const float DistanceDisableHoming = 5.0f * 5.0f;
+
+	if (distance > DistanceDisableHoming && enableHoming)
+	{
+		transform->LookAt(transform->GetPosition() - diff);
+	}
+	else if(enableHoming)
+	{
+		enableHoming = false;
+	}
+
+	auto forward = transform->Forward();
+	transform->Move(0.8f * -forward * EnemyTimeController::GetTimeScale());
 }
 
 /**************************************

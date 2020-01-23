@@ -38,6 +38,8 @@ public:
 
 	bool InSlowdown() const;
 
+	D3DXVECTOR3 GetPlayerPosition() const;
+
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;
