@@ -84,7 +84,7 @@ void EnemyBulletActor::Update()
 	renderTransform->SetPosition(transform->GetPosition());
 	renderTransform->SetScale(transform->GetScale());
 	D3DXVECTOR3 eulerAngle = transform->GetEulerAngle();
-	renderTransform->SetRotation({ eulerAngle.z, 0.0f, 0.0f });
+	renderTransform->SetRotation({ 0.0f, 0.0f, -eulerAngle.x });
 }
 
 /**************************************
