@@ -13,6 +13,7 @@
 
 #include "../../Effect/GameParticleManager.h"
 #include "../../System/EnemyTween.h"
+#include "../../Handler/EnemyEventHandler.h"
 
 /**************************************
 コンストラクタ
@@ -68,7 +69,8 @@ void DemoEnemyActor::Uninit()
 ***************************************/
 void DemoEnemyActor::Update()
 {
-
+	D3DXVECTOR3 diff = handle->GetPlayerPosition() - transform->GetPosition();
+	transform->LookAt(transform->GetPosition() - diff);
 }
 
 /**************************************
