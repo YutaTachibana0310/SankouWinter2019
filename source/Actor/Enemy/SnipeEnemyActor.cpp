@@ -1,17 +1,16 @@
 //=====================================
 //
-//RotateChargeEnemy.cpp
+//SnipeEnemyActor.cpp
 //機能:
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "RotateChargeEnemy.h"
+#include "SnipeEnemyActor.h"
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Core/ObjectPool.h"
 
-#include "../../Controller/EnemyTimeController.h"
 #include "../../Handler/EnemyEventHandler.h"
 
 /**************************************
@@ -21,79 +20,80 @@
 /**************************************
 コンストラクタ
 ***************************************/
-RotateChargeEnemy::RotateChargeEnemy(EnemyEventHandler* handler) :
+SnipeEnemyActor::SnipeEnemyActor(EnemyEventHandler * handler) :
 	BaseSmallEnemy(handler),
-	enableHoming(true)
-{ 
+	cntFrame(0.0f),
+	cntAttack(0),
+	enableSnipe(true)
+{
 	colliders.reserve(1);
 	colliders.push_back(BoxCollider3D::Create("Enemy", transform));
 	colliders[0]->SetSize({ 5.0f, 2.0f, 2.0f });
 	colliders[0]->AddObserver(this);
 
 	ResourceManager::Instance()->GetMesh("RotateEnemy", mesh);
+
+	shotTransform = std::make_shared<Transform>();
+	transform->AddChild(shotTransform);
+	shotTransform->SetLocalPosition({ 0.0f, 0.0f, -2.0f });
+
 }
 
 /**************************************
 デストラクタ
 ***************************************/
-RotateChargeEnemy::~RotateChargeEnemy()
+SnipeEnemyActor::~SnipeEnemyActor()
 {
-
+	shotTransform.reset();
 }
 
 /**************************************
 初期化処理
 ***************************************/
-void RotateChargeEnemy::Init()
+void SnipeEnemyActor::Init()
 {
+	cntFrame = 0.0f;
+	cntAttack = 0;
 	active = true;
 	SetCollider(true);
-	enableHoming = true;
 
 	hp = 5.0f;
+
+	ChangeState(InitState);
 }
 
 /**************************************
 終了処理
 ***************************************/
-void RotateChargeEnemy::Uninit()
+void SnipeEnemyActor::Uninit()
 {
 	SetCollider(false);
 	active = false;
-	ObjectPool::Instance()->Destroy<RotateChargeEnemy>(this);
+	ObjectPool::Instance()->Destroy<SnipeEnemyActor>(this);
 }
 
 /**************************************
 更新処理
 ***************************************/
-void RotateChargeEnemy::Update()
+void SnipeEnemyActor::Update()
 {
-	D3DXVECTOR3 playerPos = handle->GetPlayerPosition();
-	D3DXVECTOR3 diff = playerPos - transform->GetPosition();
-
-	float distance = D3DXVec3LengthSq(&diff);
-	const float DistanceDisableHoming = 5.0f * 5.0f;
-
-	if (distance > DistanceDisableHoming && enableHoming)
-	{
-		transform->LookAt(transform->GetPosition() - diff);
-	}
-	else if(enableHoming)
-	{
-		enableHoming = false;
-	}
-
-	auto forward = transform->Forward();
-	transform->Move(0.8f * -forward * EnemyTimeController::GetTimeScale());
+	fsm[state]->OnUpdate(*this);
 }
 
 /**************************************
 描画処理
 ***************************************/
-void RotateChargeEnemy::Draw()
+void SnipeEnemyActor::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
+}
 
-	colliders[0]->Draw();
+/**************************************
+ステート遷移
+***************************************/
+void SnipeEnemyActor::ChangeState(int next)
+{
+	state = SnipeState(next);
+	fsm[state]->OnStart(*this);
 }

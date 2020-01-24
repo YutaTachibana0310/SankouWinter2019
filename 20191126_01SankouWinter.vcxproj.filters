@@ -151,6 +151,7 @@
     <ClCompile Include="source\Actor\Enemy\State\DemoAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoWait.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoEscape.cpp" />
+    <ClCompile Include="source\Actor\Enemy\SnipeEnemyActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -327,6 +328,7 @@
     <ClInclude Include="source\Actor\Enemy\State\DemoAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoWait.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoEscape.h" />
+    <ClInclude Include="source\Actor\Enemy\SnipeEnemyActor.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

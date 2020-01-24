@@ -250,6 +250,7 @@
     <ClCompile Include="source\Actor\Enemy\EnemyBulletActor.cpp" />
     <ClCompile Include="source\Actor\Enemy\FleetEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\RotateChargeEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\SnipeEnemyActor.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoEscape.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoInit.cpp" />
@@ -425,6 +426,7 @@
     <ClInclude Include="source\Actor\Enemy\EnemyBulletActor.h" />
     <ClInclude Include="source\Actor\Enemy\FleetEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\RotateChargeEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\SnipeEnemyActor.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoEscape.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoInit.h" />
