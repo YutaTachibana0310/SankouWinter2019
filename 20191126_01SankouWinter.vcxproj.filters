@@ -151,6 +151,10 @@
     <ClCompile Include="source\Actor\Enemy\State\DemoAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoWait.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoEscape.cpp" />
+    <ClCompile Include="source\Actor\Enemy\SnipeEnemyActor.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\SnipeAttack.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -327,6 +331,10 @@
     <ClInclude Include="source\Actor\Enemy\State\DemoAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoWait.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoEscape.h" />
+    <ClInclude Include="source\Actor\Enemy\SnipeEnemyActor.h" />
+    <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />
+    <ClInclude Include="source\Actor\Enemy\State\SnipeAttack.h" />
+    <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

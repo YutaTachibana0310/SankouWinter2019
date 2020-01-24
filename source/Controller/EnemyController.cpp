@@ -18,6 +18,7 @@
 #include "../Actor/Enemy/DemoEnemyActor.h"
 #include "../Actor/Enemy/RotateChargeEnemy.h"
 #include "../Actor/Enemy/FleetEnemy.h"
+#include "../Actor/Enemy/SnipeEnemyActor.h"
 
 #include <type_traits>
 
@@ -139,13 +140,18 @@ void EnemyController::SetEnemyEventHandler(EnemyEventHandler *handler)
 	//enemyContainer.push_back(enemy);
 	//enemy->Init();
 
-	enemy = new DemoEnemyActor(enemyEventHandler);
-	enemy->SetPosition({ 0.0f, 0.0f, 50.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
+	//enemy = new DemoEnemyActor(enemyEventHandler);
+	//enemy->SetPosition({ 0.0f, 0.0f, 50.0f });
+	//enemyContainer.push_back(enemy);
+	//enemy->Init();
 
 	//enemy = new FleetEnemy(enemyEventHandler);
 	//enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
 	//enemyContainer.push_back(enemy);
 	//enemy->Init();
+
+	enemy = new SnipeEnemyActor(enemyEventHandler);
+	enemy->SetPosition({ 0.0f, 20.0f, 60.0f });
+	enemyContainer.push_back(enemy);
+	enemy->Init();
 }
