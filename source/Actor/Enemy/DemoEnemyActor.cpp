@@ -39,6 +39,11 @@ DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
 
 	transform->AddChild(shotTransformLeft);
 	transform->AddChild(shotTransformRight);
+	
+	const D3DXVECTOR3 ShotPositionLeft = { 0.0f, 2.0f, -5.0f };
+	const D3DXVECTOR3 ShotPositionRight = { 0.0f, -2.0f, -5.0f };
+	shotTransformLeft->SetLocalPosition(ShotPositionLeft);
+	shotTransformRight->SetLocalPosition(ShotPositionRight);
 
 	fsm.resize(DemoState::MaxState, nullptr);
 	fsm[InitState] = new DemoInit();

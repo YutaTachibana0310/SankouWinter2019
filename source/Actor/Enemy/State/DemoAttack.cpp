@@ -14,7 +14,7 @@
 ***************************************/
 void DemoEnemyActor::DemoAttack::OnStart(DemoEnemyActor & entity)
 {
-	const float BulletSpeed = 0.5f;
+	const float BulletSpeed = 0.3f;
 	const float SpeedOffset = 0.02f;
 	const int CountBullet = 10;
 
