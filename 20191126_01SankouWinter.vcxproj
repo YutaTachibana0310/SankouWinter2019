@@ -255,6 +255,9 @@
     <ClCompile Include="source\Actor\Enemy\State\DemoEscape.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoInit.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoWait.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\SnipeAttack.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerColliderViewer.cpp" />
@@ -431,6 +434,9 @@
     <ClInclude Include="source\Actor\Enemy\State\DemoEscape.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoInit.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoWait.h" />
+    <ClInclude Include="source\Actor\Enemy\State\SnipeAttack.h" />
+    <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
+    <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerColliderViewer.h" />

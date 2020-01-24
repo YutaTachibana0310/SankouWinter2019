@@ -13,6 +13,10 @@
 
 #include "../../Handler/EnemyEventHandler.h"
 
+#include "State\SnipeInit.h"
+#include "State\SnipeAttack.h"
+#include "State\SnipeEscape.h"
+
 /**************************************
 グローバル変数
 ***************************************/
@@ -37,6 +41,10 @@ SnipeEnemyActor::SnipeEnemyActor(EnemyEventHandler * handler) :
 	transform->AddChild(shotTransform);
 	shotTransform->SetLocalPosition({ 0.0f, 0.0f, -2.0f });
 
+	fsm.resize(SnipeState::StateMax, nullptr);
+	fsm[InitState] = new SnipeInit();
+	fsm[AttackState] = new SnipeAttack();
+	fsm[EscapeState] = new SnipeEscape();
 }
 
 /**************************************
@@ -45,6 +53,7 @@ SnipeEnemyActor::SnipeEnemyActor(EnemyEventHandler * handler) :
 SnipeEnemyActor::~SnipeEnemyActor()
 {
 	shotTransform.reset();
+	Utility::DeleteContainer(fsm);
 }
 
 /**************************************
@@ -96,4 +105,13 @@ void SnipeEnemyActor::ChangeState(int next)
 {
 	state = SnipeState(next);
 	fsm[state]->OnStart(*this);
+}
+
+/**************************************
+プレイヤーの方を向く処理
+***************************************/
+void SnipeEnemyActor::LookAtPlayer()
+{
+	D3DXVECTOR3 diff = handle->GetPlayerPosition() - transform->GetPosition();
+	transform->LookAt(transform->GetPosition() - diff);
 }

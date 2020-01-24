@@ -52,7 +52,9 @@ private:
 
 	class SnipeInit;
 	class SnipeAttack;
-	class SniptEscape;
+	class SnipeEscape;
+
+	void LookAtPlayer();
 };
 
 #endif
