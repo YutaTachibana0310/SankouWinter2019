@@ -134,18 +134,18 @@ void EnemyController::SetEnemyEventHandler(EnemyEventHandler *handler)
 
 	BaseEnemy *enemy = nullptr;
 
-	enemy = new RotateChargeEnemy(enemyEventHandler);
-	enemy->SetPosition({ 0.0f, 10.0f, 60.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
+	//enemy = new RotateChargeEnemy(enemyEventHandler);
+	//enemy->SetPosition({ 0.0f, 10.0f, 60.0f });
+	//enemyContainer.push_back(enemy);
+	//enemy->Init();
 
 	enemy = new DemoEnemyActor(enemyEventHandler);
-	enemy->SetPosition({ 0.0f, 0.0f, 20.0f });
+	enemy->SetPosition({ 0.0f, 0.0f, 50.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
 
-	enemy = new FleetEnemy(enemyEventHandler);
-	enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
-	enemyContainer.push_back(enemy);
-	enemy->Init();
+	//enemy = new FleetEnemy(enemyEventHandler);
+	//enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
+	//enemyContainer.push_back(enemy);
+	//enemy->Init();
 }

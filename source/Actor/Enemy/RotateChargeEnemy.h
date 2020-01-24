@@ -33,6 +33,8 @@ public:
 
 	virtual void Draw() override;
 
+	void ChangeState(int next) {}
+
 private:
 	bool enableHoming;
 

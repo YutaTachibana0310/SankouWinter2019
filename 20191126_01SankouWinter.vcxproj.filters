@@ -147,6 +147,10 @@
     <ClCompile Include="source\Viewer\Back\BackViewer.cpp" />
     <ClCompile Include="source\Viewer\Back\TimeBreakText.cpp" />
     <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\DemoInit.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\DemoAttack.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\DemoWait.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\DemoEscape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -319,6 +323,10 @@
     <ClInclude Include="source\Viewer\Back\BackViewer.h" />
     <ClInclude Include="source\Viewer\Back\TimeBreakText.h" />
     <ClInclude Include="source\Handler\EnemyEventHandler.h" />
+    <ClInclude Include="source\Actor\Enemy\State\DemoInit.h" />
+    <ClInclude Include="source\Actor\Enemy\State\DemoAttack.h" />
+    <ClInclude Include="source\Actor\Enemy\State\DemoWait.h" />
+    <ClInclude Include="source\Actor\Enemy\State\DemoEscape.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

@@ -51,6 +51,8 @@ public:
 
 	virtual bool IsDestroied();
 
+	virtual void ChangeState(int next) = 0;
+
 protected:
 	float hp;
 	std::vector<std::shared_ptr<BoxCollider3D>> colliders;
@@ -59,6 +61,5 @@ protected:
 	EnemyEventHandler *handle;
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
-
 };
 #endif

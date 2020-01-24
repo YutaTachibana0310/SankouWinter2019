@@ -15,6 +15,11 @@
 #include "../../System/EnemyTween.h"
 #include "../../Handler/EnemyEventHandler.h"
 
+#include "State\DemoInit.h"
+#include "State\DemoAttack.h"
+#include "State\DemoWait.h"
+#include "State\DemoEscape.h"
+
 /**************************************
 コンストラクタ
 ***************************************/
@@ -28,6 +33,18 @@ DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
 	colliders[0] = BoxCollider3D::Create("Enemy", transform);
 	colliders[0]->AddObserver(this);
 	colliders[0]->SetSize({ 5.0f, 8.0f, 7.0f });
+
+	shotTransformLeft = std::make_shared<Transform>();
+	shotTransformRight = std::make_shared<Transform>();
+
+	transform->AddChild(shotTransformLeft);
+	transform->AddChild(shotTransformRight);
+
+	fsm.resize(DemoState::MaxState, nullptr);
+	fsm[InitState] = new DemoInit();
+	fsm[AttackState] = new DemoAttack();
+	fsm[WaitState] = new DemoWait();
+	fsm[EscapeState] = new DemoEscape();
 }
 
 /**************************************
@@ -35,7 +52,10 @@ DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
 ***************************************/
 DemoEnemyActor::~DemoEnemyActor()
 {
+	shotTransformLeft.reset();
+	shotTransformRight.reset();
 
+	Utility::DeleteContainer(fsm);
 }
 
 /**************************************
@@ -43,13 +63,12 @@ DemoEnemyActor::~DemoEnemyActor()
 ***************************************/
 void DemoEnemyActor::Init()
 {
-	D3DXVECTOR3 InitPos = { 0.0f, 0.0f, 50.0f };
-	D3DXVECTOR3 GoalPos = { 0.0f, 0.0f, 25.0f };
-
-	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
-
 	SetCollider(true);
 	active = true;
+
+	cntFrame = 0;
+	cntAttack = 0;
+	ChangeState(InitState);
 
 	hp = 50.0f;
 }
@@ -71,6 +90,8 @@ void DemoEnemyActor::Update()
 {
 	D3DXVECTOR3 diff = handle->GetPlayerPosition() - transform->GetPosition();
 	transform->LookAt(transform->GetPosition() - diff);
+
+	fsm[state]->OnUpdate(*this);
 }
 
 /**************************************
@@ -80,4 +101,13 @@ void DemoEnemyActor::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
+}
+
+/**************************************
+ステート遷移
+***************************************/
+void DemoEnemyActor::ChangeState(int next)
+{
+	state = DemoState(next);
+	fsm[state]->OnStart(*this);
 }

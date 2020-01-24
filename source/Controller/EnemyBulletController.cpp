@@ -54,25 +54,25 @@ void EnemyBulletController::Update()
 	/*
 	テスト用処理
 	*/
-	{
-		static float cntDebug = 0.0f;
-		if (cntDebug >= 10.0f)
-		{
-			Transform shotTransform;
-			shotTransform.SetPosition({ 0.0f, 0.0f, 20.0f });
-			EnemyEventHandler handle;
-			handle.GiveEnemyBulletController(this);
+	//{
+	//	static float cntDebug = 0.0f;
+	//	if (cntDebug >= 10.0f)
+	//	{
+	//		Transform shotTransform;
+	//		shotTransform.SetPosition({ 0.0f, 0.0f, 20.0f });
+	//		EnemyEventHandler handle;
+	//		handle.GiveEnemyBulletController(this);
 
-			shotTransform.Rotate(30.0f, Vector3::Right);
-			handle.SetWayBullet(shotTransform, EnemyBulletConfig::BlueNeedle, 0.5f, 3, 15.0f);
+	//		shotTransform.Rotate(30.0f, Vector3::Right);
+	//		handle.SetWayBullet(shotTransform, EnemyBulletConfig::BlueNeedle, 0.5f, 3, 15.0f);
 
-			shotTransform.Rotate(-60.0f, Vector3::Right);
-			handle.SetWayBullet(shotTransform, EnemyBulletConfig::RedNeedle, 0.5f, 3, -15.0f);
+	//		shotTransform.Rotate(-60.0f, Vector3::Right);
+	//		handle.SetWayBullet(shotTransform, EnemyBulletConfig::RedNeedle, 0.5f, 3, -15.0f);
 
-			cntDebug -= 10.0f;
-		}
-		cntDebug += EnemyTimeController::GetTimeScale();
-	}
+	//		cntDebug -= 10.0f;
+	//	}
+	//	cntDebug += EnemyTimeController::GetTimeScale();
+	//}
 
 	//更新
 	for (auto&& bullet : bulletContainer)

@@ -10,6 +10,7 @@
 
 #include "../../../main.h"
 #include "../../../Framework/Collider/ColliderObserver.h"
+#include "../../../Framework/Pattern/BaseState.h"
 #include "Base/BaseMiddleEnemy.h"
 
 /**************************************
@@ -32,8 +33,31 @@ public:
 	void Update();
 	void Draw();
 
-private:
+	enum DemoState
+	{
+		InitState,
+		AttackState,
+		EscapeState,
+		WaitState,
+		MaxState
+	};
 
+private:
+	std::shared_ptr<Transform> shotTransformLeft;
+	std::shared_ptr<Transform> shotTransformRight;
+
+	float cntFrame;
+	int cntAttack;
+
+	std::vector<BaseState<DemoEnemyActor, DemoState>*> fsm;
+	DemoState state;
+
+	class DemoInit;
+	class DemoAttack;
+	class DemoWait;
+	class DemoEscape;
+
+	void ChangeState(int next);
 };
 
 #endif
