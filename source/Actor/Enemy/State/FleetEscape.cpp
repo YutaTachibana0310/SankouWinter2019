@@ -22,8 +22,8 @@ void FleetEnemy::FleetEscape::OnStart(FleetEnemy & entity)
 {
 	entity.cntFrame = 0.0f;
 
-	const D3DXVECTOR3 TargetPosition = entity.transform->GetPosition() + Vector3::Forward * 50.0f;
-	EnemyTween::Move(entity, TargetPosition, Duration, EaseType::OutSine);
+	const D3DXVECTOR3 TargetPosition = entity.transform->GetPosition() + Vector3::Forward * 80.0f;
+	EnemyTween::Move(entity, TargetPosition, Duration, EaseType::InSine);
 }
 
 /**************************************
