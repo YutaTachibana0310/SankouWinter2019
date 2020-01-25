@@ -145,13 +145,13 @@ void EnemyController::SetEnemyEventHandler(EnemyEventHandler *handler)
 	//enemyContainer.push_back(enemy);
 	//enemy->Init();
 
-	//enemy = new FleetEnemy(enemyEventHandler);
-	//enemy->SetPosition({ 0.0f, -10.0f, 20.0f });
-	//enemyContainer.push_back(enemy);
-	//enemy->Init();
-
-	enemy = new SnipeEnemyActor(enemyEventHandler);
-	enemy->SetPosition({ 0.0f, 20.0f, 60.0f });
+	enemy = new FleetEnemy(enemyEventHandler);
+	enemy->SetPosition({ 0.0f, -50.0f, 20.0f });
 	enemyContainer.push_back(enemy);
 	enemy->Init();
+
+	//enemy = new SnipeEnemyActor(enemyEventHandler);
+	//enemy->SetPosition({ 0.0f, 20.0f, 60.0f });
+	//enemyContainer.push_back(enemy);
+	//enemy->Init();
 }

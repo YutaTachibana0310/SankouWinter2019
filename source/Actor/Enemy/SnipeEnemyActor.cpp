@@ -107,11 +107,3 @@ void SnipeEnemyActor::ChangeState(int next)
 	fsm[state]->OnStart(*this);
 }
 
-/**************************************
-ƒvƒŒƒCƒ„[‚Ì•û‚ðŒü‚­ˆ—
-***************************************/
-void SnipeEnemyActor::LookAtPlayer()
-{
-	D3DXVECTOR3 diff = handle->GetPlayerPosition() - transform->GetPosition();
-	transform->LookAt(transform->GetPosition() - diff);
-}

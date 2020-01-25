@@ -53,8 +53,6 @@ private:
 	class SnipeInit;
 	class SnipeAttack;
 	class SnipeEscape;
-
-	void LookAtPlayer();
 };
 
 #endif

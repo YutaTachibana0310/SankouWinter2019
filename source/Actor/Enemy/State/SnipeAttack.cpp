@@ -30,7 +30,7 @@ SnipeEnemyActor::SnipeState SnipeEnemyActor::SnipeAttack::OnUpdate(SnipeEnemyAct
 {
 	entity.cntFrame += EnemyTimeController::GetTimeScale();
 
-	entity.LookAtPlayer();
+	entity.LookAtPlayer(*entity.transform);
 
 	const float Interval = 90.0f;
 	if (entity.cntFrame >= Interval)

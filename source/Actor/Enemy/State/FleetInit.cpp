@@ -1,43 +1,45 @@
 //=====================================
 //
-//SnipeInit.cpp
-//機能:
-//Author:GP12B332 21 立花雄太
+// FleetInit.cpp
+// 機能:
+// Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "SnipeInit.h"
+#include "FleetInit.h"
 #include "../../../System/EnemyTween.h"
 #include "../../../Controller/EnemyTimeController.h"
 
 /**************************************
 グローバル変数
 ***************************************/
-static const float Duration = 60;
+static const float Duration = 45.0f;
 
 /**************************************
 入場処理
 ***************************************/
-void SnipeEnemyActor::SnipeInit::OnStart(SnipeEnemyActor & entity)
+void FleetEnemy::FleetInit::OnStart(FleetEnemy & entity)
 {
 	entity.cntFrame = 0.0f;
+	entity.cntAttack = 0;
 
-	const D3DXVECTOR3 targetPosition = entity.transform->GetPosition() + Vector3::Back * 40.0f;
-	EnemyTween::Move(entity, targetPosition, Duration, EaseType::OutSine);
+	D3DXVECTOR3 targetPosition = entity.transform->GetPosition();
+	const float OffsetY = targetPosition.y > 0.0f ? -40.0f : 40.0f;
+	targetPosition.y += OffsetY;
+
+	EnemyTween::Move(entity, targetPosition, Duration, EaseType::OutCubic);
 }
 
 /**************************************
 更新処理
 ***************************************/
-SnipeEnemyActor::SnipeState SnipeEnemyActor::SnipeInit::OnUpdate(SnipeEnemyActor & entity)
+FleetEnemy::FleetState FleetEnemy::FleetInit::OnUpdate(FleetEnemy & entity)
 {
-	entity.LookAtPlayer(*entity.transform);
-
 	entity.cntFrame += EnemyTimeController::GetTimeScale();
 
 	if (entity.cntFrame >= Duration)
 	{
-		entity.ChangeState(AttackState);
+		entity.ChangeState(WaitState);
 	}
 
-	return SnipeState();
+	return FleetState();
 }

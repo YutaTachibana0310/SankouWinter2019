@@ -53,6 +53,8 @@ public:
 
 	virtual void ChangeState(int next) = 0;
 
+	virtual void LookAtPlayer(Transform& transform);
+
 protected:
 	float hp;
 	std::vector<std::shared_ptr<BoxCollider3D>> colliders;
