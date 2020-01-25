@@ -29,7 +29,7 @@ FleetEnemy::FleetState FleetEnemy::FleetAttack::OnUpdate(FleetEnemy & entity)
 {
 	entity.cntFrame += EnemyTimeController::GetTimeScale();
 
-	const float Interval = 60.0f;
+	const float Interval = 45.0f;
 	if (entity.cntFrame >= Interval * entity.cntAttack)
 	{		
 		const int WayCircle = 8;
@@ -55,7 +55,7 @@ FleetEnemy::FleetState FleetEnemy::FleetAttack::OnUpdate(FleetEnemy & entity)
 		++entity.cntAttack;
 	}
 
-	const int AttackMax = 10;
+	const int AttackMax = 8;
 	if (entity.cntAttack > AttackMax)
 	{
 		entity.ChangeState(WaitState);

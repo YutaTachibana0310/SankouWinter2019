@@ -30,7 +30,7 @@ void SnipeEnemyActor::SnipeInit::OnStart(SnipeEnemyActor & entity)
 ***************************************/
 SnipeEnemyActor::SnipeState SnipeEnemyActor::SnipeInit::OnUpdate(SnipeEnemyActor & entity)
 {
-	entity.LookAtPlayer();
+	entity.LookAtPlayer(*entity.transform);
 
 	entity.cntFrame += EnemyTimeController::GetTimeScale();
 

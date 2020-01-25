@@ -11,6 +11,7 @@
 #include "../../../../Framework/Tool/DebugWindow.h"
 
 #include "../../Player/PlayerBulletActor.h"
+#include "../../../Handler/EnemyEventHandler.h"
 
 /**************************************
 コンストラクタ
@@ -51,6 +52,16 @@ void BaseEnemy::SetCollider(bool state)
 bool BaseEnemy::IsDestroied()
 {
 	return hp <= 0.0f;
+}
+
+/**************************************
+プレイヤーの方へ姿勢を向かせる
+***************************************/
+void BaseEnemy::LookAtPlayer(Transform & transform)
+{
+	const D3DXVECTOR3 Position = transform.GetPosition();
+	const D3DXVECTOR3 Diff = handle->GetPlayerPosition() - Position;
+	transform.LookAt(Position - Diff);
 }
 
 /**************************************

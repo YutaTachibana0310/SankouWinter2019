@@ -33,7 +33,7 @@ FleetEnemy::FleetState FleetEnemy::FleetInsanity::OnUpdate(FleetEnemy & entity)
 	const float Interval = 3.0f;
 	if (entity.cntFrame >= Interval * entity.cntAttack)
 	{
-		entity.shotTransform->LookAt(entity.handle->GetPlayerPosition());
+		entity.LookAtPlayer(*entity.shotTransform);
 
 		const float BulletSpeed = 0.4f;
 		const float SpeedRange = 0.2f;
