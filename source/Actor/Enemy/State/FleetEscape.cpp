@@ -1,45 +1,42 @@
 //=====================================
 //
-// FleetInit.cpp
-// 機能:
+// FleetEscape.cpp
+// 機能:フリートエネミー逃走ステート
 // Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "FleetInit.h"
-#include "../../../System/EnemyTween.h"
+#include "FleetEscape.h"
 #include "../../../Controller/EnemyTimeController.h"
+#include "../../../Handler/EnemyEventHandler.h"
+#include "../../../System/EnemyTween.h"
 
 /**************************************
 グローバル変数
 ***************************************/
-static const float Duration = 45.0f;
+static const float Duration = 120.0f;
 
 /**************************************
 入場処理
 ***************************************/
-void FleetEnemy::FleetInit::OnStart(FleetEnemy & entity)
+void FleetEnemy::FleetEscape::OnStart(FleetEnemy & entity)
 {
 	entity.cntFrame = 0.0f;
-	entity.cntAttack = 0;
 
-	D3DXVECTOR3 targetPosition = entity.transform->GetPosition();
-	const float OffsetY = targetPosition.y > 0.0f ? -40.0f : 40.0f;
-	targetPosition.y += OffsetY;
-
-	EnemyTween::Move(entity, targetPosition, Duration, EaseType::OutCubic);
+	const D3DXVECTOR3 TargetPosition = entity.transform->GetPosition() + Vector3::Forward * 50.0f;
+	EnemyTween::Move(entity, TargetPosition, Duration, EaseType::OutSine);
 }
 
 /**************************************
 更新処理
 ***************************************/
-FleetEnemy::FleetState FleetEnemy::FleetInit::OnUpdate(FleetEnemy & entity)
+FleetEnemy::FleetState FleetEnemy::FleetEscape::OnUpdate(FleetEnemy & entity)
 {
 	entity.cntFrame += EnemyTimeController::GetTimeScale();
 
 	if (entity.cntFrame >= Duration)
 	{
-		entity.ChangeState(WaitState);
+		entity.Uninit();
 	}
 
-	return FleetState();
+	return FleetState::EscapeState;
 }

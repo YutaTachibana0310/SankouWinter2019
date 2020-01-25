@@ -58,7 +58,7 @@ FleetEnemy::FleetState FleetEnemy::FleetAttack::OnUpdate(FleetEnemy & entity)
 	const int AttackMax = 10;
 	if (entity.cntAttack > AttackMax)
 	{
-		//entity.ChangeState(WaitState);
+		entity.ChangeState(WaitState);
 	}
 
 	return FleetState::WaitState;

@@ -14,6 +14,12 @@
 #include "../../System/EnemyTween.h"
 #include "../../Effect/GameParticleManager.h"
 
+#include "State/FleetInit.h"
+#include "State/FleetWait.h"
+#include "State/FleetAttack.h"
+#include "State/FleetInsanity.h"
+#include "State/FleetEscape.h"
+
 /**************************************
 グローバル変数
 ***************************************/
@@ -30,6 +36,16 @@ FleetEnemy::FleetEnemy(EnemyEventHandler* handler) :
 	colliders.push_back(BoxCollider3D::Create("Enemy", transform));
 	colliders[0]->SetSize({ 5.0f, 10.0f, 10.0f });
 	colliders[0]->AddObserver(this);
+
+	shotTransform = std::make_shared<Transform>();
+	transform->AddChild(shotTransform);
+
+	fsm.resize(StateMax, nullptr);
+	fsm[InitState] = new FleetInit();
+	fsm[WaitState] = new FleetWait();
+	fsm[AttackState] = new FleetAttack();
+	fsm[InsanityState] = new FleetInsanity();
+	fsm[EscapeState] = new FleetEscape();
 }
 
 /**************************************gae
@@ -37,6 +53,8 @@ FleetEnemy::FleetEnemy(EnemyEventHandler* handler) :
 ***************************************/
 FleetEnemy::~FleetEnemy()
 {
+	shotTransform.reset();
+	Utility::DeleteContainer(fsm);
 }
 
 /**************************************
@@ -47,17 +65,11 @@ void FleetEnemy::Init()
 	active = true;
 	SetCollider(true);
 
-	D3DXVECTOR3 InitPos = { 0.0f, -10.0f, 50.0f };
-	D3DXVECTOR3 GoalPos = { 0.0f, -10.0f, 25.0f };
-
-	EnemyTween::Move(*this, InitPos, GoalPos, 60, EaseType::OutCirc);
-
-	SetCollider(true);
-
 	hp = 50.0f;
-	active = true;
 
 	isDestroied = false;
+
+	ChangeState(InitState);
 }
 
 /**************************************
@@ -77,7 +89,7 @@ void FleetEnemy::Uninit()
 ***************************************/
 void FleetEnemy::Update()
 {
-
+	fsm[state]->OnUpdate(*this);
 }
 
 /**************************************
@@ -89,4 +101,13 @@ void FleetEnemy::Draw()
 	mesh->Draw();
 
 	colliders[0]->Draw();
+}
+
+/**************************************
+ステート遷移
+***************************************/
+void FleetEnemy::ChangeState(int next)
+{
+	state = FleetState(next);
+	fsm[state]->OnStart(*this);
 }

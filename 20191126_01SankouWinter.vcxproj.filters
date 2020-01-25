@@ -155,6 +155,11 @@
     <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\FleetInit.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\FleetWait.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\FleetAttack.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\FleetInsanity.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\FleetEscape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -335,6 +340,11 @@
     <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
+    <ClInclude Include="source\Actor\Enemy\State\FleetInit.h" />
+    <ClInclude Include="source\Actor\Enemy\State\FleetWait.h" />
+    <ClInclude Include="source\Actor\Enemy\State\FleetAttack.h" />
+    <ClInclude Include="source\Actor\Enemy\State\FleetInsanity.h" />
+    <ClInclude Include="source\Actor\Enemy\State\FleetEscape.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
