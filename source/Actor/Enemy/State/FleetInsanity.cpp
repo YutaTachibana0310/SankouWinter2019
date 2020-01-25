@@ -30,20 +30,24 @@ FleetEnemy::FleetState FleetEnemy::FleetInsanity::OnUpdate(FleetEnemy & entity)
 {
 	entity.cntFrame += EnemyTimeController::GetTimeScale();
 
-	const float Interval = 3.0f;
+	const float Interval = 5.0f;
 	if (entity.cntFrame >= Interval * entity.cntAttack)
 	{
 		entity.LookAtPlayer(*entity.shotTransform);
 
-		const float BulletSpeed = 0.4f;
+		const float BulletSpeed = 0.25f;
 		const float SpeedRange = 0.2f;
-		const float Speed = Math::RandomRange(BulletSpeed - SpeedRange, BulletSpeed + SpeedRange);
-		entity.handle->SetStrewBullet(*entity.shotTransform, EnemyBulletConfig::BlueSphere, Speed, 10.0f);
+		
+		for (int i = 0; i < 3; i++)
+		{
+			const float Speed = Math::RandomRange(BulletSpeed - SpeedRange, BulletSpeed + SpeedRange);
+			entity.handle->SetStrewBullet(*entity.shotTransform, EnemyBulletConfig::BlueSphere, Speed, 30.0f);
+		}
 
 		++entity.cntAttack;
 	}
 
-	const int AttackMax = 100;
+	const int AttackMax = 60;
 	if (entity.cntAttack > AttackMax)
 	{
 		entity.ChangeState(EscapeState);
