@@ -161,6 +161,13 @@ void EnemyFactory::CreateSnipe(const EnemyData& data, std::list<BaseEnemy*>& out
 ***************************************/
 void EnemyFactory::CreateDemo(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
+	const D3DXVECTOR3 InitPosition = { 0.0f, data.Param(0), data.Param(1) };
+
+	DemoEnemyActor *enemy = ObjectPool::Instance()->Create<DemoEnemyActor>(*eventHandler);
+	enemy->SetPosition(InitPosition);
+	enemy->Init();
+
+	output.push_back(enemy);
 }
 
 /**************************************
@@ -168,6 +175,13 @@ void EnemyFactory::CreateDemo(const EnemyData& data, std::list<BaseEnemy*>& outp
 ***************************************/
 void EnemyFactory::CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
+	const D3DXVECTOR3 InitPosition = { 0.0f, data.Param(0), data.Param(1) };
+
+	MiddleWayEnemy *enemy = ObjectPool::Instance()->Create<MiddleWayEnemy>(*eventHandler);
+	enemy->SetPosition(InitPosition);
+	enemy->Init();
+
+	output.push_back(enemy);
 }
 
 /**************************************
@@ -175,6 +189,13 @@ void EnemyFactory::CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*>&
 ***************************************/
 void EnemyFactory::CreateFleet(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
+	const D3DXVECTOR3 InitPosition = { 0.0f, data.Param(0), data.Param(1) };
+
+	FleetEnemy* enemy = ObjectPool::Instance()->Create<FleetEnemy>(*eventHandler);
+	enemy->SetPosition(InitPosition);
+	enemy->Init();
+
+	output.push_back(enemy);
 }
 
 /**************************************
