@@ -27,7 +27,7 @@ const unsigned EnemyData::MaxParam = 6;
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyFactory::EnemyFactory(EnemyEventHandler *eventHandler) :
+EnemyFactory::EnemyFactory(EnemyEventHandler **eventHandler) :
 	next(0),
 	count(0.0f),
 	eventHandler(eventHandler)
@@ -76,6 +76,9 @@ std::list<BaseEnemy*> EnemyFactory::Create()
 	{
 		EnemyData *data = dataContainer[next];
 
+		if (data->Count() > count)
+			break;
+
 		switch (data->Type())
 		{
 		case RotCharge:
@@ -106,36 +109,42 @@ std::list<BaseEnemy*> EnemyFactory::Create()
 /**************************************
 回転突進エネミー生成
 ***************************************/
-void EnemyFactory::CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*> output)
+void EnemyFactory::CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
-	
+	RotateChargeEnemy *enemy = ObjectPool::Instance()->Create<RotateChargeEnemy>(*eventHandler);
+
+	D3DXVECTOR3 initPosition = { 0.0f, data.Param(0), data.Param(1)};
+	enemy->SetPosition(initPosition);
+	enemy->Init();
+
+	output.push_back(enemy);
 }
 
 /**************************************
 スナイプエネミー生成
 ***************************************/
-void EnemyFactory::CreateSnipe(const EnemyData& data, std::list<BaseEnemy*> output)
+void EnemyFactory::CreateSnipe(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
 }
 
 /**************************************
 中型エネミー生成
 ***************************************/
-void EnemyFactory::CreateDemo(const EnemyData& data, std::list<BaseEnemy*> output)
+void EnemyFactory::CreateDemo(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
 }
 
 /**************************************
 中型ウェイエネミー生成
 ***************************************/
-void EnemyFactory::CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*> output)
+void EnemyFactory::CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
 }
 
 /**************************************
 フリートエネミー生成
 ***************************************/
-void EnemyFactory::CreateFleet(const EnemyData& data, std::list<BaseEnemy*> output)
+void EnemyFactory::CreateFleet(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
 }
 
@@ -165,7 +174,7 @@ EnemyData::EnemyData(const json11::Json & data) :
 	{
 		std::string key = "Param";
 		key += std::to_string(i);
-		params.push_back(data[key].string_value());
+		params.push_back((float)data[key].number_value());
 	}
 }
 

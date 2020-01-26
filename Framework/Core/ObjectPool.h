@@ -57,7 +57,7 @@ public:
 		
 		if (container->empty())
 		{
-			ptr = new T();
+			ptr = new T(args...);
 		}
 		else
 		{

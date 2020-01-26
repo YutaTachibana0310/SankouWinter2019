@@ -1,0 +1,24 @@
+[
+	{
+		"Type": "RotCharge",
+		"Count": 180,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 360,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	}
+]

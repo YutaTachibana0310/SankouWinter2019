@@ -29,7 +29,7 @@ namespace json11
 class EnemyFactory
 {
 public:
-	EnemyFactory(EnemyEventHandler *eventHandler);
+	EnemyFactory(EnemyEventHandler **eventHandler);
 	~EnemyFactory();
 
 	void Load(const char* path);
@@ -53,13 +53,13 @@ private:
 
 	float count;
 
-	EnemyEventHandler *eventHandler;
+	EnemyEventHandler **eventHandler;
 
-	void CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*> output);
-	void CreateSnipe(const EnemyData& data, std::list<BaseEnemy*> output);
-	void CreateDemo(const EnemyData& data, std::list<BaseEnemy*> output);
-	void CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*> output);
-	void CreateFleet(const EnemyData& data, std::list<BaseEnemy*> output);
+	void CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*>& output);
+	void CreateSnipe(const EnemyData& data, std::list<BaseEnemy*>& output);
+	void CreateDemo(const EnemyData& data, std::list<BaseEnemy*>& output);
+	void CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*>& output);
+	void CreateFleet(const EnemyData& data, std::list<BaseEnemy*>& output);
 };
 
 /**************************************
@@ -81,7 +81,7 @@ public:
 		return type;
 	}
 
-	inline std::string Param(int no) const
+	inline float Param(int no) const
 	{
 		return params[no];
 	}
@@ -91,7 +91,7 @@ public:
 private:
 	int type;
 	float count;
-	std::vector<std::string> params;
+	std::vector<float> params;
 };
 
 #endif
