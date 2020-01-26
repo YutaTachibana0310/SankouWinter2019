@@ -136,6 +136,24 @@ void EnemyFactory::CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy
 ***************************************/
 void EnemyFactory::CreateSnipe(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
+	const D3DXVECTOR3 InitPosition = { 0.0f, data.Param(0), data.Param(1) };
+	const float Offset = 3.0f;
+	const D3DXVECTOR3 OffsetPosition[] = {
+		InitPosition,
+		InitPosition + D3DXVECTOR3(0.0f, 1.0f, 1.0f) * Offset,
+		InitPosition + D3DXVECTOR3(0.0f, -1.0f, 1.0f) * Offset,
+		InitPosition + D3DXVECTOR3(0.0f, 1.0f, -1.0f) * Offset,
+		InitPosition + D3DXVECTOR3(0.0f, -1.0f, -1.0f) * Offset
+	};
+
+	for (int i = 0; i < 5; i++)
+	{
+		SnipeEnemyActor *enemy = ObjectPool::Instance()->Create<SnipeEnemyActor>(*eventHandler);
+		enemy->SetPosition(OffsetPosition[i]);
+		enemy->Init();
+
+		output.push_back(enemy);
+	}
 }
 
 /**************************************

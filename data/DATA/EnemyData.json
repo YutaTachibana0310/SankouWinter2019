@@ -20,5 +20,27 @@
 		"Param4": "",
 		"Param5": "",
 		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 540,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 720,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
 	}
 ]
