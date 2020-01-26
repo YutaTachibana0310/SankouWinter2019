@@ -13,6 +13,10 @@
 
 #include "../../System/EnemyTween.h"
 
+#include "State/MiddleWayAttack.h"
+#include "State/MiddleWayEscape.h"
+#include "State/MiddleWayInit.h"
+
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
 ***************************************/
@@ -37,7 +41,10 @@ MiddleWayEnemy::MiddleWayEnemy(EnemyEventHandler * handle) :
 	const D3DXVECTOR3 ShotPosition = { 0.0f, 0.0f, -5.0f };
 	shotTransform->SetLocalPosition(ShotPosition);
 
-
+	fsm.resize(State::StateMax, nullptr);
+	fsm[State::InitState] = new MiddleWayInit();
+	fsm[State::AttackState] = new MiddleWayAttack();
+	fsm[State::EscapeState] = new MiddleWayEscape();
 }
 
 /**************************************
@@ -56,6 +63,8 @@ void MiddleWayEnemy::Init()
 {
 	SetCollider(true);
 	active = true;
+
+	hp = 50.0f;
 
 	ChangeState(InitState);
 }

@@ -261,6 +261,9 @@
     <ClCompile Include="source\Actor\Enemy\State\FleetInit.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\FleetInsanity.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\FleetWait.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayAttack.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayEscape.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayInit.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
@@ -446,6 +449,9 @@
     <ClInclude Include="source\Actor\Enemy\State\FleetInit.h" />
     <ClInclude Include="source\Actor\Enemy\State\FleetInsanity.h" />
     <ClInclude Include="source\Actor\Enemy\State\FleetWait.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayAttack.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayEscape.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayInit.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />

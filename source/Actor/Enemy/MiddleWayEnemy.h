@@ -30,12 +30,6 @@ public:
 	void Update();
 	void Draw();
 
-private:
-	std::shared_ptr<Transform> shotTransform;
-
-	float cntFrame;
-	int cntAttack;
-
 	enum State
 	{
 		InitState,
@@ -44,8 +38,14 @@ private:
 		EscapeState,
 		StateMax
 	};
-
 	using MiddleWayState = BaseState<MiddleWayEnemy, State>;
+
+private:
+	std::shared_ptr<Transform> shotTransform;
+
+	float cntFrame;
+	int cntAttack;
+
 	std::vector<MiddleWayState*> fsm;
 	State state;
 
