@@ -160,6 +160,10 @@
     <ClCompile Include="source\Actor\Enemy\State\FleetAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\FleetInsanity.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\FleetEscape.cpp" />
+    <ClCompile Include="source\Actor\Enemy\MiddleWayEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayInit.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayAttack.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayEscape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -345,6 +349,10 @@
     <ClInclude Include="source\Actor\Enemy\State\FleetAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\FleetInsanity.h" />
     <ClInclude Include="source\Actor\Enemy\State\FleetEscape.h" />
+    <ClInclude Include="source\Actor\Enemy\MiddleWayEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayInit.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayAttack.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayEscape.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

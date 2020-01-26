@@ -48,6 +48,5 @@ SnipeEnemyActor::SnipeState SnipeEnemyActor::SnipeAttack::OnUpdate(SnipeEnemyAct
 		}
 	}
 
-	if(entity.cntFrame)
 	return SnipeState::AttackState;
 }

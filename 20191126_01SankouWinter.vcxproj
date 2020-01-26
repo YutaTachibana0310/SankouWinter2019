@@ -249,6 +249,7 @@
     <ClCompile Include="source\Actor\Enemy\DemoEnemyActor.cpp" />
     <ClCompile Include="source\Actor\Enemy\EnemyBulletActor.cpp" />
     <ClCompile Include="source\Actor\Enemy\FleetEnemy.cpp" />
+    <ClCompile Include="source\Actor\Enemy\MiddleWayEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\RotateChargeEnemy.cpp" />
     <ClCompile Include="source\Actor\Enemy\SnipeEnemyActor.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\DemoAttack.cpp" />
@@ -260,6 +261,9 @@
     <ClCompile Include="source\Actor\Enemy\State\FleetInit.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\FleetInsanity.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\FleetWait.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayAttack.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayEscape.cpp" />
+    <ClCompile Include="source\Actor\Enemy\State\MiddleWayInit.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
@@ -433,6 +437,7 @@
     <ClInclude Include="source\Actor\Enemy\DemoEnemyActor.h" />
     <ClInclude Include="source\Actor\Enemy\EnemyBulletActor.h" />
     <ClInclude Include="source\Actor\Enemy\FleetEnemy.h" />
+    <ClInclude Include="source\Actor\Enemy\MiddleWayEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\RotateChargeEnemy.h" />
     <ClInclude Include="source\Actor\Enemy\SnipeEnemyActor.h" />
     <ClInclude Include="source\Actor\Enemy\State\DemoAttack.h" />
@@ -444,6 +449,9 @@
     <ClInclude Include="source\Actor\Enemy\State\FleetInit.h" />
     <ClInclude Include="source\Actor\Enemy\State\FleetInsanity.h" />
     <ClInclude Include="source\Actor\Enemy\State\FleetWait.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayAttack.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayEscape.h" />
+    <ClInclude Include="source\Actor\Enemy\State\MiddleWayInit.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />

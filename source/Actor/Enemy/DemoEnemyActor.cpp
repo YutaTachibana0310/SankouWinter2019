@@ -26,7 +26,6 @@
 DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
 	BaseMiddleEnemy(handler)
 {
-	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("DemoEnemy", mesh);
 
 	colliders.resize(1, nullptr);
