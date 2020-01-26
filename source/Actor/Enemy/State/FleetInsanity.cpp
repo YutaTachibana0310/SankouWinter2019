@@ -41,7 +41,7 @@ FleetEnemy::FleetState FleetEnemy::FleetInsanity::OnUpdate(FleetEnemy & entity)
 		for (int i = 0; i < 3; i++)
 		{
 			const float Speed = Math::RandomRange(BulletSpeed - SpeedRange, BulletSpeed + SpeedRange);
-			entity.handle->SetStrewBullet(*entity.shotTransform, EnemyBulletConfig::BlueSphere, Speed, 30.0f);
+			entity.handle->SetStrewBullet(*entity.shotTransform, EnemyBulletConfig::BlueLarge, Speed, 30.0f);
 		}
 
 		++entity.cntAttack;

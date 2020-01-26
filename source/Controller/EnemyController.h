@@ -19,6 +19,8 @@ class EnemyBulletController;
 class GameCamera;
 class EnemyEventHandler;
 class PlayerController;
+class EnemyController;
+class EnemyFactory;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -45,6 +47,8 @@ private:
 	GameCamera *gameCamera;
 
 	EnemyEventHandler* enemyEventHandler;
+
+	EnemyFactory *factory;
 };
 
 #endif

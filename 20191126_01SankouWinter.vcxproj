@@ -277,6 +277,7 @@
     <ClCompile Include="source\Controller\EnemyBulletConfig.cpp" />
     <ClCompile Include="source\Controller\EnemyBulletController.cpp" />
     <ClCompile Include="source\Controller\EnemyController.cpp" />
+    <ClCompile Include="source\Controller\EnemyFactory.cpp" />
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
     <ClCompile Include="source\Controller\PlayerController.cpp" />
@@ -465,6 +466,7 @@
     <ClInclude Include="source\Controller\EnemyBulletConfig.h" />
     <ClInclude Include="source\Controller\EnemyBulletController.h" />
     <ClInclude Include="source\Controller\EnemyController.h" />
+    <ClInclude Include="source\Controller\EnemyFactory.h" />
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
     <ClInclude Include="source\Controller\PlayerController.h" />

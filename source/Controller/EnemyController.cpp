@@ -8,12 +8,14 @@
 #include "EnemyController.h"
 #include "../../Framework/Tool/DebugWindow.h"
 #include "../../Framework/Resource/ResourceManager.h"
+#include "../../Library/json11/json11.hpp"
 
 #include "EnemyTimeController.h"
 #include "EnemyBulletController.h"
 #include "../System/EnemyTween.h"
 #include "../Camera/GameCamera.h"
 #include "../Handler/EnemyEventHandler.h"
+#include "EnemyFactory.h"
 
 #include "../Actor/Enemy/DemoEnemyActor.h"
 #include "../Actor/Enemy/RotateChargeEnemy.h"
@@ -22,6 +24,7 @@
 #include "../Actor/Enemy/MiddleWayEnemy.h"
 
 #include <type_traits>
+#include <fstream>
 
 /**************************************
 グローバル変数
@@ -42,6 +45,9 @@ EnemyController::EnemyController(GameCamera* gameCamera) :
 	ResourceManager::Instance()->LoadMesh("FleetEnemy", "data/MODEL/BigEnemy/BigEnemy.x");
 
 	bulletController = new EnemyBulletController();
+	factory = new EnemyFactory(&enemyEventHandler);
+
+	factory->Load("data/DATA/EnemyData.json");
 }
 
 /**************************************
@@ -62,13 +68,23 @@ EnemyController::~EnemyController()
 ***************************************/
 void EnemyController::Update()
 {
+	//エネミーの生成
+	std::list<BaseEnemy*> newEnemy = factory->Create();
+	if (!newEnemy.empty())
+	{
+		enemyContainer.splice(enemyContainer.end(), newEnemy);
+	}
+
+	//更新
 	for (auto&& enemy : enemyContainer)
 	{
 		enemy->Update();
 	}
 
+	//トゥイーン更新
 	EnemyTween::mInstance->Update();
 
+	//バレット更新
 	bulletController->Update();
 }
 
@@ -156,8 +172,8 @@ void EnemyController::SetEnemyEventHandler(EnemyEventHandler *handler)
 	//enemyContainer.push_back(enemy);
 	//enemy->Init();
 
-	enemy = new MiddleWayEnemy(enemyEventHandler);
-	enemy->SetPosition({ 0.0f, -50.0f, 30.0f });
-	enemy->Init();
-	enemyContainer.push_back(enemy);
+	//enemy = new MiddleWayEnemy(enemyEventHandler);
+	//enemy->SetPosition({ 0.0f, -50.0f, 30.0f });
+	//enemy->Init();
+	//enemyContainer.push_back(enemy);
 }

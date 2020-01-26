@@ -1,0 +1,79 @@
+[
+	{
+		"Type": "RotCharge",
+		"Count": 180,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 360,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 540,
+		"Param0": 15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 720,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Demo",
+		"Count": 900,
+		"Param0": 10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "MiddleWay",
+		"Count": 1080,
+		"Param0": -50,
+		"Param1": 20,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Fleet",
+		"Count": 1260,
+		"Param0": 40,
+		"Param1": 30,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	}
+]

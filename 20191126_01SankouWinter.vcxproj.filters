@@ -164,6 +164,7 @@
     <ClCompile Include="source\Actor\Enemy\State\MiddleWayInit.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\MiddleWayAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\MiddleWayEscape.cpp" />
+    <ClCompile Include="source\Controller\EnemyFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -353,6 +354,7 @@
     <ClInclude Include="source\Actor\Enemy\State\MiddleWayInit.h" />
     <ClInclude Include="source\Actor\Enemy\State\MiddleWayAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\MiddleWayEscape.h" />
+    <ClInclude Include="source\Controller\EnemyFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
