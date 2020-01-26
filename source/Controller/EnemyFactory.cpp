@@ -11,6 +11,12 @@
 
 #include "EnemyTimeController.h"
 
+#include "../Actor/Enemy/DemoEnemyActor.h"
+#include "../Actor/Enemy/RotateChargeEnemy.h"
+#include "../Actor/Enemy/FleetEnemy.h"
+#include "../Actor/Enemy/SnipeEnemyActor.h"
+#include "../Actor/Enemy/MiddleWayEnemy.h"
+
 #include <fstream>
 
 /**************************************
@@ -21,9 +27,10 @@ const unsigned EnemyData::MaxParam = 6;
 /**************************************
 コンストラクタ
 ***************************************/
-EnemyFactory::EnemyFactory() :
+EnemyFactory::EnemyFactory(EnemyEventHandler *eventHandler) :
 	next(0),
-	count(0.0f)
+	count(0.0f),
+	eventHandler(eventHandler)
 {
 }
 
@@ -62,39 +69,35 @@ void EnemyFactory::Load(const char * path)
 std::list<BaseEnemy*> EnemyFactory::Create()
 {
 	count += EnemyTimeController::GetBulletTimeScale();
-
-	EnemyData* data = dataContainer[next];
 	
 	std::list<BaseEnemy*> output;
 
-	for (unsigned i = next; i < sizeContainer; i++)
+	for (; next < sizeContainer; next++)
 	{
-		BaseEnemy* enemy = nullptr;
+		EnemyData *data = dataContainer[next];
+
 		switch (data->Type())
 		{
 		case RotCharge:
-			enemy = CreateRotateCharge(*data);
+			CreateRotateCharge(*data, output);
 			break;
 
 		case Snipe:
-			enemy = CreateSnipe(*data);
+			CreateSnipe(*data, output);
 			break;
 
 		case Demo:
-			enemy = CreateDemo(*data);
+			CreateDemo(*data, output);
 			break;
 
 		case MiddleWay:
-			enemy = CreateMiddleWay(*data);
+			CreateMiddleWay(*data, output);
 			break;
 
 		case Fleet:
-			enemy = CreateFleet(*data);
+			CreateFleet(*data, output);
 			break;
 		}
-
-		if (enemy != nullptr)
-			output.push_back(enemy);
 	}
 
 	return output;
@@ -103,41 +106,37 @@ std::list<BaseEnemy*> EnemyFactory::Create()
 /**************************************
 回転突進エネミー生成
 ***************************************/
-BaseEnemy * EnemyFactory::CreateRotateCharge(const EnemyData & data)
+void EnemyFactory::CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*> output)
 {
-	return nullptr;
+	
 }
 
 /**************************************
 スナイプエネミー生成
 ***************************************/
-BaseEnemy * EnemyFactory::CreateSnipe(const EnemyData & data)
+void EnemyFactory::CreateSnipe(const EnemyData& data, std::list<BaseEnemy*> output)
 {
-	return nullptr;
 }
 
 /**************************************
 中型エネミー生成
 ***************************************/
-BaseEnemy * EnemyFactory::CreateDemo(const EnemyData & data)
+void EnemyFactory::CreateDemo(const EnemyData& data, std::list<BaseEnemy*> output)
 {
-	return nullptr;
 }
 
 /**************************************
 中型ウェイエネミー生成
 ***************************************/
-BaseEnemy * EnemyFactory::CreateMiddleWay(const EnemyData & data)
+void EnemyFactory::CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*> output)
 {
-	return nullptr;
 }
 
 /**************************************
 フリートエネミー生成
 ***************************************/
-BaseEnemy * EnemyFactory::CreateFleet(const EnemyData & data)
+void EnemyFactory::CreateFleet(const EnemyData& data, std::list<BaseEnemy*> output)
 {
-	return nullptr;
 }
 
 /**************************************

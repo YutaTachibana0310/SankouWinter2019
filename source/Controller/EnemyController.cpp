@@ -45,7 +45,7 @@ EnemyController::EnemyController(GameCamera* gameCamera) :
 	ResourceManager::Instance()->LoadMesh("FleetEnemy", "data/MODEL/BigEnemy/BigEnemy.x");
 
 	bulletController = new EnemyBulletController();
-	factory = new EnemyFactory();
+	factory = new EnemyFactory(enemyEventHandler);
 
 	factory->Load("data/DATA/EnemyData.json");
 }

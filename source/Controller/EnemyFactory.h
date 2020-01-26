@@ -16,6 +16,7 @@
 ***************************************/
 class BaseEnemy;
 class EnemyData;
+class EnemyEventHandler;
 
 namespace json11
 {
@@ -28,7 +29,7 @@ namespace json11
 class EnemyFactory
 {
 public:
-	EnemyFactory();
+	EnemyFactory(EnemyEventHandler *eventHandler);
 	~EnemyFactory();
 
 	void Load(const char* path);
@@ -52,11 +53,13 @@ private:
 
 	float count;
 
-	BaseEnemy* CreateRotateCharge(const EnemyData& data);
-	BaseEnemy* CreateSnipe(const EnemyData& data);
-	BaseEnemy* CreateDemo(const EnemyData& data);
-	BaseEnemy* CreateMiddleWay(const EnemyData& data);
-	BaseEnemy* CreateFleet(const EnemyData& data);
+	EnemyEventHandler *eventHandler;
+
+	void CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*> output);
+	void CreateSnipe(const EnemyData& data, std::list<BaseEnemy*> output);
+	void CreateDemo(const EnemyData& data, std::list<BaseEnemy*> output);
+	void CreateMiddleWay(const EnemyData& data, std::list<BaseEnemy*> output);
+	void CreateFleet(const EnemyData& data, std::list<BaseEnemy*> output);
 };
 
 /**************************************
