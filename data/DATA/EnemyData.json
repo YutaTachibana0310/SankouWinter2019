@@ -57,8 +57,8 @@
 	{
 		"Type": "MiddleWay",
 		"Count": 1080,
-		"Param0": -10,
-		"Param1": 30,
+		"Param0": -50,
+		"Param1": 20,
 		"Param2": "",
 		"Param3": "",
 		"Param4": "",
@@ -68,8 +68,8 @@
 	{
 		"Type": "Fleet",
 		"Count": 1260,
-		"Param0": 10,
-		"Param1": 80,
+		"Param0": 40,
+		"Param1": 30,
 		"Param2": "",
 		"Param3": "",
 		"Param4": "",

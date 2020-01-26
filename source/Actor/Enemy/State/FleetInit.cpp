@@ -12,7 +12,7 @@
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
 ***************************************/
-static const float Duration = 45.0f;
+static const float Duration = 90.0f;
 
 /**************************************
 “üêˆ—
@@ -23,10 +23,10 @@ void FleetEnemy::FleetInit::OnStart(FleetEnemy & entity)
 	entity.cntAttack = 0;
 
 	D3DXVECTOR3 targetPosition = entity.transform->GetPosition();
-	const float OffsetY = targetPosition.y > 0.0f ? -40.0f : 40.0f;
+	const float OffsetY = targetPosition.y > 0.0f ? -30.0f : 30.0f;
 	targetPosition.y += OffsetY;
 
-	EnemyTween::Move(entity, targetPosition, Duration, EaseType::OutCubic);
+	EnemyTween::Move(entity, targetPosition, Duration, EaseType::OutSine);
 }
 
 /**************************************
