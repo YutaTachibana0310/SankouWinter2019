@@ -111,13 +111,24 @@ std::list<BaseEnemy*> EnemyFactory::Create()
 ***************************************/
 void EnemyFactory::CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*>& output)
 {
-	RotateChargeEnemy *enemy = ObjectPool::Instance()->Create<RotateChargeEnemy>(*eventHandler);
+	const D3DXVECTOR3 InitPosition = { 0.0f, data.Param(0), data.Param(1)};
+	const float Offset = 5.0f;
+	const D3DXVECTOR3 OffsetPosition[] = {
+		InitPosition,
+		InitPosition + Vector3::Up * Offset,
+		InitPosition + Vector3::Down * Offset,
+		InitPosition + Vector3::Forward * Offset,
+		InitPosition + Vector3::Back * Offset
+	};
 
-	D3DXVECTOR3 initPosition = { 0.0f, data.Param(0), data.Param(1)};
-	enemy->SetPosition(initPosition);
-	enemy->Init();
+	for (int i = 0; i < 5; i++)
+	{
+		RotateChargeEnemy *enemy = ObjectPool::Instance()->Create<RotateChargeEnemy>(*eventHandler);
+		enemy->SetPosition(OffsetPosition[i]);
+		enemy->Init();
 
-	output.push_back(enemy);
+		output.push_back(enemy);
+	}
 }
 
 /**************************************
