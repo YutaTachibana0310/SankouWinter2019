@@ -205,6 +205,7 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 	}
 	else if (otherTag == "Item")
 	{
+		player->PowerUp();
 		backViewer->PlayPowerUp();
 	}
 }
