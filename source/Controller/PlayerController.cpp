@@ -17,6 +17,10 @@
 #include "../Camera/GameCamera.h"
 #include "../Effect/GameParticleManager.h"
 #include "../Actor/Player/PlayerColliderViewer.h"
+#include "../Actor/Player/PowerupItemActor.h"
+#include "../Viewer/Back/BackViewer.h"
+
+#include <algorithm>
 
 /**************************************
 グローバル変数
@@ -28,8 +32,9 @@ const int PlayerController::MaxLife = 2;
 /**************************************
 コンストラクタ
 ***************************************/
-PlayerController::PlayerController(GameCamera *camera) :
+PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 	camera(camera),
+	backViewer(backViewer),
 	cntEnergy(MaxEnergy),
 	inSlow(false),
 	cntLife(MaxLife),
@@ -38,11 +43,14 @@ PlayerController::PlayerController(GameCamera *camera) :
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	ResourceManager::Instance()->MakePolygon("PlayerCollider", "data/TEXTURE/Player/playerCollider.png", { 1.0f, 1.0f }, { 3.0f, 2.0f });
+	ResourceManager::Instance()->MakePolygon("PowerupItem", "data/TEXTURE/Player/PowerupItem.png", { 3.0f, 3.0f });
 
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
 
-	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1, std::placeholders::_2);
+	itemContainer.reserve(5);
+
+	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	player->onFireBullet = onFireBullet;
 
 	auto onHitPlayer = std::bind(&PlayerController::CollisionPlayer, this, std::placeholders::_1);
@@ -52,6 +60,10 @@ PlayerController::PlayerController(GameCamera *camera) :
 	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
 
 	player->Init();
+
+	itemContainer.push_back(new PowerupItemActor());
+	itemContainer[0]->SetPosition({ 0.0f, 0.0f, 30.0f });
+	itemContainer[0]->Init();
 }
 
 /**************************************
@@ -61,6 +73,8 @@ PlayerController::~PlayerController()
 {
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
+
+	Utility::DeleteContainer(itemContainer);
 }
 
 /**************************************
@@ -71,6 +85,17 @@ void PlayerController::Update()
 	player->Update();
 
 	bulletController->Update();
+
+	for (auto&& item : itemContainer)
+	{
+		item->Update();
+	}
+
+	auto itr = std::remove_if(itemContainer.begin(), itemContainer.end(), [](auto item)
+	{
+		return !item->IsActive();
+	});
+	itemContainer.erase(itr, itemContainer.end());
 }
 
 /**************************************
@@ -87,6 +112,11 @@ void PlayerController::Draw()
 void PlayerController::DrawBullet()
 {
 	bulletController->Draw();
+
+	for (auto&& item : itemContainer)
+	{
+		item->Draw();
+	}
 }
 
 /**************************************
@@ -160,14 +190,23 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 ***************************************/
 void PlayerController::CollisionPlayer(ColliderObserver * other)
 {
-	GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());	
-
-	auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
-	bool res = camera->Focus(player->GetPosition(), callback);
-
-	if (!res)
+	std::string otherTag = other->Tag();
+	if (otherTag == "Enemy")
 	{
-		OnFinishCameraFocus();
+		GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
+
+		auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
+		bool res = camera->Focus(player->GetPosition(), callback);
+
+		if (!res)
+		{
+			OnFinishCameraFocus();
+		}
+	}
+	else if (otherTag == "Item")
+	{
+		player->PowerUp();
+		backViewer->PlayPowerUp();
 	}
 }
 

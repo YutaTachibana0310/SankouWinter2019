@@ -78,7 +78,7 @@ void PlayerBulletController::Draw()
 /**************************************
 ”­ŽËˆ—
 ***************************************/
-void PlayerBulletController::FireBullet(const D3DXVECTOR3 & pos, bool isMain)
+void PlayerBulletController::FireBullet(const D3DXVECTOR3 & pos, bool isMain, int level)
 {
 	PlayerBulletActor* bullet = ObjectPool::Instance()->Create<PlayerBulletActor>();
 	bullet->Init(pos, isMain);

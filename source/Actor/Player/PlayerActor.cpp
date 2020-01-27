@@ -13,6 +13,7 @@
 #include "../../../Framework/Core/ObjectPool.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Tween/Tween.h"
+#include "../../../Framework/Core/ObjectPool.h"
 
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
@@ -34,7 +35,8 @@ const float PlayerActor::MaxAngle = 40.0f;
 PlayerActor::PlayerActor() :
 	cntShotFrame(0),
 	enableShot(false),
-	enableMove(false)
+	enableMove(false),
+	currentLevel(0)
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("Player", mesh);
@@ -50,20 +52,8 @@ PlayerActor::PlayerActor() :
 	colliderViewer = new PlayerColliderViewer();
 	AddChild(colliderViewer);
 
-	const unsigned MaxTurret = 4;
+	const unsigned MaxTurret = 8;
 	turretContainer.reserve(MaxTurret);
-	for (int i = 0; i < MaxTurret; i++)
-	{
-		turretContainer.push_back(new PlayerTurretActor());
-		turretRoot->AddChild(turretContainer[i]);
-	}
-
-	const float PositionTurret = -2.0f;
-	const float OffsetTurret = 7.5f;
-	turretContainer[0]->SetPosition({ OffsetTurret, 0.0f, PositionTurret });
-	turretContainer[1]->SetPosition({ -OffsetTurret, 0.0f, PositionTurret });
-	turretContainer[2]->SetPosition({ 0.0f, OffsetTurret, PositionTurret });
-	turretContainer[3]->SetPosition({ 0.0f, -OffsetTurret, PositionTurret });
 }
 
 /**************************************
@@ -91,6 +81,9 @@ void PlayerActor::Init()
 	const D3DXVECTOR3 StartPos = { 0.0f, 0.0f, -20.0f };
 	auto callback = std::bind(&PlayerActor::OnFinishInitMove, this);
 	Tween::Move(*this, InitPos, StartPos, 60.0f, EaseType::OutBack, false, callback);
+
+	currentLevel = -1;
+	PowerUp();
 }
 
 /**************************************
@@ -129,14 +122,6 @@ void PlayerActor::Update()
 	}
 
 	colliderViewer->Update();
-
-	Debug::Begin("Player");
-
-	Debug::Text(transform->GetPosition(), "PlayerPos");
-	Debug::Text(transform->GetScale(), "PlayerScale");
-	Debug::Text(Quaternion::ToEuler(transform->GetRotation()), "PlayerRotation");
-	Debug::Text(turretContainer[0]->GetPosition(), "Turretposition");
-	Debug::End();
 }
 
 /**************************************
@@ -169,6 +154,51 @@ void PlayerActor::Draw()
 void PlayerActor::DrawCollider()
 {
 	colliderViewer->Draw();
+}
+
+/**************************************
+レベルアップ処理
+***************************************/
+void PlayerActor::PowerUp()
+{
+	const int MaxLevel = 3;
+	if (currentLevel >= MaxLevel)
+		return;
+
+	++currentLevel;
+
+	for (auto&& turret : turretContainer)
+	{
+		turretRoot->RemoveChild(turret);
+		ObjectPool::Instance()->Destroy<PlayerTurretActor>(turret);
+	}
+	turretContainer.clear();
+
+	const float TurretOffset = 7.5f;
+	const float PositionTurret = -2.0f;
+	const int NumTurret[MaxLevel + 1]
+	{
+		2,
+		4,
+		6,
+		8
+	};
+	int numTurret = NumTurret[currentLevel];
+
+	D3DXVECTOR3 offset = { 0.0f, TurretOffset, PositionTurret };
+	D3DXMATRIX mtxRot;
+	D3DXMatrixRotationAxis(&mtxRot, &Vector3::Forward, D3DXToRadian(360.0f / numTurret));
+
+	for (int i = 0; i < numTurret; i++)
+	{
+		PlayerTurretActor *turret = ObjectPool::Instance()->Create<PlayerTurretActor>();
+		turretRoot->AddChild(turret);
+
+		turret->SetLocalPosition(offset);
+		D3DXVec3TransformCoord(&offset, &offset, &mtxRot);
+
+		turretContainer.push_back(turret);
+	}
 }
 
 /**************************************
@@ -215,7 +245,7 @@ void PlayerActor::_Shot()
 
 	const float ShotInterval = 3.0f;
 	cntShotFrame += FixedTime::GetTimeScale();
-	
+
 	if (cntShotFrame < ShotInterval)
 		return;
 
@@ -224,10 +254,10 @@ void PlayerActor::_Shot()
 
 	for (auto&& turret : turretContainer)
 	{
-		onFireBullet(turret->GetShotPosition(), false);
+		onFireBullet(turret->GetShotPosition(), false, currentLevel);
 	}
 
-	onFireBullet(transform->GetPosition() + ShotPosition, true);
+	onFireBullet(transform->GetPosition() + ShotPosition, true, currentLevel);
 
 	cntShotFrame = 0.0f;
 }
@@ -249,9 +279,12 @@ void PlayerActor::_SlowDownEnemyBullet()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
-	collider->SetActive(false);
-	enableMove = false;
-	enableShot = false;
+	if (other->Tag() == "Enemy")
+	{
+		collider->SetActive(false);
+		enableMove = false;
+		enableShot = false;
+	}
 
 	onColliderHit(other);
 }

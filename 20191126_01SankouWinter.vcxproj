@@ -271,6 +271,7 @@
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerColliderViewer.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerTurretActor.cpp" />
+    <ClCompile Include="source\Actor\Player\PowerupItemActor.cpp" />
     <ClCompile Include="source\BackGround\GameSkybox.cpp" />
     <ClCompile Include="source\BackGround\PlanetActor.cpp" />
     <ClCompile Include="source\Camera\GameCamera.cpp" />
@@ -460,6 +461,7 @@
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerColliderViewer.h" />
     <ClInclude Include="source\Actor\Player\PlayerTurretActor.h" />
+    <ClInclude Include="source\Actor\Player\PowerupItemActor.h" />
     <ClInclude Include="source\BackGround\GameSkybox.h" />
     <ClInclude Include="source\BackGround\PlanetActor.h" />
     <ClInclude Include="source\Camera\GameCamera.h" />

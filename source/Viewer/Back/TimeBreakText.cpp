@@ -9,6 +9,7 @@
 #include "../../../Framework/Renderer2D/Polygon2D.h"
 #include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Task/TaskManager.h"
+#include "../../../Framework/Resource/ResourceManager.h"
 
 /**************************************
 グローバル変数
@@ -22,6 +23,11 @@ const D3DXVECTOR3 TimeBreakText::PositionLower = { SCREEN_CENTER_X, 830.0f, 0.0f
 const D3DXVECTOR3 TimeBreakText::LastPositionUpper = { SCREEN_WIDTH * -0.5f, 350.0f, 0.0f };
 const D3DXVECTOR3 TimeBreakText::LastPositionLower = { SCREEN_WIDTH * 1.5f, 830.0f, 0.0f };
 
+static const char* TexturePath[] = {
+	"data/TEXTURE/Viewer/TimeBreak.png",
+	"data/TEXTURE/Viewer/PowerUp.png"
+};
+
 /**************************************
 コンストラクタ
 ***************************************/
@@ -30,8 +36,10 @@ TimeBreakText::TimeBreakText()
 	upper = new Polygon2D();
 	lower = new Polygon2D();
 
-	upper->LoadTexture("data/TEXTURE/Viewer/TimeBreak.png");
-	lower->LoadTexture("data/TEXTURE/Viewer/TimeBreak.png");
+	for (int i = 0; i < TypeMax; i++)
+	{
+		ResourceManager::Instance()->LoadTexture(TexturePath[i]);
+	}
 
 	upper->SetPosition(InitPositionUpper);
 	lower->SetPosition(InitPositionLower);
@@ -64,8 +72,11 @@ void TimeBreakText::Draw()
 /**************************************
 セット処理
 ***************************************/
-void TimeBreakText::Set()
+void TimeBreakText::Set(Type type)
 {
+	upper->LoadTexture(TexturePath[type]);
+	lower->LoadTexture(TexturePath[type]);
+
 	upper->SetPosition(InitPositionUpper);
 	lower->SetPosition(InitPositionLower);
 

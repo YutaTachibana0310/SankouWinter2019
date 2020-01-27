@@ -48,14 +48,15 @@ void GameScene::Init()
 	MusicPlayer::PlayBGM(GameBGM);
 
 	sceneCamera = gameCamera = new GameCamera();
+	backViewer = new BackViewer();
+
 	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	skybox = new GameSkybox();
-	playerController = new PlayerController(gameCamera);
+	playerController = new PlayerController(gameCamera, backViewer);
 	bloom = new BloomController();
 	enemyController = new EnemyController(gameCamera);
 	planet = new PlanetActor();
 	viewer = new GameViewer();
-	backViewer = new BackViewer();
 	handler = new EnemyEventHandler();
 
 	Camera::SetMainCamera(gameCamera);
@@ -102,6 +103,7 @@ void GameScene::Update()
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 	ColliderManager::Instance()->CheckRoundRobin("Player", "EnemyBullet");
+	ColliderManager::Instance()->CheckRoundRobin("Player", "Item");
 
 	enemyController->CheckEnemyDestroy();
 

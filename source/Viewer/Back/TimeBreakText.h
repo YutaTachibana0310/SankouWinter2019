@@ -21,16 +21,23 @@ class Polygon2D;
 class TimeBreakText
 {
 public:
+	enum Type
+	{
+		TimeBreak,
+		PowerUp,
+		TypeMax
+	};
+
 	TimeBreakText();
 	~TimeBreakText();
 
 	void Draw();
 
-	void Set();
+	void Set(Type type);
 
 	void OnFinishIn();
 	void OnFinishOut();
-
+	
 	static const D3DXVECTOR3 InitPositionUpper;
 	static const D3DXVECTOR3 InitPositionLower;
 

@@ -60,6 +60,7 @@ BoxCollider3D::BoxCollider3D(const std::string & tag, const std::shared_ptr<Tran
 std::shared_ptr<BoxCollider3D> BoxCollider3D::Create(std::string tag, const std::shared_ptr<Transform>& transform)
 {
 	std::shared_ptr<BoxCollider3D> ptr = std::shared_ptr<BoxCollider3D>(new BoxCollider3D(tag, transform));
+	ptr->SetTag(tag);
 
 	ColliderManager::Instance()->AddBoxCollider3D(tag, ptr);
 

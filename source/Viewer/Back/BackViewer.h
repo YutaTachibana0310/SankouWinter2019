@@ -35,6 +35,7 @@ public:
 	};
 
 	void PlayTimeBreak();
+	void PlayPowerUp();
 
 private:
 	TimeBreakText *timeBreak;

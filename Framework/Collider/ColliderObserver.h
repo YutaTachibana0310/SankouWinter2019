@@ -20,6 +20,19 @@ class ColliderObserver
 {
 public:
 	virtual void OnColliderHit(ColliderObserver *other) = 0;
+
+	inline std::string Tag() const
+	{
+		return tag;
+	}
+
+	void SetTag(const std::string& tag)
+	{
+		this->tag = tag;
+	}
+
+private:
+	std::string tag;
 };
 
 #endif
