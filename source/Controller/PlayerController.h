@@ -9,6 +9,7 @@
 #define _PLAYERCONTROLLER_H_
 
 #include "../../main.h"
+#include <vector>
 
 /**************************************
 前方宣言
@@ -17,6 +18,7 @@ class PlayerActor;
 class PlayerBulletController;
 class ColliderObserver;
 class GameCamera;
+class PowerupItemActor;
 
 /**************************************
 クラス定義
@@ -43,6 +45,7 @@ public:
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;
+	std::vector<PowerupItemActor*> itemContainer;
 
 	GameCamera *camera;
 

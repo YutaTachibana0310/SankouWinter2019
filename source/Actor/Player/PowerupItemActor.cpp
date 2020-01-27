@@ -9,6 +9,7 @@
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Core/FixedTime.h"
+#include "../../../Framework/Collider/BoxCollider3D.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -24,6 +25,9 @@ PowerupItemActor::PowerupItemActor() :
 {
 	polygon = new BoardPolygon();
 	ResourceManager::Instance()->GetPolygon("PowerupItem", polygon);
+
+	collider = BoxCollider3D::Create("Item", transform);
+	collider->SetSize({ 5.0f, 3.0f, 3.0f });
 }
 
 /**************************************
@@ -32,6 +36,7 @@ PowerupItemActor::PowerupItemActor() :
 PowerupItemActor::~PowerupItemActor()
 {
 	SAFE_DELETE(polygon);
+	collider.reset();
 }
 
 /**************************************
@@ -42,6 +47,9 @@ void PowerupItemActor::Init()
 	cntFrame = 0.0f;
 	moveDir = Vector3::Random();
 	moveDir.z = -fabsf(moveDir.z);
+	moveDir.x = 0.0f;
+
+	collider->SetActive(true);
 }
 
 /**************************************
@@ -50,6 +58,7 @@ void PowerupItemActor::Init()
 void PowerupItemActor::Uninit()
 {
 	active = false;
+	collider->SetActive(false);
 }
 
 /**************************************
@@ -62,8 +71,8 @@ void PowerupItemActor::Update()
 
 	cntFrame += FixedTime::GetTimeScale();
 
-	const float DurationBound = 600.0f;
-	const float Speed = 0.8f;
+	const float DurationBound = 1200.0f;
+	const float Speed = 0.4f;
 
 	if (cntFrame < DurationBound)
 	{

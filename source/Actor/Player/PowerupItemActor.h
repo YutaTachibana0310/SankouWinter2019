@@ -38,6 +38,8 @@ private:
 
 	D3DXVECTOR3 moveDir;
 	float cntFrame;
+
+	std::shared_ptr<BoxCollider3D> collider;
 };
 
 #endif

@@ -102,6 +102,7 @@ void GameScene::Update()
 
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 	ColliderManager::Instance()->CheckRoundRobin("Player", "EnemyBullet");
+	ColliderManager::Instance()->CheckRoundRobin("Player", "Item");
 
 	enemyController->CheckEnemyDestroy();
 

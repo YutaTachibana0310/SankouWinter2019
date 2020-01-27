@@ -48,6 +48,7 @@ bool BaseCollider::IsActive()
 void BaseCollider::AddObserver(ColliderObserver * observer)
 {
 	this->observer = observer;
+	observer->SetTag(tag);
 }
 
 /**************************************
@@ -56,4 +57,12 @@ void BaseCollider::AddObserver(ColliderObserver * observer)
 void BaseCollider::RemoveObserver()
 {
 	this->observer = nullptr;
+}
+
+/**************************************
+ƒ^ƒOİ’èˆ—
+***************************************/
+void BaseCollider::SetTag(const std::string & tag)
+{
+	this->tag = tag;
 }

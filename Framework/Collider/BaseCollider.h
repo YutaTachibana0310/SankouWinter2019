@@ -30,10 +30,13 @@ public:
 	void AddObserver(ColliderObserver* observer);
 	void RemoveObserver();
 
+	void SetTag(const std::string& tag);
+
 protected:
 	bool active;
 	std::shared_ptr<Transform> refTransform;
 	ColliderObserver* observer;
+	std::string tag;
 };
 
 #endif

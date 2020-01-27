@@ -249,9 +249,12 @@ void PlayerActor::_SlowDownEnemyBullet()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
-	collider->SetActive(false);
-	enableMove = false;
-	enableShot = false;
+	if (other->Tag() == "Enemy")
+	{
+		collider->SetActive(false);
+		enableMove = false;
+		enableShot = false;
+	}
 
 	onColliderHit(other);
 }

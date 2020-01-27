@@ -17,6 +17,7 @@
 #include "../Camera/GameCamera.h"
 #include "../Effect/GameParticleManager.h"
 #include "../Actor/Player/PlayerColliderViewer.h"
+#include "../Actor/Player/PowerupItemActor.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -38,9 +39,12 @@ PlayerController::PlayerController(GameCamera *camera) :
 	ResourceManager::Instance()->LoadMesh("Player", "data/MODEL/Player/Player.x");
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	ResourceManager::Instance()->MakePolygon("PlayerCollider", "data/TEXTURE/Player/playerCollider.png", { 1.0f, 1.0f }, { 3.0f, 2.0f });
+	ResourceManager::Instance()->MakePolygon("PowerupItem", "data/TEXTURE/Player/PowerupItem.png", { 3.0f, 3.0f });
 
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
+
+	itemContainer.reserve(5);
 
 	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1, std::placeholders::_2);
 	player->onFireBullet = onFireBullet;
@@ -52,6 +56,9 @@ PlayerController::PlayerController(GameCamera *camera) :
 	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
 
 	player->Init();
+
+	itemContainer.push_back(new PowerupItemActor());
+	itemContainer[0]->Init();
 }
 
 /**************************************
@@ -61,6 +68,8 @@ PlayerController::~PlayerController()
 {
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
+
+	Utility::DeleteContainer(itemContainer);
 }
 
 /**************************************
@@ -71,6 +80,11 @@ void PlayerController::Update()
 	player->Update();
 
 	bulletController->Update();
+
+	for (auto&& item : itemContainer)
+	{
+		item->Update();
+	}
 }
 
 /**************************************
@@ -87,6 +101,11 @@ void PlayerController::Draw()
 void PlayerController::DrawBullet()
 {
 	bulletController->Draw();
+
+	for (auto&& item : itemContainer)
+	{
+		item->Draw();
+	}
 }
 
 /**************************************
