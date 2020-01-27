@@ -18,6 +18,13 @@ staticメンバ
 ***************************************/
 const float PlayerBulletActor::SpeedMove = 2.0f;
 const D3DXVECTOR2 PlayerBulletActor::Size = { 2.0f, 1.0f };
+const float PlayerBulletActor::PowerTable[] =
+{
+	0.5f,
+	0.275f,
+	0.2f,
+	0.1625f
+};
 
 /**************************************
 コンストラクタ
@@ -45,17 +52,17 @@ PlayerBulletActor::~PlayerBulletActor()
 /**************************************
 初期化処理
 ***************************************/
-void PlayerBulletActor::Init(const D3DXVECTOR3& position, bool isMain)
+void PlayerBulletActor::Init(const D3DXVECTOR3& position, bool isMain, int level)
 {
 	if (isMain)
 	{
 		ResourceManager::Instance()->GetPolygon("PlayerBulletMain", polygon);
-		power = 1.25f;
+		power = 1.0f;
 	}
 	else
 	{
 		ResourceManager::Instance()->GetPolygon("PlayerBullet", polygon);
-		power = 1.0f;
+		power = PowerTable[level];
 	}
 
 	active = true;

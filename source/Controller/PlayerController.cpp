@@ -50,7 +50,7 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 
 	itemContainer.reserve(5);
 
-	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1, std::placeholders::_2);
+	auto onFireBullet = std::bind(&PlayerBulletController::FireBullet, bulletController, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 	player->onFireBullet = onFireBullet;
 
 	auto onHitPlayer = std::bind(&PlayerController::CollisionPlayer, this, std::placeholders::_1);

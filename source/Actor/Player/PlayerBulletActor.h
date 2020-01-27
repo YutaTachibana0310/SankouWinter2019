@@ -26,7 +26,7 @@ public:
 	PlayerBulletActor();
 	~PlayerBulletActor();
 
-	void Init(const D3DXVECTOR3& position, bool isMain);
+	void Init(const D3DXVECTOR3& position, bool isMain, int level);
 	void Uninit();
 	void Update();
 	void Draw();
@@ -54,5 +54,6 @@ private:
 
 	float power;
 
+	static const float PowerTable[];
 };
 #endif

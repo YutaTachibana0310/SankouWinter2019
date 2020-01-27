@@ -40,7 +40,7 @@ public:
 	
 	virtual void PowerUp();
 
-	std::function<void(const D3DXVECTOR3, bool)> onFireBullet;
+	std::function<void(const D3DXVECTOR3, bool, int)> onFireBullet;
 	std::function<void(ColliderObserver* other)> onColliderHit;
 	std::function<void(bool slowDown)> onSlowdownEnemyBullet;
 	std::function<void()> onFireBomber;

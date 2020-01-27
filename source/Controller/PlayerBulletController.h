@@ -28,7 +28,7 @@ public:
 	void Update();
 	void Draw();
 
-	void FireBullet(const D3DXVECTOR3& pos, bool isMain);
+	void FireBullet(const D3DXVECTOR3& pos, bool isMain, int level);
 
 private:
 	std::vector<PlayerBulletActor*> bulletContainer;

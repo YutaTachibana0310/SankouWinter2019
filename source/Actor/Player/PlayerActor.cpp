@@ -254,10 +254,10 @@ void PlayerActor::_Shot()
 
 	for (auto&& turret : turretContainer)
 	{
-		onFireBullet(turret->GetShotPosition(), false);
+		onFireBullet(turret->GetShotPosition(), false, currentLevel);
 	}
 
-	onFireBullet(transform->GetPosition() + ShotPosition, true);
+	onFireBullet(transform->GetPosition() + ShotPosition, true, currentLevel);
 
 	cntShotFrame = 0.0f;
 }
