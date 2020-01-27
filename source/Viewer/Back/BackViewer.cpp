@@ -51,5 +51,13 @@ TimeBreakÄ¶ˆ—
 ***************************************/
 void BackViewer::PlayTimeBreak()
 {
-	timeBreak->Set();
+	timeBreak->Set(TimeBreakText::TimeBreak);
+}
+
+/**************************************
+PowerUpÄ¶ˆ—
+***************************************/
+void BackViewer::PlayPowerUp()
+{
+	timeBreak->Set(TimeBreakText::PowerUp);
 }
