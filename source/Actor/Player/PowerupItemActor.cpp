@@ -10,6 +10,7 @@
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Core/FixedTime.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
+#include "../../../Framework/Core/ObjectPool.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -28,6 +29,7 @@ PowerupItemActor::PowerupItemActor() :
 
 	collider = BoxCollider3D::Create("Item", transform);
 	collider->SetSize({ 5.0f, 3.0f, 3.0f });
+	collider->AddObserver(this);
 }
 
 /**************************************
@@ -59,6 +61,7 @@ void PowerupItemActor::Uninit()
 {
 	active = false;
 	collider->SetActive(false);
+	ObjectPool::Instance()->Destroy<PowerupItemActor>(this);
 }
 
 /**************************************
@@ -106,4 +109,12 @@ void PowerupItemActor::Draw()
 {
 	D3DXMATRIX mtxWorld = transform->GetMatrix();
 	polygon->Draw(mtxWorld);
+}
+
+/**************************************
+Õ“Ëˆ—
+***************************************/
+void PowerupItemActor::OnColliderHit(ColliderObserver * other)
+{
+	Uninit();
 }

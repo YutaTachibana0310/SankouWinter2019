@@ -19,6 +19,8 @@
 #include "../Actor/Player/PlayerColliderViewer.h"
 #include "../Actor/Player/PowerupItemActor.h"
 
+#include <algorithm>
+
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
 ***************************************/
@@ -58,6 +60,7 @@ PlayerController::PlayerController(GameCamera *camera) :
 	player->Init();
 
 	itemContainer.push_back(new PowerupItemActor());
+	itemContainer[0]->SetPosition({ 0.0f, 0.0f, 30.0f });
 	itemContainer[0]->Init();
 }
 
@@ -85,6 +88,12 @@ void PlayerController::Update()
 	{
 		item->Update();
 	}
+
+	auto itr = std::remove_if(itemContainer.begin(), itemContainer.end(), [](auto item)
+	{
+		return !item->IsActive();
+	});
+	itemContainer.erase(itr, itemContainer.end());
 }
 
 /**************************************
@@ -179,14 +188,22 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 ***************************************/
 void PlayerController::CollisionPlayer(ColliderObserver * other)
 {
-	GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());	
-
-	auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
-	bool res = camera->Focus(player->GetPosition(), callback);
-
-	if (!res)
+	std::string otherTag = other->Tag();
+	if (otherTag == "Enemy")
 	{
-		OnFinishCameraFocus();
+		GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
+
+		auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
+		bool res = camera->Focus(player->GetPosition(), callback);
+
+		if (!res)
+		{
+			OnFinishCameraFocus();
+		}
+	}
+	else if (otherTag == "Item")
+	{
+		Debug::Log("Hit Item");
 	}
 }
 

@@ -10,6 +10,7 @@
 
 #include "../../../main.h"
 #include "../../../Framework/Renderer3D/BillboardObject.h"
+#include "../../../Framework/Collider/ColliderObserver.h"
 
 /**************************************
 前方宣言
@@ -20,7 +21,7 @@ class BoardPolygon;
 /**************************************
 クラス定義
 ***************************************/
-class PowerupItemActor : public BillboardObject
+class PowerupItemActor : public BillboardObject, public ColliderObserver
 {
 public:
 	PowerupItemActor();
@@ -40,6 +41,8 @@ private:
 	float cntFrame;
 
 	std::shared_ptr<BoxCollider3D> collider;
+
+	virtual void OnColliderHit(ColliderObserver * other) override;
 };
 
 #endif
