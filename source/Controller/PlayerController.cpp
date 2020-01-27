@@ -18,6 +18,7 @@
 #include "../Effect/GameParticleManager.h"
 #include "../Actor/Player/PlayerColliderViewer.h"
 #include "../Actor/Player/PowerupItemActor.h"
+#include "../Viewer/Back/BackViewer.h"
 
 #include <algorithm>
 
@@ -31,8 +32,9 @@ const int PlayerController::MaxLife = 2;
 /**************************************
 コンストラクタ
 ***************************************/
-PlayerController::PlayerController(GameCamera *camera) :
+PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 	camera(camera),
+	backViewer(backViewer),
 	cntEnergy(MaxEnergy),
 	inSlow(false),
 	cntLife(MaxLife),
@@ -203,7 +205,7 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 	}
 	else if (otherTag == "Item")
 	{
-		Debug::Log("Hit Item");
+		backViewer->PlayPowerUp();
 	}
 }
 

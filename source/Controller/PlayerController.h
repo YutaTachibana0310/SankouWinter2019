@@ -19,6 +19,7 @@ class PlayerBulletController;
 class ColliderObserver;
 class GameCamera;
 class PowerupItemActor;
+class BackViewer;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -26,7 +27,7 @@ class PowerupItemActor;
 class PlayerController
 {
 public:
-	PlayerController(GameCamera *camera);
+	PlayerController(GameCamera *camera, BackViewer *backViewer);
 	~PlayerController();
 
 	void Update();
@@ -48,6 +49,7 @@ private:
 	std::vector<PowerupItemActor*> itemContainer;
 
 	GameCamera *camera;
+	BackViewer *backViewer;
 
 	float cntEnergy;
 	bool inSlow;
