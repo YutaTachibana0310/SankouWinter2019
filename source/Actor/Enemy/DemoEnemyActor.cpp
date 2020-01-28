@@ -74,7 +74,7 @@ void DemoEnemyActor::Init()
 	cntAttack = 0;
 	ChangeState(InitState);
 
-	hp = 50.0f;
+	hp = 70.0f;
 }
 
 /**************************************

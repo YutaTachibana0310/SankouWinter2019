@@ -196,6 +196,10 @@ BulletRenderer•`‰æˆ—
 void EnemyBulletController::BulletRenderer::Draw()
 {
 	SetTransformBuffer();
+
+	if (cntBullet == 0)
+		return;
+
 	SetUVBuffer();
 
 	D3DXMATRIX view, proj, invView;
