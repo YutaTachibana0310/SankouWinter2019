@@ -48,8 +48,10 @@ void PowerupItemActor::Init()
 {
 	cntFrame = 0.0f;
 	moveDir = Vector3::Random();
-	moveDir.z = -fabsf(moveDir.z);
 	moveDir.x = 0.0f;
+	moveDir.y *= 0.5f;
+	moveDir.z = -fabsf(moveDir.z);
+	moveDir = Vector3::Normalize(moveDir);
 
 	collider->SetActive(true);
 }

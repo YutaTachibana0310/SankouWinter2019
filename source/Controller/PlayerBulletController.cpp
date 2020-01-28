@@ -81,7 +81,7 @@ void PlayerBulletController::Draw()
 void PlayerBulletController::FireBullet(const D3DXVECTOR3 & pos, bool isMain, int level)
 {
 	PlayerBulletActor* bullet = ObjectPool::Instance()->Create<PlayerBulletActor>();
-	bullet->Init(pos, isMain);
+	bullet->Init(pos, isMain, level);
 	bulletContainer.push_back(bullet);
 
 	SoundPlayer::Instance()->Play("PlayerShot");
