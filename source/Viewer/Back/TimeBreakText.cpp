@@ -32,7 +32,7 @@ static const char* TexturePath[] = {
 コンストラクタ
 ***************************************/
 TimeBreakText::TimeBreakText() :
-	inplaying(false)
+	inPlaying(false)
 {
 	upper = new Polygon2D();
 	lower = new Polygon2D();

@@ -19,7 +19,7 @@
 ***************************************/
 void SnipeEnemyActor::SnipeAttack::OnStart(SnipeEnemyActor & entity)
 {
-	entity.cntFrame = 0.0f;
+	entity.cntFrame = 90.0f;
 	entity.cntAttack = 0;
 }
 
