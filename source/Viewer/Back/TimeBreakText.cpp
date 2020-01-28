@@ -31,7 +31,8 @@ static const char* TexturePath[] = {
 /**************************************
 コンストラクタ
 ***************************************/
-TimeBreakText::TimeBreakText()
+TimeBreakText::TimeBreakText() :
+	inplaying(false)
 {
 	upper = new Polygon2D();
 	lower = new Polygon2D();
@@ -74,6 +75,9 @@ void TimeBreakText::Draw()
 ***************************************/
 void TimeBreakText::Set(Type type)
 {
+	if (inPlaying)
+		return;
+
 	upper->LoadTexture(TexturePath[type]);
 	lower->LoadTexture(TexturePath[type]);
 
@@ -90,10 +94,12 @@ void TimeBreakText::Set(Type type)
 ***************************************/
 void TimeBreakText::OnFinishIn()
 {
+	auto callback = std::bind(&TimeBreakText::OnFinishOut, this);
+
 	TaskManager::Instance()->CreateDelayedTask(30.0f, true, [=]()
 	{
 		Tween::Move(*upper, LastPositionUpper, 60.0f, EaseType::InCubic, true);
-		Tween::Move(*lower, LastPositionLower, 60.0f, EaseType::InCubic, true);
+		Tween::Move(*lower, LastPositionLower, 60.0f, EaseType::InCubic, true, callback);
 	});
 }
 
@@ -102,4 +108,5 @@ void TimeBreakText::OnFinishIn()
 ***************************************/
 void TimeBreakText::OnFinishOut()
 {
+	inPlaying = false;
 }
