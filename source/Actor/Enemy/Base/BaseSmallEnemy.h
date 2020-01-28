@@ -25,6 +25,11 @@ public:
 	void Explode();
 
 	EnemyType GetType();
+
+	void SetPowerupItem(bool state);
+
+protected:
+	bool generateItem;
 };
 
 #endif

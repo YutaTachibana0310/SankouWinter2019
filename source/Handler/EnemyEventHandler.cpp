@@ -135,6 +135,14 @@ D3DXVECTOR3 EnemyEventHandler::GetPlayerPosition() const
 }
 
 /**************************************
+パワーアップアイテム生成
+***************************************/
+void EnemyEventHandler::GeneratePowerupItem(const D3DXVECTOR3& position)
+{
+	playerController->SetPowerupItem(position);
+}
+
+/**************************************
 エネミーバレットコントローラ設定処理
 ***************************************/
 void EnemyEventHandler::GiveEnemyBulletController(EnemyBulletController * controller)

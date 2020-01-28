@@ -52,7 +52,8 @@ void PowerupItemActor::Init()
 	moveDir.y *= 0.5f;
 	moveDir.z = -fabsf(moveDir.z);
 	moveDir = Vector3::Normalize(moveDir);
-
+	
+	active = true;
 	collider->SetActive(true);
 }
 

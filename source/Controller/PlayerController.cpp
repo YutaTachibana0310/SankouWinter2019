@@ -170,6 +170,7 @@ D3DXVECTOR3 PlayerController::GetPlayerPosition() const
 void PlayerController::SetPowerupItem(const D3DXVECTOR3 & position)
 {
 	PowerupItemActor *item = ObjectPool::Instance()->Create<PowerupItemActor>();
+	item->SetPosition(position);
 	item->Init();
 	itemContainer.push_back(item);
 }

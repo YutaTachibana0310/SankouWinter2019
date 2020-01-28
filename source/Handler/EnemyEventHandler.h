@@ -45,6 +45,8 @@ public:
 
 	D3DXVECTOR3 GetPlayerPosition() const;
 
+	void GeneratePowerupItem(const D3DXVECTOR3& position);
+
 	void GiveEnemyBulletController(EnemyBulletController *controller);
 	void GivePlayerController(PlayerController *controller);
 	void GiveBackViewer(BackViewer *viewer);
