@@ -66,7 +66,7 @@ void SnipeEnemyActor::Init()
 	active = true;
 	SetCollider(true);
 
-	hp = 5.0f;
+	hp = 2.0f;
 
 	ChangeState(InitState);
 }

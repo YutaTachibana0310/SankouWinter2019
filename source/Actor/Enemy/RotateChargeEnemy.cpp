@@ -50,7 +50,7 @@ void RotateChargeEnemy::Init()
 	SetCollider(true);
 	enableHoming = true;
 
-	hp = 5.0f;
+	hp = 2.0f;
 }
 
 /**************************************

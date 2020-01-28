@@ -50,7 +50,7 @@ void PowerupItemActor::Init()
 	moveDir = Vector3::Random();
 	moveDir.x = 0.0f;
 	moveDir.y *= 0.5f;
-	moveDir.z = -fabsf(moveDir.z);
+	moveDir.z = -fabsf(moveDir.z * 2.0f);
 	moveDir = Vector3::Normalize(moveDir);
 	
 	active = true;
