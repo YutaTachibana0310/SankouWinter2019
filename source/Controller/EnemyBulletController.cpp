@@ -107,6 +107,11 @@ void EnemyBulletController::Draw()
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 	pDevice->SetRenderState(D3DRS_ZENABLE, false);
 
+	for (auto&& bullet : bulletContainer)
+	{
+		bullet->UpdateRenderTransform();
+	}
+
 	//インスタンシングでの描画
 	renderer->Draw();
 

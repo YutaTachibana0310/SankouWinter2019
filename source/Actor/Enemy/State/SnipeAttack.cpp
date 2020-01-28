@@ -38,7 +38,7 @@ SnipeEnemyActor::SnipeState SnipeEnemyActor::SnipeAttack::OnUpdate(SnipeEnemyAct
 		const int MaxAttack = 4;
 		if (entity.cntAttack < MaxAttack)
 		{
-			entity.handle->SetBullet(*entity.shotTransform, EnemyBulletConfig::BlueSphere, 0.5f);
+			entity.handle->SetBullet(*entity.shotTransform, EnemyBulletConfig::BlueSphere, 0.35f);
 			entity.cntFrame -= Interval;
 			++entity.cntAttack;
 		}

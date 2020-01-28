@@ -22,7 +22,7 @@ class BaseSmallEnemy : public BaseEnemy
 {
 	using BaseEnemy::BaseEnemy;
 public:
-	void Explode();
+	virtual void Explode();
 
 	EnemyType GetType();
 

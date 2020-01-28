@@ -97,3 +97,12 @@ void RotateChargeEnemy::Draw()
 
 	colliders[0]->Draw();
 }
+
+/**************************************
+”š”­ˆ—
+***************************************/
+void RotateChargeEnemy::Explode()
+{
+	handle->SetBullet(*transform, EnemyBulletConfig::BlueRotate, 0.35f);
+	BaseSmallEnemy::Explode();
+}

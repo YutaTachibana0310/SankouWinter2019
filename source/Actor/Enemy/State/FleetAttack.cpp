@@ -36,7 +36,7 @@ FleetEnemy::FleetState FleetEnemy::FleetAttack::OnUpdate(FleetEnemy & entity)
 		const float RangeWay = 360.0f / (WayCircle * 2.5f);
 		const int Way = 10;
 		const float RotAngle = 360.0f / WayCircle;
-		const float BulletSpeed = 0.25f;
+		const float BulletSpeed = 0.35f;
 
 		for (int cntWay = 0; cntWay < WayCircle; cntWay++)
 		{
