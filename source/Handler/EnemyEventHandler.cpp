@@ -82,6 +82,7 @@ void EnemyEventHandler::SetStrewBullet(const Transform & shotTransform, EnemyBul
 ***************************************/
 void EnemyEventHandler::VanishAllBullet()
 {
+	bulletController->DisableAllBullet();
 }
 
 /**************************************

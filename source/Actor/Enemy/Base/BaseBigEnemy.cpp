@@ -27,6 +27,7 @@ BaseBigEnemy::BaseBigEnemy(EnemyEventHandler* handler) :
 void BaseBigEnemy::Uninit()
 {
 	SoundPlayer::Instance()->Play("BigExplosion");
+	handle->VanishAllBullet();
 	handle->SlowdownEnemy();
 }
 

@@ -32,6 +32,8 @@ public:
 	
 	void SetBullet(const Transform& shotTransform, EnemyBulletConfig::Type type, float speed);
 
+	void DisableAllBullet();
+
 	static const unsigned MaxBullet;
 
 private:

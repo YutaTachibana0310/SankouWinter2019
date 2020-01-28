@@ -144,6 +144,21 @@ void EnemyBulletController::SetBullet(const Transform & shotTransform, EnemyBull
 }
 
 /**************************************
+全バレット消滅処理
+***************************************/
+void EnemyBulletController::DisableAllBullet()
+{
+	for (auto&& bullet : bulletContainer)
+	{
+		bullet->Uninit();
+		ObjectPool::Instance()->Destroy<EnemyBulletActor>(bullet);
+		cntBullet--;
+	}
+
+	bulletContainer.clear();
+}
+
+/**************************************
 BulletRendererコンストラクタ
 ***************************************/
 EnemyBulletController::BulletRenderer::BulletRenderer(EnemyBulletController * entity) :
