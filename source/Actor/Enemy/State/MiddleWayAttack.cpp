@@ -35,8 +35,8 @@ MiddleWayEnemy::State MiddleWayEnemy::MiddleWayAttack::OnUpdate(MiddleWayEnemy &
 	{
 		const float WayAngle = 5.0f;
 
-		entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::RedRotate, 0.25f, 3, WayAngle * 2);
-		entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::BlueRotate, 0.4f, 2, WayAngle * 6);
+		entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::RedRotate, 0.45f, 3, WayAngle * 2);
+		entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::BlueRotate, 0.2f, 2, WayAngle * 6);
 
 		++entity.cntAttack;
 
