@@ -103,6 +103,6 @@ void RotateChargeEnemy::Draw()
 ***************************************/
 void RotateChargeEnemy::Explode()
 {
-	handle->SetBullet(*transform, EnemyBulletConfig::BlueRotate, 0.35f);
+	handle->SetBullet(*transform, EnemyBulletConfig::BlueRotate, 0.55f);
 	BaseSmallEnemy::Explode();
 }
