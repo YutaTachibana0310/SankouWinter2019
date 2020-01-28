@@ -50,6 +50,8 @@ public:
 private:
 	Polygon2D *upper;
 	Polygon2D *lower;
+
+	bool inPlaying;
 };
 
 #endif

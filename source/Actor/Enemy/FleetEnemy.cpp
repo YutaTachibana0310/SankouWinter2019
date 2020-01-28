@@ -65,7 +65,7 @@ void FleetEnemy::Init()
 	active = true;
 	SetCollider(true);
 
-	hp = 50.0f;
+	hp = 400.0f;
 
 	isDestroied = false;
 

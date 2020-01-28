@@ -48,9 +48,15 @@ void PowerupItemActor::Init()
 {
 	cntFrame = 0.0f;
 	moveDir = Vector3::Random();
-	moveDir.z = -fabsf(moveDir.z);
 	moveDir.x = 0.0f;
+	moveDir.y *= 0.5f;
+	moveDir.z = -fabsf(moveDir.z * 2.0f);
+	moveDir = Vector3::Normalize(moveDir);
 
+	D3DXVECTOR3 initPosition = Vector3::Clamp(-MoveBorder, MoveBorder, transform->GetPosition());
+	transform->SetPosition(initPosition);
+	
+	active = true;
 	collider->SetActive(true);
 }
 

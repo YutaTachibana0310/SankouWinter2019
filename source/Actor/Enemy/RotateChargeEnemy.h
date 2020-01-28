@@ -35,6 +35,8 @@ public:
 
 	void ChangeState(int next) {}
 
+	void Explode() override;
+
 private:
 	bool enableHoming;
 

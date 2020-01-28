@@ -64,7 +64,7 @@ void MiddleWayEnemy::Init()
 	SetCollider(true);
 	active = true;
 
-	hp = 50.0f;
+	hp = 70.0f;
 
 	ChangeState(InitState);
 }

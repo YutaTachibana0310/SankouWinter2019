@@ -50,7 +50,7 @@ void RotateChargeEnemy::Init()
 	SetCollider(true);
 	enableHoming = true;
 
-	hp = 5.0f;
+	hp = 2.0f;
 }
 
 /**************************************
@@ -96,4 +96,13 @@ void RotateChargeEnemy::Draw()
 	mesh->Draw();
 
 	colliders[0]->Draw();
+}
+
+/**************************************
+”š”­ˆ—
+***************************************/
+void RotateChargeEnemy::Explode()
+{
+	handle->SetBullet(*transform, EnemyBulletConfig::BlueRotate, 0.55f);
+	BaseSmallEnemy::Explode();
 }

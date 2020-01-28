@@ -19,7 +19,7 @@
 ***************************************/
 void SnipeEnemyActor::SnipeAttack::OnStart(SnipeEnemyActor & entity)
 {
-	entity.cntFrame = 0.0f;
+	entity.cntFrame = 90.0f;
 	entity.cntAttack = 0;
 }
 
@@ -38,7 +38,7 @@ SnipeEnemyActor::SnipeState SnipeEnemyActor::SnipeAttack::OnUpdate(SnipeEnemyAct
 		const int MaxAttack = 4;
 		if (entity.cntAttack < MaxAttack)
 		{
-			entity.handle->SetBullet(*entity.shotTransform, EnemyBulletConfig::BlueSphere, 0.5f);
+			entity.handle->SetBullet(*entity.shotTransform, EnemyBulletConfig::BlueSphere, 0.35f);
 			entity.cntFrame -= Interval;
 			++entity.cntAttack;
 		}

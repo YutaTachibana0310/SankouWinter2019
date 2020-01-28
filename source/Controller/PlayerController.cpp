@@ -10,6 +10,7 @@
 #include "../../Framework/Input/input.h"
 #include "../../Framework/Tool/DebugWindow.h"
 #include "../../Framework/Task/TaskManager.h"
+#include "../../Framework/Core/ObjectPool.h"
 
 #include "../Actor/Player/PlayerActor.h"
 #include "PlayerBulletController.h"
@@ -60,10 +61,6 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
 
 	player->Init();
-
-	itemContainer.push_back(new PowerupItemActor());
-	itemContainer[0]->SetPosition({ 0.0f, 0.0f, 30.0f });
-	itemContainer[0]->Init();
 }
 
 /**************************************
@@ -168,6 +165,17 @@ D3DXVECTOR3 PlayerController::GetPlayerPosition() const
 }
 
 /**************************************
+パワーアップアイテム生成処理
+***************************************/
+void PlayerController::SetPowerupItem(const D3DXVECTOR3 & position)
+{
+	PowerupItemActor *item = ObjectPool::Instance()->Create<PowerupItemActor>();
+	item->SetPosition(position);
+	item->Init();
+	itemContainer.push_back(item);
+}
+
+/**************************************
 バレットを止める入力の処理
 ***************************************/
 void PlayerController::SlowDownEnemyBullet(bool isSlow)
@@ -191,7 +199,7 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 void PlayerController::CollisionPlayer(ColliderObserver * other)
 {
 	std::string otherTag = other->Tag();
-	if (otherTag == "Enemy")
+	if (otherTag == "EnemyBullet")
 	{
 		GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
 

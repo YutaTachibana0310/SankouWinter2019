@@ -82,6 +82,7 @@ void EnemyEventHandler::SetStrewBullet(const Transform & shotTransform, EnemyBul
 ***************************************/
 void EnemyEventHandler::VanishAllBullet()
 {
+	bulletController->DisableAllBullet();
 }
 
 /**************************************
@@ -131,6 +132,14 @@ void EnemyEventHandler::FetchSlowdownState()
 D3DXVECTOR3 EnemyEventHandler::GetPlayerPosition() const
 {
 	return playerController->GetPlayerPosition();
+}
+
+/**************************************
+パワーアップアイテム生成
+***************************************/
+void EnemyEventHandler::GeneratePowerupItem(const D3DXVECTOR3& position)
+{
+	playerController->SetPowerupItem(position);
 }
 
 /**************************************

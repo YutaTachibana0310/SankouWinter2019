@@ -79,12 +79,6 @@ void EnemyBulletActor::Update()
 
 	if (!CheckMoveBorder())
 		active = false;
-
-	//描画用のSRT情報設定
-	renderTransform->SetPosition(transform->GetPosition());
-	renderTransform->SetScale(transform->GetScale());
-	D3DXVECTOR3 eulerAngle = transform->GetEulerAngle();
-	renderTransform->SetRotation({ 0.0f, 0.0f, -eulerAngle.x });
 }
 
 /**************************************
@@ -141,6 +135,18 @@ D3DXVECTOR2 EnemyBulletActor::GetBloomUV() const
 void EnemyBulletActor::OnColliderHit(ColliderObserver * other)
 {
 	//Uninit();
+}
+
+/**************************************
+描画用トランスフォーム更新
+***************************************/
+void EnemyBulletActor::UpdateRenderTransform()
+{
+	//描画用のSRT情報設定
+	renderTransform->SetPosition(transform->GetPosition());
+	renderTransform->SetScale(transform->GetScale());
+	D3DXVECTOR3 eulerAngle = transform->GetEulerAngle();
+	renderTransform->SetRotation({ 0.0f, 0.0f, -eulerAngle.x });
 }
 
 /**************************************

@@ -47,6 +47,8 @@ public:
 
 	void OnColliderHit(ColliderObserver * other) override;
 
+	void UpdateRenderTransform();
+
 private:
 	std::shared_ptr<BoxCollider3D> collider;
 	BoardPolygon *polygon;

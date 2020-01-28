@@ -43,6 +43,8 @@ public:
 
 	D3DXVECTOR3 GetPlayerPosition() const;
 
+	void SetPowerupItem(const D3DXVECTOR3& position);
+
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;

@@ -120,12 +120,18 @@ void EnemyFactory::CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy
 		InitPosition + Vector3::Forward * Offset,
 		InitPosition + Vector3::Back * Offset
 	};
+	bool isItemCareer = data.Param(2) != 0.0f ? true : false;
 
 	for (int i = 0; i < 5; i++)
 	{
 		RotateChargeEnemy *enemy = ObjectPool::Instance()->Create<RotateChargeEnemy>(*eventHandler);
 		enemy->SetPosition(OffsetPosition[i]);
 		enemy->Init();
+
+		if (i == 0 && isItemCareer)
+			enemy->SetPowerupItem(true);
+		else
+			enemy->SetPowerupItem(false);
 
 		output.push_back(enemy);
 	}
@@ -145,12 +151,18 @@ void EnemyFactory::CreateSnipe(const EnemyData& data, std::list<BaseEnemy*>& out
 		InitPosition + D3DXVECTOR3(0.0f, 1.0f, -1.0f) * Offset,
 		InitPosition + D3DXVECTOR3(0.0f, -1.0f, -1.0f) * Offset
 	};
+	bool isItemCareer = data.Param(2) != 0.0f ? true : false;
 
 	for (int i = 0; i < 5; i++)
 	{
 		SnipeEnemyActor *enemy = ObjectPool::Instance()->Create<SnipeEnemyActor>(*eventHandler);
 		enemy->SetPosition(OffsetPosition[i]);
 		enemy->Init();
+
+		if (i == 0 && isItemCareer)
+			enemy->SetPowerupItem(true);
+		else
+			enemy->SetPowerupItem(false);
 
 		output.push_back(enemy);
 	}

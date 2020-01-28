@@ -107,6 +107,11 @@ void EnemyBulletController::Draw()
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
 	pDevice->SetRenderState(D3DRS_ZENABLE, false);
 
+	for (auto&& bullet : bulletContainer)
+	{
+		bullet->UpdateRenderTransform();
+	}
+
 	//インスタンシングでの描画
 	renderer->Draw();
 
@@ -141,6 +146,21 @@ void EnemyBulletController::SetBullet(const Transform & shotTransform, EnemyBull
 	bulletContainer.push_back(bullet);
 
 	cntBullet++;
+}
+
+/**************************************
+全バレット消滅処理
+***************************************/
+void EnemyBulletController::DisableAllBullet()
+{
+	for (auto&& bullet : bulletContainer)
+	{
+		bullet->Uninit();
+		ObjectPool::Instance()->Destroy<EnemyBulletActor>(bullet);
+		cntBullet--;
+	}
+
+	bulletContainer.clear();
 }
 
 /**************************************
@@ -181,6 +201,10 @@ BulletRenderer描画処理
 void EnemyBulletController::BulletRenderer::Draw()
 {
 	SetTransformBuffer();
+
+	if (cntBullet == 0)
+		return;
+
 	SetUVBuffer();
 
 	D3DXMATRIX view, proj, invView;
