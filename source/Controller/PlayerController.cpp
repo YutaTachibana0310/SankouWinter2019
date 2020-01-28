@@ -199,7 +199,7 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 void PlayerController::CollisionPlayer(ColliderObserver * other)
 {
 	std::string otherTag = other->Tag();
-	if (otherTag == "Enemy")
+	if (otherTag == "EnemyBullet")
 	{
 		GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
 

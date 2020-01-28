@@ -279,7 +279,7 @@ void PlayerActor::_SlowDownEnemyBullet()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
-	if (other->Tag() == "Enemy")
+	if (other->Tag() == "EnemyBullet")
 	{
 		collider->SetActive(false);
 		enableMove = false;
