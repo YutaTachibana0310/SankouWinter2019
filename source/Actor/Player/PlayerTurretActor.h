@@ -14,6 +14,7 @@
 前方宣言
 ***************************************/
 class MeshContainer;
+class BaseEmitter;
 
 /**************************************
 クラス定義
@@ -24,6 +25,8 @@ public:
 	PlayerTurretActor();
 	~PlayerTurretActor();
 
+	void Init();
+	void Uninit();
 	void Update();
 	void Draw();
 
@@ -31,6 +34,7 @@ public:
 
 private:
 	MeshContainer * mesh;
+	BaseEmitter *trailEmitter;
 
 	static const D3DXVECTOR3 OffsetShot;
 };

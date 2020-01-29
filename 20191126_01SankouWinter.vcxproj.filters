@@ -168,6 +168,7 @@
     <ClCompile Include="source\Actor\Player\PowerupItemActor.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyBulletVanish.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyTrail.cpp" />
+    <ClCompile Include="source\Effect\Game\PlayerTrail.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -361,6 +362,7 @@
     <ClInclude Include="source\Actor\Player\PowerupItemActor.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyBulletVanish.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyTrail.h" />
+    <ClInclude Include="source\Effect\Game\PlayerTrail.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

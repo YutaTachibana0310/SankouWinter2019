@@ -27,6 +27,7 @@ namespace GameEffect
 		EnemySmallDebris,
 		EnemyBulletVanish,
 		EnemyTrail,
+		PlayerTrail,
 		Max
 	};
 }

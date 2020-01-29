@@ -14,6 +14,9 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Core/ObjectPool.h"
+#include "../../../Framework/Particle/BaseEmitter.h"
+
+#include "../../Effect/GameParticleManager.h"
 
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
@@ -54,6 +57,10 @@ PlayerActor::PlayerActor() :
 
 	const unsigned MaxTurret = 8;
 	turretContainer.reserve(MaxTurret);
+
+	trailEmitter = GameParticleManager::Instance()->Generate(GameEffect::PlayerTrail, transform->GetPosition());
+	AddChild(trailEmitter);
+	trailEmitter->SetLocalPosition(Vector3::Back * 2.0f);
 }
 
 /**************************************
@@ -84,6 +91,8 @@ void PlayerActor::Init()
 
 	currentLevel = -1;
 	PowerUp();
+
+	trailEmitter->SetActive(true);
 }
 
 /**************************************
@@ -93,6 +102,13 @@ void PlayerActor::Uninit()
 {
 	collider->SetActive(false);
 	active = false;
+
+	for (auto&& turret : turretContainer)
+	{
+		turret->Uninit();
+	}
+
+	trailEmitter->SetActive(false);
 }
 
 /**************************************
@@ -153,6 +169,9 @@ void PlayerActor::Draw()
 ***************************************/
 void PlayerActor::DrawCollider()
 {
+	if (!active)
+		return;
+
 	colliderViewer->Draw();
 }
 
@@ -196,6 +215,8 @@ void PlayerActor::PowerUp()
 
 		turret->SetLocalPosition(offset);
 		D3DXVec3TransformCoord(&offset, &offset, &mtxRot);
+
+		turret->Init();
 
 		turretContainer.push_back(turret);
 	}
