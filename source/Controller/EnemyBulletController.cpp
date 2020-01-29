@@ -16,6 +16,7 @@
 
 #include "../Actor/Enemy/EnemyBulletActor.h"
 #include "EnemyTimeController.h"
+#include "../Effect/GameParticleManager.h"
 
 #include <algorithm>
 
@@ -155,6 +156,8 @@ void EnemyBulletController::DisableAllBullet()
 {
 	for (auto&& bullet : bulletContainer)
 	{
+		GameParticleManager::Instance()->Generate(GameEffect::EnemyBulletVanish, bullet->GetPosition());
+
 		bullet->Uninit();
 		ObjectPool::Instance()->Destroy<EnemyBulletActor>(bullet);
 		cntBullet--;

@@ -282,6 +282,7 @@
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
     <ClCompile Include="source\Controller\PlayerController.cpp" />
+    <ClCompile Include="source\Effect\Enemy\EnemyBulletVanish.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyDebris.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyFlame.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyParticleEmitter.cpp" />
@@ -472,6 +473,7 @@
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
     <ClInclude Include="source\Controller\PlayerController.h" />
+    <ClInclude Include="source\Effect\Enemy\EnemyBulletVanish.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyDebris.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyFlame.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyParticleEmitter.h" />
