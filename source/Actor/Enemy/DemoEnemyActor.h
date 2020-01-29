@@ -18,6 +18,7 @@
 ***************************************/
 class MeshContainer;
 class BoxCollider3D;
+class BaseEmitter;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -51,6 +52,9 @@ private:
 
 	std::vector<BaseState<DemoEnemyActor, DemoState>*> fsm;
 	DemoState state;
+
+	BaseEmitter *trailEmitterR;
+	BaseEmitter *trailEmitterL;
 
 	class DemoInit;
 	class DemoAttack;

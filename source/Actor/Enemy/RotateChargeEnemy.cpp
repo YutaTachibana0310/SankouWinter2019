@@ -10,9 +10,11 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Core/ObjectPool.h"
+#include "../../../Framework/Particle/BaseEmitter.h"
 
 #include "../../Controller/EnemyTimeController.h"
 #include "../../Handler/EnemyEventHandler.h"
+#include "../../Effect/GameParticleManager.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -23,7 +25,8 @@
 ***************************************/
 RotateChargeEnemy::RotateChargeEnemy(EnemyEventHandler* handler) :
 	BaseSmallEnemy(handler),
-	enableHoming(true)
+	enableHoming(true),
+	trailEmitter(nullptr)
 { 
 	colliders.reserve(1);
 	colliders.push_back(BoxCollider3D::Create("Enemy", transform));
@@ -50,6 +53,13 @@ void RotateChargeEnemy::Init()
 	SetCollider(true);
 	enableHoming = true;
 
+	trailEmitter = GameParticleManager::Instance()->Generate(GameEffect::EnemyTrail, *transform);
+	if (trailEmitter != nullptr)
+	{
+		AddChild(trailEmitter);
+		trailEmitter->SetLocalPosition(Vector3::Forward * 2.0f);
+	}
+
 	hp = 2.0f;
 }
 
@@ -58,6 +68,12 @@ void RotateChargeEnemy::Init()
 ***************************************/
 void RotateChargeEnemy::Uninit()
 {
+	if (trailEmitter != nullptr)
+	{
+		RemoveChild(trailEmitter);
+		trailEmitter->SetActive(false);
+	}
+
 	SetCollider(false);
 	active = false;
 	ObjectPool::Instance()->Destroy<RotateChargeEnemy>(this);

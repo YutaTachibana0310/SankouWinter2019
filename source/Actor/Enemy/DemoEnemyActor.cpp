@@ -10,10 +10,12 @@
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Core/ObjectPool.h"
+#include "../../../Framework/Particle/BaseEmitter.h"
 
 #include "../../Effect/GameParticleManager.h"
 #include "../../System/EnemyTween.h"
 #include "../../Handler/EnemyEventHandler.h"
+#include "../../Effect/GameParticleManager.h"
 
 #include "State\DemoInit.h"
 #include "State\DemoAttack.h"
@@ -24,7 +26,9 @@
 コンストラクタ
 ***************************************/
 DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
-	BaseMiddleEnemy(handler)
+	BaseMiddleEnemy(handler),
+	trailEmitterL(nullptr),
+	trailEmitterR(nullptr)
 {
 	ResourceManager::Instance()->GetMesh("DemoEnemy", mesh);
 
@@ -74,6 +78,20 @@ void DemoEnemyActor::Init()
 	cntAttack = 0;
 	ChangeState(InitState);
 
+	trailEmitterL = GameParticleManager::Instance()->Generate(GameEffect::EnemyTrail, *transform);
+	if (trailEmitterL != nullptr)
+	{
+		AddChild(trailEmitterL);
+		trailEmitterL->SetLocalPosition({ 0.0f, 2.0f, 2.2f });
+	}
+
+	trailEmitterR = GameParticleManager::Instance()->Generate(GameEffect::EnemyTrail, *transform);
+	if (trailEmitterR != nullptr)
+	{
+		AddChild(trailEmitterR);
+		trailEmitterR->SetLocalPosition({ 0.0f, -2.0f, 2.2f });
+	}
+
 	hp = 70.0f;
 }
 
@@ -82,6 +100,18 @@ void DemoEnemyActor::Init()
 ***************************************/
 void DemoEnemyActor::Uninit()
 {
+	if (trailEmitterL != nullptr)
+	{
+		RemoveChild(trailEmitterL);
+		trailEmitterL->SetActive(false);
+	}
+
+	if (trailEmitterR != nullptr)
+	{
+		RemoveChild(trailEmitterR);
+		trailEmitterR->SetActive(false);
+	}
+
 	SetCollider(false);
 	active = false;
 	ObjectPool::Instance()->Destroy<DemoEnemyActor>(this);

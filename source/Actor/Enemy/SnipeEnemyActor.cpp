@@ -10,8 +10,10 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Core/ObjectPool.h"
+#include "../../../Framework/Particle/BaseEmitter.h"
 
 #include "../../Handler/EnemyEventHandler.h"
+#include "../../Effect/GameParticleManager.h"
 
 #include "State\SnipeInit.h"
 #include "State\SnipeAttack.h"
@@ -28,7 +30,8 @@ SnipeEnemyActor::SnipeEnemyActor(EnemyEventHandler * handler) :
 	BaseSmallEnemy(handler),
 	cntFrame(0.0f),
 	cntAttack(0),
-	enableSnipe(true)
+	enableSnipe(true),
+	trailEmitter(nullptr)
 {
 	colliders.reserve(1);
 	colliders.push_back(BoxCollider3D::Create("Enemy", transform));
@@ -66,6 +69,13 @@ void SnipeEnemyActor::Init()
 	active = true;
 	SetCollider(true);
 
+	trailEmitter = GameParticleManager::Instance()->Generate(GameEffect::EnemyTrail, *transform);
+	if (trailEmitter != nullptr)
+	{
+		AddChild(trailEmitter);
+		trailEmitter->SetLocalPosition(Vector3::Forward * 2.0f);
+	}
+
 	hp = 2.0f;
 
 	ChangeState(InitState);
@@ -76,6 +86,12 @@ void SnipeEnemyActor::Init()
 ***************************************/
 void SnipeEnemyActor::Uninit()
 {
+	if (trailEmitter != nullptr)
+	{
+		trailEmitter->SetActive(false);
+		RemoveChild(trailEmitter);
+	}
+
 	SetCollider(false);
 	active = false;
 	ObjectPool::Instance()->Destroy<SnipeEnemyActor>(this);

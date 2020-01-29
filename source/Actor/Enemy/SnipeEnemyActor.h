@@ -15,6 +15,7 @@
 /**************************************
 前方宣言
 ***************************************/
+class BaseEmitter;
 
 /**************************************
 クラス定義
@@ -49,6 +50,8 @@ private:
 
 	std::vector<BaseState<SnipeEnemyActor, SnipeState>*> fsm;
 	SnipeState state;
+
+	BaseEmitter *trailEmitter;
 
 	class SnipeInit;
 	class SnipeAttack;

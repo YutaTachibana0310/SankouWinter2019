@@ -15,6 +15,7 @@
 前方宣言
 ***************************************/
 class MeshContainer;
+class BaseEmitter;
 
 /**************************************
 クラス定義
@@ -39,7 +40,7 @@ public:
 
 private:
 	bool enableHoming;
-
+	BaseEmitter *trailEmitter;
 };
 
 #endif
