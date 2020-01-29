@@ -28,6 +28,7 @@ namespace GameEffect
 		EnemyBulletVanish,
 		EnemyTrail,
 		PlayerTrail,
+		EnergyEffect,
 		Max
 	};
 }

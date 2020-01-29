@@ -6,9 +6,11 @@
 //
 //=====================================
 #include "BaseSmallEnemy.h"
+#include "../../../../Framework/Camera/Camera.h"
 #include "../../../Effect/GameParticleManager.h"
 #include "../../../Sound/SoundPlayer.h"
 #include "../../../Handler/EnemyEventHandler.h"
+#include "../../../Effect/GameParticleManager.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -21,6 +23,9 @@ void BaseSmallEnemy::Explode()
 {
 	GameParticleManager::Instance()->GenerateEnemySmallExplositon(transform->GetPosition());
 	SoundPlayer::Instance()->Play("SmallExplosion");
+
+	const D3DXVECTOR3 screenPos = Camera::MainCamera()->Projection(transform->GetPosition());
+	GameParticleManager::Instance()->Generate(GameEffect::EnergyEffect, screenPos);
 
 	if (generateItem)
 		handle->GeneratePowerupItem(transform->GetPosition());
