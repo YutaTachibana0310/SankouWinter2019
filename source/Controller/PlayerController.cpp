@@ -176,6 +176,14 @@ void PlayerController::SetPowerupItem(const D3DXVECTOR3 & position)
 }
 
 /**************************************
+エナジー加算処理
+***************************************/
+void PlayerController::AddEnergy(float energy)
+{
+	cntEnergy = Math::Clamp(0.0f, MaxEnergy, cntEnergy + energy);
+}
+
+/**************************************
 バレットを止める入力の処理
 ***************************************/
 void PlayerController::SlowDownEnemyBullet(bool isSlow)

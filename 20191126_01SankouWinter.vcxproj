@@ -296,6 +296,7 @@
     <ClCompile Include="source\Effect\Game\PlayerTrail.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
+    <ClCompile Include="source\Handler\EnergyHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\Sound\SoundPlayer.cpp" />
@@ -491,6 +492,7 @@
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
     <ClInclude Include="source\Handler\EnemyEventHandler.h" />
+    <ClInclude Include="source\Handler\EnergyHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\Sound\SoundPlayer.h" />

@@ -45,6 +45,8 @@ public:
 
 	void SetPowerupItem(const D3DXVECTOR3& position);
 
+	void AddEnergy(float energy);
+
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;

@@ -12,6 +12,8 @@
 #include "../../../Framework/Particle/BaseParticleController.h"
 #include "../../../Framework/Particle/2D/Particle2D.h"
 
+class EnergyHandler;
+
 namespace Effect::Game 
 {
 	/**************************************
@@ -20,7 +22,7 @@ namespace Effect::Game
 	class EnergyEffectController : public BaseParticleController
 	{
 	public:
-		EnergyEffectController();
+		EnergyEffectController(const std::shared_ptr<EnergyHandler>& handler);
 
 		void SetEmitter(const D3DXVECTOR3& position, float energy);
 	};
@@ -31,8 +33,9 @@ namespace Effect::Game
 	class EnergyEffect : public Particle2D
 	{
 	public:
-		EnergyEffect();
-
+		EnergyEffect(const std::shared_ptr<EnergyHandler>& handler);
+		~EnergyEffect();
+		
 		void Init();
 		void Update();
 
@@ -42,6 +45,7 @@ namespace Effect::Game
 	private:
 		D3DXVECTOR3 velocity;
 		float energy;
+		std::shared_ptr<EnergyHandler> handler;
 
 		static const float LifeFrame;
 	};
@@ -52,7 +56,7 @@ namespace Effect::Game
 	class EnergyEffectEmitter : public BaseEmitter
 	{
 	public:
-		EnergyEffectEmitter();
+		EnergyEffectEmitter(const std::shared_ptr<EnergyHandler>& handler);
 
 		bool Emit() override;
 		void SetEnergy(float energy);

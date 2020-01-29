@@ -28,6 +28,7 @@
 #include "../Sound/MusicPlayer.h"
 #include "../Viewer/Back/BackViewer.h"
 #include "../Handler/EnemyEventHandler.h"
+#include "../Handler/EnergyHandler.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -58,6 +59,9 @@ void GameScene::Init()
 	planet = new PlanetActor();
 	viewer = new GameViewer();
 	handler = new EnemyEventHandler();
+
+	auto energyHandler = std::make_shared<EnergyHandler>(playerController);
+	particleManager->CreateEnergyEffectController(energyHandler);
 
 	Camera::SetMainCamera(gameCamera);
 

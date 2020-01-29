@@ -11,6 +11,8 @@
 #include "../../Framework/Task/TaskManager.h"
 #include "../../Framework/PostEffect/ScreenObject.h"
 
+#include "../Handler/EnergyHandler.h"
+
 #include "Game\PlayerBulletHit.h"
 #include "Enemy\EnemyExplosion.h"
 #include "Enemy/EnemyDebris.h"
@@ -45,8 +47,6 @@ void GameParticleManager::Init()
 	controllers[GameEffect::EnemyBulletVanish] = new Effect::Game::EnemyBulletVanishController();
 	controllers[GameEffect::EnemyTrail] = new Effect::Game::EnemyTrailController();
 	controllers[GameEffect::PlayerTrail] = new Effect::Game::PlayerTrailController();
-
-	energyEffectController = new Effect::Game::EnergyEffectController();
 
 	crossFilter->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	crossFilter->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
@@ -163,4 +163,13 @@ void GameParticleManager::GenerateEnemyBigExplosion(const D3DXVECTOR3 & position
 void GameParticleManager::GenerateEnergyEffect(const D3DXVECTOR3 & position, float energy)
 {
 	energyEffectController->SetEmitter(position, energy);
+}
+
+
+/**************************************
+エナジーエフェクトコントローラ作成処理
+***************************************/
+void GameParticleManager::CreateEnergyEffectController(const std::shared_ptr<EnergyHandler>& energyHandler)
+{
+	energyEffectController = new Effect::Game::EnergyEffectController(energyHandler);
 }

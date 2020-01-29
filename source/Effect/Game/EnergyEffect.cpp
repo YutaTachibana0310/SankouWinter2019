@@ -6,6 +6,7 @@
 //
 //=====================================
 #include "EnergyEffect.h"
+#include "../../Handler/EnergyHandler.h"
 
 namespace Effect::Game 
 {
@@ -17,7 +18,7 @@ namespace Effect::Game
 	/**************************************
 	EnergyEffectControllerコンストラクタ
 	***************************************/
-	EnergyEffectController::EnergyEffectController() :
+	EnergyEffectController::EnergyEffectController(const std::shared_ptr<EnergyHandler>& handler) :
 		BaseParticleController(Particle_2D)
 	{
 		const D3DXVECTOR2 Size = { 21.5f, -21.5f };
@@ -29,7 +30,7 @@ namespace Effect::Game
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new EnergyEffectEmitter();
+			emitter = new EnergyEffectEmitter(handler);
 		}
 	}
 
@@ -57,11 +58,20 @@ namespace Effect::Game
 	/**************************************
 	EnergyEffectコンストラクタ
 	***************************************/
-	EnergyEffect::EnergyEffect() :
+	EnergyEffect::EnergyEffect(const std::shared_ptr<EnergyHandler>& handler) :
 		Particle2D(LifeFrame),
-		velocity(Vector3::Zero)
+		velocity(Vector3::Zero),
+		handler(handler)
 	{
 
+	}
+
+	/**************************************
+	EnergyEffectデストラクタ
+	***************************************/
+	EnergyEffect::~EnergyEffect()
+	{
+		handler.reset();
 	}
 
 	/**************************************
@@ -93,6 +103,11 @@ namespace Effect::Game
 
 		velocity += acceleration / 60.0f * FixedTime::GetTimeScale();
 		transform->Move(velocity / 60.0f * FixedTime::GetTimeScale());
+
+		if (cntFrame >= LifeFrame)
+		{
+			handler->AddEnergy(energy);
+		}
 	}
 
 	/**************************************
@@ -114,13 +129,13 @@ namespace Effect::Game
 	/**************************************
 	EnergyEffectEmitterコンストラクタ
 	***************************************/
-	EnergyEffectEmitter::EnergyEffectEmitter() :
+	EnergyEffectEmitter::EnergyEffectEmitter(const std::shared_ptr<EnergyHandler>& handler) :
 		BaseEmitter(8, 2.0f)
 	{
 		particleContainer.resize(8, nullptr);
 		for (auto&& particle : particleContainer)
 		{
-			particle = new EnergyEffect();
+			particle = new EnergyEffect(handler);
 		}
 	}
 
