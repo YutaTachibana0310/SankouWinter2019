@@ -21,6 +21,8 @@ namespace Effect::Game
 	{
 	public:
 		EnergyEffectController();
+
+		void SetEmitter(const D3DXVECTOR3& position, float energy);
 	};
 
 	/**************************************
@@ -35,9 +37,11 @@ namespace Effect::Game
 		void Update();
 
 		void SetDirection(const D3DXVECTOR3& direction);
+		void SetEnergy(float energy);
 
 	private:
 		D3DXVECTOR3 velocity;
+		float energy;
 
 		static const float LifeFrame;
 	};
@@ -51,6 +55,10 @@ namespace Effect::Game
 		EnergyEffectEmitter();
 
 		bool Emit() override;
+		void SetEnergy(float energy);
+
+	private:
+		float energy;
 	};
 }
 #endif

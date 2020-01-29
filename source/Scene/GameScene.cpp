@@ -154,6 +154,8 @@ void GameScene::Draw()
 	viewer->SetParameter(param);
 	viewer->Draw();
 
+	particleManager->DrawEnergyEffect();
+
 	_DrawDebug();
 }
 

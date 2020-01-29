@@ -25,7 +25,7 @@ void BaseSmallEnemy::Explode()
 	SoundPlayer::Instance()->Play("SmallExplosion");
 
 	const D3DXVECTOR3 screenPos = Camera::MainCamera()->Projection(transform->GetPosition());
-	GameParticleManager::Instance()->Generate(GameEffect::EnergyEffect, screenPos);
+	GameParticleManager::Instance()->GenerateEnergyEffect(screenPos, 0.1f);
 
 	if (generateItem)
 		handle->GeneratePowerupItem(transform->GetPosition());

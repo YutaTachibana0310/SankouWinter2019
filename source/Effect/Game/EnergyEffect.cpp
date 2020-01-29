@@ -34,6 +34,27 @@ namespace Effect::Game
 	}
 
 	/**************************************
+	EnergyEffectControllerエミッターセット処理
+	***************************************/
+	void EnergyEffectController::SetEmitter(const D3DXVECTOR3 & position, float energy)
+	{
+		auto emitter = find_if(emitterContainer.begin(), emitterContainer.end(), [](BaseEmitter* emitter)
+		{
+			return !emitter->IsActive();
+		});
+
+		if (emitter == emitterContainer.end())
+			return;
+
+		auto ptr = dynamic_cast<EnergyEffectEmitter*>(*emitter);
+		ptr->SetPosition(position);
+		ptr->Init(nullptr);
+		ptr->SetEnergy(energy);
+
+		return;
+	}
+
+	/**************************************
 	EnergyEffectコンストラクタ
 	***************************************/
 	EnergyEffect::EnergyEffect() :
@@ -83,6 +104,14 @@ namespace Effect::Game
 	}
 
 	/**************************************
+	エナジー量設定処理
+	***************************************/
+	void EnergyEffect::SetEnergy(float energy)
+	{
+		this->energy = energy;
+	}
+
+	/**************************************
 	EnergyEffectEmitterコンストラクタ
 	***************************************/
 	EnergyEffectEmitter::EnergyEffectEmitter() :
@@ -119,11 +148,22 @@ namespace Effect::Game
 
 			particle->SetTransform(*transform);
 			particle->Init();
-			dynamic_cast<EnergyEffect*>(particle)->SetDirection(direction);
+
+			EnergyEffect *effect = dynamic_cast<EnergyEffect*>(particle);
+			effect->SetDirection(direction);
+			effect->SetEnergy(energy / 8.0f);
 
 			D3DXVec3TransformCoord(&direction, &direction, &mtxRot);
 		}
 
 		return true;
+	}
+
+	/**************************************
+	エナジー量設定処理
+	***************************************/
+	void EnergyEffectEmitter::SetEnergy(float energy)
+	{
+		this->energy = energy;
 	}
 }

@@ -9,6 +9,7 @@
 #include "../../Framework/PostEffect/CrossFilterController.h"
 #include "../../Framework/Tool/DebugWindow.h"
 #include "../../Framework/Task/TaskManager.h"
+#include "../../Framework/PostEffect/ScreenObject.h"
 
 #include "Game\PlayerBulletHit.h"
 #include "Enemy\EnemyExplosion.h"
@@ -44,10 +45,20 @@ void GameParticleManager::Init()
 	controllers[GameEffect::EnemyBulletVanish] = new Effect::Game::EnemyBulletVanishController();
 	controllers[GameEffect::EnemyTrail] = new Effect::Game::EnemyTrailController();
 	controllers[GameEffect::PlayerTrail] = new Effect::Game::PlayerTrailController();
-	controllers[GameEffect::EnergyEffect] = new Effect::Game::EnergyEffectController();
+
+	energyEffectController = new Effect::Game::EnergyEffectController();
 
 	crossFilter->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	crossFilter->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
+}
+
+/**************************************
+終了処理
+***************************************/
+void GameParticleManager::Uninit()
+{
+	SAFE_DELETE(energyEffectController);
+	SceneParticleManager::Uninit();
 }
 
 /**************************************
@@ -69,7 +80,38 @@ void GameParticleManager::Update()
 
 	Debug::End();
 
+	energyEffectController->Update();
 	SceneParticleManager::Update();
+}
+
+/**************************************
+エナジーエフェクト描画処理
+***************************************/
+void GameParticleManager::DrawEnergyEffect()
+{
+	BaseParticleController::BeginDraw();
+
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+
+	ChangeRenderParameter();
+
+	bool isDrewd = false;
+
+	pDevice->SetRenderState(D3DRS_ZENABLE, false);
+	isDrewd |= energyEffectController->Draw();
+	pDevice->SetRenderState(D3DRS_ZENABLE, true);
+
+	BaseParticleController::EndDraw();
+
+	RestoreRenderParameter();
+	screenObj->Draw();
+
+	if (isDrewd)
+	{
+		crossFilter->Draw(renderTexture);
+	}
+
+	//SceneParticleManager::Draw();
 }
 
 /**************************************
@@ -113,4 +155,12 @@ void GameParticleManager::GenerateEnemyBigExplosion(const D3DXVECTOR3 & position
 			GenerateEnemyExplosion(offsetPosition);
 		});
 	}
+}
+
+/**************************************
+エナジーエフェクトセット処理
+***************************************/
+void GameParticleManager::GenerateEnergyEffect(const D3DXVECTOR3 & position, float energy)
+{
+	energyEffectController->SetEmitter(position, energy);
 }
