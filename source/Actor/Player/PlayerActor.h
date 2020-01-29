@@ -22,6 +22,7 @@ class PlayerTurretActor;
 class PlayerTurretRoot;
 class BoxCollider3D;
 class PlayerColliderViewer;
+class BaseEmitter;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -59,6 +60,8 @@ private:
 	std::shared_ptr<BoxCollider3D> collider;
 
 	PlayerColliderViewer *colliderViewer;
+
+	BaseEmitter *trailEmitter;
 
 	float cntShotFrame;
 

@@ -25,9 +25,18 @@ namespace GameEffect
 		PlayerExplosion,
 		EnemyFlame,
 		EnemySmallDebris,
+		EnemyBulletVanish,
+		EnemyTrail,
+		PlayerTrail,
 		Max
 	};
 }
+
+namespace Effect::Game
+{
+	class EnergyEffectController;
+}
+class EnergyHandler;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -35,15 +44,23 @@ namespace GameEffect
 class GameParticleManager : public SceneParticleManager, public BaseSingleton<GameParticleManager>
 {
 public:
-	void Init() override;
+	void Init();
+	void Uninit() override;
 	void Update() override;
+
+	void DrawEnergyEffect();
 
 	void GenerateEnemyExplosion(const D3DXVECTOR3& position);
 	void GenerateEnemySmallExplositon(const D3DXVECTOR3& position);
 	void GenerateEnemyBigExplosion(const D3DXVECTOR3& position);
+	void GenerateEnergyEffect(const D3DXVECTOR3& position, float energy);
+
+	void CreateEnergyEffectController(const std::shared_ptr<EnergyHandler>& energyHandler);
 
 private:
 	static const float BloomPower[3];
 	static const float BloomThrethold[3];
+
+	Effect::Game::EnergyEffectController *energyEffectController;
 };
 #endif

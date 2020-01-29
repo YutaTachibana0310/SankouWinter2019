@@ -9,6 +9,9 @@
 #include "../../Framework/PostEffect/CrossFilterController.h"
 #include "../../Framework/Tool/DebugWindow.h"
 #include "../../Framework/Task/TaskManager.h"
+#include "../../Framework/PostEffect/ScreenObject.h"
+
+#include "../Handler/EnergyHandler.h"
 
 #include "Game\PlayerBulletHit.h"
 #include "Enemy\EnemyExplosion.h"
@@ -16,6 +19,10 @@
 #include "Game/PlayerExplosion.h"
 #include "Enemy/EnemyFlame.h"
 #include "Enemy/EnemySmallDebris.h"
+#include "Enemy\EnemyBulletVanish.h"
+#include "Enemy\EnemyTrail.h"
+#include "Game\PlayerTrail.h"
+#include "Game\EnergyEffect.h"
 
 /**************************************
 staticメンバ
@@ -37,9 +44,21 @@ void GameParticleManager::Init()
 	controllers[GameEffect::PlayerExplosion] = new Effect::Game::PlayerExplosionController();
 	controllers[GameEffect::EnemyFlame] = new Effect::Game::EnemyFlameController();
 	controllers[GameEffect::EnemySmallDebris] = new Effect::Game::EnemySmallDebrisController();
+	controllers[GameEffect::EnemyBulletVanish] = new Effect::Game::EnemyBulletVanishController();
+	controllers[GameEffect::EnemyTrail] = new Effect::Game::EnemyTrailController();
+	controllers[GameEffect::PlayerTrail] = new Effect::Game::PlayerTrailController();
 
 	crossFilter->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	crossFilter->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
+}
+
+/**************************************
+終了処理
+***************************************/
+void GameParticleManager::Uninit()
+{
+	SAFE_DELETE(energyEffectController);
+	SceneParticleManager::Uninit();
 }
 
 /**************************************
@@ -61,7 +80,38 @@ void GameParticleManager::Update()
 
 	Debug::End();
 
+	energyEffectController->Update();
 	SceneParticleManager::Update();
+}
+
+/**************************************
+エナジーエフェクト描画処理
+***************************************/
+void GameParticleManager::DrawEnergyEffect()
+{
+	BaseParticleController::BeginDraw();
+
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+
+	ChangeRenderParameter();
+
+	bool isDrewd = false;
+
+	pDevice->SetRenderState(D3DRS_ZENABLE, false);
+	isDrewd |= energyEffectController->Draw();
+	pDevice->SetRenderState(D3DRS_ZENABLE, true);
+
+	BaseParticleController::EndDraw();
+
+	RestoreRenderParameter();
+	screenObj->Draw();
+
+	if (isDrewd)
+	{
+		crossFilter->Draw(renderTexture);
+	}
+
+	//SceneParticleManager::Draw();
 }
 
 /**************************************
@@ -105,4 +155,21 @@ void GameParticleManager::GenerateEnemyBigExplosion(const D3DXVECTOR3 & position
 			GenerateEnemyExplosion(offsetPosition);
 		});
 	}
+}
+
+/**************************************
+エナジーエフェクトセット処理
+***************************************/
+void GameParticleManager::GenerateEnergyEffect(const D3DXVECTOR3 & position, float energy)
+{
+	energyEffectController->SetEmitter(position, energy);
+}
+
+
+/**************************************
+エナジーエフェクトコントローラ作成処理
+***************************************/
+void GameParticleManager::CreateEnergyEffectController(const std::shared_ptr<EnergyHandler>& energyHandler)
+{
+	energyEffectController = new Effect::Game::EnergyEffectController(energyHandler);
 }

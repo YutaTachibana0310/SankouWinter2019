@@ -15,6 +15,7 @@
 /**************************************
 前方宣言
 ***************************************/
+class BaseEmitter;
 
 /**************************************
 クラス定義
@@ -48,6 +49,9 @@ private:
 
 	std::vector<MiddleWayState*> fsm;
 	State state;
+
+	BaseEmitter *trailEmitterR;
+	BaseEmitter *trailEmitterL;
 
 	class MiddleWayInit;
 	class MiddleWayAttack;

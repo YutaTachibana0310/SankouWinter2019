@@ -10,8 +10,10 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Core/ObjectPool.h"
+#include "../../../Framework/Particle/BaseEmitter.h"
 
 #include "../../System/EnemyTween.h"
+#include "../../Effect/GameParticleManager.h"
 
 #include "State/MiddleWayAttack.h"
 #include "State/MiddleWayEscape.h"
@@ -25,7 +27,9 @@
 コンストラクタ
 ***************************************/
 MiddleWayEnemy::MiddleWayEnemy(EnemyEventHandler * handle) :
-	BaseMiddleEnemy(handle)
+	BaseMiddleEnemy(handle),
+	trailEmitterL(nullptr),
+	trailEmitterR(nullptr)
 {
 	ResourceManager::Instance()->GetMesh("DemoEnemy", mesh);
 
@@ -66,6 +70,20 @@ void MiddleWayEnemy::Init()
 
 	hp = 70.0f;
 
+	trailEmitterL = GameParticleManager::Instance()->Generate(GameEffect::EnemyTrail, *transform);
+	if (trailEmitterL != nullptr)
+	{
+		AddChild(trailEmitterL);
+		trailEmitterL->SetLocalPosition({ 0.0f, 2.0f, 2.2f });
+	}
+
+	trailEmitterR = GameParticleManager::Instance()->Generate(GameEffect::EnemyTrail, *transform);
+	if (trailEmitterR != nullptr)
+	{
+		AddChild(trailEmitterR);
+		trailEmitterR->SetLocalPosition({ 0.0f, -2.0f, 2.2f });
+	}
+
 	ChangeState(InitState);
 }
 
@@ -74,6 +92,18 @@ void MiddleWayEnemy::Init()
 ***************************************/
 void MiddleWayEnemy::Uninit()
 {
+	if (trailEmitterL != nullptr)
+	{
+		RemoveChild(trailEmitterL);
+		trailEmitterL->SetActive(false);
+	}
+
+	if (trailEmitterR != nullptr)
+	{
+		RemoveChild(trailEmitterR);
+		trailEmitterR->SetActive(false);
+	}
+
 	SetCollider(false);
 	active = false;
 	ObjectPool::Instance()->Destroy<MiddleWayEnemy>(this);
