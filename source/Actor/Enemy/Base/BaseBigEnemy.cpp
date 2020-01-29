@@ -8,6 +8,7 @@
 #include "BaseBigEnemy.h"
 #include "../../../Effect/GameParticleManager.h"
 #include "../../../Sound/SoundPlayer.h"
+#include "../../../../Framework/Camera/Camera.h"
 
 #include "../../../Handler/EnemyEventHandler.h"
 
@@ -36,6 +37,9 @@ void BaseBigEnemy::Uninit()
 ***************************************/
 void BaseBigEnemy::Explode()
 {
+	const auto ScreenPosition = Camera::MainCamera()->Projection(transform->GetPosition());
+	GameParticleManager::Instance()->GenerateEnergyEffect(ScreenPosition, 30.0f);
+
 	GameParticleManager::Instance()->GenerateEnemyBigExplosion(transform->GetPosition());
 }
 
