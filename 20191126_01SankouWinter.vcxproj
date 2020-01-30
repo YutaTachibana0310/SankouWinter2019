@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -300,11 +300,13 @@
     <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
     <ClCompile Include="source\Handler\EnergyHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
+    <ClCompile Include="source\Scene\ResultScene.cpp" />
     <ClCompile Include="source\Scene\TitleScene.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\Sound\SoundPlayer.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
     <ClCompile Include="source\System\GameInput.cpp" />
+    <ClCompile Include="source\System\ScoreRanking.cpp" />
     <ClCompile Include="source\Viewer\Back\BackViewer.cpp" />
     <ClCompile Include="source\Viewer\Back\TimeBreakText.cpp" />
     <ClCompile Include="source\Viewer\Game\BomberViewer.cpp" />
@@ -312,6 +314,9 @@
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\LifeViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
+    <ClCompile Include="source\Viewer\Result\RankingText.cpp" />
+    <ClCompile Include="source\Viewer\Result\RankingViewer.cpp" />
+    <ClCompile Include="source\Viewer\Result\ResultViewer.cpp" />
     <ClCompile Include="source\Viewer\Title\PushViewer.cpp" />
     <ClCompile Include="source\Viewer\Title\TitleGear.cpp" />
     <ClCompile Include="source\Viewer\Title\TitleViewer.cpp" />
@@ -502,11 +507,14 @@
     <ClInclude Include="source\Handler\EnemyEventHandler.h" />
     <ClInclude Include="source\Handler\EnergyHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
+    <ClInclude Include="source\Scene\ResultScene.h" />
     <ClInclude Include="source\Scene\TitleScene.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\Sound\SoundPlayer.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
     <ClInclude Include="source\System\GameInput.h" />
+    <ClInclude Include="source\System\RankingInfo.h" />
+    <ClInclude Include="source\System\ScoreRanking.h" />
     <ClInclude Include="source\Viewer\Back\BackViewer.h" />
     <ClInclude Include="source\Viewer\Back\TimeBreakText.h" />
     <ClInclude Include="source\Viewer\Game\BomberViewer.h" />
@@ -514,6 +522,9 @@
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
     <ClInclude Include="source\Viewer\Game\LifeViewer.h" />
     <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />
+    <ClInclude Include="source\Viewer\Result\RankingText.h" />
+    <ClInclude Include="source\Viewer\Result\RankingViewer.h" />
+    <ClInclude Include="source\Viewer\Result\ResultViewer.h" />
     <ClInclude Include="source\Viewer\Title\PushViewer.h" />
     <ClInclude Include="source\Viewer\Title\TitleGear.h" />
     <ClInclude Include="source\Viewer\Title\TitleViewer.h" />

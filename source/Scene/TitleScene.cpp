@@ -45,7 +45,11 @@ void TitleScene::Init()
 		skybox->LoadTexture(SkyboxTexture, SkyBox::Surface(i));
 	}
 
-	inTransition = false;
+	inTransition = true;
+	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
+	{
+		inTransition = false;
+	});
 }
 
 /**************************************

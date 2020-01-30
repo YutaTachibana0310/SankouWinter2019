@@ -19,7 +19,15 @@ public:
 	{
 		Game,
 		Title,
+		Result,
 		SceneMax
+	};
+
+	enum SaveKey
+	{
+		RecordNum,
+		Ranking,
+		CurrentScore
 	};
 };
 #endif

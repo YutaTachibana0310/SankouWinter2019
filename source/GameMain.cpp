@@ -18,6 +18,7 @@
 
 #include "Scene\GameScene.h"
 #include "Scene\TitleScene.h"
+#include "Scene\ResultScene.h"
 
 /**************************************
 コンストラクタ
@@ -27,6 +28,7 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 {
 	//ゲーム内で使用するフォントを読み込み
 	FontManager::Instance()->LoadFont("data/FONT/badfennec.otf");
+	FontManager::Instance()->LoadFont("data/FONT/Makinas-4-Square.otf");
 
 	//サウンド読み込み
 	MusicPlayer::Load();
@@ -35,8 +37,10 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 	//シーンマネージャにシーンのインスタンスを追加
 	sceneManager->Add(GameConfig::SceneID::Game, new GameScene(renderTexture, renderSurface));
 	sceneManager->Add(GameConfig::SceneID::Title, new TitleScene(renderTexture, renderSurface));
+	sceneManager->Add(GameConfig::SceneID::Result, new ResultScene(renderTexture, renderSurface));
+
 	//初期シーンに遷移
-	const int InitScene = GameConfig::SceneID::Title;
+	const int InitScene = GameConfig::SceneID::Result;
 	sceneManager->ChangeScene(InitScene);
 }
 
