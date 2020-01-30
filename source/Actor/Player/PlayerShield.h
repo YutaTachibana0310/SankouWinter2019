@@ -11,6 +11,7 @@
 #include "../../../main.h"
 #include "../../../Framework/Renderer3D/BillboardObject.h"
 #include "../../../Framework/Collider/ColliderObserver.h"
+#include <functional>
 
 /**************************************
 ‘O•ûéŒ¾
@@ -33,6 +34,11 @@ public:
 	void SetActive(bool state) override;
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
+
+	void OnFinishBoundDown();
+	std::function<void()> onFinishBoundDown;
+
+	std::shared_ptr<float> scaleY;
 
 private:
 	std::shared_ptr<BoxCollider3D> collider;

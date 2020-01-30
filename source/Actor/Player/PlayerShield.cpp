@@ -9,6 +9,7 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Renderer3D/BoardPolygon.h"
 #include "../../../Framework/Resource/ResourceManager.h"
+#include "../../../Framework/Tween/Tween.h"
 
 /**************************************
 グローバル変数
@@ -28,6 +29,11 @@ PlayerShield::PlayerShield()
 	polygon = new BoardPolygon();
 	ResourceManager::Instance()->GetPolygon("PlayerShield", polygon);
 	polygon->SetDiffuse(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.9f));
+
+	scaleY = std::make_shared<float>();
+	onFinishBoundDown = std::bind(&PlayerShield::OnFinishBoundDown, this);
+
+	OnFinishBoundDown();
 }
 
 /**************************************
@@ -37,6 +43,7 @@ PlayerShield::~PlayerShield()
 {
 	collider.reset();
 	SAFE_DELETE(polygon);
+	scaleY.reset();
 }
 
 /**************************************
@@ -54,6 +61,8 @@ void PlayerShield::Draw()
 	D3DXVECTOR3 rotation = transform->GetEulerAngle();
 	rotation.z = 0.0f;
 	transform->SetRotation(rotation);
+
+	transform->SetScale({ *scaleY, *scaleY, 1.0f });
 
 	PDIRECT3DDEVICE9 pDevice = GetDevice();
 
@@ -82,4 +91,13 @@ void PlayerShield::SetActive(bool state)
 void PlayerShield::OnColliderHit(ColliderObserver * other)
 {
 
+}
+
+/**************************************
+バウンドダウン終了処理
+***************************************/
+void PlayerShield::OnFinishBoundDown()
+{
+	*scaleY = 1.1f;
+	Tween::To(scaleY, 1.0f, 20.0f, EaseType::OutCubic, false, onFinishBoundDown);
 }
