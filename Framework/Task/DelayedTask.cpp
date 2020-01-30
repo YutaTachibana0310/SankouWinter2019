@@ -36,7 +36,7 @@ void DelayedTask::Run()
 	else
 		cntFrame += FixedTime::GetTimeScale();
 
-	if (cntFrame == Delay)
+	if (cntFrame >= Delay)
 	{
 		func();
 		state = State::Finished;

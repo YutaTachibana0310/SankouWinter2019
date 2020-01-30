@@ -22,10 +22,12 @@ void BaseMiddleEnemy::Explode()
 {
 	const auto screenPosition = Camera::MainCamera()->Projection(transform->GetPosition());
 	GameParticleManager::Instance()->GenerateEnergyEffect(screenPosition, 5.0f);
+	GameParticleManager::Instance()->GenerateScoreEffect(screenPosition, 1000);
 
-	GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
+	const auto Position = transform->GetPosition();
+	GameParticleManager::Instance()->GenerateEnemyExplosion(Position);
+	GameScore::Instance()->AddCombo();
 	SoundPlayer::Instance()->Play("MiddleExplosion");
-	GameScore::Instance()->AddScore(1000);
 }
 
 /**************************************

@@ -14,7 +14,15 @@
 ***************************************/
 void GameScore::AddScore(unsigned int point)
 {
-	score += point;
+	score += (int)(point * (1.0f * combo * 0.025f));
+}
+
+/**************************************
+スコア取得処理
+***************************************/
+void GameScore::AddCombo()
+{
+	++combo;
 }
 
 /**************************************
@@ -31,6 +39,7 @@ unsigned int GameScore::Score() const
 void GameScore::Init()
 {
 	score = 0;
+	combo = 0;
 }
 
 /**************************************
@@ -40,4 +49,12 @@ void GameScore::Save()
 {
 	std::string saveKey = std::string(NAMEOF_ENUM(GameConfig::SaveKey::CurrentScore));
 	PlayerPrefs::SaveNumber<unsigned int>(saveKey, score);
+}
+
+/**************************************
+コンボリセット
+***************************************/
+void GameScore::ResetCombo()
+{
+	combo = 0;
 }

@@ -23,6 +23,7 @@
 #include "Enemy\EnemyTrail.h"
 #include "Game\PlayerTrail.h"
 #include "Game\EnergyEffect.h"
+#include "Game\ScoreEffect.h"
 
 /**************************************
 staticメンバ
@@ -48,6 +49,8 @@ void GameParticleManager::Init()
 	controllers[GameEffect::EnemyTrail] = new Effect::Game::EnemyTrailController();
 	controllers[GameEffect::PlayerTrail] = new Effect::Game::PlayerTrailController();
 
+	scoreEffectController = new Effect::Game::ScoreEffectController();
+
 	crossFilter->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	crossFilter->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
 }
@@ -58,6 +61,7 @@ void GameParticleManager::Init()
 void GameParticleManager::Uninit()
 {
 	SAFE_DELETE(energyEffectController);
+	SAFE_DELETE(scoreEffectController);
 	SceneParticleManager::Uninit();
 }
 
@@ -66,20 +70,7 @@ void GameParticleManager::Uninit()
 ***************************************/
 void GameParticleManager::Update()
 {
-	static float power[3] = { BloomPower[0],BloomPower[1], BloomPower[2] };
-	static float threth[3] = { BloomThrethold[0],BloomThrethold[1], BloomThrethold[2] };
-
-	Debug::Begin("GameParticle");
-
-	Debug::Slider("power0", power[0], 0.0f, 1.0f);
-	Debug::Slider("power1", power[1], 0.0f, 1.0f);
-	Debug::Slider("power2", power[2], 0.0f, 1.0f);
-	Debug::Slider("threth0", threth[0], 0.0f, 1.0f);
-	Debug::Slider("threth1", threth[1], 0.0f, 1.0f);
-	Debug::Slider("threth2", threth[2], 0.0f, 1.0f);
-
-	Debug::End();
-
+	scoreEffectController->Update();
 	energyEffectController->Update();
 	SceneParticleManager::Update();
 }
@@ -99,6 +90,7 @@ void GameParticleManager::DrawEnergyEffect()
 
 	pDevice->SetRenderState(D3DRS_ZENABLE, false);
 	isDrewd |= energyEffectController->Draw();
+	isDrewd |= scoreEffectController->Draw();
 	pDevice->SetRenderState(D3DRS_ZENABLE, true);
 
 	BaseParticleController::EndDraw();
@@ -165,6 +157,13 @@ void GameParticleManager::GenerateEnergyEffect(const D3DXVECTOR3 & position, flo
 	energyEffectController->SetEmitter(position, energy);
 }
 
+/**************************************
+スコアエフェクトコントローラ作成処理
+***************************************/
+void GameParticleManager::GenerateScoreEffect(const D3DXVECTOR3 & position, int point)
+{
+	scoreEffectController->SetEmitter(position, point);
+}
 
 /**************************************
 エナジーエフェクトコントローラ作成処理

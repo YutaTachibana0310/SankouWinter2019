@@ -1,44 +1,43 @@
 //=====================================
 //
-//EnergyEffect.cpp
+//ScoreEffect.cpp
 //機能:エナジーエフェクト
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "EnergyEffect.h"
-#include "../../Handler/EnergyHandler.h"
+#include "ScoreEffect.h"
+#include "../../System/GameScore.h"
 
-namespace Effect::Game 
+namespace Effect::Game
 {
 	/**************************************
 	staticメンバ
 	***************************************/
-	const float EnergyEffect::LifeFrame = 60.0f;
+	const float ScoreEffect::LifeFrame = 60.0f;
 
 	/**************************************
-	EnergyEffectControllerコンストラクタ
+	ScoreEffectControllerコンストラクタ
 	***************************************/
-	EnergyEffectController::EnergyEffectController(const std::shared_ptr<EnergyHandler>& handler) :
-		BaseParticleController(Particle_2D),
-		handler(handler)
+	ScoreEffectController::ScoreEffectController() :
+		BaseParticleController(Particle_2D)
 	{
 		const D3DXVECTOR2 Size = { 21.5f, -21.5f };
 		MakeUnitBuffer(Size);
 
-		LoadTexture("data/TEXTURE/Particle/PlayerTrail.png");
+		LoadTexture("data/TEXTURE/Particle/ScoreEffect.png");
 
 		const unsigned MaxEmitter = 128;
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new EnergyEffectEmitter(handler);
+			emitter = new ScoreEffectEmitter();
 		}
 	}
 
 	/**************************************
-	EnergyEffectControllerエミッターセット処理
+	ScoreEffectControllerエミッターセット処理
 	***************************************/
-	void EnergyEffectController::SetEmitter(const D3DXVECTOR3 & position, float energy)
+	void ScoreEffectController::SetEmitter(const D3DXVECTOR3 & position, int point)
 	{
 		auto emitter = find_if(emitterContainer.begin(), emitterContainer.end(), [](BaseEmitter* emitter)
 		{
@@ -47,50 +46,48 @@ namespace Effect::Game
 
 		if (emitter == emitterContainer.end())
 		{
-			handler->AddEnergy(energy);
+			GameScore::Instance()->AddScore(point);
 			return;
 		}
 
-		auto ptr = dynamic_cast<EnergyEffectEmitter*>(*emitter);
+		auto ptr = dynamic_cast<ScoreEffectEmitter*>(*emitter);
 		ptr->SetPosition(position);
 		ptr->Init(nullptr);
-		ptr->SetEnergy(energy);
+		ptr->SetScore(point);
 
 		return;
 	}
 
 	/**************************************
-	EnergyEffectコンストラクタ
+	ScoreEffectコンストラクタ
 	***************************************/
-	EnergyEffect::EnergyEffect(const std::shared_ptr<EnergyHandler>& handler) :
+	ScoreEffect::ScoreEffect() :
 		Particle2D(LifeFrame),
-		velocity(Vector3::Zero),
-		handler(handler)
+		velocity(Vector3::Zero)
 	{
 
 	}
 
 	/**************************************
-	EnergyEffectデストラクタ
+	ScoreEffectデストラクタ
 	***************************************/
-	EnergyEffect::~EnergyEffect()
+	ScoreEffect::~ScoreEffect()
 	{
-		handler.reset();
 	}
 
 	/**************************************
-	EnergyEffect初期化処理
+	ScoreEffect初期化処理
 	***************************************/
-	void EnergyEffect::Init()
+	void ScoreEffect::Init()
 	{
 		cntFrame = 0.0f;
 		active = true;
 	}
 
 	/**************************************
-	EnergyEffect更新処理
+	ScoreEffect更新処理
 	***************************************/
-	void EnergyEffect::Update()
+	void ScoreEffect::Update()
 	{
 		if (!IsActive())
 			return;
@@ -98,7 +95,7 @@ namespace Effect::Game
 		D3DXVECTOR3 acceleration = Vector3::Zero;
 		float t = 1.0f - cntFrame / lifeFrame;
 
-		const D3DXVECTOR3 TargetPosition = { 900.0f, 80.0f, 0.0f };
+		const D3DXVECTOR3 TargetPosition = { 1850.0f, 80.0f, 0.0f };
 		D3DXVECTOR3 diff = TargetPosition - transform->GetPosition();
 
 		acceleration = (diff - velocity * t) * 2.0f / (t * t);
@@ -110,14 +107,14 @@ namespace Effect::Game
 
 		if (cntFrame >= LifeFrame)
 		{
-			handler->AddEnergy(energy);
+			GameScore::Instance()->AddScore(point);
 		}
 	}
 
 	/**************************************
 	方向設定処理
 	***************************************/
-	void EnergyEffect::SetDirection(const D3DXVECTOR3 & direction)
+	void ScoreEffect::SetDirection(const D3DXVECTOR3 & direction)
 	{
 		velocity = direction * 1500.0f;
 	}
@@ -125,28 +122,28 @@ namespace Effect::Game
 	/**************************************
 	エナジー量設定処理
 	***************************************/
-	void EnergyEffect::SetEnergy(float energy)
+	void ScoreEffect::SetScore(int point)
 	{
-		this->energy = energy;
+		this->point = point;
 	}
 
 	/**************************************
-	EnergyEffectEmitterコンストラクタ
+	ScoreEffectEmitterコンストラクタ
 	***************************************/
-	EnergyEffectEmitter::EnergyEffectEmitter(const std::shared_ptr<EnergyHandler>& handler) :
+	ScoreEffectEmitter::ScoreEffectEmitter() :
 		BaseEmitter(8, 2.0f)
 	{
 		particleContainer.resize(8, nullptr);
 		for (auto&& particle : particleContainer)
 		{
-			particle = new EnergyEffect(handler);
+			particle = new ScoreEffect();
 		}
 	}
 
 	/**************************************
-	EnergyEffectEmitter放出処理
+	ScoreEffectEmitter放出処理
 	***************************************/
-	bool EnergyEffectEmitter::Emit()
+	bool ScoreEffectEmitter::Emit()
 	{
 		if (!enableEmit)
 			return true;
@@ -158,8 +155,10 @@ namespace Effect::Game
 
 		D3DXVECTOR3 direction = Vector3::Up;
 		D3DXMATRIX mtxRot;
-		D3DXMatrixRotationAxis(&mtxRot, &Vector3::Forward, D3DXToRadian(360.0f / 8.0f));
+		D3DXMatrixRotationAxis(&mtxRot, &Vector3::Forward, D3DXToRadian(360.0f / 16.0f));
+		D3DXVec3TransformCoord(&direction, &direction, &mtxRot);
 
+		D3DXMatrixRotationAxis(&mtxRot, &Vector3::Forward, D3DXToRadian(360.0f / 8.0f));
 		for (auto&& particle : particleContainer)
 		{
 			if (particle->IsActive())
@@ -168,9 +167,9 @@ namespace Effect::Game
 			particle->SetTransform(*transform);
 			particle->Init();
 
-			EnergyEffect *effect = dynamic_cast<EnergyEffect*>(particle);
+			ScoreEffect *effect = dynamic_cast<ScoreEffect*>(particle);
 			effect->SetDirection(direction);
-			effect->SetEnergy(energy / 8.0f);
+			effect->SetScore(point / 8);
 
 			D3DXVec3TransformCoord(&direction, &direction, &mtxRot);
 		}
@@ -181,8 +180,8 @@ namespace Effect::Game
 	/**************************************
 	エナジー量設定処理
 	***************************************/
-	void EnergyEffectEmitter::SetEnergy(float energy)
+	void ScoreEffectEmitter::SetScore(int point)
 	{
-		this->energy = energy;
+		this->point = point;
 	}
 }

@@ -24,6 +24,7 @@ class GameScore : public BaseSingleton<GameScore>
 {
 public:
 	void AddScore(unsigned int point);
+	void AddCombo();
 
 	unsigned int Score() const;
 
@@ -31,8 +32,10 @@ public:
 
 	void Save();
 
+	void ResetCombo();
+
 private:
 	unsigned int score;
-
+	unsigned int combo;
 };
 #endif

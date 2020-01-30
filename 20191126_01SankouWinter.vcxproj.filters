@@ -184,6 +184,7 @@
     <ClCompile Include="source\Viewer\Result\RankingViewer.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerShield.cpp" />
     <ClCompile Include="source\System\GameScore.cpp" />
+    <ClCompile Include="source\Effect\Game\ScoreEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -394,6 +395,7 @@
     <ClInclude Include="source\Viewer\Result\RankingViewer.h" />
     <ClInclude Include="source\Actor\Player\PlayerShield.h" />
     <ClInclude Include="source\System\GameScore.h" />
+    <ClInclude Include="source\Effect\Game\ScoreEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

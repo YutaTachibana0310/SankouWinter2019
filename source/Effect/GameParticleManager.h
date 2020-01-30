@@ -35,6 +35,7 @@ namespace GameEffect
 namespace Effect::Game
 {
 	class EnergyEffectController;
+	class ScoreEffectController;
 }
 class EnergyHandler;
 
@@ -54,6 +55,7 @@ public:
 	void GenerateEnemySmallExplositon(const D3DXVECTOR3& position);
 	void GenerateEnemyBigExplosion(const D3DXVECTOR3& position);
 	void GenerateEnergyEffect(const D3DXVECTOR3& position, float energy);
+	void GenerateScoreEffect(const D3DXVECTOR3& position, int point);
 
 	void CreateEnergyEffectController(const std::shared_ptr<EnergyHandler>& energyHandler);
 
@@ -62,5 +64,6 @@ private:
 	static const float BloomThrethold[3];
 
 	Effect::Game::EnergyEffectController *energyEffectController;
+	Effect::Game::ScoreEffectController *scoreEffectController;
 };
 #endif

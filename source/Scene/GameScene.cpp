@@ -15,7 +15,9 @@
 #include "../../Framework/Collider/ColliderManager.h"
 #include "../../Framework/Input/input.h"
 #include "../../Framework/Transition/TransitionController.h"
+#include "../../Framework/Core/SceneManager.h"
 
+#include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
@@ -83,6 +85,7 @@ void GameScene::Init()
 		enemyController->Init();
 	});
 
+	particleManager->RunUpdate();
 }
 
 /**************************************
@@ -90,23 +93,28 @@ void GameScene::Init()
 ***************************************/
 void GameScene::Uninit()
 {
-	SAFE_DELETE(gameCamera);
-	SAFE_DELETE(bloomTarget);
-	SAFE_DELETE(skybox);
-	SAFE_DELETE(playerController);
-	SAFE_DELETE(bloom);
-	SAFE_DELETE(enemyController);
-	SAFE_DELETE(planet);
-	SAFE_DELETE(viewer);
-	SAFE_DELETE(backViewer);
-	SAFE_DELETE(handler);
+	particleManager->StopUpdate([this]()
+	{
+		SAFE_DELETE(gameCamera);
+		SAFE_DELETE(bloomTarget);
+		SAFE_DELETE(skybox);
+		SAFE_DELETE(playerController);
+		SAFE_DELETE(bloom);
+		SAFE_DELETE(enemyController);
+		SAFE_DELETE(planet);
+		SAFE_DELETE(viewer);
+		SAFE_DELETE(backViewer);
+		SAFE_DELETE(handler);
 
-	particleManager->Uninit();
+		particleManager->Uninit();
 
-	sceneCamera = nullptr;
+		sceneCamera = nullptr;
 
-	GameScore::Instance()->Save();
+		GameScore::Instance()->Save();
+	});
 }
+
+#include "../../Framework/Input/input.h"
 
 /**************************************
 XVˆ—
@@ -119,6 +127,7 @@ void GameScene::Update()
 	enemyController->Update();
 	planet->Update();
 
+	ColliderManager::Instance()->Update();
 	ColliderManager::Instance()->CheckRoundRobin("PlayerShield", "EnemyBullet");
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 	ColliderManager::Instance()->CheckRoundRobin("Player", "Enemy");
@@ -127,9 +136,10 @@ void GameScene::Update()
 
 	enemyController->CheckEnemyDestroy();
 
-	particleManager->Update();
-
 	viewer->Update();
+
+	if (Keyboard::GetTrigger(DIK_F5))
+		SceneManager::ChangeScene(GameConfig::Result);
 }
 
 /**************************************
