@@ -66,11 +66,12 @@ PlayerActor::PlayerActor() :
 	trailEmitter = GameParticleManager::Instance()->Generate(GameEffect::PlayerTrail, transform->GetPosition());
 	AddChild(trailEmitter);
 	trailEmitter->SetLocalPosition(Vector3::Back * 2.0f);
-	trailEmitter->SetActive(false);
 
 	shield = new PlayerShield();
 	AddChild(shield);
 	shield->SetActive(false);
+
+	transform->SetPosition(InitPos);
 }
 
 /**************************************
