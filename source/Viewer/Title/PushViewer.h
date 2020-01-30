@@ -1,42 +1,40 @@
 //=====================================
 //
-//TitleViewer.h
-//機能:タイトルビューワ
+//PushViewer.h
+//機能:プッシュビューワ
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _TITLEVIEWER_H_
-#define _TITLEVIEWER_H_
+#ifndef _PUSHVIEWER_H_
+#define _PUSHVIEWER_H_
 
 #include "../../../main.h"
+
+#include <functional>
 
 /**************************************
 前方宣言
 ***************************************/
 class Polygon2D;
-class TitleGear;
-class PushViewer;
 
 /**************************************
 クラス定義
 ***************************************/
-class TitleViewer
+class PushViewer : public GameObject
 {
 public:
-	TitleViewer();
-	~TitleViewer();
+	PushViewer();
+	~PushViewer();
 
-	void Update();
 	void Draw();
 
 private:
-	Polygon2D * titleLogo;
+	std::shared_ptr<Polygon2D> polygon;
 
-	TitleGear *centerGear;
-	TitleGear *rightGear;
-	TitleGear *leftGear;
+	std::function<void()> onFinishFadeIn;
+	std::function<void()> onFinishFadeOut;
 
-	PushViewer *pushViewer;
+	void OnFinishFadeIn();
+	void OnFinishFadeOut();
 };
-
 #endif

@@ -10,6 +10,7 @@
 #include "../../../Framework/Tween/Tween.h"
 
 #include "TitleGear.h"
+#include "PushViewer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -27,7 +28,6 @@ TitleViewer::TitleViewer()
 
 	centerGear = new TitleGear();
 	centerGear->SetPosition({ SCREEN_CENTER_X, 360.0f, 0.0f });
-
 	
 	rightGear = new TitleGear();
 	leftGear = new TitleGear();
@@ -43,6 +43,8 @@ TitleViewer::TitleViewer()
 	const float DurationTween = 45.0f;
 	Tween::Move(*rightGear, { (float)SCREEN_WIDTH, (float)SCREEN_HEIGHT, 0.0f }, DurationTween, EaseType::OutCubic, true);
 	Tween::Move(*leftGear, { 0.0f, 0.0f, 0.0f }, DurationTween, EaseType::OutCubic, true);
+
+	pushViewer = new PushViewer();
 }
 
 /**************************************
@@ -54,6 +56,7 @@ TitleViewer::~TitleViewer()
 	SAFE_DELETE(centerGear);
 	SAFE_DELETE(rightGear);
 	SAFE_DELETE(leftGear);
+	SAFE_DELETE(pushViewer);
 }
 
 /**************************************
@@ -82,6 +85,8 @@ void TitleViewer::Draw()
 	centerGear->Draw();
 
 	titleLogo->Draw();
+
+	pushViewer->Draw();
 
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);

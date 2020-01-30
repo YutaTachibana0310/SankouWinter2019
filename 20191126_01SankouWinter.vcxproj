@@ -312,6 +312,7 @@
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\LifeViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
+    <ClCompile Include="source\Viewer\Title\PushViewer.cpp" />
     <ClCompile Include="source\Viewer\Title\TitleGear.cpp" />
     <ClCompile Include="source\Viewer\Title\TitleViewer.cpp" />
   </ItemGroup>
@@ -513,6 +514,7 @@
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
     <ClInclude Include="source\Viewer\Game\LifeViewer.h" />
     <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />
+    <ClInclude Include="source\Viewer\Title\PushViewer.h" />
     <ClInclude Include="source\Viewer\Title\TitleGear.h" />
     <ClInclude Include="source\Viewer\Title\TitleViewer.h" />
   </ItemGroup>

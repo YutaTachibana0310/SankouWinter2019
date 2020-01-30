@@ -176,6 +176,7 @@
     <ClCompile Include="source\Viewer\Title\TitleGear.cpp" />
     <ClCompile Include="source\Actor\Title\TitlePlayerActor.cpp" />
     <ClCompile Include="source\Effect\TitleParticleManager.cpp" />
+    <ClCompile Include="source\Viewer\Title\PushViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -377,6 +378,7 @@
     <ClInclude Include="source\Viewer\Title\TitleGear.h" />
     <ClInclude Include="source\Actor\Title\TitlePlayerActor.h" />
     <ClInclude Include="source\Effect\TitleParticleManager.h" />
+    <ClInclude Include="source\Viewer\Title\PushViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
