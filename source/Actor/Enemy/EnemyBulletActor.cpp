@@ -10,6 +10,7 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../Controller/EnemyTimeController.h"
+#include "../../Effect/GameParticleManager.h"
 
 /**************************************
 グローバル変数
@@ -134,7 +135,11 @@ D3DXVECTOR2 EnemyBulletActor::GetBloomUV() const
 ***************************************/
 void EnemyBulletActor::OnColliderHit(ColliderObserver * other)
 {
-	//Uninit();
+	if (other->Tag() == "PlayerShield")
+	{
+		Vanish();
+		active = false;
+	}
 }
 
 /**************************************
@@ -147,6 +152,14 @@ void EnemyBulletActor::UpdateRenderTransform()
 	renderTransform->SetScale(transform->GetScale());
 	D3DXVECTOR3 eulerAngle = transform->GetEulerAngle();
 	renderTransform->SetRotation({ 0.0f, 0.0f, -eulerAngle.x });
+}
+
+/**************************************
+描画用トランスフォーム更新
+***************************************/
+void EnemyBulletActor::Vanish()
+{
+	GameParticleManager::Instance()->Generate(GameEffect::EnemyBulletVanish, transform->GetPosition());
 }
 
 /**************************************

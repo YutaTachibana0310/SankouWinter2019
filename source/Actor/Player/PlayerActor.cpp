@@ -15,12 +15,14 @@
 #include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Core/ObjectPool.h"
 #include "../../../Framework/Particle/BaseEmitter.h"
+#include "../../../Framework/Task/TaskManager.h"
 
 #include "../../Effect/GameParticleManager.h"
 
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
 #include "PlayerColliderViewer.h"
+#include "PlayerShield.h"
 
 #include "../../System/GameInput.h"
 
@@ -31,6 +33,7 @@ const float PlayerActor::SpeedMove = 0.6f;
 const D3DXVECTOR3 PlayerActor::BorderMove = { 0.0f, 25.0f, 45.0f };
 const D3DXVECTOR3 PlayerActor::ShotPosition = { 0.0f, 0.0f, 5.0f };
 const float PlayerActor::MaxAngle = 40.0f;
+const D3DXVECTOR3 PlayerActor::InitPos = { 0.0f, 0.0f, -55.0f };
 
 /**************************************
 コンストラクタ
@@ -40,7 +43,8 @@ PlayerActor::PlayerActor() :
 	cntShotFrame(0),
 	enableShot(false),
 	enableMove(false),
-	currentLevel(0)
+	currentLevel(0),
+	isInvincible(true)
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("Player", mesh);
@@ -62,7 +66,12 @@ PlayerActor::PlayerActor() :
 	trailEmitter = GameParticleManager::Instance()->Generate(GameEffect::PlayerTrail, transform->GetPosition());
 	AddChild(trailEmitter);
 	trailEmitter->SetLocalPosition(Vector3::Back * 2.0f);
-	trailEmitter->SetActive(false);
+
+	shield = new PlayerShield();
+	AddChild(shield);
+	shield->SetActive(false);
+
+	transform->SetPosition(InitPos);
 }
 
 /**************************************
@@ -73,6 +82,7 @@ PlayerActor::~PlayerActor()
 	SAFE_DELETE(mesh);
 	SAFE_DELETE(turretRoot);
 	SAFE_DELETE(colliderViewer);
+	SAFE_DELETE(shield);
 	collider.reset();
 	Utility::DeleteContainer(turretContainer);
 }
@@ -83,18 +93,20 @@ PlayerActor::~PlayerActor()
 void PlayerActor::Init()
 {
 	active = true;
-
+	
 	transform->SetRotation(Quaternion::Identity);
 
-	const D3DXVECTOR3 InitPos = { 0.0f, 0.0f, -55.0f };
 	const D3DXVECTOR3 StartPos = { 0.0f, 0.0f, -20.0f };
 	auto callback = std::bind(&PlayerActor::OnFinishInitMove, this);
+	transform->SetPosition(InitPos);
 	Tween::Move(*this, InitPos, StartPos, 60.0f, EaseType::OutBack, false, callback);
 
 	currentLevel = -1;
 	PowerUp();
 
 	trailEmitter->SetActive(true);
+
+	shield->SetActive(true);
 }
 
 /**************************************
@@ -111,6 +123,8 @@ void PlayerActor::Uninit()
 	}
 
 	trailEmitter->SetActive(false);
+
+	Tween::Move(*this, InitPos, 30.0f, EaseType::Linear, false);
 }
 
 /**************************************
@@ -175,6 +189,9 @@ void PlayerActor::DrawCollider()
 		return;
 
 	colliderViewer->Draw();
+
+	if(shield->IsActive())
+		shield->Draw();
 }
 
 /**************************************
@@ -222,6 +239,22 @@ void PlayerActor::PowerUp()
 
 		turretContainer.push_back(turret);
 	}
+}
+
+/**************************************
+無敵判定
+***************************************/
+bool PlayerActor::IsInvincivle() const
+{
+	return isInvincible;
+}
+
+/**************************************
+レベル取得
+***************************************/
+int PlayerActor::PowerLevel()
+{
+	return currentLevel;
 }
 
 /**************************************
@@ -302,14 +335,20 @@ void PlayerActor::_SlowDownEnemyBullet()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
-	if (other->Tag() == "EnemyBullet")
+	onColliderHit(other);
+
+	const std::string tag = other->Tag();
+	if (tag == "EnemyBullet" || tag == "Enemy")
 	{
-		collider->SetActive(false);
-		enableMove = false;
-		enableShot = false;
+		if (!isInvincible)
+		{
+			collider->SetActive(false);
+			enableMove = false;
+			enableShot = false;
+			isInvincible = true;
+		}
 	}
 
-	onColliderHit(other);
 }
 
 /**************************************
@@ -320,4 +359,10 @@ void PlayerActor::OnFinishInitMove()
 	collider->SetActive(true);
 	enableMove = true;
 	enableShot = true;
+
+	TaskManager::Instance()->CreateDelayedTask(300.0f, false, [this]()
+	{
+		shield->SetActive(false);
+		isInvincible = false;
+	});
 }

@@ -45,6 +45,7 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	ResourceManager::Instance()->MakePolygon("PlayerCollider", "data/TEXTURE/Player/playerCollider.png", { 1.0f, 1.0f }, { 3.0f, 2.0f });
 	ResourceManager::Instance()->MakePolygon("PowerupItem", "data/TEXTURE/Player/PowerupItem.png", { 3.0f, 3.0f });
+	ResourceManager::Instance()->MakePolygon("PlayerShield", "data/TEXTURE/Player/PlayerShield.png", { 7.0f, 4.5f });
 
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
@@ -213,16 +214,19 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 void PlayerController::CollisionPlayer(ColliderObserver * other)
 {
 	std::string otherTag = other->Tag();
-	if (otherTag == "EnemyBullet")
+	if (otherTag == "EnemyBullet" || otherTag == "Enemy")
 	{
-		GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
-
-		auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
-		bool res = camera->Focus(player->GetPosition(), callback);
-
-		if (!res)
+		if (!player->IsInvincivle())
 		{
-			OnFinishCameraFocus();
+			GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
+
+			auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
+			bool res = camera->Focus(player->GetPosition(), callback);
+
+			if (!res)
+			{
+				OnFinishCameraFocus();
+			}
 		}
 	}
 	else if (otherTag == "Item")
@@ -237,14 +241,22 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 ***************************************/
 void PlayerController::OnFinishCameraFocus()
 {
-	player->Uninit();
-
 	if (cntLife > 0)
 	{
 		cntLife--;
+
+		const D3DXVECTOR3 playerrPosition = player->GetPosition();
+		int level = Math::Clamp(1, 3, player->PowerLevel());
+		for (int i = 0; i < level; i++)
+		{
+			SetPowerupItem(playerrPosition);
+		}
+
 		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
 		{
 			player->Init();
 		});
 	}
+
+	player->Uninit();
 }

@@ -23,6 +23,7 @@ class PlayerTurretRoot;
 class BoxCollider3D;
 class PlayerColliderViewer;
 class BaseEmitter;
+class PlayerShield;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -41,6 +42,10 @@ public:
 	
 	virtual void PowerUp();
 
+	bool IsInvincivle() const;
+
+	int PowerLevel();
+
 	std::function<void(const D3DXVECTOR3, bool, int)> onFireBullet;
 	std::function<void(ColliderObserver* other)> onColliderHit;
 	std::function<void(bool slowDown)> onSlowdownEnemyBullet;
@@ -58,8 +63,9 @@ private:
 	std::vector<PlayerTurretActor*> turretContainer;
 
 	std::shared_ptr<BoxCollider3D> collider;
-
 	PlayerColliderViewer *colliderViewer;
+
+	PlayerShield *shield;
 
 	BaseEmitter *trailEmitter;
 
@@ -67,6 +73,7 @@ private:
 
 	bool enableShot;
 	bool enableMove;
+	bool isInvincible;
 
 	int currentLevel;
 
@@ -77,6 +84,8 @@ private:
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
 	virtual void OnFinishInitMove();
+
+	static const D3DXVECTOR3 InitPos;
 };
 
 #endif
