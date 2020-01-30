@@ -85,6 +85,7 @@ void GameScene::Init()
 		enemyController->Init();
 	});
 
+	particleManager->RunUpdate();
 }
 
 /**************************************
@@ -92,23 +93,27 @@ void GameScene::Init()
 ***************************************/
 void GameScene::Uninit()
 {
-	SAFE_DELETE(gameCamera);
-	SAFE_DELETE(bloomTarget);
-	SAFE_DELETE(skybox);
-	SAFE_DELETE(playerController);
-	SAFE_DELETE(bloom);
-	SAFE_DELETE(enemyController);
-	SAFE_DELETE(planet);
-	SAFE_DELETE(viewer);
-	SAFE_DELETE(backViewer);
-	SAFE_DELETE(handler);
+	particleManager->StopUpdate([this]()
+	{
+		SAFE_DELETE(gameCamera);
+		SAFE_DELETE(bloomTarget);
+		SAFE_DELETE(skybox);
+		SAFE_DELETE(playerController);
+		SAFE_DELETE(bloom);
+		SAFE_DELETE(enemyController);
+		SAFE_DELETE(planet);
+		SAFE_DELETE(viewer);
+		SAFE_DELETE(backViewer);
+		SAFE_DELETE(handler);
 
-	particleManager->Uninit();
+		particleManager->Uninit();
 
-	sceneCamera = nullptr;
+		sceneCamera = nullptr;
 
-	GameScore::Instance()->Save();
+		GameScore::Instance()->Save();
+	});
 }
+
 #include "../../Framework/Input/input.h"
 
 /**************************************
@@ -130,8 +135,6 @@ void GameScene::Update()
 	ColliderManager::Instance()->CheckRoundRobin("Player", "Item");
 
 	enemyController->CheckEnemyDestroy();
-
-	particleManager->Update();
 
 	viewer->Update();
 

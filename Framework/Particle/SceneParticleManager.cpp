@@ -11,6 +11,7 @@
 #include "../PostEffect/CrossFilterController.h"
 #include "../Tool/DebugWindow.h"
 #include "../../Library/cppLinq/cpplinq.hpp"
+#include <time.h>
 
 /**************************************
 マクロ定義
@@ -25,7 +26,8 @@ SceneParticleManager::SceneParticleManager() :
 	renderSurface(NULL),
 	screenObj(NULL),
 	oldSuf(NULL),
-	initialized(false)
+	initialized(false),
+	inRun(false)
 {
 }
 
@@ -41,6 +43,8 @@ void SceneParticleManager::Init()
 		initialized = true;
 		crossFilter = new CrossFilterController();
 	}
+
+	inRun = false;
 }
 
 /**************************************
@@ -168,6 +172,26 @@ void SceneParticleManager::Draw()
 }
 
 /**************************************
+非同期更新の開始
+***************************************/
+void SceneParticleManager::RunUpdate()
+{
+	inRun = true;
+	auto func = std::bind(&SceneParticleManager::_Update, this);
+	asyncThread = std::thread(func);
+}
+
+/**************************************
+非同期更新の終了
+***************************************/
+void SceneParticleManager::StopUpdate(const std::function<void()>& callback)
+{
+	inRun = false;
+	asyncThread.join();
+	callback();
+}
+
+/**************************************
 発生処理
 ***************************************/
 BaseEmitter* SceneParticleManager::Generate(UINT id, const D3DXVECTOR3& pos, std::function<void(void)> callback)
@@ -246,4 +270,24 @@ void SceneParticleManager::RestoreRenderParameter()
 	pDevice->SetTexture(0, renderTexture);
 	pDevice->SetViewport(&oldViewport);
 	SAFE_RELEASE(oldSuf);
+}
+
+/**************************************
+非同期更新
+***************************************/
+void SceneParticleManager::_Update()
+{
+	DWORD currentTime = 0;
+	DWORD execLastTime = timeGetTime();
+
+	while (inRun)
+	{
+		currentTime = timeGetTime();
+		if ((currentTime - execLastTime) >= (1000 / 60))
+		{
+			execLastTime = currentTime;
+
+			Update();
+		}
+	}
 }

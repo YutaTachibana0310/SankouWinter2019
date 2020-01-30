@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <functional>
+#include <thread>
 
 /**************************************
 前方宣言
@@ -33,6 +34,10 @@ public:
 	virtual void Uninit();
 	virtual void Update();
 	virtual void Draw();
+
+	//非同期で更新処理を始める
+	virtual void RunUpdate();
+	virtual void StopUpdate(const std::function<void()>& callback);
 
 	//パーティクル発生処理
 	virtual BaseEmitter* Generate(UINT id, const D3DXVECTOR3& pos, std::function<void(void)> callback = nullptr);
@@ -59,6 +64,10 @@ protected:
 	void CreateRenderTarget(void);
 	void ChangeRenderParameter(void);
 	void RestoreRenderParameter(void);
+
+	bool inRun;
+	std::thread asyncThread;
+	void _Update();
 
 private:
 	bool initialized;

@@ -70,20 +70,6 @@ void GameParticleManager::Uninit()
 ***************************************/
 void GameParticleManager::Update()
 {
-	static float power[3] = { BloomPower[0],BloomPower[1], BloomPower[2] };
-	static float threth[3] = { BloomThrethold[0],BloomThrethold[1], BloomThrethold[2] };
-
-	Debug::Begin("GameParticle");
-
-	Debug::Slider("power0", power[0], 0.0f, 1.0f);
-	Debug::Slider("power1", power[1], 0.0f, 1.0f);
-	Debug::Slider("power2", power[2], 0.0f, 1.0f);
-	Debug::Slider("threth0", threth[0], 0.0f, 1.0f);
-	Debug::Slider("threth1", threth[1], 0.0f, 1.0f);
-	Debug::Slider("threth2", threth[2], 0.0f, 1.0f);
-
-	Debug::End();
-
 	scoreEffectController->Update();
 	energyEffectController->Update();
 	SceneParticleManager::Update();
