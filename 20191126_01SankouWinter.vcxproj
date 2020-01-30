@@ -285,6 +285,7 @@
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
     <ClCompile Include="source\Controller\PlayerController.cpp" />
+    <ClCompile Include="source\Controller\TutorialPlayerController.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyBulletVanish.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyDebris.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyFlame.cpp" />
@@ -306,6 +307,7 @@
     <ClCompile Include="source\Handler\EnergyHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\Scene\ResultScene.cpp" />
+    <ClCompile Include="source\Scene\State\TutorialMove.cpp" />
     <ClCompile Include="source\Scene\TutorialScene.cpp" />
     <ClCompile Include="source\Scene\TitleScene.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
@@ -498,6 +500,7 @@
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
     <ClInclude Include="source\Controller\PlayerController.h" />
+    <ClInclude Include="source\Controller\TutorialPlayerController.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyBulletVanish.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyDebris.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyFlame.h" />
@@ -520,6 +523,7 @@
     <ClInclude Include="source\Handler\EnergyHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\Scene\ResultScene.h" />
+    <ClInclude Include="source\Scene\State\TutorialMove.h" />
     <ClInclude Include="source\Scene\TutorialScene.h" />
     <ClInclude Include="source\Scene\TitleScene.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />

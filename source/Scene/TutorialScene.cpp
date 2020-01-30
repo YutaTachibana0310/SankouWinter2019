@@ -18,12 +18,11 @@
 #include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
-#include "../Actor/Player/PlayerActor.h"
 #include "../Controller/PlayerBulletController.h"
 #include "../Controller/EnemyController.h"
 #include "../Controller/EnemyTimeController.h"
 #include "../Viewer/Game/GameViewer.h"
-#include "../Controller/PlayerController.h"
+#include "../Controller/TutorialPlayerController.h"
 #include "../Sound/MusicPlayer.h"
 #include "../Viewer/Back/BackViewer.h"
 #include "../Handler/EnemyEventHandler.h"
@@ -52,7 +51,7 @@ void TutorialScene::Init()
 	sceneCamera = gameCamera = new GameCamera();
 	backViewer = new BackViewer();
 
-	playerController = new PlayerController(gameCamera, backViewer);
+	playerController = new TutorialPlayerController(gameCamera, backViewer);
 	bloom = new BloomController();
 	enemyController = new EnemyController(gameCamera);
 	viewer = new GameViewer();

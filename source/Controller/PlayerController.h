@@ -29,7 +29,7 @@ class PlayerController
 {
 public:
 	PlayerController(GameCamera *camera, BackViewer *backViewer);
-	~PlayerController();
+	virtual ~PlayerController();
 
 	void Init();
 	void Update();
@@ -49,7 +49,7 @@ public:
 
 	void AddEnergy(float energy);
 
-private:
+protected:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;
 	PlayerBomberActor *bomber;
@@ -69,9 +69,9 @@ private:
 	static const int MaxLife;
 	static const int MaxBomb;
 
-	void SlowDownEnemyBullet(bool isSlow);
+	virtual void SlowDownEnemyBullet(bool isSlow);
 	void CollisionPlayer(ColliderObserver* other);
 	void OnFinishCameraFocus();
-	void FireBomber();
+	virtual void FireBomber();
 };
 #endif

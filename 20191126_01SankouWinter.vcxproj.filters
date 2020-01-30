@@ -189,6 +189,8 @@
     <ClCompile Include="source\Effect\Game\YellowBomber.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBomber.cpp" />
     <ClCompile Include="source\Scene\TutorialScene.cpp" />
+    <ClCompile Include="source\Scene\State\TutorialMove.cpp" />
+    <ClCompile Include="source\Controller\TutorialPlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -404,6 +406,8 @@
     <ClInclude Include="source\Effect\Game\YellowBomber.h" />
     <ClInclude Include="source\Actor\Player\PlayerBomber.h" />
     <ClInclude Include="source\Scene\TutorialScene.h" />
+    <ClInclude Include="source\Scene\State\TutorialMove.h" />
+    <ClInclude Include="source\Controller\TutorialPlayerController.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

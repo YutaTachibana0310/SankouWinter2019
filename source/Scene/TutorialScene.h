@@ -10,6 +10,7 @@
 
 #include "../../main.h"
 #include "../../Framework/Core/BaseScene.h"
+#include "../../Framework/Pattern/BaseState.h"
 
 /**************************************
 ëOï˚êÈåæ
@@ -22,7 +23,7 @@ class GameCamera;
 class GameParticleManager;
 class PlanetActor;
 class GameViewer;
-class PlayerController;
+class TutorialPlayerController;
 class BackViewer;
 class EnemyEventHandler;
 
@@ -34,6 +35,15 @@ class TutorialScene : public BaseScene
 	using BaseScene::BaseScene;
 
 public:
+	enum State
+	{
+		Move,
+		Attack,
+		Slowdown,
+		Bomber,
+		Max
+	};
+
 	void Init();
 	void Uninit();
 	void Update();
@@ -42,12 +52,14 @@ public:
 	static const float BloomPower[];
 	static const float BloomThrethold[];
 
+	using TutorialState = BaseState<TutorialScene, State>;
+
 private:
 	GameCamera *gameCamera;
 
 	GameParticleManager *particleManager;
 
-	PlayerController *playerController;
+	TutorialPlayerController *playerController;
 
 	EnemyController *enemyController;
 
@@ -57,5 +69,10 @@ private:
 	BackViewer *backViewer;
 
 	EnemyEventHandler *handler;
+
+	class TutorialMove;
+	class TutorialAttack;
+	class TutorialSlowdown;
+	class TutorialBomber;
 };
 #endif
