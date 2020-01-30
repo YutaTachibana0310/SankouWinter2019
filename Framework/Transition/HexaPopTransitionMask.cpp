@@ -14,7 +14,7 @@ staticƒƒ“ƒo
 const int HexaPopTransitionMask::DivineX = 10;
 const int HexaPopTransitionMask::DivineY = 10;
 const float HexaPopTransitionMask::Duration = 1.0f;
-const float HexaPopTransitionMask::Interval = 0.08f;
+const float HexaPopTransitionMask::Interval = 0.16f;
 
 typedef BaseTransitionMask Base;
 /**************************************

@@ -18,6 +18,7 @@ public:
 	enum SceneID
 	{
 		Game,
+		Title,
 		SceneMax
 	};
 };

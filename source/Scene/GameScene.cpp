@@ -14,6 +14,7 @@
 #include "../../Framework/PostEffect/BloomController.h"
 #include "../../Framework/Collider/ColliderManager.h"
 #include "../../Framework/Input/input.h"
+#include "../../Framework/Transition/TransitionController.h"
 
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
@@ -71,6 +72,13 @@ void GameScene::Init()
 
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
+
+	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
+	{
+		playerController->Init();
+		enemyController->Init();
+	});
+
 }
 
 /**************************************

@@ -36,6 +36,7 @@ const float PlayerActor::MaxAngle = 40.0f;
 コンストラクタ
 ***************************************/
 PlayerActor::PlayerActor() :
+	GameObject(false),
 	cntShotFrame(0),
 	enableShot(false),
 	enableMove(false),
@@ -61,6 +62,7 @@ PlayerActor::PlayerActor() :
 	trailEmitter = GameParticleManager::Instance()->Generate(GameEffect::PlayerTrail, transform->GetPosition());
 	AddChild(trailEmitter);
 	trailEmitter->SetLocalPosition(Vector3::Back * 2.0f);
+	trailEmitter->SetActive(false);
 }
 
 /**************************************
