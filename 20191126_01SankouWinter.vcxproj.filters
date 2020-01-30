@@ -191,6 +191,7 @@
     <ClCompile Include="source\Scene\TutorialScene.cpp" />
     <ClCompile Include="source\Scene\State\TutorialMove.cpp" />
     <ClCompile Include="source\Controller\TutorialPlayerController.cpp" />
+    <ClCompile Include="source\Actor\Enemy\TutorialEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -408,6 +409,7 @@
     <ClInclude Include="source\Scene\TutorialScene.h" />
     <ClInclude Include="source\Scene\State\TutorialMove.h" />
     <ClInclude Include="source\Controller\TutorialPlayerController.h" />
+    <ClInclude Include="source\Actor\Enemy\TutorialEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

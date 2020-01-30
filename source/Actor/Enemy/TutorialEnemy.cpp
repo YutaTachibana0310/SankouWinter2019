@@ -1,11 +1,11 @@
 //=====================================
 //
-//DemoEnemyActor.cpp
+//TutorialEnemyActor.cpp
 //機能:
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#include "DemoEnemyActor.h"
+#include "TutorialEnemy.h"
 #include "../../../Framework/Resource/ResourceManager.h"
 #include "../../../Framework/Renderer3D/MeshContainer.h"
 #include "../../../Framework/Collider/BoxCollider3D.h"
@@ -16,16 +16,12 @@
 #include "../../System/EnemyTween.h"
 #include "../../Handler/EnemyEventHandler.h"
 #include "../../Effect/GameParticleManager.h"
-
-#include "State\DemoInit.h"
-#include "State\DemoAttack.h"
-#include "State\DemoWait.h"
-#include "State\DemoEscape.h"
+#include "../../Controller/EnemyTimeController.h"
 
 /**************************************
 コンストラクタ
 ***************************************/
-DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
+TutorialEnemyActor::TutorialEnemyActor(EnemyEventHandler* handler) :
 	BaseMiddleEnemy(handler),
 	trailEmitterL(nullptr),
 	trailEmitterR(nullptr)
@@ -42,41 +38,36 @@ DemoEnemyActor::DemoEnemyActor(EnemyEventHandler* handler) :
 
 	transform->AddChild(shotTransformLeft);
 	transform->AddChild(shotTransformRight);
-	
+
 	const D3DXVECTOR3 ShotPositionLeft = { 0.0f, 2.0f, -5.0f };
 	const D3DXVECTOR3 ShotPositionRight = { 0.0f, -2.0f, -5.0f };
 	shotTransformLeft->SetLocalPosition(ShotPositionLeft);
 	shotTransformRight->SetLocalPosition(ShotPositionRight);
 
-	fsm.resize(DemoState::MaxState, nullptr);
-	fsm[InitState] = new DemoInit();
-	fsm[AttackState] = new DemoAttack();
-	fsm[WaitState] = new DemoWait();
-	fsm[EscapeState] = new DemoEscape();
+	shotTransformLeft->Rotate(20.0f, Vector3::Right);
+	shotTransformRight->Rotate(20.0f, Vector3::Left);
 }
 
 /**************************************
 デストラクタ
 ***************************************/
-DemoEnemyActor::~DemoEnemyActor()
+TutorialEnemyActor::~TutorialEnemyActor()
 {
 	shotTransformLeft.reset();
 	shotTransformRight.reset();
-
-	Utility::DeleteContainer(fsm);
 }
 
 /**************************************
 初期化処理
 ***************************************/
-void DemoEnemyActor::Init()
+void TutorialEnemyActor::Init()
 {
 	SetCollider(true);
 	active = true;
+	enableAttack = false;
 
 	cntFrame = 0;
 	cntAttack = 0;
-	ChangeState(InitState);
 
 	trailEmitterL = GameParticleManager::Instance()->Generate(GameEffect::EnemyTrail, *transform);
 	if (trailEmitterL != nullptr)
@@ -92,13 +83,19 @@ void DemoEnemyActor::Init()
 		trailEmitterR->SetLocalPosition({ 0.0f, -2.0f, 2.2f });
 	}
 
-	hp = 60.0f;
+	hp = 100.0f;
+
+	transform->SetPosition({ 0.0f, 0.0f, 60.0f });
+	EnemyTween::Move(*this, { 0.0f, 0.0f, 30.0f }, 60.0f, EaseType::OutCubic, [this]()
+	{
+		enableAttack = true;
+	});
 }
 
 /**************************************
 終了処理
 ***************************************/
-void DemoEnemyActor::Uninit()
+void TutorialEnemyActor::Uninit()
 {
 	if (trailEmitterL != nullptr)
 	{
@@ -114,26 +111,33 @@ void DemoEnemyActor::Uninit()
 		trailEmitterR = nullptr;
 	}
 
-	SetCollider(false);
-	active = false;
-	ObjectPool::Instance()->Destroy<DemoEnemyActor>(this);
+	Init();
 }
 
 /**************************************
 更新処理
 ***************************************/
-void DemoEnemyActor::Update()
+void TutorialEnemyActor::Update()
 {
-	D3DXVECTOR3 diff = handle->GetPlayerPosition() - transform->GetPosition();
-	transform->LookAt(transform->GetPosition() - diff);
+	if (!enableAttack)
+		return;
 
-	fsm[state]->OnUpdate(*this);
+	cntFrame += EnemyTimeController::GetTimeScale();
+
+	const float Interval = 120.0f;
+	if (enableAttack && cntFrame >= Interval * cntAttack)
+	{
+		handle->SetBullet(*shotTransformLeft, EnemyBulletConfig::BlueRotate, 0.3f);
+		handle->SetBullet(*shotTransformRight, EnemyBulletConfig::RedRotate, 0.3f);
+
+		++cntAttack;
+	}
 }
 
 /**************************************
 描画処理
 ***************************************/
-void DemoEnemyActor::Draw()
+void TutorialEnemyActor::Draw()
 {
 	transform->SetWorld();
 	mesh->Draw();
@@ -142,8 +146,6 @@ void DemoEnemyActor::Draw()
 /**************************************
 ステート遷移
 ***************************************/
-void DemoEnemyActor::ChangeState(int next)
+void TutorialEnemyActor::ChangeState(int next)
 {
-	state = DemoState(next);
-	fsm[state]->OnStart(*this);
 }

@@ -40,6 +40,8 @@ public:
 
 	void SetEnemyEventHandler(EnemyEventHandler *handler);
 
+	void CreateTutorialEnemy();
+
 private:
 	std::list<BaseEnemy*> enemyContainer;
 

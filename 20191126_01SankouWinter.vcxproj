@@ -267,6 +267,7 @@
     <ClCompile Include="source\Actor\Enemy\State\SnipeAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
+    <ClCompile Include="source\Actor\Enemy\TutorialEnemy.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBomber.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
@@ -482,6 +483,7 @@
     <ClInclude Include="source\Actor\Enemy\State\SnipeAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />
+    <ClInclude Include="source\Actor\Enemy\TutorialEnemy.h" />
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerBomber.h" />
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />

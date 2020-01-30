@@ -72,7 +72,6 @@ void TutorialScene::Init()
 	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
 	{
 		playerController->Init();
-		enemyController->Init();
 	});
 
 	particleManager->RunUpdate();
