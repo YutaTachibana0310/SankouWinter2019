@@ -33,6 +33,8 @@ public:
 
 	void SetRanking(const std::vector<RankingInfo>& ranking);
 
+	void MoveIn();
+
 private:
 	std::vector<RankingText*> rankingContainer;
 

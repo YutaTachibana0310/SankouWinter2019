@@ -86,3 +86,16 @@ void RankingViewer::SetRanking(const std::vector<RankingInfo>& ranking)
 		rankingContainer[i]->SetScore(ranking[i]);
 	}
 }
+
+/**************************************
+スライドイン処理
+***************************************/
+void RankingViewer::MoveIn()
+{
+	float delay = 0.0f;
+	for (auto itr = rankingContainer.rbegin(); itr != rankingContainer.rend(); ++itr)
+	{
+		(*itr)->MoveIn(delay);
+		delay += 5.0f;
+	}
+}

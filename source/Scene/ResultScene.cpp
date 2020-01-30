@@ -40,6 +40,7 @@ void ResultScene::Init()
 
 	auto rankingContainer = ranking->GetRanking();
 	rankViewer->SetRanking(rankingContainer);
+	rankViewer->MoveIn();
 }
 
 /**************************************

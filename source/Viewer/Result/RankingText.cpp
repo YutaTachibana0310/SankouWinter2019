@@ -62,7 +62,7 @@ void RankingText::MoveIn(float delay)
 	const float OffsetX = -3000.0f;
 	const D3DXVECTOR3 currentPosition = transform->GetPosition();
 
-	transform->Move(Vector3::Left * OffsetX);
+	transform->Move(Vector3::Right * OffsetX);
 
 	if(delay == 0.0f)
 		Tween::Move(*this, currentPosition, 60.0f, EaseType::OutCubic, true);
