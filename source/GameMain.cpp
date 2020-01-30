@@ -18,6 +18,7 @@
 
 #include "Scene\GameScene.h"
 #include "Scene\TitleScene.h"
+#include "Scene\ResultScene.h"
 
 /**************************************
 コンストラクタ
@@ -35,8 +36,10 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 	//シーンマネージャにシーンのインスタンスを追加
 	sceneManager->Add(GameConfig::SceneID::Game, new GameScene(renderTexture, renderSurface));
 	sceneManager->Add(GameConfig::SceneID::Title, new TitleScene(renderTexture, renderSurface));
+	sceneManager->Add(GameConfig::SceneID::Result, new ResultScene(renderTexture, renderSurface));
+
 	//初期シーンに遷移
-	const int InitScene = GameConfig::SceneID::Title;
+	const int InitScene = GameConfig::SceneID::Result;
 	sceneManager->ChangeScene(InitScene);
 }
 

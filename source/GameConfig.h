@@ -19,6 +19,7 @@ public:
 	{
 		Game,
 		Title,
+		Result,
 		SceneMax
 	};
 };
