@@ -278,7 +278,7 @@ void PlayerController::FireBomber()
 
 	D3DXVECTOR3 playerPos = player->GetPosition();
 	
-	playerPos.z = Math::Clamp(-40.0f, 40.0f, playerPos.z + 20.0f);
+	playerPos.z = Math::Clamp(-50.0f, 50.0f, playerPos.z + 40.0f);
 
 	GameParticleManager::Instance()->GenerareBomber(playerPos);
 

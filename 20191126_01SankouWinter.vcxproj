@@ -297,6 +297,7 @@
     <ClCompile Include="source\Effect\Game\PlayerExplosion.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerTrail.cpp" />
     <ClCompile Include="source\Effect\Game\ScoreEffect.cpp" />
+    <ClCompile Include="source\Effect\Game\YellowBomber.cpp" />
     <ClCompile Include="source\Effect\Game\YellowSpark.cpp" />
     <ClCompile Include="source\Effect\TitleParticleManager.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
@@ -507,6 +508,7 @@
     <ClInclude Include="source\Effect\Game\PlayerExplosion.h" />
     <ClInclude Include="source\Effect\Game\PlayerTrail.h" />
     <ClInclude Include="source\Effect\Game\ScoreEffect.h" />
+    <ClInclude Include="source\Effect\Game\YellowBomber.h" />
     <ClInclude Include="source\Effect\Game\YellowSpark.h" />
     <ClInclude Include="source\Effect\TitleParticleManager.h" />
     <ClInclude Include="source\GameConfig.h" />

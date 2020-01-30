@@ -25,6 +25,7 @@
 #include "Game\EnergyEffect.h"
 #include "Game\ScoreEffect.h"
 #include "Game\YellowSpark.h"
+#include "Game\YellowBomber.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -50,6 +51,7 @@ void GameParticleManager::Init()
 	controllers[GameEffect::EnemyTrail] = new Effect::Game::EnemyTrailController();
 	controllers[GameEffect::PlayerTrail] = new Effect::Game::PlayerTrailController();
 	controllers[GameEffect::YellowSpark] = new Effect::Game::YellowSparkController();
+	controllers[GameEffect::YellowBomber] = new Effect::Game::YellowBomberController();
 
 	scoreEffectController = new Effect::Game::ScoreEffectController();
 
@@ -173,6 +175,7 @@ void GameParticleManager::GenerateScoreEffect(const D3DXVECTOR3 & position, int 
 void GameParticleManager::GenerareBomber(const D3DXVECTOR3 position)
 {
 	controllers[GameEffect::YellowSpark]->SetEmitter(position);
+	controllers[GameEffect::YellowBomber]->SetEmitter(position);
 }
 
 /**************************************

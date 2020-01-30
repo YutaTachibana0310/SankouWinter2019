@@ -25,7 +25,7 @@ namespace Effect::Game
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new BaseEmitter(15, 300.0f);
+			emitter = new BaseEmitter(25, 300.0f);
 			emitter->CreateParticleContainer<YellowSpark>(256);
 		}
 	}

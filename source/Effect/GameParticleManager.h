@@ -29,6 +29,7 @@ namespace GameEffect
 		EnemyTrail,
 		PlayerTrail,
 		YellowSpark,
+		YellowBomber,
 		Max
 	};
 }
