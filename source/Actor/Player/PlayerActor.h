@@ -42,6 +42,8 @@ public:
 	
 	virtual void PowerUp();
 
+	bool IsInvincivle() const;
+
 	std::function<void(const D3DXVECTOR3, bool, int)> onFireBullet;
 	std::function<void(ColliderObserver* other)> onColliderHit;
 	std::function<void(bool slowDown)> onSlowdownEnemyBullet;

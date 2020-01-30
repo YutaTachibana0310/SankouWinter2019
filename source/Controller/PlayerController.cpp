@@ -216,14 +216,17 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 	std::string otherTag = other->Tag();
 	if (otherTag == "EnemyBullet" || otherTag == "Enemy")
 	{
-		GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
-
-		auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
-		bool res = camera->Focus(player->GetPosition(), callback);
-
-		if (!res)
+		if (!player->IsInvincivle())
 		{
-			OnFinishCameraFocus();
+			GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
+
+			auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
+			bool res = camera->Focus(player->GetPosition(), callback);
+
+			if (!res)
+			{
+				OnFinishCameraFocus();
+			}
 		}
 	}
 	else if (otherTag == "Item")

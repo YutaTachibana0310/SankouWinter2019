@@ -113,6 +113,7 @@ void GameScene::Update()
 	enemyController->Update();
 	planet->Update();
 
+	ColliderManager::Instance()->CheckRoundRobin("PlayerShield", "EnemyBullet");
 	ColliderManager::Instance()->CheckRoundRobin("PlayerBullet", "Enemy");
 	ColliderManager::Instance()->CheckRoundRobin("Player", "Enemy");
 	ColliderManager::Instance()->CheckRoundRobin("Player", "EnemyBullet");

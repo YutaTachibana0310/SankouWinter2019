@@ -156,8 +156,7 @@ void EnemyBulletController::DisableAllBullet()
 {
 	for (auto&& bullet : bulletContainer)
 	{
-		GameParticleManager::Instance()->Generate(GameEffect::EnemyBulletVanish, bullet->GetPosition());
-
+		bullet->Vanish();
 		bullet->Uninit();
 		ObjectPool::Instance()->Destroy<EnemyBulletActor>(bullet);
 		cntBullet--;

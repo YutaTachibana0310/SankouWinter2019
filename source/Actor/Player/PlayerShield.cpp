@@ -22,7 +22,7 @@ PlayerShield::PlayerShield()
 {
 	collider = BoxCollider3D::Create("PlayerShield", transform);
 	collider->AddObserver(this);
-	collider->SetSize({ 5.0f, 2.0f, 5.0f });
+	collider->SetSize({ 5.0f, 3.0f, 6.0f });
 
 	collider->SetActive(true);
 
@@ -74,6 +74,8 @@ void PlayerShield::Draw()
 
 	pDevice->SetRenderState(D3DRS_ZENABLE, true);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+	//collider->Draw();
 }
 
 /**************************************

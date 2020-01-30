@@ -238,6 +238,14 @@ void PlayerActor::PowerUp()
 }
 
 /**************************************
+–³“G”»’è
+***************************************/
+bool PlayerActor::IsInvincivle() const
+{
+	return isInvincible;
+}
+
+/**************************************
 ˆÚ“®ˆ—
 ***************************************/
 void PlayerActor::_Move(const D3DXVECTOR3 & dir)
@@ -315,16 +323,16 @@ void PlayerActor::_SlowDownEnemyBullet()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
-	if (isInvincible)
-		return;
-
 	const std::string tag = other->Tag();
 	if (tag == "EnemyBullet" || tag == "Enemy")
 	{
-		collider->SetActive(false);
-		enableMove = false;
-		enableShot = false;
-		isInvincible = true;
+		if (!isInvincible)
+		{
+			collider->SetActive(false);
+			enableMove = false;
+			enableShot = false;
+			isInvincible = true;
+		}
 	}
 
 	onColliderHit(other);

@@ -49,6 +49,8 @@ public:
 
 	void UpdateRenderTransform();
 
+	void Vanish();
+
 private:
 	std::shared_ptr<BoxCollider3D> collider;
 	BoardPolygon *polygon;
