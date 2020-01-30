@@ -180,6 +180,9 @@
     <ClCompile Include="source\Scene\ResultScene.cpp" />
     <ClCompile Include="source\Viewer\Result\ResultViewer.cpp" />
     <ClCompile Include="source\System\ScoreRanking.cpp" />
+    <ClCompile Include="source\Viewer\Result\RankingText.cpp" />
+    <ClCompile Include="source\Viewer\Result\RankingViewer.cpp" />
+    <ClCompile Include="source\Actor\Player\PlayerShield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -385,6 +388,10 @@
     <ClInclude Include="source\Scene\ResultScene.h" />
     <ClInclude Include="source\Viewer\Result\ResultViewer.h" />
     <ClInclude Include="source\System\ScoreRanking.h" />
+    <ClInclude Include="source\System\RankingInfo.h" />
+    <ClInclude Include="source\Viewer\Result\RankingText.h" />
+    <ClInclude Include="source\Viewer\Result\RankingViewer.h" />
+    <ClInclude Include="source\Actor\Player\PlayerShield.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

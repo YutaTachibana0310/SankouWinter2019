@@ -270,6 +270,7 @@
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerColliderViewer.cpp" />
+    <ClCompile Include="source\Actor\Player\PlayerShield.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerTurretActor.cpp" />
     <ClCompile Include="source\Actor\Player\PowerupItemActor.cpp" />
     <ClCompile Include="source\Actor\Title\TitlePlayerActor.cpp" />
@@ -476,6 +477,7 @@
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerColliderViewer.h" />
+    <ClInclude Include="source\Actor\Player\PlayerShield.h" />
     <ClInclude Include="source\Actor\Player\PlayerTurretActor.h" />
     <ClInclude Include="source\Actor\Player\PowerupItemActor.h" />
     <ClInclude Include="source\Actor\Title\TitlePlayerActor.h" />

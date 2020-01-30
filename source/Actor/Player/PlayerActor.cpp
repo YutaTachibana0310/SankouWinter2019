@@ -22,6 +22,7 @@
 #include "PlayerTurretActor.h"
 #include "PlayerBulletActor.h"
 #include "PlayerColliderViewer.h"
+#include "PlayerShield.h"
 
 #include "../../System/GameInput.h"
 
@@ -65,6 +66,10 @@ PlayerActor::PlayerActor() :
 	AddChild(trailEmitter);
 	trailEmitter->SetLocalPosition(Vector3::Back * 2.0f);
 	trailEmitter->SetActive(false);
+
+	shield = new PlayerShield();
+	AddChild(shield);
+	shield->SetActive(false);
 }
 
 /**************************************
@@ -75,6 +80,7 @@ PlayerActor::~PlayerActor()
 	SAFE_DELETE(mesh);
 	SAFE_DELETE(turretRoot);
 	SAFE_DELETE(colliderViewer);
+	SAFE_DELETE(shield);
 	collider.reset();
 	Utility::DeleteContainer(turretContainer);
 }
@@ -97,6 +103,8 @@ void PlayerActor::Init()
 	PowerUp();
 
 	trailEmitter->SetActive(true);
+
+	shield->SetActive(true);
 }
 
 /**************************************
@@ -177,6 +185,9 @@ void PlayerActor::DrawCollider()
 		return;
 
 	colliderViewer->Draw();
+
+	if(shield->IsActive())
+		shield->Draw();
 }
 
 /**************************************
@@ -330,6 +341,7 @@ void PlayerActor::OnFinishInitMove()
 
 	TaskManager::Instance()->CreateDelayedTask(300.0f, false, [this]()
 	{
+		shield->SetActive(false);
 		isInvincible = false;
 	});
 }

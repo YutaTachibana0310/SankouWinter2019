@@ -23,6 +23,7 @@ class PlayerTurretRoot;
 class BoxCollider3D;
 class PlayerColliderViewer;
 class BaseEmitter;
+class PlayerShield;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -58,8 +59,9 @@ private:
 	std::vector<PlayerTurretActor*> turretContainer;
 
 	std::shared_ptr<BoxCollider3D> collider;
-
 	PlayerColliderViewer *colliderViewer;
+
+	PlayerShield *shield;
 
 	BaseEmitter *trailEmitter;
 

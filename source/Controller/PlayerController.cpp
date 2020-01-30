@@ -45,6 +45,7 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 	ResourceManager::Instance()->LoadMesh("PlayerTurret", "data/MODEL/Player/PlayerTurret.x");
 	ResourceManager::Instance()->MakePolygon("PlayerCollider", "data/TEXTURE/Player/playerCollider.png", { 1.0f, 1.0f }, { 3.0f, 2.0f });
 	ResourceManager::Instance()->MakePolygon("PowerupItem", "data/TEXTURE/Player/PowerupItem.png", { 3.0f, 3.0f });
+	ResourceManager::Instance()->MakePolygon("PlayerShield", "data/TEXTURE/Player/PlayerShield.png", { 7.0f, 4.5f });
 
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
