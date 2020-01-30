@@ -59,7 +59,7 @@ void RankingText::Draw()
 ***************************************/
 void RankingText::MoveIn(float delay)
 {
-	const float OffsetX = -3000.0f;
+	const float OffsetX = -2000.0f;
 	const D3DXVECTOR3 currentPosition = transform->GetPosition();
 
 	transform->Move(Vector3::Right * OffsetX);

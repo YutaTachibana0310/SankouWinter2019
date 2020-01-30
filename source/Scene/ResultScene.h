@@ -40,6 +40,8 @@ private:
 
 	std::shared_ptr<float> bloomPower;
 
+	bool inTransition;
+
 	void OnFinishBlinkIn();
 	void OnFinishBlinkOut();
 

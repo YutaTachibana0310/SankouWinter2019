@@ -10,7 +10,11 @@
 #include "../../Framework/PostEffect/BloomController.h"
 #include "../../Framework/Tool/DebugWindow.h"
 #include "../../Framework/Tween/Tween.h"
+#include "../../Framework/Input/input.h"
+#include "../../Framework/Transition/TransitionController.h"
+#include "../../Framework/Core/SceneManager.h"
 
+#include "../GameConfig.h"
 #include "../Viewer/Result/ResultViewer.h"
 #include "../System/ScoreRanking.h"
 #include "../Viewer/Result/RankingViewer.h"
@@ -46,11 +50,16 @@ void ResultScene::Init()
 
 	ranking->CheckUpdate();
 
-	auto rankingContainer = ranking->GetRanking();
-	rankViewer->SetRanking(rankingContainer);
-	rankViewer->MoveIn();
-
 	OnFinishBlinkIn();
+
+	inTransition = true;
+	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
+	{
+		inTransition = false;
+		auto rankingContainer = ranking->GetRanking();
+		rankViewer->SetRanking(rankingContainer);
+		rankViewer->MoveIn();
+	});
 }
 
 /**************************************
@@ -76,6 +85,15 @@ void ResultScene::Update()
 	rankViewer->Update();
 
 	bloom->SetPower(BloomPower[0] * *bloomPower, BloomPower[1] * *bloomPower, BloomPower[2] * *bloomPower);
+
+	if (!inTransition && Keyboard::GetTrigger(DIK_Z))
+	{
+		inTransition = true;
+		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+		{
+			SceneManager::ChangeScene(GameConfig::Title);
+		});
+	}
 }
 
 /**************************************

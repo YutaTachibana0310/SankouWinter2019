@@ -36,6 +36,7 @@ RankingViewer::RankingViewer()
 		ptr->SetPosition(textPosition);
 
 		textPosition += Offset;
+		ptr->SetActive(false);
 
 		rankingContainer.push_back(ptr);
 	}
@@ -71,6 +72,9 @@ void RankingViewer::Draw()
 
 	for (auto&& ranking : rankingContainer)
 	{
+		if (!ranking->IsActive())
+			continue;
+
 		ranking->Draw();
 	}
 }
@@ -95,6 +99,7 @@ void RankingViewer::MoveIn()
 	float delay = 0.0f;
 	for (auto itr = rankingContainer.rbegin(); itr != rankingContainer.rend(); ++itr)
 	{
+		(*itr)->SetActive(true);
 		(*itr)->MoveIn(delay);
 		delay += 5.0f;
 	}
