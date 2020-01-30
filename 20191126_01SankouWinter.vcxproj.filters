@@ -173,6 +173,7 @@
     <ClCompile Include="source\Handler\EnergyHandler.cpp" />
     <ClCompile Include="source\Scene\TitleScene.cpp" />
     <ClCompile Include="source\Viewer\Title\TitleViewer.cpp" />
+    <ClCompile Include="source\Viewer\Title\TitleGear.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -371,6 +372,7 @@
     <ClInclude Include="source\Handler\EnergyHandler.h" />
     <ClInclude Include="source\Scene\TitleScene.h" />
     <ClInclude Include="source\Viewer\Title\TitleViewer.h" />
+    <ClInclude Include="source\Viewer\Title\TitleGear.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

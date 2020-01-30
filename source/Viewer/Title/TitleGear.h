@@ -1,36 +1,34 @@
 //=====================================
 //
-//TitleScene.h
-//機能:タイトルシーン
+//TitleGear.h
+//機能:タイトル歯車
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _TITLESCENE_H_
-#define _TITLESCENE_H_
+#ifndef _TITLEGEAR_H_
+#define _TITLEGEAR_H_
 
-#include "../../main.h"
-#include "../../Framework/Core/BaseScene.h"
+#include "../../../main.h"
 
 /**************************************
 前方宣言
 ***************************************/
-class TitleViewer;
-class GameSkybox;
+class Polygon2D;
 
 /**************************************
 クラス定義
 ***************************************/
-class TitleScene : public BaseScene
+class TitleGear : public GameObject
 {
-	using BaseScene::BaseScene;
 public:
-	void Init();
-	void Uninit();
+	TitleGear();
+	~TitleGear();
+
 	void Update();
 	void Draw();
 
 private:
-	TitleViewer * viewer;
-	GameSkybox *skybox;
+	Polygon2D * innerGear;
+	Polygon2D * outerGear;
 };
 #endif

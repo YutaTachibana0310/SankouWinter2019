@@ -14,6 +14,7 @@
 前方宣言
 ***************************************/
 class Polygon2D;
+class TitleGear;
 
 /**************************************
 クラス定義
@@ -29,6 +30,10 @@ public:
 
 private:
 	Polygon2D * titleLogo;
+
+	TitleGear *centerGear;
+	TitleGear *rightGear;
+	TitleGear *leftGear;
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include "../../Framework/Camera/Camera.h"
 
 #include "../Viewer/Title/TitleViewer.h"
+#include "../BackGround/GameSkybox.h"
 
 /**************************************
 
@@ -23,6 +24,7 @@ void TitleScene::Init()
 	Camera::SetMainCamera(sceneCamera);
 
 	viewer = new TitleViewer();
+	skybox = new GameSkybox();
 }
 
 /**************************************
@@ -32,6 +34,7 @@ void TitleScene::Uninit()
 {
 	SAFE_DELETE(sceneCamera);
 	SAFE_DELETE(viewer);
+	SAFE_DELETE(skybox);
 }
 
 /**************************************
@@ -40,6 +43,7 @@ void TitleScene::Uninit()
 void TitleScene::Update()
 {
 	sceneCamera->Update();
+	skybox->Update();
 	viewer->Update();
 }
 
@@ -49,5 +53,6 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	sceneCamera->Set();
+	skybox->Draw();
 	viewer->Draw();
 }
