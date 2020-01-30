@@ -21,6 +21,7 @@
 #include "../Actor/Player/PowerupItemActor.h"
 #include "../Viewer/Back/BackViewer.h"
 #include "../System/GameScore.h"
+#include "../Actor/Player/PlayerBomber.h"
 
 #include <algorithm>
 
@@ -50,6 +51,7 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 
 	player = new PlayerActor();
 	bulletController = new PlayerBulletController();
+	bomber = new PlayerBomberActor();
 
 	itemContainer.reserve(5);
 
@@ -61,6 +63,9 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 
 	auto onSlowDownEnemyBullet = std::bind(&PlayerController::SlowDownEnemyBullet, this, std::placeholders::_1);
 	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
+
+	auto onFireBomber = std::bind(&PlayerController::FireBomber, this);
+	player->onFireBomber = onFireBomber;
 }
 
 /**************************************
@@ -70,6 +75,7 @@ PlayerController::~PlayerController()
 {
 	SAFE_DELETE(player);
 	SAFE_DELETE(bulletController);
+	SAFE_DELETE(bomber);
 
 	Utility::DeleteContainer(itemContainer);
 }
@@ -90,6 +96,8 @@ void PlayerController::Update()
 	player->Update();
 
 	bulletController->Update();
+
+	bomber->Update();
 
 	for (auto&& item : itemContainer)
 	{
@@ -256,9 +264,33 @@ void PlayerController::OnFinishCameraFocus()
 
 		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
 		{
+			cntBomb = PlayerController::MaxBomb;
 			player->Init();
 		});
 	}
 
 	player->Uninit();
+}
+
+/**************************************
+É{ÉìÉoÅ[î≠éÀ
+***************************************/
+void PlayerController::FireBomber()
+{
+	if (cntBomb <= 0)
+		return;
+
+	if (bomber->IsActive())
+		return;
+
+	--cntBomb;
+
+	D3DXVECTOR3 playerPos = player->GetPosition();
+	
+	playerPos.z = Math::Clamp(-50.0f, 50.0f, playerPos.z + 40.0f);
+
+	GameParticleManager::Instance()->GenerareBomber(playerPos);
+
+	bomber->SetPosition(playerPos);
+	bomber->Init();
 }

@@ -24,6 +24,8 @@
 #include "Game\PlayerTrail.h"
 #include "Game\EnergyEffect.h"
 #include "Game\ScoreEffect.h"
+#include "Game\YellowSpark.h"
+#include "Game\YellowBomber.h"
 
 /**************************************
 staticメンバ
@@ -48,6 +50,8 @@ void GameParticleManager::Init()
 	controllers[GameEffect::EnemyBulletVanish] = new Effect::Game::EnemyBulletVanishController();
 	controllers[GameEffect::EnemyTrail] = new Effect::Game::EnemyTrailController();
 	controllers[GameEffect::PlayerTrail] = new Effect::Game::PlayerTrailController();
+	controllers[GameEffect::YellowSpark] = new Effect::Game::YellowSparkController();
+	controllers[GameEffect::YellowBomber] = new Effect::Game::YellowBomberController();
 
 	scoreEffectController = new Effect::Game::ScoreEffectController();
 
@@ -163,6 +167,15 @@ void GameParticleManager::GenerateEnergyEffect(const D3DXVECTOR3 & position, flo
 void GameParticleManager::GenerateScoreEffect(const D3DXVECTOR3 & position, int point)
 {
 	scoreEffectController->SetEmitter(position, point);
+}
+
+/**************************************
+ボンバーエフェクトセット
+***************************************/
+void GameParticleManager::GenerareBomber(const D3DXVECTOR3 position)
+{
+	controllers[GameEffect::YellowSpark]->SetEmitter(position);
+	controllers[GameEffect::YellowBomber]->SetEmitter(position);
 }
 
 /**************************************

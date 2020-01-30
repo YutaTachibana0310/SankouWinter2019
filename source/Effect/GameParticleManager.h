@@ -28,6 +28,8 @@ namespace GameEffect
 		EnemyBulletVanish,
 		EnemyTrail,
 		PlayerTrail,
+		YellowSpark,
+		YellowBomber,
 		Max
 	};
 }
@@ -56,6 +58,7 @@ public:
 	void GenerateEnemyBigExplosion(const D3DXVECTOR3& position);
 	void GenerateEnergyEffect(const D3DXVECTOR3& position, float energy);
 	void GenerateScoreEffect(const D3DXVECTOR3& position, int point);
+	void GenerareBomber(const D3DXVECTOR3 position);
 
 	void CreateEnergyEffectController(const std::shared_ptr<EnergyHandler>& energyHandler);
 

@@ -20,6 +20,7 @@ class ColliderObserver;
 class GameCamera;
 class PowerupItemActor;
 class BackViewer;
+class PlayerBomberActor;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -51,6 +52,8 @@ public:
 private:
 	PlayerActor * player;
 	PlayerBulletController *bulletController;
+	PlayerBomberActor *bomber;
+
 	std::vector<PowerupItemActor*> itemContainer;
 
 	GameCamera *camera;
@@ -69,5 +72,6 @@ private:
 	void SlowDownEnemyBullet(bool isSlow);
 	void CollisionPlayer(ColliderObserver* other);
 	void OnFinishCameraFocus();
+	void FireBomber();
 };
 #endif

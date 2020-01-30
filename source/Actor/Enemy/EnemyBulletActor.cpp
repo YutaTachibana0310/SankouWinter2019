@@ -135,7 +135,13 @@ D3DXVECTOR2 EnemyBulletActor::GetBloomUV() const
 ***************************************/
 void EnemyBulletActor::OnColliderHit(ColliderObserver * other)
 {
-	if (other->Tag() == "PlayerShield")
+	const auto Tag = other->Tag();
+	if (Tag == "PlayerShield")
+	{
+		Vanish();
+		active = false;
+	}
+	else if (Tag == "PlayerBomber")
 	{
 		Vanish();
 		active = false;

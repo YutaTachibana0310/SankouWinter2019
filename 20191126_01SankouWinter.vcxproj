@@ -268,6 +268,7 @@
     <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
+    <ClCompile Include="source\Actor\Player\PlayerBomber.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerColliderViewer.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerShield.cpp" />
@@ -297,6 +298,8 @@
     <ClCompile Include="source\Effect\Game\PlayerExplosion.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerTrail.cpp" />
     <ClCompile Include="source\Effect\Game\ScoreEffect.cpp" />
+    <ClCompile Include="source\Effect\Game\YellowBomber.cpp" />
+    <ClCompile Include="source\Effect\Game\YellowSpark.cpp" />
     <ClCompile Include="source\Effect\TitleParticleManager.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
@@ -477,6 +480,7 @@
     <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />
+    <ClInclude Include="source\Actor\Player\PlayerBomber.h" />
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerColliderViewer.h" />
     <ClInclude Include="source\Actor\Player\PlayerShield.h" />
@@ -506,6 +510,8 @@
     <ClInclude Include="source\Effect\Game\PlayerExplosion.h" />
     <ClInclude Include="source\Effect\Game\PlayerTrail.h" />
     <ClInclude Include="source\Effect\Game\ScoreEffect.h" />
+    <ClInclude Include="source\Effect\Game\YellowBomber.h" />
+    <ClInclude Include="source\Effect\Game\YellowSpark.h" />
     <ClInclude Include="source\Effect\TitleParticleManager.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />

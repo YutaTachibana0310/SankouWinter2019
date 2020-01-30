@@ -69,10 +69,15 @@ void BaseEnemy::LookAtPlayer(Transform & transform)
 ***************************************/
 void BaseEnemy::OnColliderHit(ColliderObserver * other)
 {
-	if (typeid(*other) == typeid(PlayerBulletActor))
+	const auto tag = other->Tag();
+	if (tag == "PlayerBullet")
 	{
 		PlayerBulletActor *bullet = dynamic_cast<PlayerBulletActor*>(other);
 		hp -= 1.0f;
 		//Debug::Log("Hit");
+	}
+	else if (tag == "PlayerBomber")
+	{
+		hp -= 100.0f;
 	}
 }
