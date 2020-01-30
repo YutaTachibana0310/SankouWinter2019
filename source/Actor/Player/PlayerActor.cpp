@@ -246,6 +246,14 @@ bool PlayerActor::IsInvincivle() const
 }
 
 /**************************************
+ƒŒƒxƒ‹æ“¾
+***************************************/
+int PlayerActor::PowerLevel()
+{
+	return currentLevel;
+}
+
+/**************************************
 ˆÚ“®ˆ—
 ***************************************/
 void PlayerActor::_Move(const D3DXVECTOR3 & dir)

@@ -241,14 +241,22 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 ***************************************/
 void PlayerController::OnFinishCameraFocus()
 {
-	player->Uninit();
-
 	if (cntLife > 0)
 	{
 		cntLife--;
+
+		const D3DXVECTOR3 playerrPosition = player->GetPosition();
+		int level = Math::Clamp(1, 3, player->PowerLevel());
+		for (int i = 0; i < level; i++)
+		{
+			SetPowerupItem(playerrPosition);
+		}
+
 		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
 		{
 			player->Init();
 		});
 	}
+
+	player->Uninit();
 }
