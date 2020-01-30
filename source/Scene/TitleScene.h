@@ -37,5 +37,7 @@ private:
 	TitlePlayerActor *actor;
 	TitleParticleManager *particleManager;
 	SkyBox *skybox;
+
+	bool inTransition;
 };
 #endif

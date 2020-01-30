@@ -14,6 +14,7 @@
 #include "../../Framework/PostEffect/BloomController.h"
 #include "../../Framework/Collider/ColliderManager.h"
 #include "../../Framework/Input/input.h"
+#include "../../Framework/Transition/TransitionController.h"
 
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
@@ -41,6 +42,8 @@ const float GameScene::BloomThrethold[] = { 0.4f, 0.3f, 0.24f };		//ƒuƒ‹[ƒ€‚ð‚©
 ***************************************/
 void GameScene::Init()
 {
+	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop);
+
 	ResourceManager::Instance()->LoadMesh("Planet", "data/MODEL/Planet/GreyMoon.x");
 
 	particleManager = GameParticleManager::Instance();

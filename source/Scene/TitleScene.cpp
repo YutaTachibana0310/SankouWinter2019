@@ -9,7 +9,11 @@
 #include "../../Framework/Camera/Camera.h"
 #include "../../Framework/Resource/ResourceManager.h"
 #include "../../Framework/Renderer3D/SkyBox.h"
+#include "../../Framework/Transition/TransitionController.h"
+#include "../../Framework/Core/SceneManager.h"
+#include "../../Framework/Input/input.h"
 
+#include "../GameConfig.h"
 #include "../Viewer/Title/TitleViewer.h"
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Title/TitlePlayerActor.h"
@@ -40,6 +44,8 @@ void TitleScene::Init()
 	{
 		skybox->LoadTexture(SkyboxTexture, SkyBox::Surface(i));
 	}
+
+	inTransition = false;
 }
 
 /**************************************
@@ -69,6 +75,16 @@ void TitleScene::Update()
 	viewer->Update();
 
 	particleManager->Update();
+
+	if (!inTransition && Keyboard::GetTrigger(DIK_Z))
+	{
+		inTransition = true;
+
+		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+		{
+			SceneManager::ChangeScene(GameConfig::Game);
+		});
+	}
 }
 
 /**************************************
