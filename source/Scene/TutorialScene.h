@@ -26,6 +26,7 @@ class GameViewer;
 class TutorialPlayerController;
 class BackViewer;
 class EnemyEventHandler;
+class TutorialViewer;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -41,6 +42,7 @@ public:
 		Attack,
 		Slowdown,
 		Bomber,
+		Wait,
 		Max
 	};
 
@@ -70,9 +72,9 @@ private:
 
 	EnemyEventHandler *handler;
 
-	class TutorialMove;
-	class TutorialAttack;
-	class TutorialSlowdown;
-	class TutorialBomber;
+	TutorialViewer *tutorialViewer;
+
+	State state;
+	State prevState;
 };
 #endif

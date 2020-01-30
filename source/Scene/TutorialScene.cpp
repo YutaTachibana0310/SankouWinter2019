@@ -27,6 +27,7 @@
 #include "../Viewer/Back/BackViewer.h"
 #include "../Handler/EnemyEventHandler.h"
 #include "../Handler/EnergyHandler.h"
+#include "../Viewer/Tutorial/TutorialViewer.h"
 
 #include "../System/GameScore.h"
 
@@ -56,6 +57,7 @@ void TutorialScene::Init()
 	enemyController = new EnemyController(gameCamera);
 	viewer = new GameViewer();
 	handler = new EnemyEventHandler();
+	tutorialViewer = new TutorialViewer();
 
 	auto energyHandler = std::make_shared<EnergyHandler>(playerController);
 	particleManager->CreateEnergyEffectController(energyHandler);
@@ -72,9 +74,12 @@ void TutorialScene::Init()
 	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
 	{
 		playerController->Init();
+		state = State::Move;
 	});
 
 	particleManager->RunUpdate();
+
+	state = State::Wait;
 }
 
 /**************************************
@@ -91,6 +96,7 @@ void TutorialScene::Uninit()
 		SAFE_DELETE(viewer);
 		SAFE_DELETE(backViewer);
 		SAFE_DELETE(handler);
+		SAFE_DELETE(tutorialViewer);
 
 		particleManager->Uninit();
 
@@ -103,6 +109,47 @@ void TutorialScene::Uninit()
 ***************************************/
 void TutorialScene::Update()
 {
+	switch (state)
+	{
+	case Move:
+		tutorialViewer->Set(TutorialViewer::Move, [this]()
+		{
+			state = State::Attack;
+			playerController->EnableShot(true);
+		});
+		state = Wait;
+		break;
+
+	case Attack:
+		tutorialViewer->Set(TutorialViewer::Attack, [this]()
+		{
+			state = State::Slowdown;
+			playerController->EnableSlowdown(true);
+		});
+		state = Wait;
+		break;
+
+	case Slowdown:
+		tutorialViewer->Set(TutorialViewer::SlowDown, [this]()
+		{
+			state = State::Bomber;
+			playerController->EnableBomber(true);
+		});
+		state = Wait;
+		break;
+
+	case Bomber:
+		tutorialViewer->Set(TutorialViewer::Bomber, []()
+		{
+			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+			{
+				SceneManager::ChangeScene(GameConfig::Game);
+			});
+		});
+		state = Wait;
+		break;
+	}
+
 	gameCamera->Update();
 	playerController->Update();
 	enemyController->Update();
@@ -157,4 +204,6 @@ void TutorialScene::Draw()
 	viewer->Draw();
 
 	particleManager->DrawEnergyEffect();
+
+	tutorialViewer->Draw();
 }
