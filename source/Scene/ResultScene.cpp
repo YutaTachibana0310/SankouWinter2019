@@ -7,6 +7,8 @@
 //=====================================
 #include "ResultScene.h"
 #include "../../Framework/Camera/Camera.h"
+#include "../../Framework/PostEffect/BloomController.h"
+#include "../../Framework/Tool/DebugWindow.h"
 
 #include "../Viewer/Result/ResultViewer.h"
 #include "../System/ScoreRanking.h"
@@ -15,6 +17,8 @@
 /**************************************
 グローバル変数
 ***************************************/
+const float BloomPower[] = { 0.9f, 0.9f, 0.2f };		//ブルームの強さ
+const float BloomThrethold[] = { 0.95f, 0.95f, 0.95f };		//ブルームをかける輝度の閾値
 
 /**************************************
 初期化処理
@@ -27,6 +31,10 @@ void ResultScene::Init()
 	viewer = new ResultViewer();
 	ranking = new ScoreRanking();
 	rankViewer = new RankingViewer();
+	bloom = new BloomController();
+
+	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
+	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
 
 	ranking->CheckUpdate();
 
@@ -43,6 +51,7 @@ void ResultScene::Uninit()
 	SAFE_DELETE(viewer);
 	SAFE_DELETE(ranking);
 	SAFE_DELETE(rankViewer);
+	SAFE_DELETE(bloom);
 }
 
 /**************************************
@@ -63,4 +72,6 @@ void ResultScene::Draw()
 	sceneCamera->Set();
 	viewer->Draw();
 	rankViewer->Draw();
+
+	bloom->Draw(renderTexture);
 }

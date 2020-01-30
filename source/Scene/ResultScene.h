@@ -17,6 +17,7 @@
 class ResultViewer;
 class ScoreRanking;
 class RankingViewer;
+class BloomController;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -34,5 +35,6 @@ private:
 	ResultViewer * viewer;
 	ScoreRanking *ranking;
 	RankingViewer *rankViewer;
+	BloomController *bloom;
 };
 #endif
