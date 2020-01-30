@@ -45,7 +45,10 @@ namespace Effect::Game
 		});
 
 		if (emitter == emitterContainer.end())
+		{
+			GameScore::Instance()->AddScore(point);
 			return;
+		}
 
 		auto ptr = dynamic_cast<ScoreEffectEmitter*>(*emitter);
 		ptr->SetPosition(position);

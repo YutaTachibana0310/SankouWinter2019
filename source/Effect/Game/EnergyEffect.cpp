@@ -19,7 +19,8 @@ namespace Effect::Game
 	EnergyEffectControllerコンストラクタ
 	***************************************/
 	EnergyEffectController::EnergyEffectController(const std::shared_ptr<EnergyHandler>& handler) :
-		BaseParticleController(Particle_2D)
+		BaseParticleController(Particle_2D),
+		handler(handler)
 	{
 		const D3DXVECTOR2 Size = { 21.5f, -21.5f };
 		MakeUnitBuffer(Size);
@@ -45,7 +46,10 @@ namespace Effect::Game
 		});
 
 		if (emitter == emitterContainer.end())
+		{
+			handler->AddEnergy(energy);
 			return;
+		}
 
 		auto ptr = dynamic_cast<EnergyEffectEmitter*>(*emitter);
 		ptr->SetPosition(position);

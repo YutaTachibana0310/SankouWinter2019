@@ -25,6 +25,9 @@ namespace Effect::Game
 		EnergyEffectController(const std::shared_ptr<EnergyHandler>& handler);
 
 		void SetEmitter(const D3DXVECTOR3& position, float energy);
+
+	private:
+		std::shared_ptr<EnergyHandler> handler;
 	};
 
 	/**************************************
