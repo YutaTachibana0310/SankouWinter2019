@@ -20,6 +20,7 @@
 #include "../Actor/Player/PlayerColliderViewer.h"
 #include "../Actor/Player/PowerupItemActor.h"
 #include "../Viewer/Back/BackViewer.h"
+#include "../System/GameScore.h"
 
 #include <algorithm>
 
@@ -219,6 +220,7 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 		if (!player->IsInvincivle())
 		{
 			GameParticleManager::Instance()->Generate(GameEffect::PlayerExplosion, player->GetPosition());
+			GameScore::Instance()->ResetCombo();
 
 			auto callback = std::bind(&PlayerController::OnFinishCameraFocus, this);
 			bool res = camera->Focus(player->GetPosition(), callback);

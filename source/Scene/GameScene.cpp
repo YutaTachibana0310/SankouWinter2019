@@ -15,7 +15,9 @@
 #include "../../Framework/Collider/ColliderManager.h"
 #include "../../Framework/Input/input.h"
 #include "../../Framework/Transition/TransitionController.h"
+#include "../../Framework/Core/SceneManager.h"
 
+#include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
 #include "../Camera/GameCamera.h"
 #include "../BackGround/GameSkybox.h"
@@ -107,6 +109,7 @@ void GameScene::Uninit()
 
 	GameScore::Instance()->Save();
 }
+#include "../../Framework/Input/input.h"
 
 /**************************************
 XVˆ—
@@ -130,6 +133,9 @@ void GameScene::Update()
 	particleManager->Update();
 
 	viewer->Update();
+
+	if (Keyboard::GetTrigger(DIK_F5))
+		SceneManager::ChangeScene(GameConfig::Result);
 }
 
 /**************************************

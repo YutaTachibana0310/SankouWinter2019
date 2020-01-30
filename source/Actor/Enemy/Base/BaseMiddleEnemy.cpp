@@ -26,6 +26,7 @@ void BaseMiddleEnemy::Explode()
 	GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
 	SoundPlayer::Instance()->Play("MiddleExplosion");
 	GameScore::Instance()->AddScore(1000);
+	GameScore::Instance()->AddCombo();
 }
 
 /**************************************

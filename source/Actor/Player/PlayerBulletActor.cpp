@@ -146,6 +146,6 @@ void PlayerBulletActor::OnColliderHit(ColliderObserver * other)
 {
 	active = false;
 	GameParticleManager::Instance()->Generate(GameEffect::PlayerBulletHit, transform->GetPosition());
-	GameScore::Instance()->AddScore(1);
+	GameScore::Instance()->AddScore(15);
 }
 

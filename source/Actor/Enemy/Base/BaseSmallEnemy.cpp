@@ -32,6 +32,7 @@ void BaseSmallEnemy::Explode()
 		handle->GeneratePowerupItem(transform->GetPosition());
 
 	GameScore::Instance()->AddScore(50);
+	GameScore::Instance()->AddCombo();
 }
 
 /**************************************

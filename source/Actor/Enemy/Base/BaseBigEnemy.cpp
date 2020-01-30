@@ -32,6 +32,7 @@ void BaseBigEnemy::Uninit()
 	handle->VanishAllBullet();
 	handle->SlowdownEnemy();
 	GameScore::Instance()->AddScore(5000);
+	GameScore::Instance()->AddCombo();
 }
 
 /**************************************
