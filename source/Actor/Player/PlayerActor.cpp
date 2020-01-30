@@ -15,6 +15,7 @@
 #include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Core/ObjectPool.h"
 #include "../../../Framework/Particle/BaseEmitter.h"
+#include "../../../Framework/Task/TaskManager.h"
 
 #include "../../Effect/GameParticleManager.h"
 
@@ -40,7 +41,8 @@ PlayerActor::PlayerActor() :
 	cntShotFrame(0),
 	enableShot(false),
 	enableMove(false),
-	currentLevel(0)
+	currentLevel(0),
+	isInvincible(true)
 {
 	mesh = new MeshContainer();
 	ResourceManager::Instance()->GetMesh("Player", mesh);
@@ -83,7 +85,7 @@ PlayerActor::~PlayerActor()
 void PlayerActor::Init()
 {
 	active = true;
-
+	
 	transform->SetRotation(Quaternion::Identity);
 
 	const D3DXVECTOR3 InitPos = { 0.0f, 0.0f, -55.0f };
@@ -302,11 +304,16 @@ void PlayerActor::_SlowDownEnemyBullet()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
-	if (other->Tag() == "EnemyBullet")
+	if (isInvincible)
+		return;
+
+	const std::string tag = other->Tag();
+	if (tag == "EnemyBullet" || tag == "Enemy")
 	{
 		collider->SetActive(false);
 		enableMove = false;
 		enableShot = false;
+		isInvincible = true;
 	}
 
 	onColliderHit(other);
@@ -320,4 +327,9 @@ void PlayerActor::OnFinishInitMove()
 	collider->SetActive(true);
 	enableMove = true;
 	enableShot = true;
+
+	TaskManager::Instance()->CreateDelayedTask(300.0f, false, [this]()
+	{
+		isInvincible = false;
+	});
 }

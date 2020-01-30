@@ -67,6 +67,7 @@ private:
 
 	bool enableShot;
 	bool enableMove;
+	bool isInvincible;
 
 	int currentLevel;
 
