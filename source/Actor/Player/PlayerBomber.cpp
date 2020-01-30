@@ -62,7 +62,7 @@ void PlayerBomberActor::Update()
 
 	cntFrame += FixedTime::GetTimeScale();
 
-	const float Duration = 330.0f;
+	const float Duration = 270.0f;
 	if (cntFrame >= Duration)
 	{
 		Uninit();
