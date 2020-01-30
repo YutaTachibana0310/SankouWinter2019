@@ -15,6 +15,8 @@
 static変数
 ***************************************/
 const int RankingText::SizeFont = 100;
+static const D3DXCOLOR DefaultOutlineColor = { 0.2f, 0.5f, 1.0f, 1.0f };
+static const D3DXCOLOR HighlightOutlineColor = { 1.0f, 0.2f, 0.2f, 1.0f};
 
 /**************************************
 コンストラクタ
@@ -33,7 +35,7 @@ RankingText::RankingText() :
 	scoreText->SetLocalPosition({ 250.0f, 0.0f, 0.0f });
 	scoreText->SetHorizontalAlignment(HorizontalAlignment::Left);
 	scoreText->UseOutLine(true);
-	scoreText->SetOutlineColor(D3DXCOLOR(0.5f, 0.8f, 1.0f, 1.0f));
+	scoreText->SetOutlineColor(DefaultOutlineColor);
 	scoreText->SetOutlineWidth(3);
 }
 
@@ -100,14 +102,15 @@ void RankingText::SetScore(const RankingInfo & info)
 
 	if (info.IsPlayerScore())
 	{
-		score += "YOU!!";
-		SetColor(D3DXCOLOR(255.0f, 100.0f, 100.0f, 255.0f));
-		scoreText->SetColor(D3DXCOLOR(255.0f, 100.0f, 100.0f, 255.0f));
+		score += "  YOU!";
+
+		SetOutlineColor(HighlightOutlineColor);
+		scoreText->SetOutlineColor(HighlightOutlineColor);
 	}
 	else
 	{
-		SetColor(D3DXCOLOR(255.0f, 255.0f, 255.0f, 255.0f));
-		scoreText->SetColor(D3DXCOLOR(255.0f, 255.0f, 255.0f, 255.0f));
+		SetOutlineColor(DefaultOutlineColor);
+		scoreText->SetOutlineColor(DefaultOutlineColor);
 	}
 
 	SetText(rankingText);
