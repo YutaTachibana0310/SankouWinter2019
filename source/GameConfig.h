@@ -20,6 +20,7 @@ public:
 		Game,
 		Title,
 		Result,
+		Tutorial,
 		SceneMax
 	};
 

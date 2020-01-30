@@ -1,16 +1,15 @@
 //=====================================
 //
-//DemoEnemyActor.h
-//機能:でもエネミーアクター
+//TutorialEnemy.h
+//機能:チュートリアル用エネミー
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _DEMOENEMYACTOR_H_
-#define _DEMOENEMYACTOR_H_
+#ifndef _TUTORIALENEMY_H_
+#define _TUTORIALENEMY_H_
 
 #include "../../../main.h"
-#include "../../../Framework/Pattern/BaseState.h"
-#include "Base/BaseMiddleEnemy.h"
+#include "Base\BaseMiddleEnemy.h"
 
 /**************************************
 前方宣言
@@ -20,25 +19,16 @@ class BaseEmitter;
 /**************************************
 クラス定義
 ***************************************/
-class DemoEnemyActor : public BaseMiddleEnemy
+class TutorialEnemyActor : public BaseMiddleEnemy
 {
 public:
-	DemoEnemyActor(EnemyEventHandler* handler);
-	~DemoEnemyActor();
+	TutorialEnemyActor(EnemyEventHandler* handler);
+	~TutorialEnemyActor();
 
 	void Init();
 	void Uninit();
 	void Update();
 	void Draw();
-
-	enum DemoState
-	{
-		InitState,
-		AttackState,
-		EscapeState,
-		WaitState,
-		MaxState
-	};
 
 private:
 	std::shared_ptr<Transform> shotTransformLeft;
@@ -47,18 +37,11 @@ private:
 	float cntFrame;
 	int cntAttack;
 
-	std::vector<BaseState<DemoEnemyActor, DemoState>*> fsm;
-	DemoState state;
+	bool enableAttack;
 
 	BaseEmitter *trailEmitterR;
 	BaseEmitter *trailEmitterL;
 
-	class DemoInit;
-	class DemoAttack;
-	class DemoWait;
-	class DemoEscape;
-
 	void ChangeState(int next);
 };
-
 #endif

@@ -267,6 +267,7 @@
     <ClCompile Include="source\Actor\Enemy\State\SnipeAttack.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeEscape.cpp" />
     <ClCompile Include="source\Actor\Enemy\State\SnipeInit.cpp" />
+    <ClCompile Include="source\Actor\Enemy\TutorialEnemy.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerActor.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBomber.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerBulletActor.cpp" />
@@ -285,6 +286,7 @@
     <ClCompile Include="source\Controller\EnemyTimeController.cpp" />
     <ClCompile Include="source\Controller\PlayerBulletController.cpp" />
     <ClCompile Include="source\Controller\PlayerController.cpp" />
+    <ClCompile Include="source\Controller\TutorialPlayerController.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyBulletVanish.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyDebris.cpp" />
     <ClCompile Include="source\Effect\Enemy\EnemyFlame.cpp" />
@@ -306,6 +308,7 @@
     <ClCompile Include="source\Handler\EnergyHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
     <ClCompile Include="source\Scene\ResultScene.cpp" />
+    <ClCompile Include="source\Scene\TutorialScene.cpp" />
     <ClCompile Include="source\Scene\TitleScene.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\Sound\SoundPlayer.cpp" />
@@ -326,6 +329,7 @@
     <ClCompile Include="source\Viewer\Title\PushViewer.cpp" />
     <ClCompile Include="source\Viewer\Title\TitleGear.cpp" />
     <ClCompile Include="source\Viewer\Title\TitleViewer.cpp" />
+    <ClCompile Include="source\Viewer\Tutorial\TutorialViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -479,6 +483,7 @@
     <ClInclude Include="source\Actor\Enemy\State\SnipeAttack.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeEscape.h" />
     <ClInclude Include="source\Actor\Enemy\State\SnipeInit.h" />
+    <ClInclude Include="source\Actor\Enemy\TutorialEnemy.h" />
     <ClInclude Include="source\Actor\Player\PlayerActor.h" />
     <ClInclude Include="source\Actor\Player\PlayerBomber.h" />
     <ClInclude Include="source\Actor\Player\PlayerBulletActor.h" />
@@ -497,6 +502,7 @@
     <ClInclude Include="source\Controller\EnemyTimeController.h" />
     <ClInclude Include="source\Controller\PlayerBulletController.h" />
     <ClInclude Include="source\Controller\PlayerController.h" />
+    <ClInclude Include="source\Controller\TutorialPlayerController.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyBulletVanish.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyDebris.h" />
     <ClInclude Include="source\Effect\Enemy\EnemyFlame.h" />
@@ -519,6 +525,7 @@
     <ClInclude Include="source\Handler\EnergyHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
     <ClInclude Include="source\Scene\ResultScene.h" />
+    <ClInclude Include="source\Scene\TutorialScene.h" />
     <ClInclude Include="source\Scene\TitleScene.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\Sound\SoundPlayer.h" />
@@ -540,6 +547,7 @@
     <ClInclude Include="source\Viewer\Title\PushViewer.h" />
     <ClInclude Include="source\Viewer\Title\TitleGear.h" />
     <ClInclude Include="source\Viewer\Title\TitleViewer.h" />
+    <ClInclude Include="source\Viewer\Tutorial\TutorialViewer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx">

@@ -22,6 +22,7 @@
 #include "../Actor/Enemy/FleetEnemy.h"
 #include "../Actor/Enemy/SnipeEnemyActor.h"
 #include "../Actor/Enemy/MiddleWayEnemy.h"
+#include "../Actor/Enemy/TutorialEnemy.h"
 
 #include <type_traits>
 #include <fstream>
@@ -153,7 +154,6 @@ void EnemyController::CheckEnemyDestroy()
 	});
 }
 
-
 /**************************************
 ハンドラー作成
 ***************************************/
@@ -188,4 +188,14 @@ void EnemyController::SetEnemyEventHandler(EnemyEventHandler *handler)
 	//enemy->SetPosition({ 0.0f, -50.0f, 30.0f });
 	//enemy->Init();
 	//enemyContainer.push_back(enemy);
+}
+
+/**************************************
+チュートリアル用エネミー作成
+***************************************/
+void EnemyController::CreateTutorialEnemy()
+{
+	TutorialEnemyActor *actor = new TutorialEnemyActor(enemyEventHandler);
+	actor->Init();
+	enemyContainer.push_back(actor);
 }
