@@ -7,8 +7,9 @@
 //=====================================
 #include "ScoreViewer.h"
 #include "../../../Framework/Renderer2D/TextViewer.h"
-
 #include "../../../Framework/Tool/DebugWindow.h"
+
+#include "../../System/GameScore.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -26,7 +27,7 @@ ScoreViewer::ScoreViewer()
 	num->SetHorizontalAlignment(TextViewer::HorizontalAlignment::Right);
 
 	caption->SetText("SCORE");
-	num->SetText("999,999,999,999");
+	num->SetText("0");
 
 	caption->UseOutLine(true);
 	caption->SetOutlineColor(D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.0f));
@@ -50,7 +51,7 @@ ScoreViewer::~ScoreViewer()
 ***************************************/
 void ScoreViewer::Update()
 {
-
+	SetScore(GameScore::Instance()->Score());
 }
 
 /**************************************

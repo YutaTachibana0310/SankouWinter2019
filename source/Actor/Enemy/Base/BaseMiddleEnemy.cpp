@@ -9,6 +9,7 @@
 #include "../../../Effect/GameParticleManager.h"
 #include "../../../Sound/SoundPlayer.h"
 #include "../../../../Framework/Camera/Camera.h"
+#include "../../../System/GameScore.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -24,6 +25,7 @@ void BaseMiddleEnemy::Explode()
 
 	GameParticleManager::Instance()->GenerateEnemyExplosion(transform->GetPosition());
 	SoundPlayer::Instance()->Play("MiddleExplosion");
+	GameScore::Instance()->AddScore(1000);
 }
 
 /**************************************

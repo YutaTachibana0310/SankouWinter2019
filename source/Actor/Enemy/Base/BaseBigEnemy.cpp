@@ -11,6 +11,7 @@
 #include "../../../../Framework/Camera/Camera.h"
 
 #include "../../../Handler/EnemyEventHandler.h"
+#include "../../../System/GameScore.h"
 
 /*************************************
 コンストラクタ
@@ -30,6 +31,7 @@ void BaseBigEnemy::Uninit()
 	SoundPlayer::Instance()->Play("BigExplosion");
 	handle->VanishAllBullet();
 	handle->SlowdownEnemy();
+	GameScore::Instance()->AddScore(5000);
 }
 
 /**************************************

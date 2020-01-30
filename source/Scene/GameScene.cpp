@@ -31,6 +31,8 @@
 #include "../Handler/EnemyEventHandler.h"
 #include "../Handler/EnergyHandler.h"
 
+#include "../System/GameScore.h"
+
 /**************************************
 staticƒƒ“ƒo
 ***************************************/
@@ -42,6 +44,8 @@ const float GameScene::BloomThrethold[] = { 0.4f, 0.3f, 0.24f };		//ƒuƒ‹[ƒ€‚ğ‚©
 ***************************************/
 void GameScene::Init()
 {
+	GameScore::Instance()->Init();
+
 	ResourceManager::Instance()->LoadMesh("Planet", "data/MODEL/Planet/GreyMoon.x");
 
 	particleManager = GameParticleManager::Instance();
@@ -100,6 +104,8 @@ void GameScene::Uninit()
 	particleManager->Uninit();
 
 	sceneCamera = nullptr;
+
+	GameScore::Instance()->Save();
 }
 
 /**************************************

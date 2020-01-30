@@ -11,6 +11,7 @@
 #include "../../../Sound/SoundPlayer.h"
 #include "../../../Handler/EnemyEventHandler.h"
 #include "../../../Effect/GameParticleManager.h"
+#include "../../../System/GameScore.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -29,6 +30,8 @@ void BaseSmallEnemy::Explode()
 
 	if (generateItem)
 		handle->GeneratePowerupItem(transform->GetPosition());
+
+	GameScore::Instance()->AddScore(50);
 }
 
 /**************************************

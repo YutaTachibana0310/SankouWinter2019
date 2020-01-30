@@ -18,6 +18,9 @@ namespace String
 	***************************************/
 	void Split(std::vector<std::string>& out, std::string& str, const char delim);
 
+	/**************************************
+	•¶š—ñ•ªŠ„ŠÖ”
+	***************************************/
 }
 
 #endif

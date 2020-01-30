@@ -12,6 +12,7 @@
 #include "../../../Framework/Collider/BoxCollider3D.h"
 
 #include "../../Effect/GameParticleManager.h"
+#include "../../System/GameScore.h"
 
 /**************************************
 staticƒƒ“ƒo
@@ -145,5 +146,6 @@ void PlayerBulletActor::OnColliderHit(ColliderObserver * other)
 {
 	active = false;
 	GameParticleManager::Instance()->Generate(GameEffect::PlayerBulletHit, transform->GetPosition());
+	GameScore::Instance()->AddScore(1);
 }
 
