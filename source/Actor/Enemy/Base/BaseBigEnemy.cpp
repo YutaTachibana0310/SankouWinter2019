@@ -31,8 +31,6 @@ void BaseBigEnemy::Uninit()
 	SoundPlayer::Instance()->Play("BigExplosion");
 	handle->VanishAllBullet();
 	handle->SlowdownEnemy();
-	GameScore::Instance()->AddScore(5000);
-	GameScore::Instance()->AddCombo();
 }
 
 /**************************************
@@ -42,8 +40,11 @@ void BaseBigEnemy::Explode()
 {
 	const auto ScreenPosition = Camera::MainCamera()->Projection(transform->GetPosition());
 	GameParticleManager::Instance()->GenerateEnergyEffect(ScreenPosition, 30.0f);
+	GameParticleManager::Instance()->GenerateEnergyEffect(ScreenPosition, 5000);
 
 	GameParticleManager::Instance()->GenerateEnemyBigExplosion(transform->GetPosition());
+
+	GameScore::Instance()->AddCombo();
 }
 
 /**************************************

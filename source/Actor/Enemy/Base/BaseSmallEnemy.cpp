@@ -27,11 +27,11 @@ void BaseSmallEnemy::Explode()
 
 	const D3DXVECTOR3 screenPos = Camera::MainCamera()->Projection(transform->GetPosition());
 	GameParticleManager::Instance()->GenerateEnergyEffect(screenPos, 0.1f);
+	GameParticleManager::Instance()->GenerateScoreEffect(screenPos, 50);
 
 	if (generateItem)
 		handle->GeneratePowerupItem(transform->GetPosition());
 
-	GameScore::Instance()->AddScore(50);
 	GameScore::Instance()->AddCombo();
 }
 
