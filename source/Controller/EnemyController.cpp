@@ -35,7 +35,8 @@ EnemyTween* EnemyTween::mInstance = nullptr;
 コンストラクタ
 ***************************************/
 EnemyController::EnemyController(GameCamera* gameCamera) :
-	gameCamera(gameCamera)
+	gameCamera(gameCamera),
+	enableGenerateEnemy(false)
 {
 	if (EnemyTween::mInstance == nullptr)
 		EnemyTween::mInstance = new EnemyTween();
@@ -64,15 +65,26 @@ EnemyController::~EnemyController()
 }
 
 /**************************************
+エネミー初期化処理
+***************************************/
+void EnemyController::Init()
+{
+	enableGenerateEnemy = true;
+}
+
+/**************************************
 更新処理
 ***************************************/
 void EnemyController::Update()
 {
 	//エネミーの生成
-	std::list<BaseEnemy*> newEnemy = factory->Create();
-	if (!newEnemy.empty())
+	if (enableGenerateEnemy)
 	{
-		enemyContainer.splice(enemyContainer.end(), newEnemy);
+		std::list<BaseEnemy*> newEnemy = factory->Create();
+		if (!newEnemy.empty())
+		{
+			enemyContainer.splice(enemyContainer.end(), newEnemy);
+		}
 	}
 
 	//更新

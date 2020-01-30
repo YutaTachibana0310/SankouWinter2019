@@ -42,8 +42,6 @@ const float GameScene::BloomThrethold[] = { 0.4f, 0.3f, 0.24f };		//ƒuƒ‹[ƒ€‚ð‚©
 ***************************************/
 void GameScene::Init()
 {
-	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop);
-
 	ResourceManager::Instance()->LoadMesh("Planet", "data/MODEL/Planet/GreyMoon.x");
 
 	particleManager = GameParticleManager::Instance();
@@ -74,6 +72,13 @@ void GameScene::Init()
 
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
+
+	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
+	{
+		playerController->Init();
+		enemyController->Init();
+	});
+
 }
 
 /**************************************

@@ -30,6 +30,7 @@ public:
 	PlayerController(GameCamera *camera, BackViewer *backViewer);
 	~PlayerController();
 
+	void Init();
 	void Update();
 	void Draw();
 	void DrawBullet();

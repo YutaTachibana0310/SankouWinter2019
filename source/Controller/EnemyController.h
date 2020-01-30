@@ -31,6 +31,7 @@ public:
 	EnemyController(GameCamera *gameCamera);
 	~EnemyController();
 
+	void Init();
 	void Update();
 	void Draw();
 	void DrawBullet();
@@ -49,6 +50,8 @@ private:
 	EnemyEventHandler* enemyEventHandler;
 
 	EnemyFactory *factory;
+
+	bool enableGenerateEnemy;
 };
 
 #endif

@@ -59,8 +59,6 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 
 	auto onSlowDownEnemyBullet = std::bind(&PlayerController::SlowDownEnemyBullet, this, std::placeholders::_1);
 	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
-
-	player->Init();
 }
 
 /**************************************
@@ -72,6 +70,14 @@ PlayerController::~PlayerController()
 	SAFE_DELETE(bulletController);
 
 	Utility::DeleteContainer(itemContainer);
+}
+
+/**************************************
+ƒvƒŒƒCƒ„[‰Šú‰»
+***************************************/
+void PlayerController::Init()
+{
+	player->Init();
 }
 
 /**************************************
