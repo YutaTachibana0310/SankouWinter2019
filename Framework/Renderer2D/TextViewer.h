@@ -45,19 +45,16 @@ public:
 	TextViewer(const char* fontName, int size);
 
 	//デストラクタ
-	~TextViewer();
+	virtual ~TextViewer();
 
 	//描画処理
-	void Draw(void);
-
-	//座標セット処理
-	void SetPos(int x, int y);
+	virtual void Draw(void);
 
 	//カラーセット処理
-	void SetColor(const D3DXCOLOR& color);
+	virtual void SetColor(const D3DXCOLOR& color);
 
 	//表示テキストセット処理
-	void SetText(const std::string& message);
+	virtual void SetText(const std::string& message);
 
 	//表示テキスト取得処理
 	std::string GetText() const;

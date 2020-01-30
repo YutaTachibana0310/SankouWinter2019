@@ -26,6 +26,8 @@ public:
 	RankingText();
 	~RankingText();
 
+	void Draw() override;
+
 	void MoveIn(float delay);
 
 	void SetScore(const RankingInfo& info);
@@ -33,6 +35,6 @@ public:
 	static const int SizeFont;
 
 private:
-
+	TextViewer * scoreText;
 };
 #endif

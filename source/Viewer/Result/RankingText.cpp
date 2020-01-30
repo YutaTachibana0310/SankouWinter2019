@@ -14,7 +14,7 @@
 /**************************************
 static変数
 ***************************************/
-const int RankingText::SizeFont = 120;
+const int RankingText::SizeFont = 100;
 
 /**************************************
 コンストラクタ
@@ -23,6 +23,18 @@ RankingText::RankingText() :
 	TextViewer("マキナス 4 Square", SizeFont)
 {
 	SetHorizontalAlignment(HorizontalAlignment::Left);
+	UseOutLine(true);
+	SetOutlineColor(D3DXCOLOR(0.5f, 0.8f, 1.0f, 1.0f));
+	SetOutlineWidth(3);
+
+	scoreText = new TextViewer("マキナス 4 Square", SizeFont);
+
+	AddChild(scoreText);
+	scoreText->SetLocalPosition({ 250.0f, 0.0f, 0.0f });
+	scoreText->SetHorizontalAlignment(HorizontalAlignment::Left);
+	scoreText->UseOutLine(true);
+	scoreText->SetOutlineColor(D3DXCOLOR(0.5f, 0.8f, 1.0f, 1.0f));
+	scoreText->SetOutlineWidth(3);
 }
 
 /**************************************
@@ -30,6 +42,16 @@ RankingText::RankingText() :
 ***************************************/
 RankingText::~RankingText()
 {
+	SAFE_DELETE(scoreText);
+}
+
+/**************************************
+描画処理
+***************************************/
+void RankingText::Draw()
+{
+	scoreText->Draw();
+	TextViewer::Draw();
 }
 
 /**************************************
@@ -63,30 +85,31 @@ void RankingText::SetScore(const RankingInfo & info)
 	const int Rank = info.Rank();
 
 	if (Rank == 1)
-		rankingText += "1st ";
+		rankingText += "1st";
 	else if (Rank == 2)
-		rankingText += "2nd ";
+		rankingText += "2nd";
 	else if (Rank == 3)
-		rankingText += "3rd ";
+		rankingText += "3rd";
 	else
 	{
 		rankingText += std::to_string(Rank);
-		rankingText += "th ";
+		rankingText += "th";
 	}
 
-	rankingText += std::to_string(info.Score());
-	rankingText += " ";
+	std::string score = std::to_string(info.Score());
 
 	if (info.IsPlayerScore())
 	{
-		rankingText += "YOU!!";
+		score += "YOU!!";
 		SetColor(D3DXCOLOR(255.0f, 100.0f, 100.0f, 255.0f));
+		scoreText->SetColor(D3DXCOLOR(255.0f, 100.0f, 100.0f, 255.0f));
 	}
 	else
 	{
 		SetColor(D3DXCOLOR(255.0f, 255.0f, 255.0f, 255.0f));
+		scoreText->SetColor(D3DXCOLOR(255.0f, 255.0f, 255.0f, 255.0f));
 	}
 
 	SetText(rankingText);
-
+	scoreText->SetText(score);
 }

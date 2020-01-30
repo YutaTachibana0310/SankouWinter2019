@@ -43,7 +43,7 @@ public:
 		return isPlayerScore;
 	}
 
-	static const unsigned int RankingMax = 7;
+	static const unsigned int RankingMax = 10;
 
 private:
 	int rank;

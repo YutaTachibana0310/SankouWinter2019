@@ -19,15 +19,22 @@ RankingViewer::RankingViewer()
 {
 	rankingContainer.reserve(RankingInfo::RankingMax);
 
-	D3DXVECTOR3 textPosition = { 0.0f, 300.0f, 0.0f };
-	const float Offset = (float)RankingText::SizeFont;
+	const D3DXVECTOR3 InitPosition = { 10.0f, 350.0f, 0.0f };
+	const D3DXVECTOR3 Offset = { 30.0f, (float)RankingText::SizeFont * 1.6f , 0.0f };
+	D3DXVECTOR3 textPosition = InitPosition;
 
 	for (unsigned int i = 0; i < RankingInfo::RankingMax; i++)
 	{
+		if (i == RankingInfo::RankingMax / 2)
+		{
+			textPosition = InitPosition;
+			textPosition.x += SCREEN_CENTER_X;
+		}
+
 		RankingText *ptr = new RankingText();
 		ptr->SetPosition(textPosition);
 
-		textPosition += Vector3::Up * Offset;
+		textPosition += Offset;
 
 		rankingContainer.push_back(ptr);
 	}

@@ -71,14 +71,6 @@ void TextViewer::Draw(void)
 /**************************************
 座標セット処理
 ***************************************/
-void TextViewer::SetPos(int x, int y)
-{
-	transform->SetPosition({ (float)x, (float)y, 0.0f });
-}
-
-/**************************************
-座標セット処理
-***************************************/
 void TextViewer::SetColor(const D3DXCOLOR & color)
 {
 	this->color = color;
