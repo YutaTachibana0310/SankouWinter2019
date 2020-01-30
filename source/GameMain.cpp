@@ -17,6 +17,7 @@
 #include "Sound/SoundPlayer.h"
 
 #include "Scene\GameScene.h"
+#include "Scene\TitleScene.h"
 
 /**************************************
 コンストラクタ
@@ -33,9 +34,9 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 
 	//シーンマネージャにシーンのインスタンスを追加
 	sceneManager->Add(GameConfig::SceneID::Game, new GameScene(renderTexture, renderSurface));
-
+	sceneManager->Add(GameConfig::SceneID::Title, new TitleScene(renderTexture, renderSurface));
 	//初期シーンに遷移
-	const int InitScene = GameConfig::SceneID::Game;
+	const int InitScene = GameConfig::SceneID::Title;
 	sceneManager->ChangeScene(InitScene);
 }
 

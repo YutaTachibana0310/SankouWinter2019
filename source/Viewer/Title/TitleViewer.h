@@ -1,35 +1,34 @@
 //=====================================
 //
-//TitleScene.h
-//機能:タイトルシーン
+//TitleViewer.h
+//機能:タイトルビューワ
 //Author:GP12B332 21 立花雄太
 //
 //=====================================
-#ifndef _TITLESCENE_H_
-#define _TITLESCENE_H_
+#ifndef _TITLEVIEWER_H_
+#define _TITLEVIEWER_H_
 
-#include "../../main.h"
-#include "../../Framework/Core/BaseScene.h"
+#include "../../../main.h"
 
 /**************************************
 前方宣言
 ***************************************/
-class TitleViewer;
+class Polygon2D;
 
 /**************************************
 クラス定義
 ***************************************/
-class TitleScene : public BaseScene
+class TitleViewer
 {
-	using BaseScene::BaseScene;
 public:
-	void Init();
-	void Uninit();
+	TitleViewer();
+	~TitleViewer();
+
 	void Update();
 	void Draw();
 
 private:
-	TitleViewer * viewer;
-
+	Polygon2D * titleLogo;
 };
+
 #endif

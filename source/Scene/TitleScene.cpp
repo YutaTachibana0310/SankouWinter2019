@@ -8,6 +8,8 @@
 #include "TitleScene.h"
 #include "../../Framework/Camera/Camera.h"
 
+#include "../Viewer/Title/TitleViewer.h"
+
 /**************************************
 
 ***************************************/
@@ -19,6 +21,8 @@ void TitleScene::Init()
 {
 	sceneCamera = new Camera();
 	Camera::SetMainCamera(sceneCamera);
+
+	viewer = new TitleViewer();
 }
 
 /**************************************
@@ -27,6 +31,7 @@ void TitleScene::Init()
 void TitleScene::Uninit()
 {
 	SAFE_DELETE(sceneCamera);
+	SAFE_DELETE(viewer);
 }
 
 /**************************************
@@ -35,6 +40,7 @@ void TitleScene::Uninit()
 void TitleScene::Update()
 {
 	sceneCamera->Update();
+	viewer->Update();
 }
 
 /**************************************
@@ -43,4 +49,5 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	sceneCamera->Set();
+	viewer->Draw();
 }
