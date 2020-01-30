@@ -39,10 +39,15 @@ public:
 	enum State
 	{
 		Move,
+		MoveWait,
 		Attack,
+		AttackWait,
 		Slowdown,
+		SlowdownWait,
 		Bomber,
+		BomberWait,
 		Wait,
+		Finish,
 		Max
 	};
 
@@ -76,5 +81,7 @@ private:
 
 	State state;
 	State prevState;
+
+	int cntFrame;
 };
 #endif

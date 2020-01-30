@@ -26,7 +26,7 @@ TutorialViewer::TutorialViewer() :
 	bg = std::make_shared<Polygon2D>();
 	bg->LoadTexture("");
 	bg->SetSize({ 500.0f, 130.0f });
-	bg->SetColor(D3DXCOLOR(0.01f, 0.01f, 0.2f, 0.0f));
+	bg->SetColor(D3DXCOLOR(0.01f, 0.01f, 0.1f, 0.0f));
 
 	text = new TextViewer("マキナス 4 Square", 60);
 	

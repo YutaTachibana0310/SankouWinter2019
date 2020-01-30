@@ -28,6 +28,7 @@
 #include "../Handler/EnemyEventHandler.h"
 #include "../Handler/EnergyHandler.h"
 #include "../Viewer/Tutorial/TutorialViewer.h"
+#include "../System/GameInput.h"
 
 #include "../System/GameScore.h"
 
@@ -80,6 +81,7 @@ void TutorialScene::Init()
 	particleManager->RunUpdate();
 
 	state = State::Wait;
+	cntFrame = 0;
 }
 
 /**************************************
@@ -112,41 +114,76 @@ void TutorialScene::Update()
 	switch (state)
 	{
 	case Move:
-		tutorialViewer->Set(TutorialViewer::Move, [this]()
+		tutorialViewer->Set(TutorialViewer::Move, nullptr);
+		state = MoveWait;
+		break;
+
+	case MoveWait:
+		++cntFrame;
+		if (cntFrame == 270)
 		{
-			state = State::Attack;
-			playerController->EnableShot(true);
-		});
-		state = Wait;
+			cntFrame = 0;
+			state = Attack;
+		}
 		break;
 
 	case Attack:
-		tutorialViewer->Set(TutorialViewer::Attack, [this]()
+		playerController->EnableShot(true);
+		enemyController->CreateTutorialEnemy();
+		tutorialViewer->Set(TutorialViewer::Attack, nullptr);
+		state = AttackWait;
+		break;
+
+	case AttackWait:
+		if (GameInput::GetShotButtonPress())
+			++cntFrame;
+
+		if (cntFrame == 240)
 		{
-			state = State::Slowdown;
-			playerController->EnableSlowdown(true);
-		});
-		state = Wait;
+			cntFrame = 0;
+			state = Slowdown;
+		}
 		break;
 
 	case Slowdown:
-		tutorialViewer->Set(TutorialViewer::SlowDown, [this]()
+		playerController->EnableSlowdown(true);
+		tutorialViewer->Set(TutorialViewer::SlowDown, nullptr);
+		state = SlowdownWait;
+		break;
+
+	case SlowdownWait:
+		if (GameInput::GetSlowdownButtonPress())
+			++cntFrame;
+
+		if (cntFrame == 120)
 		{
-			state = State::Bomber;
-			playerController->EnableBomber(true);
-		});
-		state = Wait;
+			cntFrame = 0;
+			state = Bomber;
+		}
 		break;
 
 	case Bomber:
-		tutorialViewer->Set(TutorialViewer::Bomber, []()
+		tutorialViewer->Set(TutorialViewer::Bomber, nullptr);
+		playerController->EnableBomber(true);
+		state = BomberWait;
+		break;
+
+	case BomberWait:
+		if (GameInput::GetBomberButtonTrigger())
+		{
+			state = Finish;
+		}
+		break;
+
+	case Finish:
+		cntFrame++;
+		if (cntFrame == 300)
 		{
 			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 			{
 				SceneManager::ChangeScene(GameConfig::Game);
 			});
-		});
-		state = Wait;
+		}
 		break;
 	}
 
