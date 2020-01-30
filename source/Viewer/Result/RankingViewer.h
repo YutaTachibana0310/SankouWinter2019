@@ -17,6 +17,7 @@
 ***************************************/
 class RankingText;
 class RankingInfo;
+class Polygon2D;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -34,6 +35,8 @@ public:
 
 private:
 	std::vector<RankingText*> rankingContainer;
+
+	Polygon2D *caption;
 };
 
 #endif

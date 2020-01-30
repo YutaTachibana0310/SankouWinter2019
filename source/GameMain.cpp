@@ -28,6 +28,7 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 {
 	//ゲーム内で使用するフォントを読み込み
 	FontManager::Instance()->LoadFont("data/FONT/badfennec.otf");
+	FontManager::Instance()->LoadFont("data/FONT/Makinas-4-Square.otf");
 
 	//サウンド読み込み
 	MusicPlayer::Load();

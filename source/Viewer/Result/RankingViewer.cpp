@@ -6,6 +6,7 @@
 //
 //=====================================
 #include "RankingViewer.h"
+#include "../../../Framework/Renderer2D/Polygon2D.h"
 #include "RankingText.h"
 
 /**************************************
@@ -38,6 +39,11 @@ RankingViewer::RankingViewer()
 
 		rankingContainer.push_back(ptr);
 	}
+
+	caption = new Polygon2D();
+	caption->SetSize({ 400.0f, 100.0f });
+	caption->SetPosition({ SCREEN_CENTER_X, 100.0f, 0.0f });
+	caption->LoadTexture("data/TEXTURE/Viewer/Ranking.png");
 }
 
 /**************************************
@@ -46,6 +52,7 @@ RankingViewer::RankingViewer()
 RankingViewer::~RankingViewer()
 {
 	Utility::DeleteContainer(rankingContainer);
+	SAFE_DELETE(caption);
 }
 
 /**************************************
@@ -60,6 +67,8 @@ void RankingViewer::Update()
 ***************************************/
 void RankingViewer::Draw()
 {
+	caption->Draw();
+
 	for (auto&& ranking : rankingContainer)
 	{
 		ranking->Draw();

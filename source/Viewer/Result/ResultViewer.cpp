@@ -43,12 +43,5 @@ void ResultViewer::Update()
 ***************************************/
 void ResultViewer::Draw()
 {
-	LPDIRECT3DDEVICE9 pDevice = GetDevice();
-	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
-	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
-
 	bg->Draw();
-
-	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
-	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 }

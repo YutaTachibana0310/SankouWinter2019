@@ -70,8 +70,17 @@ void ResultScene::Update()
 void ResultScene::Draw()
 {
 	sceneCamera->Set();
+
+	LPDIRECT3DDEVICE9 pDevice = GetDevice();
+
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+
 	viewer->Draw();
 	rankViewer->Draw();
+
+	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 
 	bloom->Draw(renderTexture);
 }
