@@ -26,7 +26,7 @@ namespace Effect::Game
 		emitterContainer.resize(MaxEmitter, nullptr);
 		for (auto&& emitter : emitterContainer)
 		{
-			emitter = new BaseEmitter(5, 300.0f);
+			emitter = new BaseEmitter(5, 240.0f);
 			emitter->CreateParticleContainer<YellowBomber>(256);
 		}
 	}
@@ -82,7 +82,7 @@ namespace Effect::Game
 			transform->SetScale(Vector3::One * currentScale);
 		}
 
-		transform->Rotate(0.02f, Vector3::Forward);
+		transform->Rotate(0.2f, Vector3::Forward);
 	}
 
 }

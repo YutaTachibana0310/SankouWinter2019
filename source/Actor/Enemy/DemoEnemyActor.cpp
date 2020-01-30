@@ -92,7 +92,7 @@ void DemoEnemyActor::Init()
 		trailEmitterR->SetLocalPosition({ 0.0f, -2.0f, 2.2f });
 	}
 
-	hp = 70.0f;
+	hp = 60.0f;
 }
 
 /**************************************

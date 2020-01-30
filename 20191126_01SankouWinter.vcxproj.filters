@@ -187,6 +187,7 @@
     <ClCompile Include="source\Effect\Game\ScoreEffect.cpp" />
     <ClCompile Include="source\Effect\Game\YellowSpark.cpp" />
     <ClCompile Include="source\Effect\Game\YellowBomber.cpp" />
+    <ClCompile Include="source\Actor\Player\PlayerBomber.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -400,6 +401,7 @@
     <ClInclude Include="source\Effect\Game\ScoreEffect.h" />
     <ClInclude Include="source\Effect\Game\YellowSpark.h" />
     <ClInclude Include="source\Effect\Game\YellowBomber.h" />
+    <ClInclude Include="source\Actor\Player\PlayerBomber.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />
