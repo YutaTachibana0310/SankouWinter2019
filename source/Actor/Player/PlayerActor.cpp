@@ -33,6 +33,7 @@ const float PlayerActor::SpeedMove = 0.6f;
 const D3DXVECTOR3 PlayerActor::BorderMove = { 0.0f, 25.0f, 45.0f };
 const D3DXVECTOR3 PlayerActor::ShotPosition = { 0.0f, 0.0f, 5.0f };
 const float PlayerActor::MaxAngle = 40.0f;
+const D3DXVECTOR3 PlayerActor::InitPos = { 0.0f, 0.0f, -55.0f };
 
 /**************************************
 コンストラクタ
@@ -94,9 +95,9 @@ void PlayerActor::Init()
 	
 	transform->SetRotation(Quaternion::Identity);
 
-	const D3DXVECTOR3 InitPos = { 0.0f, 0.0f, -55.0f };
 	const D3DXVECTOR3 StartPos = { 0.0f, 0.0f, -20.0f };
 	auto callback = std::bind(&PlayerActor::OnFinishInitMove, this);
+	transform->SetPosition(InitPos);
 	Tween::Move(*this, InitPos, StartPos, 60.0f, EaseType::OutBack, false, callback);
 
 	currentLevel = -1;
@@ -121,6 +122,8 @@ void PlayerActor::Uninit()
 	}
 
 	trailEmitter->SetActive(false);
+
+	Tween::Move(*this, InitPos, 30.0f, EaseType::Linear, false);
 }
 
 /**************************************

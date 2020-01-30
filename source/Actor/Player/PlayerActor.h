@@ -84,6 +84,8 @@ private:
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
 	virtual void OnFinishInitMove();
+
+	static const D3DXVECTOR3 InitPos;
 };
 
 #endif
