@@ -22,5 +22,12 @@ public:
 		Result,
 		SceneMax
 	};
+
+	enum SaveKey
+	{
+		RecordNum,
+		Ranking,
+		CurrentScore
+	};
 };
 #endif

@@ -179,6 +179,7 @@
     <ClCompile Include="source\Viewer\Title\PushViewer.cpp" />
     <ClCompile Include="source\Scene\ResultScene.cpp" />
     <ClCompile Include="source\Viewer\Result\ResultViewer.cpp" />
+    <ClCompile Include="source\System\ScoreRanking.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -383,6 +384,7 @@
     <ClInclude Include="source\Viewer\Title\PushViewer.h" />
     <ClInclude Include="source\Scene\ResultScene.h" />
     <ClInclude Include="source\Viewer\Result\ResultViewer.h" />
+    <ClInclude Include="source\System\ScoreRanking.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

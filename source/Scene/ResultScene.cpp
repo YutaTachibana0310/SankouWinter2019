@@ -9,6 +9,8 @@
 #include "../../Framework/Camera/Camera.h"
 
 #include "../Viewer/Result/ResultViewer.h"
+#include "../System/ScoreRanking.h"
+#include "../Viewer/Result/RankingViewer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -23,6 +25,13 @@ void ResultScene::Init()
 	Camera::SetMainCamera(sceneCamera);
 
 	viewer = new ResultViewer();
+	ranking = new ScoreRanking();
+	rankViewer = new RankingViewer();
+
+	ranking->CheckUpdate();
+
+	auto rankingContainer = ranking->GetRanking();
+	rankViewer->SetRanking(rankingContainer);
 }
 
 /**************************************
@@ -32,6 +41,8 @@ void ResultScene::Uninit()
 {
 	SAFE_DELETE(sceneCamera);
 	SAFE_DELETE(viewer);
+	SAFE_DELETE(ranking);
+	SAFE_DELETE(rankViewer);
 }
 
 /**************************************
@@ -41,6 +52,7 @@ void ResultScene::Update()
 {
 	sceneCamera->Update();
 	viewer->Update();
+	rankViewer->Update();
 }
 
 /**************************************
@@ -50,4 +62,5 @@ void ResultScene::Draw()
 {
 	sceneCamera->Set();
 	viewer->Draw();
+	rankViewer->Draw();
 }

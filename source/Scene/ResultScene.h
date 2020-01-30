@@ -15,6 +15,8 @@
 前方宣言
 ***************************************/
 class ResultViewer;
+class ScoreRanking;
+class RankingViewer;
 
 /**************************************
 クラス定義
@@ -30,5 +32,7 @@ public:
 
 private:
 	ResultViewer * viewer;
+	ScoreRanking *ranking;
+	RankingViewer *rankViewer;
 };
 #endif
