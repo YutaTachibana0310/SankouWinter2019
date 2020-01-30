@@ -264,6 +264,7 @@ void PlayerController::OnFinishCameraFocus()
 
 		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
 		{
+			cntBomb = PlayerController::MaxBomb;
 			player->Init();
 		});
 	}
