@@ -27,6 +27,7 @@ class TutorialPlayerController;
 class BackViewer;
 class EnemyEventHandler;
 class TutorialViewer;
+class SkyBox;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -78,6 +79,8 @@ private:
 	EnemyEventHandler *handler;
 
 	TutorialViewer *tutorialViewer;
+
+	SkyBox *skybox;
 
 	State state;
 	State prevState;

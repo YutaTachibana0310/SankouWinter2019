@@ -14,6 +14,7 @@
 #include "../../Framework/Input/input.h"
 #include "../../Framework/Transition/TransitionController.h"
 #include "../../Framework/Core/SceneManager.h"
+#include "../../Framework/Renderer3D/SkyBox.h"
 
 #include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
@@ -29,7 +30,6 @@
 #include "../Handler/EnergyHandler.h"
 #include "../Viewer/Tutorial/TutorialViewer.h"
 #include "../System/GameInput.h"
-
 #include "../System/GameScore.h"
 
 /**************************************
@@ -59,6 +59,12 @@ void TutorialScene::Init()
 	viewer = new GameViewer();
 	handler = new EnemyEventHandler();
 	tutorialViewer = new TutorialViewer();
+	skybox = new SkyBox({ 5000.0f, 2000.0f, 2000.0f });
+
+	for (int i = 0; i < SkyBox::Surface::Max; i++)
+	{
+		skybox->LoadTexture("data/TEXTURE/Skybox/TutorialGrid.jpg", SkyBox::Surface(i));
+	}
 
 	auto energyHandler = std::make_shared<EnergyHandler>(playerController);
 	particleManager->CreateEnergyEffectController(energyHandler);
@@ -99,6 +105,7 @@ void TutorialScene::Uninit()
 		SAFE_DELETE(backViewer);
 		SAFE_DELETE(handler);
 		SAFE_DELETE(tutorialViewer);
+		SAFE_DELETE(skybox);
 
 		particleManager->Uninit();
 
@@ -214,6 +221,8 @@ void TutorialScene::Update()
 void TutorialScene::Draw()
 {
 	Camera::MainCamera()->Set();
+
+	skybox->Draw();
 
 	backViewer->Draw();
 

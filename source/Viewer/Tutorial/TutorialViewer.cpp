@@ -101,7 +101,7 @@ void TutorialViewer::Set(State state, const std::function<void()>& callback)
 	}
 
 	Tween::To(textAlpha, 1.0f, 60.0f, EaseType::Linear, true);
-	Tween::Fade(bg, 0.0f, 0.5f, 60.0f,  EaseType::Linear, true, onFinisheFadeIn);
+	Tween::Fade(bg, 0.0f, 0.8f, 60.0f,  EaseType::Linear, true, onFinisheFadeIn);
 }
 
 /**************************************
@@ -112,6 +112,6 @@ void TutorialViewer::_OnFinishFadeIn()
 	TaskManager::Instance()->CreateDelayedTask(150.0f, true, [this]()
 	{
 		Tween::To(textAlpha, 0.0f, 60.0f, EaseType::Linear, true);
-		Tween::Fade(bg, 0.5f, 0.0f, 60.0f, EaseType::Linear, true, callback);
+		Tween::Fade(bg, 0.8f, 0.0f, 60.0f, EaseType::Linear, true, callback);
 	});
 }
