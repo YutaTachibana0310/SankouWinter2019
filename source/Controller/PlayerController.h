@@ -69,5 +69,6 @@ private:
 	void SlowDownEnemyBullet(bool isSlow);
 	void CollisionPlayer(ColliderObserver* other);
 	void OnFinishCameraFocus();
+	void FireBomber();
 };
 #endif

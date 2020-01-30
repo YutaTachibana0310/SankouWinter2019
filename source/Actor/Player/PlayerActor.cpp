@@ -147,6 +147,8 @@ void PlayerActor::Update()
 
 	_SlowDownEnemyBullet();
 
+	_FireBomber();
+
 	turretRoot->Update();
 	for (auto&& turret : turretContainer)
 	{
@@ -324,10 +326,25 @@ void PlayerActor::_Shot()
 void PlayerActor::_SlowDownEnemyBullet()
 {
 	if (!enableShot)
+	{
 		onSlowdownEnemyBullet(false);
+		return;
+	}
 
-	bool input = Keyboard::GetPress(DIK_C);
+	bool input = GameInput::GetSlowdownButtonPress();
 	onSlowdownEnemyBullet(input);
+}
+
+/**************************************
+É{ÉìÉoÅ[î≠éÀ
+***************************************/
+void PlayerActor::_FireBomber()
+{
+	if (!enableShot)
+		return;
+
+	if(GameInput::GetBomberButtonTrigger())
+		onFireBomber();
 }
 
 /**************************************
@@ -348,7 +365,6 @@ void PlayerActor::OnColliderHit(ColliderObserver * other)
 			isInvincible = true;
 		}
 	}
-
 }
 
 /**************************************

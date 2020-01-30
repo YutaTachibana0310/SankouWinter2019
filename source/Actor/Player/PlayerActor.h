@@ -50,7 +50,7 @@ public:
 	std::function<void(ColliderObserver* other)> onColliderHit;
 	std::function<void(bool slowDown)> onSlowdownEnemyBullet;
 	std::function<void()> onFireBomber;
-
+	
 	static const float SpeedMove;
 	static const D3DXVECTOR3 BorderMove;
 	static const D3DXVECTOR3 ShotPosition;
@@ -81,6 +81,7 @@ private:
 	void _Rotate(float dir);
 	void _Shot();
 	void _SlowDownEnemyBullet();
+	void _FireBomber();
 
 	virtual void OnColliderHit(ColliderObserver * other) override;
 	virtual void OnFinishInitMove();

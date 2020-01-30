@@ -61,6 +61,9 @@ PlayerController::PlayerController(GameCamera *camera, BackViewer *backViewer) :
 
 	auto onSlowDownEnemyBullet = std::bind(&PlayerController::SlowDownEnemyBullet, this, std::placeholders::_1);
 	player->onSlowdownEnemyBullet = onSlowDownEnemyBullet;
+
+	auto onFireBomber = std::bind(&PlayerController::FireBomber, this);
+	player->onFireBomber = onFireBomber;
 }
 
 /**************************************
@@ -261,4 +264,22 @@ void PlayerController::OnFinishCameraFocus()
 	}
 
 	player->Uninit();
+}
+
+/**************************************
+ƒ{ƒ“ƒo[”­Ë
+***************************************/
+void PlayerController::FireBomber()
+{
+	if (cntBomb <= 0)
+		return;
+
+	--cntBomb;
+
+	D3DXVECTOR3 playerPos = player->GetPosition();
+	
+	playerPos.z = Math::Clamp(-40.0f, 40.0f, playerPos.z + 20.0f);
+
+	GameParticleManager::Instance()->GenerareBomber(playerPos);
+
 }
