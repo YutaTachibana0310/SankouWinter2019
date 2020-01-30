@@ -13,16 +13,15 @@
 /**************************************
 グローバル変数
 ***************************************/
-const unsigned ScoreRanking::RankingMax = 5;
 
 /**************************************
 コンストラクタ
 ***************************************/
 ScoreRanking::ScoreRanking()
 {
-	scoreContainer.reserve(RankingMax);
+	scoreContainer.reserve(RankingInfo::RankingMax);
 	const std::string BaseSaveKey = std::string(NAMEOF_ENUM(GameConfig::SaveKey::Ranking));
-	for (unsigned int i = 0; i < 5; i++)
+	for (unsigned int i = 0; i < RankingInfo::RankingMax; i++)
 	{
 		std::string saveKey = BaseSaveKey;
 		saveKey += std::to_string(i);
@@ -32,7 +31,7 @@ ScoreRanking::ScoreRanking()
 		if (score != 0)
 			scoreContainer.push_back(RankingInfo(i + 1, score, false));
 		else
-			scoreContainer.push_back(RankingInfo(i + 1, 200000 * (RankingMax - i), false));
+			scoreContainer.push_back(RankingInfo(i + 1, 200000 * (RankingInfo::RankingMax - i), false));
 	}
 }
 
@@ -75,7 +74,7 @@ void ScoreRanking::CheckUpdate()
 
 	for (unsigned int i = 0; i < scoreContainer.size(); i++)
 	{
-		scoreContainer[i] = RankingInfo(i, scoreContainer[i].Score(), scoreContainer[i].IsPlayerScore());
+		scoreContainer[i] = RankingInfo(i + 1, scoreContainer[i].Score(), scoreContainer[i].IsPlayerScore());
 	}
 }
 

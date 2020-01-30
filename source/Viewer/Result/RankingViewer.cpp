@@ -17,13 +17,12 @@
 ***************************************/
 RankingViewer::RankingViewer()
 {
-	const unsigned int RankingMax = 5;
-	rankingContainer.reserve(RankingMax);
+	rankingContainer.reserve(RankingInfo::RankingMax);
 
 	D3DXVECTOR3 textPosition = { 0.0f, 300.0f, 0.0f };
-	const float Offset = 100.0f;
+	const float Offset = (float)RankingText::SizeFont;
 
-	for (unsigned int i = 0; i < RankingMax; i++)
+	for (unsigned int i = 0; i < RankingInfo::RankingMax; i++)
 	{
 		RankingText *ptr = new RankingText();
 		ptr->SetPosition(textPosition);

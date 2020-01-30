@@ -30,6 +30,8 @@ public:
 
 	void SetScore(const RankingInfo& info);
 
+	static const int SizeFont;
+
 private:
 
 };

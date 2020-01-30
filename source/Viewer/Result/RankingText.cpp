@@ -12,10 +12,15 @@
 #include "../../System/RankingInfo.h"
 
 /**************************************
+static変数
+***************************************/
+const int RankingText::SizeFont = 120;
+
+/**************************************
 コンストラクタ
 ***************************************/
 RankingText::RankingText() :
-	TextViewer("マキナス 4 Square", 80)
+	TextViewer("マキナス 4 Square", SizeFont)
 {
 	SetHorizontalAlignment(HorizontalAlignment::Left);
 }
