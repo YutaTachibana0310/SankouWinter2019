@@ -323,6 +323,8 @@ void PlayerActor::_SlowDownEnemyBullet()
 ***************************************/
 void PlayerActor::OnColliderHit(ColliderObserver * other)
 {
+	onColliderHit(other);
+
 	const std::string tag = other->Tag();
 	if (tag == "EnemyBullet" || tag == "Enemy")
 	{
@@ -335,7 +337,6 @@ void PlayerActor::OnColliderHit(ColliderObserver * other)
 		}
 	}
 
-	onColliderHit(other);
 }
 
 /**************************************
