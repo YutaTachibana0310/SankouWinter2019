@@ -298,6 +298,7 @@
     <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
     <ClCompile Include="source\Handler\EnergyHandler.cpp" />
     <ClCompile Include="source\Scene\GameScene.cpp" />
+    <ClCompile Include="source\Scene\TitleScene.cpp" />
     <ClCompile Include="source\Sound\MusicPlayer.cpp" />
     <ClCompile Include="source\Sound\SoundPlayer.cpp" />
     <ClCompile Include="source\System\EnemyTween.cpp" />
@@ -494,6 +495,7 @@
     <ClInclude Include="source\Handler\EnemyEventHandler.h" />
     <ClInclude Include="source\Handler\EnergyHandler.h" />
     <ClInclude Include="source\Scene\GameScene.h" />
+    <ClInclude Include="source\Scene\TitleScene.h" />
     <ClInclude Include="source\Sound\MusicPlayer.h" />
     <ClInclude Include="source\Sound\SoundPlayer.h" />
     <ClInclude Include="source\System\EnemyTween.h" />
