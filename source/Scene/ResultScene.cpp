@@ -9,6 +9,7 @@
 #include "../../Framework/Camera/Camera.h"
 #include "../../Framework/PostEffect/BloomController.h"
 #include "../../Framework/Tool/DebugWindow.h"
+#include "../../Framework/Tween/Tween.h"
 
 #include "../Viewer/Result/ResultViewer.h"
 #include "../System/ScoreRanking.h"
@@ -17,8 +18,9 @@
 /**************************************
 グローバル変数
 ***************************************/
-const float BloomPower[] = { 0.9f, 0.9f, 0.2f };		//ブルームの強さ
-const float BloomThrethold[] = { 0.95f, 0.95f, 0.95f };		//ブルームをかける輝度の閾値
+static const float BloomPower[] = { 0.9f, 0.9f, 0.3f };		//ブルームの強さ
+static const float BloomThrethold[] = { 0.95f, 0.95f, 0.95f };		//ブルームをかける輝度の閾値
+static const float BlinkDuraiton = 120.0f;
 
 /**************************************
 初期化処理
@@ -27,6 +29,12 @@ void ResultScene::Init()
 {
 	sceneCamera = new Camera();
 	Camera::SetMainCamera(sceneCamera);
+
+	onFinishBlinkIn = std::bind(&ResultScene::OnFinishBlinkIn, this);
+	onFinishBlinkOut = std::bind(&ResultScene::OnFinishBlinkOut, this);
+
+	bloomPower = std::make_shared<float>();
+	*bloomPower = 1.0f;
 
 	viewer = new ResultViewer();
 	ranking = new ScoreRanking();
@@ -41,6 +49,8 @@ void ResultScene::Init()
 	auto rankingContainer = ranking->GetRanking();
 	rankViewer->SetRanking(rankingContainer);
 	rankViewer->MoveIn();
+
+	OnFinishBlinkIn();
 }
 
 /**************************************
@@ -53,6 +63,7 @@ void ResultScene::Uninit()
 	SAFE_DELETE(ranking);
 	SAFE_DELETE(rankViewer);
 	SAFE_DELETE(bloom);
+	bloomPower.reset();
 }
 
 /**************************************
@@ -63,6 +74,8 @@ void ResultScene::Update()
 	sceneCamera->Update();
 	viewer->Update();
 	rankViewer->Update();
+
+	bloom->SetPower(BloomPower[0] * *bloomPower, BloomPower[1] * *bloomPower, BloomPower[2] * *bloomPower);
 }
 
 /**************************************
@@ -84,4 +97,20 @@ void ResultScene::Draw()
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 
 	bloom->Draw(renderTexture);
+}
+
+/**************************************
+ブルーム点滅コールバック
+***************************************/
+void ResultScene::OnFinishBlinkIn()
+{
+	Tween::To(bloomPower, 0.5f, BlinkDuraiton, EaseType::Linear, true, onFinishBlinkOut);
+}
+
+/**************************************
+ブルーム点滅コールバック
+***************************************/
+void ResultScene::OnFinishBlinkOut()
+{
+	Tween::To(bloomPower, 1.0f, BlinkDuraiton, EaseType::Linear, true, onFinishBlinkIn);
 }

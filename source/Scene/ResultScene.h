@@ -10,6 +10,7 @@
 
 #include "../../main.h"
 #include "../../Framework/Core/BaseScene.h"
+#include <functional>
 
 /**************************************
 ‘O•ûéŒ¾
@@ -36,5 +37,13 @@ private:
 	ScoreRanking *ranking;
 	RankingViewer *rankViewer;
 	BloomController *bloom;
+
+	std::shared_ptr<float> bloomPower;
+
+	void OnFinishBlinkIn();
+	void OnFinishBlinkOut();
+
+	std::function<void()> onFinishBlinkIn;
+	std::function<void()> onFinishBlinkOut;
 };
 #endif
