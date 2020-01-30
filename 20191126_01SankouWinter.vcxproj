@@ -272,6 +272,7 @@
     <ClCompile Include="source\Actor\Player\PlayerColliderViewer.cpp" />
     <ClCompile Include="source\Actor\Player\PlayerTurretActor.cpp" />
     <ClCompile Include="source\Actor\Player\PowerupItemActor.cpp" />
+    <ClCompile Include="source\Actor\Title\TitlePlayerActor.cpp" />
     <ClCompile Include="source\BackGround\GameSkybox.cpp" />
     <ClCompile Include="source\BackGround\PlanetActor.cpp" />
     <ClCompile Include="source\Camera\GameCamera.cpp" />
@@ -294,6 +295,7 @@
     <ClCompile Include="source\Effect\Game\PlayerBulletHIt.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerExplosion.cpp" />
     <ClCompile Include="source\Effect\Game\PlayerTrail.cpp" />
+    <ClCompile Include="source\Effect\TitleParticleManager.cpp" />
     <ClCompile Include="source\GameMain.cpp" />
     <ClCompile Include="source\Handler\EnemyEventHandler.cpp" />
     <ClCompile Include="source\Handler\EnergyHandler.cpp" />
@@ -470,6 +472,7 @@
     <ClInclude Include="source\Actor\Player\PlayerColliderViewer.h" />
     <ClInclude Include="source\Actor\Player\PlayerTurretActor.h" />
     <ClInclude Include="source\Actor\Player\PowerupItemActor.h" />
+    <ClInclude Include="source\Actor\Title\TitlePlayerActor.h" />
     <ClInclude Include="source\BackGround\GameSkybox.h" />
     <ClInclude Include="source\BackGround\PlanetActor.h" />
     <ClInclude Include="source\Camera\GameCamera.h" />
@@ -492,6 +495,7 @@
     <ClInclude Include="source\Effect\Game\PlayerBulletHit.h" />
     <ClInclude Include="source\Effect\Game\PlayerExplosion.h" />
     <ClInclude Include="source\Effect\Game\PlayerTrail.h" />
+    <ClInclude Include="source\Effect\TitleParticleManager.h" />
     <ClInclude Include="source\GameConfig.h" />
     <ClInclude Include="source\GameMain.h" />
     <ClInclude Include="source\Handler\EnemyEventHandler.h" />

@@ -16,6 +16,9 @@
 ***************************************/
 class TitleViewer;
 class GameSkybox;
+class TitlePlayerActor;
+class TitleParticleManager;
+class SkyBox;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -31,6 +34,8 @@ public:
 
 private:
 	TitleViewer * viewer;
-	GameSkybox *skybox;
+	TitlePlayerActor *actor;
+	TitleParticleManager *particleManager;
+	SkyBox *skybox;
 };
 #endif

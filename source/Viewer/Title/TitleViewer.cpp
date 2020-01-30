@@ -26,7 +26,7 @@ TitleViewer::TitleViewer()
 	titleLogo->SetPosition({ SCREEN_CENTER_X, 360.0f, 0.0f });
 
 	centerGear = new TitleGear();
-	centerGear->SetPosition({ SCREEN_CENTER_X, SCREEN_CENTER_Y, 0.0f });
+	centerGear->SetPosition({ SCREEN_CENTER_X, 360.0f, 0.0f });
 
 	
 	rightGear = new TitleGear();
