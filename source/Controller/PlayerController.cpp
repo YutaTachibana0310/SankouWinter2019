@@ -23,6 +23,7 @@
 #include "../System/GameScore.h"
 #include "../Actor/Player/PlayerBomber.h"
 #include "../Sound/SoundPlayer.h"
+#include "../System/GameInput.h"
 
 #include <algorithm>
 
@@ -211,6 +212,9 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 		EnemyTimeController::SlowDownBullet(true);
 		inSlow = true;
 		backViewer->SetGreenBG(true);
+
+		if(GameInput::GetSlowdownButtonTrigger())
+			SoundPlayer::Instance()->Play("Slowdown");
 	}
 	else
 	{
@@ -277,6 +281,7 @@ void PlayerController::OnFinishCameraFocus()
 		onGameOver();
 	}
 
+	SoundPlayer::Instance()->Play("PlayerExplosion");
 	player->Uninit();
 }
 

@@ -35,3 +35,11 @@ bool GameInput::GetSlowdownButtonPress()
 {
 	return Keyboard::GetPress(DIK_C) || GamePad::GetPress(0, BUTTON_Z);
 }
+
+/**************************************
+スロウダウンボタントリガー入力
+***************************************/
+bool GameInput::GetSlowdownButtonTrigger()
+{
+	return Keyboard::GetTrigger(DIK_C) || GamePad::GetTrigger(0, BUTTON_Z);
+}

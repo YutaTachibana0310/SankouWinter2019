@@ -27,6 +27,7 @@ public:
 	static bool GetShotButtonPress();
 	static bool GetBomberButtonTrigger();
 	static bool GetSlowdownButtonPress();
+	static bool GetSlowdownButtonTrigger();
 };
 
 #endif
