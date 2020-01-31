@@ -105,7 +105,7 @@ void RotateChargeEnemy::Update()
 	if (!enableHoming)
 	{
 		const auto CurrentPosition = transform->GetPosition();
-		if (CurrentPosition.x < -60.0f || CurrentPosition.y < -40.0f)
+		if (CurrentPosition.z < -60.0f || fabsf(CurrentPosition.y) > 40.0f)
 		{
 			Uninit();
 		}
