@@ -47,6 +47,8 @@ private:
 	float cntFrame;
 	int cntAttack;
 
+	bool enableAttack;
+
 	std::vector<MiddleWayState*> fsm;
 	State state;
 

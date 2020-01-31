@@ -35,8 +35,11 @@ MiddleWayEnemy::State MiddleWayEnemy::MiddleWayAttack::OnUpdate(MiddleWayEnemy &
 	{
 		const float WayAngle = 5.0f;
 
-		entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::RedRotate, 0.45f, 3, WayAngle * 2);
-		entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::BlueRotate, 0.2f, 2, WayAngle * 8);
+		if (entity.enableAttack)
+		{
+			entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::RedRotate, 0.45f, 3, WayAngle * 1);
+			entity.handle->SetWayBullet(*entity.shotTransform, EnemyBulletConfig::BlueRotate, 0.2f, 2, WayAngle * 6);
+		}
 
 		++entity.cntAttack;
 
@@ -44,6 +47,11 @@ MiddleWayEnemy::State MiddleWayEnemy::MiddleWayAttack::OnUpdate(MiddleWayEnemy &
 		if (entity.cntAttack > AttackMax)
 		{
 			entity.ChangeState(EscapeState);
+		}
+
+		if (entity.cntAttack % 3 == 0)
+		{
+			entity.enableAttack = !entity.enableAttack;
 		}
 	}
 
