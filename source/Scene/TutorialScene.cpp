@@ -15,6 +15,7 @@
 #include "../../Framework/Transition/TransitionController.h"
 #include "../../Framework/Core/SceneManager.h"
 #include "../../Framework/Renderer3D/SkyBox.h"
+#include "../../Framework/Renderer2D/RenderingTarget.h"
 
 #include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
@@ -52,6 +53,7 @@ void TutorialScene::Init()
 	sceneCamera = gameCamera = new GameCamera();
 	backViewer = new BackViewer();
 
+	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	playerController = new TutorialPlayerController(gameCamera, backViewer);
 	bloom = new BloomController();
 	enemyController = new EnemyController(gameCamera);
@@ -98,6 +100,7 @@ void TutorialScene::Uninit()
 {
 	particleManager->StopUpdate([this]()
 	{
+		SAFE_DELETE(bloomTarget);
 		SAFE_DELETE(gameCamera);
 		SAFE_DELETE(playerController);
 		SAFE_DELETE(bloom);
@@ -225,14 +228,20 @@ void TutorialScene::Draw()
 
 	backViewer->Draw();
 
+	bloomTarget->Set();
+
 	playerController->Draw();
 
 	enemyController->Draw();
 
 	playerController->DrawBullet();
 
+	bloomTarget->Restore();
+
+	bloomTarget->Draw();
+
 	//ƒuƒ‹[ƒ€‚ð‚©‚¯‚é
-	bloom->Draw(renderTexture);
+	bloom->Draw(bloomTarget->GetTexture());
 
 	particleManager->Draw();
 
