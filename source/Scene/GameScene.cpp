@@ -16,6 +16,7 @@
 #include "../../Framework/Input/input.h"
 #include "../../Framework/Transition/TransitionController.h"
 #include "../../Framework/Core/SceneManager.h"
+#include "../../Framework/Task/TaskManager.h"
 
 #include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
@@ -150,12 +151,16 @@ void GameScene::Update()
 	if (!isCleared && enemyController->IsClear())
 	{
 		isCleared = true;
-		viewer->PlayStageClear([]()
+		MusicPlayer::FadeOut(120);
+		
+		TaskManager::Instance()->CreateDelayedTask(120, true, [this]()
 		{
-			MusicPlayer::FadeOut(60);
-			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+			viewer->PlayStageClear([]()
 			{
-				SceneManager::ChangeScene(GameConfig::Result);
+				TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+				{
+					SceneManager::ChangeScene(GameConfig::Result);
+				});
 			});
 		});
 	}

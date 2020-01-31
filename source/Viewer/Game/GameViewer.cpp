@@ -13,6 +13,7 @@
 #include "BomberViewer.h"
 #include "LifeViewer.h"
 #include "GameTelop.h"
+#include "../../Sound/SoundPlayer.h"
 
 /**************************************
 ÉOÉçÅ[ÉoÉãïœêî
@@ -102,6 +103,7 @@ void GameViewer::SetParameter(const GameViewerParameter & param)
 void GameViewer::PlayGameStart(const std::function<void()>& callback)
 {
 	telop->Play(GameTelop::GameStart, callback);
+	SoundPlayer::Instance()->Play("GameStart");
 }
 
 /**************************************
@@ -110,6 +112,7 @@ void GameViewer::PlayGameStart(const std::function<void()>& callback)
 void GameViewer::PlayStageClear(const std::function<void()>& callback)
 {
 	telop->Play(GameTelop::StageClear, callback);
+	SoundPlayer::Instance()->Play("StageClear");
 }
 
 /**************************************
@@ -118,4 +121,5 @@ void GameViewer::PlayStageClear(const std::function<void()>& callback)
 void GameViewer::PlayGameOvert(const std::function<void()>& callback)
 {
 	telop->Play(GameTelop::GameOver, callback);
+	SoundPlayer::Instance()->Play("GameOver");
 }

@@ -24,6 +24,7 @@
 #include "../Actor/Player/PlayerBomber.h"
 #include "../Sound/SoundPlayer.h"
 #include "../System/GameInput.h"
+#include "../Sound/MusicPlayer.h"
 
 #include <algorithm>
 
@@ -278,7 +279,11 @@ void PlayerController::OnFinishCameraFocus()
 	}
 	else
 	{
-		onGameOver();
+		MusicPlayer::FadeOut(120);
+		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
+		{
+			onGameOver();
+		});
 	}
 
 	SoundPlayer::Instance()->Play("PlayerExplosion");
