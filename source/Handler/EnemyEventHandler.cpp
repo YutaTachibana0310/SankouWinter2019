@@ -107,7 +107,10 @@ void EnemyEventHandler::AddScore(int point)
 void EnemyEventHandler::SlowdownEnemy()
 {
 	if (!inSlowdown)
+	{
+		backViewer->PlayBeatEnemy();
 		return;
+	}
 
 	backViewer->PlayTimeBreak();
 	EnemyTimeController::SetTimeScale(0.01f);
@@ -164,5 +167,13 @@ void EnemyEventHandler::GivePlayerController(PlayerController * controller)
 void EnemyEventHandler::GiveBackViewer(BackViewer * viewer)
 {
 	backViewer = viewer;
+}
+
+/**************************************
+BeatEnemyÄ¶
+***************************************/
+void EnemyEventHandler::PlayBeatEnemy()
+{
+	backViewer->PlayBeatEnemy();
 }
 

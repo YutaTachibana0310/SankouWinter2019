@@ -37,6 +37,8 @@ public:
 
 	void PlayTimeBreak();
 	void PlayPowerUp();
+	void PlayBeatEnemy();
+	void PlayFireBom();
 	void SetGreenBG(bool state);
 
 private:

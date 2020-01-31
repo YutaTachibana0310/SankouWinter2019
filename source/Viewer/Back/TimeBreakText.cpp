@@ -25,7 +25,9 @@ const D3DXVECTOR3 TimeBreakText::LastPositionLower = { SCREEN_WIDTH * 1.5f, 830.
 
 static const char* TexturePath[] = {
 	"data/TEXTURE/Viewer/TimeBreak.png",
-	"data/TEXTURE/Viewer/PowerUp.png"
+	"data/TEXTURE/Viewer/PowerUp.png",
+	"data/TEXTURE/Viewer/BeatEnemy.png",
+	"data/TEXTURE/Viewer/FireBomber.png"
 };
 
 /**************************************

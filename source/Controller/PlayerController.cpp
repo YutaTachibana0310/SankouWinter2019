@@ -301,4 +301,6 @@ void PlayerController::FireBomber()
 	bomber->Init();
 
 	player->ActivateShield();
+
+	backViewer->PlayFireBom();
 }
