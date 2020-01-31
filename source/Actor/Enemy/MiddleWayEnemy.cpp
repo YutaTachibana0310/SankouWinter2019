@@ -67,6 +67,7 @@ void MiddleWayEnemy::Init()
 {
 	SetCollider(true);
 	active = true;
+	enableAttack = true;
 
 	hp = 70.0f;
 

@@ -192,6 +192,7 @@
     <ClCompile Include="source\Controller\TutorialPlayerController.cpp" />
     <ClCompile Include="source\Actor\Enemy\TutorialEnemy.cpp" />
     <ClCompile Include="source\Viewer\Tutorial\TutorialViewer.cpp" />
+    <ClCompile Include="source\Viewer\Game\GameTelop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\Animation\AnimationManager.h" />
@@ -410,6 +411,7 @@
     <ClInclude Include="source\Controller\TutorialPlayerController.h" />
     <ClInclude Include="source\Actor\Enemy\TutorialEnemy.h" />
     <ClInclude Include="source\Viewer\Tutorial\TutorialViewer.h" />
+    <ClInclude Include="source\Viewer\Game\GameTelop.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\BloomFilter.fx" />

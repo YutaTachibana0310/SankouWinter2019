@@ -6,6 +6,8 @@
 //
 //=====================================
 #include "BackViewer.h"
+#include "../../../Framework/Renderer2D/Polygon2D.h"
+#include "../../../Framework/Tween/Tween.h"
 #include "TimeBreakText.h"
 
 /**************************************
@@ -18,6 +20,12 @@
 BackViewer::BackViewer()
 {
 	timeBreak = new TimeBreakText();
+	greenBG = std::make_shared<Polygon2D>();
+	
+	greenBG->SetSize({ SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f });
+	greenBG->SetPosition({ SCREEN_CENTER_X, SCREEN_CENTER_Y, 0.0f });
+	greenBG->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.0f));
+	greenBG->LoadTexture("data/TEXTURE/Viewer/GreenBG.png");
 }
 
 /**************************************
@@ -26,6 +34,7 @@ BackViewer::BackViewer()
 BackViewer::~BackViewer()
 {
 	SAFE_DELETE(timeBreak);
+	greenBG.reset();
 }
 
 /**************************************
@@ -38,6 +47,8 @@ void BackViewer::Draw()
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 	pDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
+	greenBG->Draw();
 
 	timeBreak->Draw();
 
@@ -60,4 +71,19 @@ PowerUpÄ¶ˆ—
 void BackViewer::PlayPowerUp()
 {
 	timeBreak->Set(TimeBreakText::PowerUp);
+}
+
+/*************************************
+—Î”wŒiƒZƒbƒg
+***************************************/
+void BackViewer::SetGreenBG(bool state)
+{
+	if (state == greenBGstate)
+		return;
+
+	float alpha = state ? 1.0f : 0.0f;
+	float current = greenBG->GetDiffuse().a;
+
+	Tween::Fade(greenBG, current, alpha, 20.0f, EaseType::Linear, false);
+	greenBGstate = state;
 }

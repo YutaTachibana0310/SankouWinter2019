@@ -68,7 +68,7 @@ void EnemyFactory::Load(const char * path)
 ***************************************/
 std::list<BaseEnemy*> EnemyFactory::Create()
 {
-	count += EnemyTimeController::GetBulletTimeScale();
+	count += EnemyTimeController::GetTimeScale();
 	
 	std::list<BaseEnemy*> output;
 
@@ -104,6 +104,14 @@ std::list<BaseEnemy*> EnemyFactory::Create()
 	}
 
 	return output;
+}
+
+/**************************************
+ƒNƒŠƒA”»’è
+***************************************/
+bool EnemyFactory::IsFinished()
+{
+	return dataContainer.back()->Count() - count < -180.0f;
 }
 
 /**************************************

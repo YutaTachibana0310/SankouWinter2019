@@ -209,11 +209,13 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 		cntEnergy -= Math::Clamp(0.0f, MaxEnergy, 0.2f * FixedTime::GetTimeScale());
 		EnemyTimeController::SlowDownBullet(true);
 		inSlow = true;
+		backViewer->SetGreenBG(true);
 	}
 	else
 	{
 		EnemyTimeController::SlowDownBullet(false);
 		inSlow = false;
+		backViewer->SetGreenBG(false);
 	}
 }
 
@@ -267,6 +269,10 @@ void PlayerController::OnFinishCameraFocus()
 			cntBomb = PlayerController::MaxBomb;
 			player->Init();
 		});
+	}
+	else
+	{
+		onGameOver();
 	}
 
 	player->Uninit();

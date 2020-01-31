@@ -10,6 +10,7 @@
 
 #include "../../main.h"
 #include <vector>
+#include <functional>
 
 /**************************************
 ‘O•ûéŒ¾
@@ -48,6 +49,8 @@ public:
 	void SetPowerupItem(const D3DXVECTOR3& position);
 
 	void AddEnergy(float energy);
+
+	std::function<void()> onGameOver;
 
 protected:
 	PlayerActor * player;

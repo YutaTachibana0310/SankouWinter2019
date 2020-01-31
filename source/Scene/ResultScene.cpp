@@ -18,6 +18,7 @@
 #include "../Viewer/Result/ResultViewer.h"
 #include "../System/ScoreRanking.h"
 #include "../Viewer/Result/RankingViewer.h"
+#include "../Sound/MusicPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -60,6 +61,8 @@ void ResultScene::Init()
 		rankViewer->SetRanking(rankingContainer);
 		rankViewer->MoveIn();
 	});
+
+	MusicPlayer::FadeIn(ResultBGM, 60);
 }
 
 /**************************************
@@ -89,6 +92,7 @@ void ResultScene::Update()
 	if (!inTransition && Keyboard::GetTrigger(DIK_Z))
 	{
 		inTransition = true;
+		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 		{
 			SceneManager::ChangeScene(GameConfig::Title);

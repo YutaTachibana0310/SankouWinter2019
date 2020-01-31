@@ -135,8 +135,8 @@ void SceneManager::Uninit()
 		TaskManager::Instance()->ClearAll();
 
 		//NOTE:èdÇ¢Ç©Ç‡ÅH
-		BGM::Clear();
-		SE::Clear();
+		//BGM::Clear();
+		//SE::Clear();
 	}
 }
 

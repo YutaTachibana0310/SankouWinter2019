@@ -30,6 +30,8 @@ Polygon2D::Polygon2D() :
 		vtxWk[1].rhw =
 		vtxWk[2].rhw =
 		vtxWk[3].rhw = 1.0f;
+
+	diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 /**************************************
@@ -78,6 +80,8 @@ void Polygon2D::SetColor(D3DXCOLOR color)
 		vtxWk[1].diffuse =
 		vtxWk[2].diffuse =
 		vtxWk[3].diffuse = color;
+
+	diffuse = color;
 }
 
 /**************************************
@@ -104,6 +108,14 @@ void Polygon2D::LoadTexture(const char* path)
 	SAFE_RELEASE(texture);
 
 	ResourceManager::Instance()->GetTexture(path, texture);
+}
+
+/**************************************
+ディフューズ取得
+***************************************/
+D3DXCOLOR Polygon2D::GetDiffuse() const
+{
+	return vtxWk[0].diffuse;
 }
 
 /**************************************

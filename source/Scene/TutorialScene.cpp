@@ -31,6 +31,7 @@
 #include "../Viewer/Tutorial/TutorialViewer.h"
 #include "../System/GameInput.h"
 #include "../System/GameScore.h"
+#include "../Sound/MusicPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -47,8 +48,6 @@ void TutorialScene::Init()
 
 	particleManager = GameParticleManager::Instance();
 	particleManager->Init();
-
-	MusicPlayer::PlayBGM(GameBGM);
 
 	sceneCamera = gameCamera = new GameCamera();
 	backViewer = new BackViewer();
@@ -88,6 +87,8 @@ void TutorialScene::Init()
 
 	state = State::Wait;
 	cntFrame = 0;
+
+	MusicPlayer::FadeIn(TutorialBGM, 60);
 }
 
 /**************************************
@@ -186,6 +187,7 @@ void TutorialScene::Update()
 		cntFrame++;
 		if (cntFrame == 300)
 		{
+			MusicPlayer::FadeOut(60);
 			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 			{
 				SceneManager::ChangeScene(GameConfig::Game);

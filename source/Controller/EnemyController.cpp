@@ -199,3 +199,11 @@ void EnemyController::CreateTutorialEnemy()
 	actor->Init();
 	enemyContainer.push_back(actor);
 }
+
+/**************************************
+ƒNƒŠƒA”»’è
+***************************************/
+bool EnemyController::IsClear()
+{
+	return factory->IsFinished() && enemyContainer.empty();
+}

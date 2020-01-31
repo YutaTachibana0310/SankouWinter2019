@@ -30,6 +30,8 @@ public:
 
 	virtual void LoadTexture(const char* path);
 
+	virtual D3DXCOLOR GetDiffuse() const;
+
 protected:
 	VERTEX_2D vtxWk[NUM_VERTEX];
 	LPDIRECT3DTEXTURE9 texture;
@@ -37,6 +39,8 @@ protected:
 	D3DXVECTOR3 vtxPos[NUM_VERTEX];
 	D3DXVECTOR2 vtxSize;
 	D3DXVECTOR2 vtxUV[NUM_VERTEX];
+
+	D3DXCOLOR diffuse;
 
 	void SetVertex();
 

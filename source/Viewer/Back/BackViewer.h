@@ -15,6 +15,7 @@
 前方宣言
 ***************************************/
 class TimeBreakText;
+class Polygon2D;
 
 /**************************************
 クラス定義
@@ -36,11 +37,15 @@ public:
 
 	void PlayTimeBreak();
 	void PlayPowerUp();
+	void SetGreenBG(bool state);
 
 private:
 	TimeBreakText *timeBreak;
+	std::shared_ptr<Polygon2D> greenBG;
 
 	bool inPlaying;
+
+	bool greenBGstate;
 };
 
 #endif

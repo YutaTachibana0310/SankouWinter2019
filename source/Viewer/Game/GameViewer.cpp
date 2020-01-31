@@ -12,6 +12,7 @@
 #include "EnergyViewer.h"
 #include "BomberViewer.h"
 #include "LifeViewer.h"
+#include "GameTelop.h"
 
 /**************************************
 グローバル変数
@@ -32,6 +33,7 @@ GameViewer::GameViewer()
 	energyViewer = new EnergyViewer();
 	bomberViewer = new BomberViewer();
 	lifeViewer = new LifeViewer();
+	telop = new GameTelop();
 }
 
 /**************************************
@@ -44,6 +46,7 @@ GameViewer::~GameViewer()
 	SAFE_DELETE(energyViewer);
 	SAFE_DELETE(bomberViewer);
 	SAFE_DELETE(lifeViewer);
+	SAFE_DELETE(telop);
 }
 
 /**************************************
@@ -77,6 +80,8 @@ void GameViewer::Draw()
 
 	lifeViewer->Draw();
 
+	telop->Draw();
+
 	pDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	pDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 }
@@ -89,4 +94,28 @@ void GameViewer::SetParameter(const GameViewerParameter & param)
 	energyViewer->SetPercent(param.percentEnergy);
 	bomberViewer->SetCount(param.cntBomb);
 	lifeViewer->SetCount(param.cntLife);
+}
+
+/**************************************
+ゲームスタートテロップ再生
+***************************************/
+void GameViewer::PlayGameStart(const std::function<void()>& callback)
+{
+	telop->Play(GameTelop::GameStart, callback);
+}
+
+/**************************************
+ステージクリアテロップ再生
+***************************************/
+void GameViewer::PlayStageClear(const std::function<void()>& callback)
+{
+	telop->Play(GameTelop::StageClear, callback);
+}
+
+/**************************************
+ゲームオーバーテロップ再生
+***************************************/
+void GameViewer::PlayGameOvert(const std::function<void()>& callback)
+{
+	telop->Play(GameTelop::GameOver, callback);
 }

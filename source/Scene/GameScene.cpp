@@ -53,8 +53,6 @@ void GameScene::Init()
 	particleManager = GameParticleManager::Instance();
 	particleManager->Init();
 
-	MusicPlayer::PlayBGM(GameBGM);
-
 	sceneCamera = gameCamera = new GameCamera();
 	backViewer = new BackViewer();
 
@@ -79,13 +77,24 @@ void GameScene::Init()
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
 
-	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
+	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [=]()
 	{
 		playerController->Init();
-		enemyController->Init();
+
+		viewer->PlayGameStart([=]()
+		{
+			enemyController->Init();
+		});
 	});
 
 	particleManager->RunUpdate();
+
+	auto onGameOver = std::bind(&GameScene::_OnGameOver, this);
+	playerController->onGameOver = onGameOver;
+	
+	isCleared = false;
+
+	MusicPlayer::FadeIn(GameBGM, 60);
 }
 
 /**************************************
@@ -114,8 +123,6 @@ void GameScene::Uninit()
 	});
 }
 
-#include "../../Framework/Input/input.h"
-
 /**************************************
 更新処理
 ***************************************/
@@ -140,8 +147,17 @@ void GameScene::Update()
 
 	viewer->Update();
 
-	if (Keyboard::GetTrigger(DIK_F5))
-		SceneManager::ChangeScene(GameConfig::Result);
+	if (!isCleared && enemyController->IsClear())
+	{
+		isCleared = true;
+		viewer->PlayStageClear([]()
+		{
+			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+			{
+				SceneManager::ChangeScene(GameConfig::Result);
+			});
+		});
+	}
 }
 
 /**************************************
@@ -218,4 +234,18 @@ void GameScene::_DrawDebug()
 	}
 
 	Debug::End();
+}
+
+/**************************************
+ゲームオーバー処理
+***************************************/
+void GameScene::_OnGameOver()
+{
+	viewer->PlayGameOvert([]()
+	{
+		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+		{
+			SceneManager::ChangeScene(GameConfig::Result);
+		});
+	});
 }

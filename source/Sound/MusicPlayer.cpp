@@ -14,7 +14,12 @@
 const char* MusicPlayer::FileName[BGM_MAX]
 {
 	"Ro-Crazy.wav",
+	"Traffic_Jam.wav",
+	"DETROIT_BEAT.wav",
+	"Go_Ahead.wav",
 };
+
+BGM_ID MusicPlayer::current = BGM_MAX;
 
 /**************************************
 読み込み処理処理
@@ -33,5 +38,23 @@ void MusicPlayer::Load()
 ***************************************/
 void MusicPlayer::PlayBGM(BGM_ID id)
 {
+	current = id;
 	BGM::Play(id, 0.7f);
+}
+
+/**************************************
+フェードイン処理
+***************************************/
+void MusicPlayer::FadeIn(BGM_ID id, int duration)
+{
+	current = id;
+	BGM::FadeIn(id, 0.7f, duration, false);
+}
+
+/**************************************
+フェードアウト処理
+***************************************/
+void MusicPlayer::FadeOut(int duration)
+{
+	BGM::Fade(current, 0.0f, duration, false);
 }

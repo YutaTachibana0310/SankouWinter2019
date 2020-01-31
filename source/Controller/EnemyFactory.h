@@ -45,6 +45,8 @@ public:
 		 Fleet
 	 };
 
+	bool IsFinished();
+
 private:
 	std::vector<EnemyData*> dataContainer;
 	
@@ -54,6 +56,7 @@ private:
 	float count;
 
 	EnemyEventHandler **eventHandler;
+
 
 	void CreateRotateCharge(const EnemyData& data, std::list<BaseEnemy*>& output);
 	void CreateSnipe(const EnemyData& data, std::list<BaseEnemy*>& output);

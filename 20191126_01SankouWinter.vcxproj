@@ -320,6 +320,7 @@
     <ClCompile Include="source\Viewer\Back\TimeBreakText.cpp" />
     <ClCompile Include="source\Viewer\Game\BomberViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\EnergyViewer.cpp" />
+    <ClCompile Include="source\Viewer\Game\GameTelop.cpp" />
     <ClCompile Include="source\Viewer\Game\GameViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\LifeViewer.cpp" />
     <ClCompile Include="source\Viewer\Game\ScoreViewer.cpp" />
@@ -538,6 +539,7 @@
     <ClInclude Include="source\Viewer\Back\TimeBreakText.h" />
     <ClInclude Include="source\Viewer\Game\BomberViewer.h" />
     <ClInclude Include="source\Viewer\Game\EnergyViewer.h" />
+    <ClInclude Include="source\Viewer\Game\GameTelop.h" />
     <ClInclude Include="source\Viewer\Game\GameViewer.h" />
     <ClInclude Include="source\Viewer\Game\LifeViewer.h" />
     <ClInclude Include="source\Viewer\Game\ScoreViewer.h" />
