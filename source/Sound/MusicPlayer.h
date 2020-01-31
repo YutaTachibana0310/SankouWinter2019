@@ -30,6 +30,7 @@ class MusicPlayer
 public:
 	static void Load();
 	static void PlayBGM(BGM_ID id);
+	static void FadeIn(BGM_ID id, int duration);
 	static void FadeOut(int duration);
 
 private:

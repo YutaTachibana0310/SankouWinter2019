@@ -49,8 +49,6 @@ void TutorialScene::Init()
 	particleManager = GameParticleManager::Instance();
 	particleManager->Init();
 
-	MusicPlayer::PlayBGM(GameBGM);
-
 	sceneCamera = gameCamera = new GameCamera();
 	backViewer = new BackViewer();
 
@@ -90,7 +88,7 @@ void TutorialScene::Init()
 	state = State::Wait;
 	cntFrame = 0;
 
-	MusicPlayer::PlayBGM(TutorialBGM);
+	MusicPlayer::FadeIn(TutorialBGM, 60);
 }
 
 /**************************************

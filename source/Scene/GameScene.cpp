@@ -53,8 +53,6 @@ void GameScene::Init()
 	particleManager = GameParticleManager::Instance();
 	particleManager->Init();
 
-	MusicPlayer::PlayBGM(GameBGM);
-
 	sceneCamera = gameCamera = new GameCamera();
 	backViewer = new BackViewer();
 
@@ -86,6 +84,8 @@ void GameScene::Init()
 	});
 
 	particleManager->RunUpdate();
+
+	MusicPlayer::FadeIn(GameBGM, 60);
 }
 
 /**************************************

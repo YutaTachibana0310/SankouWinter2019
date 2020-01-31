@@ -43,6 +43,15 @@ void MusicPlayer::PlayBGM(BGM_ID id)
 }
 
 /**************************************
+フェードイン処理
+***************************************/
+void MusicPlayer::FadeIn(BGM_ID id, int duration)
+{
+	current = id;
+	BGM::FadeIn(id, 0.7f, duration, false);
+}
+
+/**************************************
 フェードアウト処理
 ***************************************/
 void MusicPlayer::FadeOut(int duration)

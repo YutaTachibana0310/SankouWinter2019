@@ -62,7 +62,7 @@ void ResultScene::Init()
 		rankViewer->MoveIn();
 	});
 
-	MusicPlayer::PlayBGM(ResultBGM);
+	MusicPlayer::FadeIn(ResultBGM, 60);
 }
 
 /**************************************

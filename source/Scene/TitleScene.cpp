@@ -53,7 +53,7 @@ void TitleScene::Init()
 		inTransition = false;
 	});
 
-	MusicPlayer::PlayBGM(TitleBGM);
+	MusicPlayer::FadeIn(TitleBGM, 60);
 }
 
 /**************************************
@@ -91,7 +91,7 @@ void TitleScene::Update()
 		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 		{
-			SceneManager::ChangeScene(GameConfig::Game);
+			SceneManager::ChangeScene(GameConfig::Tutorial);
 		});
 	}
 }
