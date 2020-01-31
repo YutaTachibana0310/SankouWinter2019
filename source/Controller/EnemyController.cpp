@@ -205,5 +205,5 @@ void EnemyController::CreateTutorialEnemy()
 ***************************************/
 bool EnemyController::IsClear()
 {
-	return factory->IsFinished() && enemyContainer.empty();
+	return enemyContainer.empty() && factory->IsFinished();
 }
