@@ -77,10 +77,14 @@ void GameScene::Init()
 	bloom->SetPower(BloomPower[0], BloomPower[1], BloomPower[2]);
 	bloom->SetThrethold(BloomThrethold[0], BloomThrethold[1], BloomThrethold[2]);
 
-	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [this]()
+	TransitionController::Instance()->SetTransition(true, TransitionType::HexaPop, [=]()
 	{
 		playerController->Init();
-		enemyController->Init();
+
+		viewer->PlayGameStart([=]()
+		{
+			enemyController->Init();
+		});
 	});
 
 	particleManager->RunUpdate();

@@ -42,7 +42,7 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 	sceneManager->Add(GameConfig::SceneID::Tutorial, new TutorialScene(renderTexture, renderSurface));
 
 	//‰ŠúƒV[ƒ“‚É‘JˆÚ
-	const int InitScene = GameConfig::SceneID::Title;
+	const int InitScene = GameConfig::SceneID::Game;
 	sceneManager->ChangeScene(InitScene);
 }
 

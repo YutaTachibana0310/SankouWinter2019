@@ -23,9 +23,9 @@ static const char* TelopTexture[] =
 
 static const D3DXVECTOR2 SizeTelop[] =
 {
-	{ 400.0f, 100.0f },
-	{ 400.0f, 100.0f },
-	{ 400.0f, 100.0f },
+	{ 800.0f, 200.0f },
+	{ 800.0f, 200.0f },
+	{ 800.0f, 200.0f },
 };
 
 /**************************************
@@ -76,7 +76,7 @@ void GameTelop::Play(TelopType type, const std::function<void()>& callback)
 	polygon->SetActive(true);
 
 	auto onFinishTelopin = std::bind(&GameTelop::OnFinishTelopIn, this);
-	Tween::Expand(polygon, ExpandType::ToLeftRight, 60.0f, EaseType::OutCubic, true, onFinishTelopin);
+	Tween::Expand(polygon, ExpandType::ToLeftRight, 60.0f, EaseType::InOutCubic, true, onFinishTelopin);
 }
 
 /**************************************
@@ -87,7 +87,7 @@ void GameTelop::OnFinishTelopIn()
 	auto onFinishTelopOut = std::bind(&GameTelop::OnFinishTelopOut, this);
 	TaskManager::Instance()->CreateDelayedTask(180.0f, true, [=]()
 	{
-		Tween::Close(polygon, CloseType::FromLeftRight, 60.0f, EaseType::InCubic, true, onFinishTelopOut);
+		Tween::Close(polygon, CloseType::FromLeftRight, 60.0f, EaseType::InOutCubic, true, onFinishTelopOut);
 	});
 }
 
