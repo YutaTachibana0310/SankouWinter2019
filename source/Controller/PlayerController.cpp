@@ -299,4 +299,6 @@ void PlayerController::FireBomber()
 
 	bomber->SetPosition(playerPos);
 	bomber->Init();
+
+	player->ActivateShield();
 }
