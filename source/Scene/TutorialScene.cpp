@@ -31,6 +31,7 @@
 #include "../Viewer/Tutorial/TutorialViewer.h"
 #include "../System/GameInput.h"
 #include "../System/GameScore.h"
+#include "../Sound/MusicPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -88,6 +89,8 @@ void TutorialScene::Init()
 
 	state = State::Wait;
 	cntFrame = 0;
+
+	MusicPlayer::PlayBGM(TutorialBGM);
 }
 
 /**************************************
@@ -186,6 +189,7 @@ void TutorialScene::Update()
 		cntFrame++;
 		if (cntFrame == 300)
 		{
+			MusicPlayer::FadeOut(60);
 			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 			{
 				SceneManager::ChangeScene(GameConfig::Game);

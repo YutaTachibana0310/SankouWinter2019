@@ -30,10 +30,11 @@ class MusicPlayer
 public:
 	static void Load();
 	static void PlayBGM(BGM_ID id);
+	static void FadeOut(int duration);
 
 private:
 	static const char* FileName[BGM_MAX];
-
+	static BGM_ID current;
 };
 
 #endif

@@ -42,7 +42,7 @@ GameMain::GameMain(HINSTANCE hInstance, HWND hWnd) :
 	sceneManager->Add(GameConfig::SceneID::Tutorial, new TutorialScene(renderTexture, renderSurface));
 
 	//初期シーンに遷移
-	const int InitScene = GameConfig::SceneID::Tutorial;
+	const int InitScene = GameConfig::SceneID::Title;
 	sceneManager->ChangeScene(InitScene);
 }
 
@@ -53,6 +53,7 @@ GameMain::~GameMain()
 {
 	//読み込んだフォントを解放
 	FontManager::Instance()->RemoveFont("data/FONT/badfennec.otf");
+	FontManager::Instance()->RemoveFont("data/FONT/Makinas-4-Square.otf");
 }
 
 /**************************************

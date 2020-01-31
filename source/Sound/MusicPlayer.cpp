@@ -19,6 +19,8 @@ const char* MusicPlayer::FileName[BGM_MAX]
 	"Go_Ahead.wav",
 };
 
+BGM_ID MusicPlayer::current = BGM_MAX;
+
 /**************************************
 読み込み処理処理
 ***************************************/
@@ -36,5 +38,14 @@ void MusicPlayer::Load()
 ***************************************/
 void MusicPlayer::PlayBGM(BGM_ID id)
 {
+	current = id;
 	BGM::Play(id, 0.7f);
+}
+
+/**************************************
+フェードアウト処理
+***************************************/
+void MusicPlayer::FadeOut(int duration)
+{
+	BGM::Fade(current, 0.0f, duration, false);
 }

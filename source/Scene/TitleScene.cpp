@@ -18,6 +18,8 @@
 #include "../BackGround/GameSkybox.h"
 #include "../Actor/Title/TitlePlayerActor.h"
 #include "../Effect/TitleParticleManager.h"
+#include "../Sound/MusicPlayer.h"
+
 /**************************************
 
 ***************************************/
@@ -50,6 +52,8 @@ void TitleScene::Init()
 	{
 		inTransition = false;
 	});
+
+	MusicPlayer::PlayBGM(TitleBGM);
 }
 
 /**************************************
@@ -84,6 +88,7 @@ void TitleScene::Update()
 	{
 		inTransition = true;
 
+		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 		{
 			SceneManager::ChangeScene(GameConfig::Game);
