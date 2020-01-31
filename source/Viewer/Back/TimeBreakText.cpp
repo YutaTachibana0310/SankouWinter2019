@@ -78,6 +78,8 @@ void TimeBreakText::Set(Type type)
 	if (inPlaying)
 		return;
 
+	inPlaying = true;
+
 	upper->LoadTexture(TexturePath[type]);
 	lower->LoadTexture(TexturePath[type]);
 
