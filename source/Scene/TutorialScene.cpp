@@ -33,6 +33,7 @@
 #include "../System/GameInput.h"
 #include "../System/GameScore.h"
 #include "../Sound/MusicPlayer.h"
+#include "../Sound/SoundPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -133,6 +134,7 @@ void TutorialScene::Update()
 		++cntFrame;
 		if (cntFrame == 270)
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			cntFrame = 0;
 			state = Attack;
 		}
@@ -151,6 +153,7 @@ void TutorialScene::Update()
 
 		if (cntFrame == 240)
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			cntFrame = 0;
 			state = Slowdown;
 		}
@@ -166,8 +169,9 @@ void TutorialScene::Update()
 		if (GameInput::GetSlowdownButtonPress())
 			++cntFrame;
 
-		if (cntFrame == 120)
+		if (cntFrame == 180)
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			cntFrame = 0;
 			state = Bomber;
 		}
@@ -182,6 +186,7 @@ void TutorialScene::Update()
 	case BomberWait:
 		if (GameInput::GetBomberButtonTrigger())
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			state = Finish;
 		}
 		break;

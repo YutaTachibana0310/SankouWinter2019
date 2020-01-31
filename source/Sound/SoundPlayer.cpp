@@ -40,7 +40,8 @@ void SoundPlayer::Load()
 		{"Slowdown", "magic-gravity1.wav", 0.8f},
 		{"GameStart", "decision12.wav", 0.8f},
 		{"StageClear", "stageClear.wav", 0.8f},
-		{"GameOver", "Who_Are_You.wav", 0.8f}
+		{"GameOver", "Who_Are_You.wav", 0.8f},
+		{"TutorialClear", "correct2.wav", 0.8f}
 	};
 
 	const std::string directoryPath = "data/SOUND/SE/";
