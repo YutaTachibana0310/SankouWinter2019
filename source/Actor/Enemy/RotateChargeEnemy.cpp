@@ -101,6 +101,15 @@ void RotateChargeEnemy::Update()
 
 	auto forward = transform->Forward();
 	transform->Move(0.8f * -forward * EnemyTimeController::GetTimeScale());
+
+	if (!enableHoming)
+	{
+		const auto CurrentPosition = transform->GetPosition();
+		if (CurrentPosition.x < -60.0f || CurrentPosition.y < -40.0f)
+		{
+			Uninit();
+		}
+	}
 }
 
 /**************************************
