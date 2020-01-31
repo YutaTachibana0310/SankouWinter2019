@@ -270,6 +270,10 @@ void PlayerController::OnFinishCameraFocus()
 			player->Init();
 		});
 	}
+	else
+	{
+		onGameOver();
+	}
 
 	player->Uninit();
 }

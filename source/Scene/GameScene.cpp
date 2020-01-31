@@ -89,6 +89,9 @@ void GameScene::Init()
 
 	particleManager->RunUpdate();
 
+	auto onGameOver = std::bind(&GameScene::_OnGameOver, this);
+	playerController->onGameOver = onGameOver;
+	
 	MusicPlayer::FadeIn(GameBGM, 60);
 }
 
@@ -222,4 +225,18 @@ void GameScene::_DrawDebug()
 	}
 
 	Debug::End();
+}
+
+/**************************************
+ゲームオーバー処理
+***************************************/
+void GameScene::_OnGameOver()
+{
+	viewer->PlayGameOvert([]()
+	{
+		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+		{
+			SceneManager::ChangeScene(GameConfig::Result);
+		});
+	});
 }

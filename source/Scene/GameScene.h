@@ -62,6 +62,7 @@ private:
 
 	void _DrawDebug();
 
+	void _OnGameOver();
 };
 
 #endif
