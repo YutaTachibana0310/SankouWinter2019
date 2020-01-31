@@ -25,6 +25,7 @@
 #include "../Sound/SoundPlayer.h"
 #include "../System/GameInput.h"
 #include "../Sound/MusicPlayer.h"
+#include "../../Framework/Camera/CameraShakePlugin.h"
 
 #include <algorithm>
 
@@ -317,4 +318,6 @@ void PlayerController::FireBomber()
 	backViewer->PlayFireBom();
 
 	SoundPlayer::Instance()->Play("Bomber");
+
+	CameraShakePlugin::Instance()->Set({ 0.0f, 2.0f, 2.0f }, 240);
 }

@@ -16,6 +16,7 @@
 #include "../../Framework/Core/SceneManager.h"
 #include "../../Framework/Renderer3D/SkyBox.h"
 #include "../../Framework/Renderer2D/RenderingTarget.h"
+#include "../../Framework/Camera/CameraShakePlugin.h"
 
 #include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
@@ -72,6 +73,7 @@ void TutorialScene::Init()
 	particleManager->CreateEnergyEffectController(energyHandler);
 
 	Camera::SetMainCamera(gameCamera);
+	gameCamera->AddPlugin(CameraShakePlugin::Instance());
 
 	handler->GivePlayerController(playerController);
 	handler->GiveBackViewer(backViewer);
