@@ -60,6 +60,8 @@ private:
 
 	EnemyEventHandler *handler;
 
+	bool isCleared;
+
 	void _DrawDebug();
 
 	void _OnGameOver();

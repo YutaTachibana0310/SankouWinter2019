@@ -42,6 +42,8 @@ public:
 
 	void CreateTutorialEnemy();
 
+	bool IsClear();
+
 private:
 	std::list<BaseEnemy*> enemyContainer;
 

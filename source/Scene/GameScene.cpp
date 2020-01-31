@@ -92,6 +92,8 @@ void GameScene::Init()
 	auto onGameOver = std::bind(&GameScene::_OnGameOver, this);
 	playerController->onGameOver = onGameOver;
 	
+	isCleared = false;
+
 	MusicPlayer::FadeIn(GameBGM, 60);
 }
 
@@ -121,8 +123,6 @@ void GameScene::Uninit()
 	});
 }
 
-#include "../../Framework/Input/input.h"
-
 /**************************************
 XVˆ—
 ***************************************/
@@ -147,8 +147,17 @@ void GameScene::Update()
 
 	viewer->Update();
 
-	if (Keyboard::GetTrigger(DIK_F5))
-		SceneManager::ChangeScene(GameConfig::Result);
+	if (!isCleared && enemyController->IsClear())
+	{
+		isCleared = true;
+		viewer->PlayStageClear([]()
+		{
+			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+			{
+				SceneManager::ChangeScene(GameConfig::Result);
+			});
+		});
+	}
 }
 
 /**************************************
