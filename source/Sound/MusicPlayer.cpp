@@ -14,6 +14,9 @@
 const char* MusicPlayer::FileName[BGM_MAX]
 {
 	"Ro-Crazy.wav",
+	"Traffic_Jam.wav",
+	"DETROIT_BEAT.wav",
+	"Go_Ahead.wav",
 };
 
 /**************************************

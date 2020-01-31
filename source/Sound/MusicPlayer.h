@@ -16,6 +16,9 @@
 enum BGM_ID
 {
 	GameBGM,
+	ResultBGM,
+	TutorialBGM,
+	TitleBGM,
 	BGM_MAX
 };
 
