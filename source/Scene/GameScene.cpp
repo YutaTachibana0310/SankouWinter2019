@@ -97,7 +97,7 @@ void GameScene::Init()
 
 	isCleared = false;
 
-	MusicPlayer::FadeIn(GameBGM, 60);
+	MusicPlayer::FadeIn(GameBGM, 10);
 }
 
 /**************************************
