@@ -19,6 +19,7 @@
 #include "../System/ScoreRanking.h"
 #include "../Viewer/Result/RankingViewer.h"
 #include "../Sound/MusicPlayer.h"
+#include "../System/GameInput.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -89,7 +90,7 @@ void ResultScene::Update()
 
 	bloom->SetPower(BloomPower[0] * *bloomPower, BloomPower[1] * *bloomPower, BloomPower[2] * *bloomPower);
 
-	if (!inTransition && Keyboard::GetTrigger(DIK_Z))
+	if (!inTransition && GameInput::GetShotButtonPress())
 	{
 		inTransition = true;
 		MusicPlayer::FadeOut(60);

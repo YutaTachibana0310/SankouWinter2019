@@ -17,7 +17,7 @@
 ***************************************/
 bool GameInput::GetShotButtonPress()
 {
-	return Keyboard::GetPress(DIK_Z);
+	return Keyboard::GetPress(DIK_Z) || GamePad::GetPress(0, BUTTON_A);
 }
 
 /**************************************
@@ -25,7 +25,7 @@ bool GameInput::GetShotButtonPress()
 ***************************************/
 bool GameInput::GetBomberButtonTrigger()
 {
-	return Keyboard::GetTrigger(DIK_X);
+	return Keyboard::GetTrigger(DIK_X) || GamePad::GetTrigger(0, BUTTON_B);
 }
 
 /**************************************
@@ -33,5 +33,5 @@ bool GameInput::GetBomberButtonTrigger()
 ***************************************/
 bool GameInput::GetSlowdownButtonPress()
 {
-	return Keyboard::GetPress(DIK_C);
+	return Keyboard::GetPress(DIK_C) || GamePad::GetPress(0, BUTTON_Z);
 }

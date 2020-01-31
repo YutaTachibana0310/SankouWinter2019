@@ -212,9 +212,6 @@ void TutorialScene::Update()
 	enemyController->CheckEnemyDestroy();
 
 	viewer->Update();
-
-	if (Keyboard::GetTrigger(DIK_F5))
-		SceneManager::ChangeScene(GameConfig::Result);
 }
 
 /**************************************

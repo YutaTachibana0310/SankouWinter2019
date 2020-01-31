@@ -19,6 +19,7 @@
 #include "../Actor/Title/TitlePlayerActor.h"
 #include "../Effect/TitleParticleManager.h"
 #include "../Sound/MusicPlayer.h"
+#include "../System/GameInput.h"
 
 /**************************************
 
@@ -84,7 +85,7 @@ void TitleScene::Update()
 
 	particleManager->Update();
 
-	if (!inTransition && Keyboard::GetTrigger(DIK_Z))
+	if (!inTransition && GameInput::GetShotButtonPress())
 	{
 		inTransition = true;
 
