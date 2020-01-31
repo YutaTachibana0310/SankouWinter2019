@@ -9,6 +9,7 @@
 #define _GAMEVIEWER_H_
 
 #include "../../../main.h"
+#include <functional>
 
 /**************************************
 ëOï˚êÈåæ
@@ -18,6 +19,7 @@ class ScoreViewer;
 class EnergyViewer;
 class BomberViewer;
 class LifeViewer;
+class GameTelop;
 
 /**************************************
 GameViewerParameterÉNÉâÉX
@@ -52,12 +54,17 @@ public:
 
 	void SetParameter(const GameViewerParameter& param);
 
+	void PlayGameStart(const std::function<void()>& callback);
+	void PlayStageClear(const std::function<void()>& callback);
+	void PlayGameOvert(const std::function<void()>& callback);
+
 private:
 	Polygon2D *bg;
 	ScoreViewer *scoreViewer;
 	EnergyViewer *energyViewer;
 	BomberViewer *bomberViewer;
 	LifeViewer *lifeViewer;
+	GameTelop *telop;
 };
 
 #endif
