@@ -22,6 +22,7 @@
 #include "../Viewer/Back/BackViewer.h"
 #include "../System/GameScore.h"
 #include "../Actor/Player/PlayerBomber.h"
+#include "../Sound/SoundPlayer.h"
 
 #include <algorithm>
 
@@ -245,6 +246,7 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 	{
 		player->PowerUp();
 		backViewer->PlayPowerUp();
+		SoundPlayer::Instance()->Play("PowerUp");
 	}
 }
 
@@ -303,4 +305,6 @@ void PlayerController::FireBomber()
 	player->ActivateShield();
 
 	backViewer->PlayFireBom();
+
+	SoundPlayer::Instance()->Play("Bomber");
 }

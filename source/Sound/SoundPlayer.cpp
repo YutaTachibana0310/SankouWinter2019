@@ -31,6 +31,9 @@ void SoundPlayer::Load()
 		{"SmallExplosion", "smallExplosion.wav", 0.5f},
 		{"MiddleExplosion", "middleExplosion.wav", 0.65f},
 		{"BigExplosion", "bigExplosion.wav", 0.7f},
+		{"Bomber", "magic-electron.wav", 0.7f},
+		{"PowerUp", "shakin2.wav", 0.9f},
+		{"Decide", "kettei-02.wav", 0.7f},
 	};
 
 	const std::string directoryPath = "data/SOUND/SE/";

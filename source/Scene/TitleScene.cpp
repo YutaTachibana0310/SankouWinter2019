@@ -20,6 +20,7 @@
 #include "../Effect/TitleParticleManager.h"
 #include "../Sound/MusicPlayer.h"
 #include "../System/GameInput.h"
+#include "../Sound/SoundPlayer.h"
 
 /**************************************
 
@@ -89,6 +90,7 @@ void TitleScene::Update()
 	{
 		inTransition = true;
 
+		SoundPlayer::Instance()->Play("Decide");
 		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 		{

@@ -91,7 +91,7 @@ void GameScene::Init()
 
 	auto onGameOver = std::bind(&GameScene::_OnGameOver, this);
 	playerController->onGameOver = onGameOver;
-	
+
 	isCleared = false;
 
 	MusicPlayer::FadeIn(GameBGM, 60);
@@ -152,6 +152,7 @@ void GameScene::Update()
 		isCleared = true;
 		viewer->PlayStageClear([]()
 		{
+			MusicPlayer::FadeOut(60);
 			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 			{
 				SceneManager::ChangeScene(GameConfig::Result);
@@ -174,7 +175,7 @@ void GameScene::Draw()
 	bloomTarget->Set();
 
 	planet->Draw();
-	
+
 	playerController->Draw();
 
 	enemyController->Draw();
@@ -243,6 +244,7 @@ void GameScene::_OnGameOver()
 {
 	viewer->PlayGameOvert([]()
 	{
+		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 		{
 			SceneManager::ChangeScene(GameConfig::Result);

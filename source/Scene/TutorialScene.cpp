@@ -215,6 +215,15 @@ void TutorialScene::Update()
 	enemyController->CheckEnemyDestroy();
 
 	viewer->Update();
+
+	if (Keyboard::GetTrigger(DIK_F5))
+	{
+		MusicPlayer::FadeOut(60);
+		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+		{
+			SceneManager::ChangeScene(GameConfig::Game);
+		});
+	}
 }
 
 /**************************************

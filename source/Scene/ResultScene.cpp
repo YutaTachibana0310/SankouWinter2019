@@ -20,6 +20,7 @@
 #include "../Viewer/Result/RankingViewer.h"
 #include "../Sound/MusicPlayer.h"
 #include "../System/GameInput.h"
+#include "../Sound/SoundPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -92,6 +93,7 @@ void ResultScene::Update()
 
 	if (!inTransition && GameInput::GetShotButtonPress())
 	{
+		SoundPlayer::Instance()->Play("Decide");
 		inTransition = true;
 		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
