@@ -85,7 +85,7 @@ void GameTelop::Play(TelopType type, const std::function<void()>& callback)
 void GameTelop::OnFinishTelopIn()
 {
 	auto onFinishTelopOut = std::bind(&GameTelop::OnFinishTelopOut, this);
-	TaskManager::Instance()->CreateDelayedTask(180.0f, true, [=]()
+	TaskManager::Instance()->CreateDelayedTask(120.0f, true, [=]()
 	{
 		Tween::Close(polygon, CloseType::FromLeftRight, 60.0f, EaseType::InOutCubic, true, onFinishTelopOut);
 	});

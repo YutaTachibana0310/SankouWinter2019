@@ -10,6 +10,7 @@
 #include "../../../Framework/Tween/Tween.h"
 #include "../../../Framework/Task/TaskManager.h"
 #include "../../../Framework/Resource/ResourceManager.h"
+#include "../../Sound/SoundPlayer.h"
 
 /**************************************
 ƒOƒ[ƒoƒ‹•Ï”
@@ -25,7 +26,9 @@ const D3DXVECTOR3 TimeBreakText::LastPositionLower = { SCREEN_WIDTH * 1.5f, 830.
 
 static const char* TexturePath[] = {
 	"data/TEXTURE/Viewer/TimeBreak.png",
-	"data/TEXTURE/Viewer/PowerUp.png"
+	"data/TEXTURE/Viewer/PowerUp.png",
+	"data/TEXTURE/Viewer/BeatEnemy.png",
+	"data/TEXTURE/Viewer/FireBomber.png"
 };
 
 /**************************************
@@ -78,6 +81,7 @@ void TimeBreakText::Set(Type type)
 	if (inPlaying)
 		return;
 
+	SoundPlayer::Instance()->Play("TextIn");
 	inPlaying = true;
 
 	upper->LoadTexture(TexturePath[type]);

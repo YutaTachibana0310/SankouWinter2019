@@ -105,8 +105,6 @@ void PlayerActor::Init()
 	PowerUp();
 
 	trailEmitter->SetActive(true);
-
-	shield->SetActive(true);
 }
 
 /**************************************
@@ -260,6 +258,20 @@ int PlayerActor::PowerLevel()
 }
 
 /**************************************
+シールドのアクティベイト
+***************************************/
+void PlayerActor::ActivateShield()
+{
+	shield->SetActive(true);
+
+	TaskManager::Instance()->CreateDelayedTask(300.0f, false, [this]()
+	{
+		shield->SetActive(false);
+		isInvincible = false;
+	});
+}
+
+/**************************************
 移動処理
 ***************************************/
 void PlayerActor::_Move(const D3DXVECTOR3 & dir)
@@ -376,9 +388,5 @@ void PlayerActor::OnFinishInitMove()
 	enableMove = true;
 	enableShot = true;
 
-	TaskManager::Instance()->CreateDelayedTask(300.0f, false, [this]()
-	{
-		shield->SetActive(false);
-		isInvincible = false;
-	});
+	ActivateShield();
 }

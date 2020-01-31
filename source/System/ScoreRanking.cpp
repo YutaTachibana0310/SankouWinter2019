@@ -31,7 +31,7 @@ ScoreRanking::ScoreRanking()
 		if (score != 0)
 			scoreContainer.push_back(RankingInfo(i + 1, score, false));
 		else
-			scoreContainer.push_back(RankingInfo(i + 1, 200000 * (RankingInfo::RankingMax - i), false));
+			scoreContainer.push_back(RankingInfo(i + 1, 20000 * (RankingInfo::RankingMax - i), false));
 	}
 }
 

@@ -19,6 +19,8 @@
 #include "../Actor/Title/TitlePlayerActor.h"
 #include "../Effect/TitleParticleManager.h"
 #include "../Sound/MusicPlayer.h"
+#include "../System/GameInput.h"
+#include "../Sound/SoundPlayer.h"
 
 /**************************************
 
@@ -84,10 +86,11 @@ void TitleScene::Update()
 
 	particleManager->Update();
 
-	if (!inTransition && Keyboard::GetTrigger(DIK_Z))
+	if (!inTransition && GameInput::GetShotButtonPress())
 	{
 		inTransition = true;
 
+		SoundPlayer::Instance()->Play("Decide");
 		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 		{

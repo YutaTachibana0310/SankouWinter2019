@@ -12,7 +12,7 @@ using namespace std;
 /**************************************
 マクロ定義
 ***************************************/
-#define BOXCOLLIDER3D_USE_DEBUG
+//#define BOXCOLLIDER3D_USE_DEBUG
 
 /**************************************
 構造体定義

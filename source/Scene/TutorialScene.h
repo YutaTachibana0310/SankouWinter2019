@@ -28,6 +28,7 @@ class BackViewer;
 class EnemyEventHandler;
 class TutorialViewer;
 class SkyBox;
+class RenderingTarget;
 
 /**************************************
 ƒNƒ‰ƒX’è‹`
@@ -64,7 +65,7 @@ public:
 
 private:
 	GameCamera *gameCamera;
-
+	RenderingTarget * bloomTarget;
 	GameParticleManager *particleManager;
 
 	TutorialPlayerController *playerController;

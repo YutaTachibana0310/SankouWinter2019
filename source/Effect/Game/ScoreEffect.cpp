@@ -7,6 +7,7 @@
 //=====================================
 #include "ScoreEffect.h"
 #include "../../System/GameScore.h"
+#include "../../Sound/SoundPlayer.h"
 
 namespace Effect::Game
 {
@@ -108,6 +109,7 @@ namespace Effect::Game
 		if (cntFrame >= LifeFrame)
 		{
 			GameScore::Instance()->AddScore(point);
+			SoundPlayer::Instance()->Play("Score");
 		}
 	}
 

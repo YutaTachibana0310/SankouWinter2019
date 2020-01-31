@@ -16,6 +16,8 @@
 #include "../../Framework/Input/input.h"
 #include "../../Framework/Transition/TransitionController.h"
 #include "../../Framework/Core/SceneManager.h"
+#include "../../Framework/Task/TaskManager.h"
+#include "../../Framework/Camera/CameraShakePlugin.h"
 
 #include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
@@ -69,6 +71,7 @@ void GameScene::Init()
 	particleManager->CreateEnergyEffectController(energyHandler);
 
 	Camera::SetMainCamera(gameCamera);
+	gameCamera->AddPlugin(CameraShakePlugin::Instance());
 
 	handler->GivePlayerController(playerController);
 	handler->GiveBackViewer(backViewer);
@@ -91,10 +94,10 @@ void GameScene::Init()
 
 	auto onGameOver = std::bind(&GameScene::_OnGameOver, this);
 	playerController->onGameOver = onGameOver;
-	
+
 	isCleared = false;
 
-	MusicPlayer::FadeIn(GameBGM, 60);
+	MusicPlayer::FadeIn(GameBGM, 10);
 }
 
 /**************************************
@@ -150,11 +153,16 @@ void GameScene::Update()
 	if (!isCleared && enemyController->IsClear())
 	{
 		isCleared = true;
-		viewer->PlayStageClear([]()
+		MusicPlayer::FadeOut(120);
+		
+		TaskManager::Instance()->CreateDelayedTask(120, true, [this]()
 		{
-			TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+			viewer->PlayStageClear([]()
 			{
-				SceneManager::ChangeScene(GameConfig::Result);
+				TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+				{
+					SceneManager::ChangeScene(GameConfig::Result);
+				});
 			});
 		});
 	}
@@ -174,7 +182,7 @@ void GameScene::Draw()
 	bloomTarget->Set();
 
 	planet->Draw();
-	
+
 	playerController->Draw();
 
 	enemyController->Draw();
@@ -243,6 +251,7 @@ void GameScene::_OnGameOver()
 {
 	viewer->PlayGameOvert([]()
 	{
+		MusicPlayer::FadeOut(60);
 		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
 		{
 			SceneManager::ChangeScene(GameConfig::Result);

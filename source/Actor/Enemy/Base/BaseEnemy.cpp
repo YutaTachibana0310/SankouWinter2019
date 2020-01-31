@@ -78,6 +78,6 @@ void BaseEnemy::OnColliderHit(ColliderObserver * other)
 	}
 	else if (tag == "PlayerBomber")
 	{
-		hp -= 100.0f;
+		hp -= 2.0f;
 	}
 }

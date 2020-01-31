@@ -22,6 +22,10 @@
 #include "../Viewer/Back/BackViewer.h"
 #include "../System/GameScore.h"
 #include "../Actor/Player/PlayerBomber.h"
+#include "../Sound/SoundPlayer.h"
+#include "../System/GameInput.h"
+#include "../Sound/MusicPlayer.h"
+#include "../../Framework/Camera/CameraShakePlugin.h"
 
 #include <algorithm>
 
@@ -210,6 +214,9 @@ void PlayerController::SlowDownEnemyBullet(bool isSlow)
 		EnemyTimeController::SlowDownBullet(true);
 		inSlow = true;
 		backViewer->SetGreenBG(true);
+
+		if(GameInput::GetSlowdownButtonTrigger())
+			SoundPlayer::Instance()->Play("Slowdown");
 	}
 	else
 	{
@@ -245,6 +252,7 @@ void PlayerController::CollisionPlayer(ColliderObserver * other)
 	{
 		player->PowerUp();
 		backViewer->PlayPowerUp();
+		SoundPlayer::Instance()->Play("PowerUp");
 	}
 }
 
@@ -272,9 +280,14 @@ void PlayerController::OnFinishCameraFocus()
 	}
 	else
 	{
-		onGameOver();
+		MusicPlayer::FadeOut(120);
+		TaskManager::Instance()->CreateDelayedTask(120.0f, true, [this]()
+		{
+			onGameOver();
+		});
 	}
 
+	SoundPlayer::Instance()->Play("PlayerExplosion");
 	player->Uninit();
 }
 
@@ -299,4 +312,12 @@ void PlayerController::FireBomber()
 
 	bomber->SetPosition(playerPos);
 	bomber->Init();
+
+	player->ActivateShield();
+
+	backViewer->PlayFireBom();
+
+	SoundPlayer::Instance()->Play("Bomber");
+
+	CameraShakePlugin::Instance()->Set({ 0.0f, 2.0f, 2.0f }, 240);
 }

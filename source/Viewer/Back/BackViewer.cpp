@@ -73,6 +73,22 @@ void BackViewer::PlayPowerUp()
 	timeBreak->Set(TimeBreakText::PowerUp);
 }
 
+/**************************************
+BeatEnemyÄ¶ˆ—
+***************************************/
+void BackViewer::PlayBeatEnemy()
+{
+	timeBreak->Set(TimeBreakText::BeatEnemy);
+}
+
+/**************************************
+FireBombÄ¶ˆ—
+***************************************/
+void BackViewer::PlayFireBom()
+{
+	timeBreak->Set(TimeBreakText::FireBomb);
+}
+
 /*************************************
 —Î”wŒiƒZƒbƒg
 ***************************************/

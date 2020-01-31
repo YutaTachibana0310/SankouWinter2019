@@ -1,7 +1,7 @@
 [
 	{
 		"Type": "RotCharge",
-		"Count": 180,
+		"Count": 60,
 		"Param0": 20,
 		"Param1": 60,
 		"Param2": "",
@@ -12,7 +12,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 360,
+		"Count": 240,
 		"Param0": -20,
 		"Param1": 60,
 		"Param2": "",
@@ -23,7 +23,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 540,
+		"Count": 420,
 		"Param0": -15,
 		"Param1": 65,
 		"Param2": "",
@@ -34,7 +34,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 540,
+		"Count": 420,
 		"Param0": -25,
 		"Param1": 55,
 		"Param2": "",
@@ -45,7 +45,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 720,
+		"Count": 600,
 		"Param0": 15,
 		"Param1": 65,
 		"Param2": "",
@@ -56,7 +56,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 720,
+		"Count": 600,
 		"Param0": 25,
 		"Param1": 55,
 		"Param2": "",
@@ -67,7 +67,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 900,
+		"Count": 780,
 		"Param0": 5,
 		"Param1": 65,
 		"Param2": "",
@@ -78,7 +78,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 900,
+		"Count": 780,
 		"Param0": 15,
 		"Param1": 60,
 		"Param2": "",
@@ -89,7 +89,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 900,
+		"Count": 780,
 		"Param0": -5,
 		"Param1": 65,
 		"Param2": 1,
@@ -100,7 +100,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 900,
+		"Count": 780,
 		"Param0": -15,
 		"Param1": 60,
 		"Param2": "",
@@ -111,9 +111,20 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1080,
+		"Count": 960,
 		"Param0": 5,
 		"Param1": 50,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 990,
+		"Param0": 10,
+		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
 		"Param4": "",
@@ -123,17 +134,6 @@
 	{
 		"Type": "Snipe",
 		"Count": 1110,
-		"Param0": 10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "Snipe",
-		"Count": 1230,
 		"Param0": -5,
 		"Param1": 50,
 		"Param2": "",
@@ -144,7 +144,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1260,
+		"Count": 1140,
 		"Param0": -10,
 		"Param1": 60,
 		"Param2": "",
@@ -155,7 +155,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1410,
+		"Count": 1290,
 		"Param0": 5,
 		"Param1": 70,
 		"Param2": "",
@@ -166,7 +166,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1410,
+		"Count": 1290,
 		"Param0": -5,
 		"Param1": 70,
 		"Param2": "",
@@ -177,7 +177,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1440,
+		"Count": 1320,
 		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
@@ -188,7 +188,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1440,
+		"Count": 1320,
 		"Param0": -10,
 		"Param1": 60,
 		"Param2": "",
@@ -199,7 +199,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1470,
+		"Count": 1350,
 		"Param0": 8,
 		"Param1": 65,
 		"Param2": "",
@@ -210,7 +210,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 1470,
+		"Count": 1350,
 		"Param0": -8,
 		"Param1": 65,
 		"Param2": 1,
@@ -221,7 +221,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 1650,
+		"Count": 1530,
 		"Param0": -5,
 		"Param1": 60,
 		"Param2": "",
@@ -232,7 +232,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 1680,
+		"Count": 1560,
 		"Param0": -15,
 		"Param1": 55,
 		"Param2": "",
@@ -243,7 +243,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 1740,
+		"Count": 1620,
 		"Param0": -10,
 		"Param1": 50,
 		"Param2": "",
@@ -254,7 +254,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 1860,
+		"Count": 1740,
 		"Param0": 5,
 		"Param1": 60,
 		"Param2": "",
@@ -265,7 +265,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 1890,
+		"Count": 1770,
 		"Param0": 15,
 		"Param1": 55,
 		"Param2": "",
@@ -276,7 +276,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 1950,
+		"Count": 1830,
 		"Param0": 10,
 		"Param1": 50,
 		"Param2": "",
@@ -287,8 +287,107 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 2070,
+		"Count": 1950,
 		"Param0": -10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 1960,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 1970,
+		"Param0": -10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "MiddleWay",
+		"Count": 1970,
+		"Param0": 55,
+		"Param1": 30,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 1980,
+		"Param0": -10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 1990,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2000,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2010,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "MiddleWay",
+		"Count": 2070,
+		"Param0": -55,
+		"Param1": 30,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2070,
+		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -299,105 +398,6 @@
 	{
 		"Type": "RotCharge",
 		"Count": 2080,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2090,
-		"Param0": -10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "MiddleWay",
-		"Count": 2090,
-		"Param0": 55,
-		"Param1": 30,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2100,
-		"Param0": -10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2110,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2120,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2130,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "MiddleWay",
-		"Count": 2190,
-		"Param0": -55,
-		"Param1": 30,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2190,
-		"Param0": 10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2200,
 		"Param0": 15,
 		"Param1": 60,
 		"Param2": "",
@@ -408,7 +408,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 2210,
+		"Count": 2090,
 		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
@@ -419,7 +419,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 2220,
+		"Count": 2100,
 		"Param0": 15,
 		"Param1": 60,
 		"Param2": "",
@@ -430,7 +430,7 @@
 	},
 	{
 		"Type": "Fleet",
-		"Count": 2370,
+		"Count": 2250,
 		"Param0": 40,
 		"Param1": 30,
 		"Param2": "",
@@ -441,41 +441,8 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 2610,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "Snipe",
-		"Count": 2640,
-		"Param0": -10,
-		"Param1": 50,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "Snipe",
-		"Count": 2670,
-		"Param0": -5,
-		"Param1": 55,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "Snipe",
 		"Count": 2490,
-		"Param0": 15,
+		"Param0": -15,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -486,7 +453,7 @@
 	{
 		"Type": "Snipe",
 		"Count": 2520,
-		"Param0": 10,
+		"Param0": -10,
 		"Param1": 50,
 		"Param2": "",
 		"Param3": "",
@@ -497,6 +464,39 @@
 	{
 		"Type": "Snipe",
 		"Count": 2550,
+		"Param0": -5,
+		"Param1": 55,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 2370,
+		"Param0": 15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 2400,
+		"Param0": 10,
+		"Param1": 50,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Snipe",
+		"Count": 2430,
 		"Param0": 5,
 		"Param1": 55,
 		"Param2": "",
@@ -507,8 +507,85 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 2610,
+		"Count": 2490,
 		"Param0": -10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Demo",
+		"Count": 2520,
+		"Param0": -15,
+		"Param1": 65,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2580,
+		"Param0": -5,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2590,
+		"Param0": -10,
+		"Param1": 60,
+		"Param2": 1,
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2600,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2610,
+		"Param0": -5,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2620,
+		"Param0": -10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 2630,
+		"Param0": -15,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -519,7 +596,18 @@
 	{
 		"Type": "Demo",
 		"Count": 2640,
-		"Param0": -15,
+		"Param0": 10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "Demo",
+		"Count": 2670,
+		"Param0": 15,
 		"Param1": 65,
 		"Param2": "",
 		"Param3": "",
@@ -529,41 +617,8 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 2700,
-		"Param0": -5,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2710,
-		"Param0": -10,
-		"Param1": 60,
-		"Param2": 1,
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2720,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
 		"Count": 2730,
-		"Param0": -5,
+		"Param0": 5,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -574,7 +629,7 @@
 	{
 		"Type": "RotCharge",
 		"Count": 2740,
-		"Param0": -10,
+		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -585,7 +640,7 @@
 	{
 		"Type": "RotCharge",
 		"Count": 2750,
-		"Param0": -15,
+		"Param0": 15,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -594,30 +649,8 @@
 		"Param6": ""
 	},
 	{
-		"Type": "Demo",
+		"Type": "RotCharge",
 		"Count": 2760,
-		"Param0": 10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "Demo",
-		"Count": 2790,
-		"Param0": 15,
-		"Param1": 65,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2850,
 		"Param0": 5,
 		"Param1": 60,
 		"Param2": "",
@@ -628,7 +661,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 2860,
+		"Count": 2770,
 		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
@@ -639,40 +672,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 2870,
-		"Param0": 15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2880,
-		"Param0": 5,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2890,
-		"Param0": 10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 2900,
+		"Count": 2780,
 		"Param0": 15,
 		"Param1": 60,
 		"Param2": "",
@@ -683,7 +683,7 @@
 	},
 	{
 		"Type": "Fleet",
-		"Count": 2960,
+		"Count": 2840,
 		"Param0": -40,
 		"Param1": 35,
 		"Param2": "",
@@ -694,7 +694,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 2960,
+		"Count": 2840,
 		"Param0": 5,
 		"Param1": 60,
 		"Param2": "",
@@ -705,7 +705,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 2970,
+		"Count": 2850,
 		"Param0": 15,
 		"Param1": 65,
 		"Param2": "",
@@ -716,7 +716,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 2980,
+		"Count": 2860,
 		"Param0": 10,
 		"Param1": 55,
 		"Param2": "",
@@ -727,7 +727,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 2990,
+		"Count": 2870,
 		"Param0": 9,
 		"Param1": 50,
 		"Param2": "",
@@ -738,7 +738,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3000,
+		"Count": 2880,
 		"Param0": 19,
 		"Param1": 65,
 		"Param2": "",
@@ -749,7 +749,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3010,
+		"Count": 2890,
 		"Param0": 14,
 		"Param1": 55,
 		"Param2": 1,
@@ -760,7 +760,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3040,
+		"Count": 2920,
 		"Param0": 7,
 		"Param1": 60,
 		"Param2": "",
@@ -771,7 +771,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3050,
+		"Count": 2930,
 		"Param0": 17,
 		"Param1": 65,
 		"Param2": "",
@@ -782,7 +782,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3060,
+		"Count": 2940,
 		"Param0": 12,
 		"Param1": 55,
 		"Param2": "",
@@ -793,7 +793,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3070,
+		"Count": 2950,
 		"Param0": 8,
 		"Param1": 50,
 		"Param2": "",
@@ -804,7 +804,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3080,
+		"Count": 2960,
 		"Param0": 18,
 		"Param1": 65,
 		"Param2": "",
@@ -815,7 +815,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 3090,
+		"Count": 2970,
 		"Param0": 13,
 		"Param1": 55,
 		"Param2": "",
@@ -826,7 +826,7 @@
 	},
 	{
 		"Type": "MiddleWay",
-		"Count": 3150,
+		"Count": 3030,
 		"Param0": 55,
 		"Param1": 20,
 		"Param2": "",
@@ -837,7 +837,7 @@
 	},
 	{
 		"Type": "MiddleWay",
-		"Count": 3150,
+		"Count": 3030,
 		"Param0": -55,
 		"Param1": 20,
 		"Param2": "",
@@ -848,7 +848,7 @@
 	},
 	{
 		"Type": "MiddleWay",
-		"Count": 3210,
+		"Count": 3090,
 		"Param0": 50,
 		"Param1": 30,
 		"Param2": "",
@@ -859,7 +859,7 @@
 	},
 	{
 		"Type": "MiddleWay",
-		"Count": 3210,
+		"Count": 3090,
 		"Param0": -50,
 		"Param1": 30,
 		"Param2": "",
@@ -870,7 +870,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3270,
+		"Count": 3150,
 		"Param0": 20,
 		"Param1": 60,
 		"Param2": "",
@@ -881,7 +881,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3280,
+		"Count": 3160,
 		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
@@ -892,7 +892,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3290,
+		"Count": 3170,
 		"Param0": 15,
 		"Param1": 60,
 		"Param2": 1,
@@ -903,7 +903,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3320,
+		"Count": 3200,
 		"Param0": 20,
 		"Param1": 60,
 		"Param2": "",
@@ -914,7 +914,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3330,
+		"Count": 3210,
 		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
@@ -925,8 +925,96 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3340,
+		"Count": 3220,
 		"Param0": 15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3250,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3260,
+		"Param0": 10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3270,
+		"Param0": 15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3300,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3310,
+		"Param0": 10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3320,
+		"Param0": 15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3350,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3360,
+		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -937,94 +1025,6 @@
 	{
 		"Type": "RotCharge",
 		"Count": 3370,
-		"Param0": 20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3380,
-		"Param0": 10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3390,
-		"Param0": 15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3420,
-		"Param0": 20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3430,
-		"Param0": 10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3440,
-		"Param0": 15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3470,
-		"Param0": 20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3480,
-		"Param0": 10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3490,
 		"Param0": 15,
 		"Param1": 60,
 		"Param2": "",
@@ -1035,7 +1035,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 3580,
+		"Count": 3460,
 		"Param0": -15,
 		"Param1": 50,
 		"Param2": "",
@@ -1046,7 +1046,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 3600,
+		"Count": 3480,
 		"Param0": -7.5,
 		"Param1": 52,
 		"Param2": "",
@@ -1057,7 +1057,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 3620,
+		"Count": 3500,
 		"Param0": 0,
 		"Param1": 54,
 		"Param2": "",
@@ -1068,7 +1068,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 3640,
+		"Count": 3520,
 		"Param0": 7.5,
 		"Param1": 56,
 		"Param2": "",
@@ -1079,7 +1079,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 3660,
+		"Count": 3540,
 		"Param0": 15,
 		"Param1": 58,
 		"Param2": "",
@@ -1090,7 +1090,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3720,
+		"Count": 3600,
 		"Param0": -20,
 		"Param1": 60,
 		"Param2": "",
@@ -1101,7 +1101,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3730,
+		"Count": 3610,
 		"Param0": -10,
 		"Param1": 60,
 		"Param2": "",
@@ -1112,8 +1112,96 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3740,
+		"Count": 3620,
 		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3650,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3660,
+		"Param0": -10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3670,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3700,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3710,
+		"Param0": -10,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3720,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3750,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3760,
+		"Param0": -10,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -1124,6 +1212,17 @@
 	{
 		"Type": "RotCharge",
 		"Count": 3770,
+		"Param0": -15,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 3800,
 		"Param0": -20,
 		"Param1": 60,
 		"Param2": "",
@@ -1134,19 +1233,8 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 3780,
+		"Count": 3810,
 		"Param0": -10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3790,
-		"Param0": -15,
 		"Param1": 60,
 		"Param2": "",
 		"Param3": "",
@@ -1157,94 +1245,6 @@
 	{
 		"Type": "RotCharge",
 		"Count": 3820,
-		"Param0": -20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3830,
-		"Param0": -10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3840,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3870,
-		"Param0": -20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3880,
-		"Param0": -10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3890,
-		"Param0": -15,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3920,
-		"Param0": -20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3930,
-		"Param0": -10,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 3940,
 		"Param0": -15,
 		"Param1": 60,
 		"Param2": "",
@@ -1255,7 +1255,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 4030,
+		"Count": 3910,
 		"Param0": 15,
 		"Param1": 50,
 		"Param2": "",
@@ -1266,7 +1266,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 4050,
+		"Count": 3930,
 		"Param0": 7.5,
 		"Param1": 52,
 		"Param2": "",
@@ -1277,7 +1277,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 4070,
+		"Count": 3950,
 		"Param0": 0,
 		"Param1": 54,
 		"Param2": "",
@@ -1288,7 +1288,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 4090,
+		"Count": 3970,
 		"Param0": -7.5,
 		"Param1": 56,
 		"Param2": "",
@@ -1299,7 +1299,7 @@
 	},
 	{
 		"Type": "Demo",
-		"Count": 4110,
+		"Count": 3990,
 		"Param0": -15,
 		"Param1": 58,
 		"Param2": "",
@@ -1310,7 +1310,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4170,
+		"Count": 4050,
 		"Param0": 5,
 		"Param1": 70,
 		"Param2": "",
@@ -1321,7 +1321,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4170,
+		"Count": 4050,
 		"Param0": -5,
 		"Param1": 70,
 		"Param2": "",
@@ -1332,7 +1332,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4200,
+		"Count": 4080,
 		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
@@ -1343,7 +1343,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4200,
+		"Count": 4080,
 		"Param0": -10,
 		"Param1": 60,
 		"Param2": "",
@@ -1354,7 +1354,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4230,
+		"Count": 4110,
 		"Param0": 8,
 		"Param1": 65,
 		"Param2": "",
@@ -1365,7 +1365,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4230,
+		"Count": 4110,
 		"Param0": -8,
 		"Param1": 65,
 		"Param2": "",
@@ -1376,7 +1376,7 @@
 	},
 	{
 		"Type": "MiddleWay",
-		"Count": 4290,
+		"Count": 4170,
 		"Param0": -50,
 		"Param1": 10,
 		"Param2": "",
@@ -1387,7 +1387,7 @@
 	},
 	{
 		"Type": "MiddleWay",
-		"Count": 4290,
+		"Count": 4170,
 		"Param0": 50,
 		"Param1": 10,
 		"Param2": "",
@@ -1398,7 +1398,7 @@
 	},
 	{
 		"Type": "MiddleWay",
-		"Count": 4290,
+		"Count": 4170,
 		"Param0": 40,
 		"Param1": 30,
 		"Param2": "",
@@ -1409,7 +1409,7 @@
 	},
 	{
 		"Type": "Fleet",
-		"Count": 4410,
+		"Count": 4290,
 		"Param0": -40,
 		"Param1": 25,
 		"Param2": "",
@@ -1420,7 +1420,7 @@
 	},
 	{
 		"Type": "Fleet",
-		"Count": 4410,
+		"Count": 4290,
 		"Param0": 40,
 		"Param1": 25,
 		"Param2": "",
@@ -1431,7 +1431,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 4470,
+		"Count": 4350,
 		"Param0": 20,
 		"Param1": 60,
 		"Param2": "",
@@ -1442,7 +1442,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 4470,
+		"Count": 4350,
 		"Param0": -20,
 		"Param1": 60,
 		"Param2": "",
@@ -1453,7 +1453,7 @@
 	},
 	{
 		"Type": "RotCharge",
-		"Count": 4530,
+		"Count": 4410,
 		"Param0": 20,
 		"Param1": 60,
 		"Param2": 1,
@@ -1464,6 +1464,50 @@
 	},
 	{
 		"Type": "RotCharge",
+		"Count": 4410,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 4470,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 4470,
+		"Param0": -20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
+		"Count": 4530,
+		"Param0": 20,
+		"Param1": 60,
+		"Param2": "",
+		"Param3": "",
+		"Param4": "",
+		"Param5": "",
+		"Param6": ""
+	},
+	{
+		"Type": "RotCharge",
 		"Count": 4530,
 		"Param0": -20,
 		"Param1": 60,
@@ -1496,52 +1540,8 @@
 		"Param6": ""
 	},
 	{
-		"Type": "RotCharge",
-		"Count": 4650,
-		"Param0": 20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 4650,
-		"Param0": -20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 4710,
-		"Param0": 20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
-		"Type": "RotCharge",
-		"Count": 4710,
-		"Param0": -20,
-		"Param1": 60,
-		"Param2": "",
-		"Param3": "",
-		"Param4": "",
-		"Param5": "",
-		"Param6": ""
-	},
-	{
 		"Type": "Snipe",
-		"Count": 4770,
+		"Count": 4650,
 		"Param0": 5,
 		"Param1": 70,
 		"Param2": "",
@@ -1552,7 +1552,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4770,
+		"Count": 4650,
 		"Param0": -5,
 		"Param1": 70,
 		"Param2": "",
@@ -1563,7 +1563,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4800,
+		"Count": 4680,
 		"Param0": 10,
 		"Param1": 60,
 		"Param2": "",
@@ -1574,7 +1574,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4800,
+		"Count": 4680,
 		"Param0": -10,
 		"Param1": 60,
 		"Param2": "",
@@ -1585,7 +1585,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4830,
+		"Count": 4710,
 		"Param0": 8,
 		"Param1": 65,
 		"Param2": "",
@@ -1596,7 +1596,7 @@
 	},
 	{
 		"Type": "Snipe",
-		"Count": 4830,
+		"Count": 4710,
 		"Param0": -8,
 		"Param1": 65,
 		"Param2": "",

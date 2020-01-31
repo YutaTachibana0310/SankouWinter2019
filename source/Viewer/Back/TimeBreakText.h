@@ -25,6 +25,8 @@ public:
 	{
 		TimeBreak,
 		PowerUp,
+		BeatEnemy,
+		FireBomb,
 		TypeMax
 	};
 

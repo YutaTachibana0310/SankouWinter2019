@@ -51,6 +51,8 @@ public:
 	void GivePlayerController(PlayerController *controller);
 	void GiveBackViewer(BackViewer *viewer);
 
+	void PlayBeatEnemy();
+
 private:
 	EnemyBulletController *bulletController;
 	PlayerController *playerController;

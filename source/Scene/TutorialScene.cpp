@@ -15,6 +15,8 @@
 #include "../../Framework/Transition/TransitionController.h"
 #include "../../Framework/Core/SceneManager.h"
 #include "../../Framework/Renderer3D/SkyBox.h"
+#include "../../Framework/Renderer2D/RenderingTarget.h"
+#include "../../Framework/Camera/CameraShakePlugin.h"
 
 #include "../GameConfig.h"
 #include "../Effect/GameParticleManager.h"
@@ -32,6 +34,7 @@
 #include "../System/GameInput.h"
 #include "../System/GameScore.h"
 #include "../Sound/MusicPlayer.h"
+#include "../Sound/SoundPlayer.h"
 
 /**************************************
 グローバル変数
@@ -52,6 +55,7 @@ void TutorialScene::Init()
 	sceneCamera = gameCamera = new GameCamera();
 	backViewer = new BackViewer();
 
+	bloomTarget = new RenderingTarget(SCREEN_WIDTH, SCREEN_HEIGHT);
 	playerController = new TutorialPlayerController(gameCamera, backViewer);
 	bloom = new BloomController();
 	enemyController = new EnemyController(gameCamera);
@@ -69,6 +73,7 @@ void TutorialScene::Init()
 	particleManager->CreateEnergyEffectController(energyHandler);
 
 	Camera::SetMainCamera(gameCamera);
+	gameCamera->AddPlugin(CameraShakePlugin::Instance());
 
 	handler->GivePlayerController(playerController);
 	handler->GiveBackViewer(backViewer);
@@ -98,6 +103,7 @@ void TutorialScene::Uninit()
 {
 	particleManager->StopUpdate([this]()
 	{
+		SAFE_DELETE(bloomTarget);
 		SAFE_DELETE(gameCamera);
 		SAFE_DELETE(playerController);
 		SAFE_DELETE(bloom);
@@ -130,6 +136,7 @@ void TutorialScene::Update()
 		++cntFrame;
 		if (cntFrame == 270)
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			cntFrame = 0;
 			state = Attack;
 		}
@@ -148,6 +155,7 @@ void TutorialScene::Update()
 
 		if (cntFrame == 240)
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			cntFrame = 0;
 			state = Slowdown;
 		}
@@ -163,8 +171,9 @@ void TutorialScene::Update()
 		if (GameInput::GetSlowdownButtonPress())
 			++cntFrame;
 
-		if (cntFrame == 120)
+		if (cntFrame == 180)
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			cntFrame = 0;
 			state = Bomber;
 		}
@@ -179,6 +188,7 @@ void TutorialScene::Update()
 	case BomberWait:
 		if (GameInput::GetBomberButtonTrigger())
 		{
+			SoundPlayer::Instance()->Play("TutorialClear");
 			state = Finish;
 		}
 		break;
@@ -214,7 +224,13 @@ void TutorialScene::Update()
 	viewer->Update();
 
 	if (Keyboard::GetTrigger(DIK_F5))
-		SceneManager::ChangeScene(GameConfig::Result);
+	{
+		MusicPlayer::FadeOut(60);
+		TransitionController::Instance()->SetTransition(false, TransitionType::HexaPop, []()
+		{
+			SceneManager::ChangeScene(GameConfig::Game);
+		});
+	}
 }
 
 /**************************************
@@ -228,14 +244,20 @@ void TutorialScene::Draw()
 
 	backViewer->Draw();
 
+	bloomTarget->Set();
+
 	playerController->Draw();
 
 	enemyController->Draw();
 
 	playerController->DrawBullet();
 
+	bloomTarget->Restore();
+
+	bloomTarget->Draw();
+
 	//ブルームをかける
-	bloom->Draw(renderTexture);
+	bloom->Draw(bloomTarget->GetTexture());
 
 	particleManager->Draw();
 
